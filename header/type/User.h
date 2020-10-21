@@ -10,15 +10,15 @@ using std::string;
 class User{
 public:
     string userName;
-    int userId;
+    string userId;
 
     string getUserName(){
         return userName;
     }
 
-    User(string userName, int userId) : userName(userName), userId(userId) { };
+    User(string userName, string userId) : userName(userName), userId(userId) { };
 
-    int getUserId(){
+    string getUserId(){
         return userId;
     }
 };
