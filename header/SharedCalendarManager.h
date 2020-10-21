@@ -36,7 +36,7 @@ public:
     /**
      * 공유캘린더 목록에 공유캘린더를 추가한다.
      * 
-     * @param user 공유캘린더 만든 살암
+     * @param user 공유캘린더 만든 
      * @param sharedCalndarName 공유캘린더 이름
      * @param acceptable 공유캘린더 수용인원
      * @param startDate 공유캘린더 만든 날짜
