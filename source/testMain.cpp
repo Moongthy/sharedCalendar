@@ -18,115 +18,164 @@ using namespace std;
 
 #define rep(n) for(int i = 0; i < n; ++i) 
 
+void stage_1();
+void stage_2();
+void createSC(vector<string>& scInfo, int stage);
+void stage_4();
+void stage_5();
+void stage_6();
 
-// void stage1_whatCalendarDoYouWant(){
-//     // í™”ë©´ ì§€ìš°ëŠ” ê²ƒ ë„£ì–´ì•¼ í•¨
+
+
+void stage_1(){
+    rep(5) cout << choiceCalendarMenu[i];
     
-//     rep(4) cout << choiceCalendarMenu[i];
+    Input input;
+    string c = input.input();
 
-//     Input input;
+    if(!input.simpleCheck("123q",c)){
+        cout << err[0] << endl;
+        stage_1();
+        return;
+    }
 
-//     string choice = input.input();
+    if(c == "q"){
+        cout << err[1] << endl;
+        return;
+    }
+
+    if(c == "1"){
+        cout << err[2] << endl;
+        return;
+    }
+
+    if(c == "2"){
+        stage_2();
+        return;
+    }
+
+    if(c == "3"){
+        cout << "Á¾·á" << endl;
+        exit(0);
+    }
+}
+
+void stage_2(){
+    rep(5) cout << choiceSharedCalendarAction[i];
     
-//     if(choice == "q") {
-//         // ì „ë‹¨ê³„
-//         return;
-//     }
+    vector<string> scInfo;
+    Input input;
+    string c = input.input();
 
-//     if(!input.simpleCheck("123", choice)){
-//         cout << err[0];
-//         stage1_whatCalendarDoYouWant();
-//         return;
-//     }
+    if(!input.simpleCheck("123q",c)){
+        cout << err[0] << endl;
+        stage_2();
+        return;
+    }
 
-//     if(choice == "1"){
-//         return;
-//     }
+    if(c == "q"){
+        stage_1();
+        return;
+    }
 
-//     if(choice == "2"){
-//         stage2_choiceSharedCalendarAction();
-//         return;
-//     }
+    if(c == "1"){
+        createSC(scInfo, 1);
+        stage_2();
+        return;
+    }
 
-//     if(choice == "3"){
-//         cout << "ì¢…ë£Œ" << endl;
-//         exit(0);
-//     }
-// }
+    if(c == "2"){
+        cout << err[3] << endl;
+        return;
+    }
 
-// void stage2_choiceSharedCalendarAction(){
+    if(c == "3"){
+        cout << err[4] << endl;
+        exit(0);
+    }
+}
 
-//     rep(4) cout << choiceSharedCalendarAction[i];
+void createSC(vector<string>& scInfo, int stage){
+    cout << inputCreateSharedCalendar[0];
+    cout << inputCreateSharedCalendar[stage];
 
-//     Input input;
+    if(stage == 5) return;
 
-//     string choice = input.input();
+    Input input;
+    string c = input.input();
 
-//         if(choice == "q") {
-//         stage1_whatCalendarDoYouWant();
-//         return;
-//     }
+    // °øÄ¶ ÀÌ¸§ Ã¼Å©
+    if(stage == 1){
+        int check = input.checkSharedCalendarName(c);
 
-//     if(!input.simpleCheck("123", choice)){
-//         cout << err[0];
-//         stage2_choiceSharedCalendarAction();
-//         return;
-//     }
+        if(check == 2){
+            createSC(scInfo, stage-1);
+            return;
+        }
 
-//     if(choice == "1"){
-//         return;
-//     }
+        if(check == 0 || check == -1){
+            cout << err[0] << endl;
+            createSC(scInfo, stage);
+            return;
+        }
+    }
 
-//     if(choice == "2"){
-//         stage2_choiceSharedCalendarAction(0);
-//         return;
-//     }
+    // °øÄ¶ ºñ¹ø Ã¼Å©
+    if(stage == 2){
+        int check = input.checkSharedCalendarPassWord(c);
 
-//     if(choice == "3"){
-//         cout << "ì¢…ë£Œ" << endl;
-//         exit(0);
-//     }
-// }
+        if(check == 2){
+            createSC(scInfo, stage-1);
+            return;
+        }
 
-// void state2_1_inputCreateSharedCalendar(int stage){
-    
-//     cout << inputCreateSharedCalendar[stage];    
-//     if(!stage) state2_1_inputCreateSharedCalendar(stage+1);
+        if(check == 0 || check == -1){
+            cout << err[0] << endl;
+            createSC(scInfo, stage);
+            return;
+        }
+    }
 
-//     Input input;
+    // °øÄ¶ ¼ö¿ëÀÎ¿ø Ã¼Å©
+    if(stage == 3){
+        int check = input.checkSharedCalenderAcceptable(c);
 
-//     string choice = input.input();
-//         if(choice == "q") {
-//         stage2_choiceSharedCalendarAction();
-//         return;
-//     }
+        if(check == 2){
+            createSC(scInfo, stage-1);
+            return;
+        }
 
-//     if(!input.simpleCheck("123", choice)){
-//         cout << err[0];
-//         stage2_choiceSharedCalendarAction();
-//         return;
-//     }
+        if(check == 0 || check == -1){
+            cout << err[0] << endl;
+            createSC(scInfo, stage);
+            return;
+        }
+    }
 
-//     if(choice == "1"){
-//         return;
-//     }
+    // °øÄ¶ ³¯Â¥ Ã¼Å©
+    if(stage == 4){
+        int check = input.checkSharedCalenderAcceptable(c);
 
-//     if(choice == "2"){
-//         stage2_choiceSharedCalendarAction();
-//         return;
-//     }
+        if(check == 2){
+            createSC(scInfo, stage-1);
+            return;
+        }
 
-//     if(choice == "3"){
-//         cout << "ì¢…ë£Œ" << endl;
-//         exit(0);
-//     }
-// }
+        if(check == 0 || check == -1){
+            cout << err[0] << endl;
+            createSC(scInfo, stage);
+            return;
+        }
+    }
+
+    scInfo.push_back(c);
+    createSC(scInfo, stage+1);
+}
+
 
 int main(){
+    stage_1();
 
-    
-    cout << "zzzz" << endl;
-    
-    
+    cout << ("q" == "q") << endl;
     return 0;
 }

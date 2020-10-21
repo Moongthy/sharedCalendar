@@ -5,7 +5,7 @@
 
 #include<iostream>
 #include<algorithm>
-using std::string;
+using namespace std;
 
 /**
  *  사용자에게 입력 클래스 
@@ -34,6 +34,10 @@ struct Input{
     int checkSharedCalendarPassWord(const string& s) const;
 
     bool simpleCheck(const string& check, string& s) const;
+
+    int checkSharedCalenderAcceptable(const string& s) const;
+
+    int checkSharedCalendrDate(const string& s) const;
 
 };
 

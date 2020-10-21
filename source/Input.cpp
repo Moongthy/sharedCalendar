@@ -13,8 +13,8 @@ void Input::removeSpace(string& s){
 }
 
 string Input::input(){
-    string tmp, ret = "";
-    while(!(std::cin >> tmp)) ret += tmp;
+    string ret;
+    getline(cin, ret);
     return ret;
 }
 
@@ -65,6 +65,30 @@ bool Input::simpleCheck(const string& check, string& s) const{
     return false;
 }
 
+int Input::checkSharedCalenderAcceptable(const string& s) const{
+
+        // q누름
+    if(s.size() == 1 && s[0] == 'q') return 2;
+
+    if(s.size() != 1) return 0;
+
+    if(s[0] - '0' > 5 || s[0]-'0' < 2) return -1;
+
+    return 1;
+}
+
+int Input::checkSharedCalendrDate(const string& s) const{
+    
+        // q누름
+    if(s.size() == 1 && s[0] == 'q') return 2;
+    
+    if(s.size() != 6) return 0;
+
+    for(char c : s)
+        if(c < '0' || c > '9')
+            return -1;
+    return 1;
+}
 
 
 
