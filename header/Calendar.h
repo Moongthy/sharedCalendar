@@ -19,7 +19,7 @@ using std::string;
 template <typename S, typename U, typename D> class Calendar{
 protected:
     // 캘린더 id
-    int calendarID;
+    string calendarID;
 
     // 만든사람
     U administrator;
@@ -43,12 +43,12 @@ public:
      *  @param administrator 이 캘린더를 생성한 사람. 관리자
      *  @param sharedCalendarId 공유캘린더 Id. 현재있는 공유캘린더 수 + 1000 으로 매겨짐
      */
-    Calendar(U user, int sharedCalendarId);
+    Calendar(U user, string sharedCalendarId);
 
     /**
      *  getter of caledarID 
      */
-    int getCalendarID();
+    string getCalendarID();
 
 
     U getCalendarAdministrator();

@@ -4,30 +4,29 @@
 #define __SCHEDULE__
 
 #include<string>
+#include"Date.h"
 using std::string;
 
 class Schedule{
 public:
-    int startTime;
-    int endTime;
+    Date startTime;
+    Date endTime;
     string content;
 
-    Schedule(int startTime, int endTime, string content)
+    Schedule(Date startTime, Date endTime, string content)
         : startTime(startTime), endTime(endTime), content(content) { }
 
-    int getStartTime(){
+    Date getStartTime(){
         return startTime;
     }
 
-    int getEndTime(){
+    Date getEndTime(){
         return endTime;
     }
 
     string getContent(){
         return content;
     }
-
-    
 };
 
 #endif

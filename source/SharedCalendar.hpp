@@ -1,6 +1,6 @@
 
 template<typename S, typename U, typename D>
-SharedCalendar<S, U, D>::SharedCalendar(U administrator, int sharedCalendarId, string sharedCalendarName, int acceptable, D startDate, D endDate)
+SharedCalendar<S, U, D>::SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, int acceptable, D startDate, D endDate)
  :Calendar<S, U, D>(administrator, sharedCalendarId), sharedCalendarName(sharedCalendarName), acceptable(acceptable), startDate(startDate), endDate(endDate) { }
 
 template<typename S, typename U, typename D>

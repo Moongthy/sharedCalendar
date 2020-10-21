@@ -4,11 +4,11 @@ Calendar<S, U, D>::Calendar(U user)
  :administrator(user), calendarID(user.getUserId()) { }
 
 template<typename S, typename U, typename D>
-Calendar<S, U, D>::Calendar(U user, int sharedCalendarId)
+Calendar<S, U, D>::Calendar(U user, string sharedCalendarId)
  :administrator(user), calendarID(sharedCalendarId) { }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::getCalendarID(){
+string Calendar<S, U, D>::getCalendarID(){
     return calendarID;
 }
 

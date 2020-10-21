@@ -27,7 +27,7 @@ string userNameList[6] = {
 vector<User> userList;
 void userTest(){
     for(int i = 0; i < 6; ++i)
-        userList.push_back(User(userNameList[i], i));
+        userList.push_back(User(userNameList[i], "0"+i));
 
     for(User u : userList)
         cout << "userName : " << u.getUserName() << " userId : " << u.getUserId() << "\n";
