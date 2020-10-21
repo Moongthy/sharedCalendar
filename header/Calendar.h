@@ -14,7 +14,7 @@ using std::string;
  * @param U User(사용자) type
  * @param D Date(날짜, 시간) type
  * 
- * @author 문근 조
+ * @author 문근 & 예슬
  */
 template <typename S, typename U, typename D> class Calendar{
 protected:
