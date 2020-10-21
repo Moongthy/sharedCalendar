@@ -28,11 +28,6 @@ int SharedCalendarManager<S, U, D>::searchSharedCalendarIdx(string keyword){
     return -1;
 }
 
-/**
- * 들어가는 사람이 이 캘린더의 속해있는 userID는 확인하지 않는다.
- * 왜냐하면 기획서와 흐름도에 그렇게 되어있으니까.
- * 만약 기획서 수정한다면 이부분 수정해야 될듯.
- */
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>::intoSharedCalendar(U user,
  string inputCalendarName, string inputPassWord){

@@ -12,6 +12,14 @@ g++로만 컴파일 해봄
       SharedCalendar.h
       
       SharedCalendarManager.h
+      
+      type
+        
+        Schedule.h
+        
+        Date.h
+        
+        User.h
     
   source
       
