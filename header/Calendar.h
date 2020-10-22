@@ -41,7 +41,7 @@ public:
      *  일정목록의 크기는 0으로 초기화됨
      * 
      *  @param administrator 이 캘린더를 생성한 사람. 관리자
-     *  @param sharedCalendarId 공유캘린더 Id. 공유 캘린더 만들때마다 프로그램이 1부터 오름차순으로 id 부여함. 
+     *  @param sharedCalendarId 공유캘린더 Id. 현재있는 공유캘린더 수 + 1000 으로 매겨짐 
      */
     Calendar(U user, string sharedCalendarId);
 
