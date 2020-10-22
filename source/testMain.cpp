@@ -7,8 +7,6 @@
 #include"../header/type/Date.h"
 
 #include<iostream>
-
-#include"../header/input/Input.h"
 #include"../header/strings.h"
 using namespace std;
 
