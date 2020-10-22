@@ -19,7 +19,7 @@ using std::string;
 template <typename S, typename U, typename D> class Calendar{
 protected:
     // 캘린더 id
-    string calendarID; //int?? string??
+    string calendarID; //
 
     // 만든사람
     U administrator;
