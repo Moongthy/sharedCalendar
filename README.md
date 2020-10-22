@@ -13,6 +13,8 @@ g++로만 컴파일 해봄
       
       SharedCalendarManager.h
       
+      Strings.h
+      
       type
         
         Schedule.h
@@ -20,6 +22,10 @@ g++로만 컴파일 해봄
         Date.h
         
         User.h
+      
+      input
+      
+          Input.h
     
   source
       
