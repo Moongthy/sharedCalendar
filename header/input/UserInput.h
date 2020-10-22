@@ -4,7 +4,9 @@
 #define __USERINPUT__
 
 #include<string>
+#include<algorithm>
 #include<iostream>
+
 using std::string;
 using std::cin;
 class UserInput{
@@ -17,7 +19,9 @@ public:
 
     bool qCheck();
 
-    virtual bool encodingCheck();
+    bool encodingCheck();
+
+    string lower(const string& s);
 
     virtual bool lengthCheck();
 

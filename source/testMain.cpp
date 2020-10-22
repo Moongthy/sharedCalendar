@@ -7,9 +7,12 @@
 #include"../header/type/Date.h"
 
 #include<iostream>
+#include<string.h>
 #include"../header/strings.h"
 using namespace std;
 
 int main(){
+
+
     return 0;
 }

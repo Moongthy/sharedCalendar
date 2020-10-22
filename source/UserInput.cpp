@@ -27,3 +27,10 @@ bool UserInput::encodingCheck(){
     }
     return true;
 }
+
+
+string UserInput::lower(const string& s){
+    string ret = s;
+    std::transform(ret.begin(), ret.end(), ret.begin(), tolower);
+    return ret;
+}
