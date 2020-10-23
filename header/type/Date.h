@@ -19,40 +19,19 @@ public:
         근데 > 연산자 밖에 안되서 사용하실 때는 주의 바람
     */
     Date operator>(Date date) {
-        if ((0 <= yy && yy < 70) && (0 <= date.yy && date.yy < 70)) { //둘다 2000년 이후를 뜻할 때,
-            if (yy < date.yy) {
-                return false;
-            }
-            else if (yy == date.yy && mm < date.mm) { //연도는 같은데 월이 더 클 때
-                return false;
-            }
-            else if (yy == date.yy && mm == date.mm) { // 연도랑 월이 같을 때
-                if (dd < date.dd) { // 일로 비교
-                    return false;
-                }
-                else return true;
-            }
-        }
-        else if ((70 <= yy && yy <= 99) && (70 <= date.yy && date.yy <= 99)) { // 둘다 70년 부터 00년 범위 일 때,
-            if (yy < date.yy) {
-                return false;
-            }
-            else if (yy == date.yy && mm < date.mm) {
-                return false;
-            }
-            else if (yy == date.yy && mm == date.mm) {
-                if (dd < date.dd) {
-                    return false;
-                }
-                else return true;
-            }
-        }
-        else if (((70 <= yy && yy <= 99) && (0 <= date.yy && date.yy < 70))) { //둘 다 다를 때, 1
-            return false;
-        }
-        else if (((0 <= yy && yy < 70) && (70 <= date.yy && date.yy <= 99))) {// 둘 다 다를 때, 2
+        if (yy > date.yy) { // 연도만 비교
             return true;
         }
+        else if (yy == date.yy && mm > date.mm) { //연도가 같으면 달을 비교
+            return true;
+        }
+        else if (yy == date.yy && mm == date.mm) { //연도랑 달이 똑같으면
+            if (dd > date.dd) { //일을 비교
+                return true;
+            }
+            else return false;
+        }
+        return false;
     }
     
     
