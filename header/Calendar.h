@@ -26,6 +26,7 @@ protected:
     U administrator;
 
     // 일정 목록
+    vector <vector <1200, S>> scheduleList;
     vector<S> scheduleList;
 
 public:
@@ -59,6 +60,12 @@ public:
      *  일정을 보여줌
      */
     void show_Schedules();
+    currentMonth;
+    currentYear;
+    index = (Year * 100 + month) - 197001;
+
+    scheduleList[index].length = 0;
+
 
     /**
      *  새로운 일정을 일정목록에 추가함
