@@ -19,7 +19,7 @@ public:
         근데 > 연산자 밖에 안되서 사용하실 때는 주의 바람
     */
     Date operator>(Date date) {
-        if ((0 <= yy < 70) && (0 <= date.yy < 70)) { //둘다 2000년 이후를 뜻할 때,
+        if ((0 <= yy && yy < 70) && (0 <= date.yy && date.yy < 70)) { //둘다 2000년 이후를 뜻할 때,
             if (yy < date.yy) {
                 return false;
             }
@@ -33,7 +33,7 @@ public:
                 else return true;
             }
         }
-        else if ((70 <= yy <= 99) && (70 <= date.yy <= 99)) { // 둘다 70년 부터 00년 범위 일 때,
+        else if ((70 <= yy && yy <= 99) && (70 <= date.yy && date.yy <= 99)) { // 둘다 70년 부터 00년 범위 일 때,
             if (yy < date.yy) {
                 return false;
             }
@@ -47,10 +47,10 @@ public:
                 else return true;
             }
         }
-        else if (((70 <= yy <= 99) && (0 <= date.yy < 70))) { //둘 다 다를 때, 1
+        else if (((70 <= yy && yy <= 99) && (0 <= date.yy && date.yy < 70))) { //둘 다 다를 때, 1
             return false;
         }
-        else if (((0 <= yy < 70) && (70 <= date.yy <= 99))) {// 둘 다 다를 때, 2
+        else if (((0 <= yy && yy < 70) && (70 <= date.yy && date.yy <= 99))) {// 둘 다 다를 때, 2
             return true;
         }
     }
