@@ -8,6 +8,12 @@ public:
     int yy;
     int mm;
     int dd;
+
+    Date(int yy, int mm, int dd) : mm(mm), dd(dd){
+        if (0 <= yy && yy < 70) yy += 2000;
+        else if(70 <= yy && yy < 100) yy += 1900;
+    }
+
     /*
         연산자 오버로딩을 통해서 날짜를 비교할 수 있게 했습니다
         근데 > 연산자 밖에 안되서 사용하실 때는 주의 바람
