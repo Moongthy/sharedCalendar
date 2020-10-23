@@ -12,12 +12,12 @@ private:
     int id
     string title;
     Date date;
-    Date startTime;
-    Date endTime;
+    int startTime;
+    int endTime;
     string content;
     string location;
     
-    Schedule(string title, Date date, Date startTime, Date endTime, string content = '', string location = '', int id = -1)
+    Schedule(string title, Date date, int startTime, int endTime, string content = '', string location = '', int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime), location(location), content(content) {
         if (this.date > date) {
             cout << "잘못 된 시간을 일정에 입력함"
@@ -37,16 +37,16 @@ public :
     Date setDate(Date date) {
         date = date;
     }
-    Date getStartTime(){
+    int getStartTime(){
         return startTime;
     }
-    Date setStartTime(Date startTime) {
+    int setStartTime(int startTime) {
         startTime = startTime;
     }
-    Date getEndTime(){
+    int getEndTime(){
         return endTime;
     }
-    Date setEndTime(Date endTime) {
+    int setEndTime(int endTime) {
         endTime = endTime
     }
     string getContent(){

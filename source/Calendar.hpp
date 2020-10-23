@@ -20,7 +20,19 @@ U Calendar<S, U, D>::getCalendarAdministrator(){
 /*************************일정 파트********************************/
 template<typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(){
+    //현재 날짜에 대한 정보 필요
+    int currentYear, int currentMonth) {
+    index = (currentYear * 100 + currentMonth) - 197001;
+    if (scheduleList[index].length() == 0) {
+        \
+            nothing to show
+    }
+    scheduleList.
 
+
+    }
+
+    scheduleList[index].length = 0;
 
 }
 

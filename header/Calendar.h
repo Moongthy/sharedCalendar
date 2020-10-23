@@ -2,11 +2,9 @@
 #ifndef __CALENDER__
 #define __CALENDER__
 
-#include<string>
-#include<vector>
+#include <bits/stdc++.h>
 
-using std::vector;
-using std::string;
+using namespace std;
 
 /**
  * 개인 캘린더 클래스 및 공유캘린더 부모 클래스
@@ -26,7 +24,7 @@ protected:
     U administrator;
 
     // 일정 목록
-    vector <vector <1200, S>> scheduleList;
+    vector <vector <S>> scheduleList(1200);
     vector<S> scheduleList;
 
 public:
@@ -60,11 +58,6 @@ public:
      *  일정을 보여줌
      */
     void show_Schedules();
-    currentMonth;
-    currentYear;
-    index = (Year * 100 + month) - 197001;
-
-    scheduleList[index].length = 0;
 
 
     /**
