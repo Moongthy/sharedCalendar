@@ -8,6 +8,7 @@
 using std::string;
 
 class Schedule{
+//새 브랜치 작성..ㅠㅠ
 public:
     Date startTime;
     Date endTime;
