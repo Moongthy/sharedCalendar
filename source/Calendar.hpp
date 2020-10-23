@@ -18,6 +18,8 @@ U Calendar<S, U, D>::getCalendarAdministrator(){
 }
 
 /*************************일정 파트********************************/
+//의문사항
+//(1) 스케쥴 클래스에 date 자료가 있으니까 따로 여기서 받을 필요는 있을까?
 template<typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(){
 
