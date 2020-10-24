@@ -76,6 +76,7 @@ void SharedCalendarManager<S, U, D>::showSharedCalendarList(){
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
     ReadFile rf = ReadFile();
+    
     // rf.clearSCList(); <---- 이거요
 
     for(SharedCalendar<S, U, D> sc : sharedCalendarList){
