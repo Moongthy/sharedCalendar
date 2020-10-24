@@ -15,7 +15,6 @@ int SharedCalendarManager<S, U, D>::getSharedCalendarListSize(){
 template<typename S, typename U, typename D>
 void SharedCalendarManager<S, U, D>::addSharedCalendar(U user, string sharedCalendarName, string pw,
  int acceptable, D startDate, D endDate){
-
     sharedCalendarList.push_back(SharedCalendar<S, U, D>(user, std::to_string(sharedCalendarList.size() + 1000) , sharedCalendarName, pw, acceptable, startDate, endDate));
 }
 
@@ -112,3 +111,5 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
 
     return 0;
 }
+
+

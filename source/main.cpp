@@ -7,6 +7,9 @@
 
 using namespace std;
 
+
+
+
 int main(){
 
     User user = User("ans", "123");
@@ -16,6 +19,8 @@ int main(){
     MenuInput mi = MenuInput(user, scm);
 
     mi.mainMenu();
+
+    // cout << currentDateTime() << endl;
 
     return 0;
 }

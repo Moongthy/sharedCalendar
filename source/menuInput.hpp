@@ -79,7 +79,11 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage == 0) return;
 
     if(stage == 5){
-        scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), Date(20, 10, 24),
+        string sd = currentDateTime();
+
+        Date startDate(stoi(sd.substr(0, 1)), stoi(sd.substr(3,4)), stoi(sd.substr(6,7)));
+
+        scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate,
          Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
         cout << inputCreateSharedCalendar[stage];
         return;
@@ -192,4 +196,18 @@ void MenuInput::showJoinedList(){
         if(isMyCalendar)
             cout << sc.getSharedCalendarName() << "\n";
     }
+}
+
+// 현재시간을 string type으로 return하는 함수
+
+string MenuInput::currentDateTime() {
+    time_t     now = time(0); //현재 시간을 time_t 타입으로 저장
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct); // YYYY-MM-DD.HH:mm:ss 형태의 스트링
+    
+    string ret(buf);
+
+    return ret.substr(2, 8);
 }
