@@ -4,6 +4,9 @@
 #define __SHAREDCALENDARMANGER__
 
 #include"SharedCalendar.h"
+
+#include"ReadFile.h"
+
 #include<iostream>
 
 using std::cout;

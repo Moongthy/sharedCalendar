@@ -72,14 +72,38 @@ void SharedCalendarManager<S, U, D>::showSharedCalendarList(){
 
 
 /******************************파일 입출력 파트************************************/
+
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
-    // to do : 현재 sharedCalendarList를 .txt파일로 저장한다.
+    ReadFile rf = ReadFile();
+    // rf.clearSCList(); <---- 이거요
+
+    for(SharedCalendar<S, U, D> sc : sharedCalendarList){
+        
+        string startDate = "", endDate = "";
+        
+        startDate = to_string(sc.getStartDate().yy) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
+        endDate = to_string(sc.getEndDate().yy) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
+        
+        rf.writeSCList(sc.getSharedCalendarName(), sc.getPassWord(), startDate, endDate, sc.getCalendarAdministrator().getUserId());
+    
+    }
     return 0;
 }
 
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
-    // to do : .txt파일을 sharedCalendarList로 불러온다.
+
+    // while(SCList 다 읽을 때 까지){
+
+    //     User user : 읽어온 사용자 정보
+    //     string sharedCalendarNaem : 읽어온 공캘 제목
+    //     int acceptable : 읽어온 수용인원
+    //     Date startDate : 읽어온 시작 날짜
+    //     Date endDate : 읽어온 끝날짜
+
+    //     sharedCalendarList.push_back(SharedCalendar<S, U, D>(user, sharedCalenarName, acceptable, startDate, endDate));
+    // }
+
     return 0;
 }
