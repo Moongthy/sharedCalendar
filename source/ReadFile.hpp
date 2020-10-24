@@ -119,6 +119,44 @@ void ReadFile::writeSCList(string title, string password, string startday, strin
 }
 
 
+vector<string> ReadFile::getSCList() {
+    read.open("../data/SharedCalendarList.txt");
+    char str[sizeof(read)]={'\0'};
+    int i = 0;
+    string SCdata;
+    vector<string> SCAll;
+
+    if(read.good())
+    {
+        while(!read.eof())
+        {
+            read.getline(str, sizeof(read));
+            if(read.eof()) break;
+            
+            SCdata = "";
+            for(i=0; i<sizeof(read); i++)
+            {
+                if(str[i]=='\0') break;
+                SCdata += str[i];
+            }
+            cout << SCdata << endl;
+            SCAll.push_back(SCdata);
+        }
+        
+    }
+    else cout << "[SharedCalendarList.txt] read error!" << endl;
+    
+    read.close();
+
+    return SCAll;
+}
+
+void ReadFile::clearSCList() {
+    write.open("../data/SharedCalendarList.txt", ios::out);
+    write.close();
+}
+
+
 vector<string> ReadFile::getSCTitleList() {
     read.open("../data/SharedCalendarList.txt");
     char str[sizeof(read)]={'\0'};

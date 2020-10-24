@@ -70,6 +70,20 @@ class ReadFile {
         
 
         /**
+         * SharedCalendarList.txt 전체 불러오기 
+         * 
+         * @return
+         *      line별 내용
+         */          
+        vector<string> getSCList();
+        
+        /**
+         * SharedCalendarList.txt 전체 삭제 
+         */          
+        void clearSCList();
+        
+        
+        /**
          * SharedCalendarList.txt 파일에 저장되어있는 공유 캘린더 제목
          * (제목 중복 확인 사용)
          * 
