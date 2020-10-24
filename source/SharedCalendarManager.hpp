@@ -21,9 +21,8 @@ void SharedCalendarManager<S, U, D>::addSharedCalendar(U user, string sharedCale
 
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>::searchSharedCalendarIdx(string keyword){
-
     for(int idx = 0; idx < sharedCalendarList.size(); ++idx)
-        if(sharedCalendarList[idx].getSharedCalendarName() == keyword)
+        if(sharedCalendarList[idx].getSharedCalendarName().find(keyword) != string::npos)
             return idx;
     return -1;
 }
@@ -35,7 +34,7 @@ int SharedCalendarManager<S, U, D>::intoSharedCalendar(U user,
     int scIdx = searchSharedCalendarIdx(inputCalendarName);
 
     // 일치하는 공유캘린더 없음
-    if(!scIdx) return 0;
+    if(scIdx < 0) return 0;
 
     // 패스워드 불일치
     if(sharedCalendarList[scIdx].getPassWord() != inputPassWord) return -1;
@@ -56,7 +55,7 @@ int SharedCalendarManager<S, U, D>::joinSharedCalendar(U user, string inputCalen
     if(!sharedCalendarList[scIdx].addMember(user)) return -2;
 
     // 성공
-    return scIdx;
+    return 1;
 }
 
 template<typename S, typename U, typename D>

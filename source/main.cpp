@@ -10,7 +10,9 @@ using namespace std;
 int main(){
 
     User user = User("ans", "123");
+    
     SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
+    
     MenuInput mi = MenuInput(user, scm);
 
     mi.mainMenu();

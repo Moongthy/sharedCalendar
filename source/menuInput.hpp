@@ -43,12 +43,7 @@ int MenuInput::whatCalendarDoYouWant(){
 
     if(c.qCheck(input)) return -1;
 
-    if(!c.numberCheck(input, 3)) {
-        cout << err[0];
-        return -1;
-    }
-
-    if(c.totalCheck(input, _NORMAL)) return stoi(input);
+    if(c.totalCheck(input, _NORMAL, 3)) return stoi(input);
 
     cout << err[0];
 
@@ -67,12 +62,7 @@ int MenuInput::sharedCalendarActions(){
 
     if(c.qCheck(input)) return -1;
 
-    if(!c.numberCheck(input, 3)) {
-        cout << err[0];
-        return -1;
-    }
-
-    if(c.totalCheck(input, _NORMAL)) return stoi(input);
+    if(c.totalCheck(input, _NORMAL, 3)) return stoi(input);
 
     cout << err[0];
 
@@ -86,7 +76,8 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage < 0) return;
 
     if(stage == 5){
-        scm.addSharedCalendar(user, scInfo[0], stoi(scInfo[2]), Date(0, 1, 2), Date(3, 4, 5));
+        scm.addSharedCalendar(user, scInfo[0], stoi(scInfo[2]), Date(20, 10, 24),
+         Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
         cout << inputCreateSharedCalendar[stage];
         return;
     }
@@ -105,7 +96,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
         return;
     }
 
-    if(!c.totalCheck(input, stage)){
+    if(!c.totalCheck(input, stage, 0)){
         cout << err[0];
         createNewSc(scInfo, stage);
         return;
@@ -121,8 +112,8 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
     if(stage < 0) return;
 
     if(stage == 3){
-        if(scm.joinSharedCalendar(user, scInfo[0], scInfo[1]) < 0){
-            cout << err[0];
+        if(scm.joinSharedCalendar(user, scInfo[0], scInfo[1]) != 1){
+            cout << err[1];
             return;
         }
         cout << inputJoinSharedCalendar[stage];
@@ -145,7 +136,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
         return;
     }
 
-    if(!c.totalCheck(input, stage)){
+    if(!c.totalCheck(input, stage, 0)){
         cout << err[0];
         joinSC(scInfo, stage);
         return;
@@ -167,7 +158,7 @@ void MenuInput::intoSC(){
 
     if(c.qCheck(input)) return;
 
-    if(c.totalCheck(input, _NORMAL)){
+    if(c.totalCheck(input, _NORMAL, scm.getSharedCalendarListSize()-1)){
         cout << err[0];
         intoSC();
     }
