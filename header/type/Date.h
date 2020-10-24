@@ -8,6 +8,8 @@ public:
     int yy;
     int mm;
     int dd;
+
+    Date(int yy, int mm, int dd) : yy(yy), mm(mm), dd(dd) { }
 };
 
 #endif

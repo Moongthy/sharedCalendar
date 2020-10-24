@@ -26,7 +26,6 @@ protected:
 
     // 일정 목록
     vector<S> scheduleList;
-
 public:
     /**
      *  개인 캘린더 생성자
@@ -49,7 +48,6 @@ public:
      *  getter of caledarID 
      */
     string getCalendarID();
-
 
     U getCalendarAdministrator();
 
@@ -93,7 +91,6 @@ public:
      */
     void showNextMonthSchedules();
     void showPrevMonthSchedules();
-
 };
 
 #include"../source/Calendar.hpp"

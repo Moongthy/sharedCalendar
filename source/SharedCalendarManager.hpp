@@ -4,7 +4,7 @@ SharedCalendarManager<S, U, D>::SharedCalendarManager(){};
 
 template<typename S, typename U, typename D>
 vector<SharedCalendar<S, U, D>> SharedCalendarManager<S, U, D>::getSharedCalendarList(){
-    return getSharedCalendarList;      
+    return sharedCalendarList;      
 }
 
 template<typename S, typename U, typename D>
@@ -23,7 +23,7 @@ template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>::searchSharedCalendarIdx(string keyword){
 
     for(int idx = 0; idx < sharedCalendarList.size(); ++idx)
-        if(sharedCalendarList[idx].getCalendarName() == keyword)
+        if(sharedCalendarList[idx].getSharedCalendarName() == keyword)
             return idx;
     return -1;
 }
@@ -56,7 +56,7 @@ int SharedCalendarManager<S, U, D>::joinSharedCalendar(U user, string inputCalen
     if(!sharedCalendarList[scIdx].addMember(user)) return -2;
 
     // 성공
-    return 1;
+    return scIdx;
 }
 
 template<typename S, typename U, typename D>
