@@ -7,6 +7,8 @@ g++로만 컴파일 해봄
 
   header
       
+      ReadFile.h
+      
       Calendar.h
       
       SharedCalendar.h
@@ -17,15 +19,17 @@ g++로만 컴파일 해봄
       
       type
         
-        Schedule.h
+                Schedule.h
         
-        Date.h
+                Date.h
         
-        User.h
+                User.h
       
       input
       
-          Input.h
+              check.h
+              
+              menuInput.h
     
   source
       
@@ -34,4 +38,8 @@ g++로만 컴파일 해봄
       SharedCalendar.hpp
       
       SharedCalendarManager.hpp
+      
+      menuInput.hpp
+      
+      ReadFile.hpp
     
