@@ -77,7 +77,7 @@ template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
     ReadFile rf = ReadFile();
     
-    // rf.clearSCList(); <---- 이거요
+    rf.clearSCList();
 
     for(SharedCalendar<S, U, D> sc : sharedCalendarList){
         
@@ -94,17 +94,34 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
 
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
+    ReadFile rf = ReadFile();
+    vector<string> FileSCList = rf.getSCList();
+    int i, separatorIndex;
 
-    // while(SCList 다 읽을 때 까지){
-
-    //     User user : 읽어온 사용자 정보
-    //     string sharedCalendarNaem : 읽어온 공캘 제목
-    //     int acceptable : 읽어온 수용인원
-    //     Date startDate : 읽어온 시작 날짜
-    //     Date endDate : 읽어온 끝날짜
-
-    //     sharedCalendarList.push_back(SharedCalendar<S, U, D>(user, sharedCalenarName, acceptable, startDate, endDate));
-    // }
-
+    string id, SCName, password, startDate, endDate, member;
+    for(string SCdata : FileSCList){
+        SharedCalendar<S, U, D> SC;
+        separatorIndex = 0;
+        id="", SCName="", password="", startDate="", endDate="", member="";
+        for(i=0; i<SCdata.length(); i++){
+            if(SCdata[i]=='$' || i==SCdata.length()) {
+                if(separatorIndex==5) {
+                    member+=SCdata[i];
+                    SC.SharedCalendar(member, id, password, SCName, startDate, endDate);
+                }
+                else if(separatorIndex>=6) SC.addMember(member);
+                separatorIndex++;
+                member="";
+            }
+            else if(separatorIndex==0) id+=SCdata[i];
+            else if(separatorIndex==1) SCName+=SCdata[i];
+            else if(separatorIndex==2) password+=SCdata[i];
+            else if(separatorIndex==3) startDate+=SCdata[i];
+            else if(separatorIndex==4) endDate+=SCdata[i];
+            else if(separatorIndex>=5) member+=SCdata[i];
+        }
+        cout << member << endl;
+        sharedCalendarList.push_back(SC);
+    }
     return 0;
 }
