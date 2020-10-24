@@ -23,7 +23,6 @@ class MenuInput{
 private:
     User user;
     SharedCalendarManager<Schedule, User, Date> scm;
-
 public:
 
     MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm);
@@ -44,6 +43,8 @@ public:
     // 캘린더에 참가한다.
     void joinSC(vector<string>& scInfo, int stage);
 
+    // 캘린더 번호를 입력하여 
+    // 캘린더에 들어간다.
     void intoSC();
 
     // 공유캘린더를 삭제한다.
@@ -51,7 +52,6 @@ public:
 
     // 참가된 공유캘린더들의 이름을 출력한다.
     void showJoinedList();
-
 };
 
 #include"../../source/menuInput.hpp"

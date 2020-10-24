@@ -11,7 +11,10 @@ void MenuInput::mainMenu(){
         // a에서 공유 캘린더 메뉴로 들어감.
         if(a == 2) b = sharedCalendarActions();
         // 종료
-        if(a == 3) exit(0);
+        if(a == 3) {
+            scm.saveSharedCalendarList();
+            exit(0);
+        }
         
         // 공유캘린더 생성
         if(b == 1){
