@@ -79,7 +79,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage < 0) return;
 
     if(stage == 5){
-        scm.addSharedCalendar(user, scInfo[0], stoi(scInfo[2]), Date(20, 10, 24),
+        scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), Date(20, 10, 24),
          Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
         cout << inputCreateSharedCalendar[stage];
         return;
@@ -115,7 +115,10 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
     if(stage < 0) return;
 
     if(stage == 3){
-        if(scm.joinSharedCalendar(user, scInfo[0], scInfo[1]) != 1){
+        int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
+        if(x < 0){
+            cout << scInfo[1] << endl;
+            cout << x << endl;
             cout << err[1];
             return;
         }

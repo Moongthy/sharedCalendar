@@ -31,7 +31,7 @@ string choiceSharedCalendarAction[10] = {
 
 // 새로운 공유 캘린더 생성
 string inputCreateSharedCalendar[10] = {
-    "[새로운 공유 캘린더 생성]",
+    "[새로운 공유 캘린더 생성]\n",
     "캘린더 제목 > ",
     "캘린더 비밀번호 > ",
     "캘린더 입장인원 > ",

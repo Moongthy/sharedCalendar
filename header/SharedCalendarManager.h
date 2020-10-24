@@ -45,7 +45,7 @@ public:
      * @param startDate 공유캘린더 만든 날짜
      * @param endDate 공유캘린더 유효기간
      **/
-    void addSharedCalendar(U user, string sharedCalendarName,
+    void addSharedCalendar(U user, string sharedCalendarName, string pw,
      int acceptable, D startDate, D endDate);
 
     /**
