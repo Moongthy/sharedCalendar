@@ -76,7 +76,7 @@ int MenuInput::sharedCalendarActions(){
 // 새로운 캘린더 정보를 입력받아 
 // 새로운 캘린더를 만든다.
 void MenuInput::createNewSc(vector<string>& scInfo, int stage){
-    if(stage < 0) return;
+    if(stage == 0) return;
 
     if(stage == 5){
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), Date(20, 10, 24),
@@ -94,7 +94,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     check c = check();
 
     if(c.qCheck(input)){
-        scInfo.pop_back();
+        if(scInfo.size()) scInfo.pop_back();
         createNewSc(scInfo, stage-1);
         return;
     }
@@ -112,7 +112,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
 // 캘린더 이름과 비번을 입력받아
 // 캘린더에 참가한다.
 void MenuInput::joinSC(vector<string>& scInfo, int stage){
-    if(stage < 0) return;
+    if(stage == 0) return;
 
     if(stage == 3){
         int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
@@ -137,7 +137,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
     check c = check();
 
     if(c.qCheck(input)){
-        scInfo.pop_back();
+        if(scInfo.size()) scInfo.pop_back();
         joinSC(scInfo, stage-1);
         return;
     }

@@ -17,12 +17,14 @@ public:
 
     check(){ }
 
+    // 뒤로가기 체크
     bool qCheck(const string& s){
         if(s.size() == 1 && s[0] == 'q')
             return true;
         return false;
     }
 
+    // 인코딩 체크
     bool encodingCheck(const string& s){
         string e = "";
         for(int i = (int)'a'; i <= (int)'z'; ++i) e += (char)i;
@@ -37,6 +39,7 @@ public:
         return true;
     }
 
+    // 숫자 체크
     bool numberCheck(const string& s, int upper){
         string num = "0123456789";
         if(num.find(s) == string::npos)
@@ -45,16 +48,7 @@ public:
         return true;
     }
 
-    bool dateCheck(const string& s){
-        string num = "0123456789";
-        for(char c : s)
-            if(num.find(c) == string::npos){
-                cout << "fuck" << "\n";
-                return false;
-            }
-        return true;
-    }
-
+    // 종합 체크
     bool totalCheck(string& s, int n, int upper){
         // 일반 메뉴 선택 입력
         if(n == _NORMAL){
