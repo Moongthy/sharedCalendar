@@ -1,7 +1,46 @@
 #include "../header/ReadFile.h"
 
+
 using namespace std;
 
+
+ReadFile::ReadFile() { }
+
+vector<User> ReadFile::getUserIdName() 
+{
+    read.open("../data/UserList.txt");
+    char str[sizeof(read)]={'\0'};
+    int i = 0;
+    vector<User> userlist;
+    string id, name;
+
+    if(read.good())
+    {
+        while(!read.eof())
+        {
+            read.getline(str, sizeof(read));
+            if(read.eof()) break;
+
+            id = "", name = "";
+            separatorIndex = 0;
+            for(i=0; i<sizeof(read); i++)
+            {
+                if(str[i]=='$') separatorIndex++;
+                else if(separatorIndex==0) id += str[i];
+                else if(separatorIndex==2) name += str[i];
+                else if(str[i]=='\0') break;
+            }
+            // cout << id << name << endl;
+            userlist.push_back(User(name, id));
+        }
+        
+    }
+    else cout << "[UserList.txt] read error!" << endl;
+    
+    read.close();
+
+    return userlist; 
+}
 
 vector<string> ReadFile::getUserIDList() 
 {
@@ -139,7 +178,7 @@ vector<string> ReadFile::getSCList() {
                 if(str[i]=='\0') break;
                 SCdata += str[i];
             }
-            cout << SCdata << endl;
+            // cout << SCdata << endl;
             SCAll.push_back(SCdata);
         }
         

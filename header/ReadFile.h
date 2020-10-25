@@ -12,6 +12,8 @@ using namespace std;
 //SharedCalendarList.txt
 //(캘린더 ID).txt
 
+#include"type/User.h"
+
 class ReadFile {
     private:
         ifstream read;
@@ -20,6 +22,10 @@ class ReadFile {
         string separator = "$";
 
     public:
+        
+        ReadFile();
+
+        vector<User> getUserIdName();
 
         /**
          * UserList.txt 파일에 저장되어있는 사용자들의 아이디
@@ -148,8 +154,6 @@ class ReadFile {
          * 
          */
         void deleteSchedule(string userID, string scheID);
-
-        
 
 };
 

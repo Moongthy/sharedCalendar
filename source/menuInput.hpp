@@ -2,6 +2,11 @@ MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
  :user(user), scm(scm) { }
 
 void MenuInput::mainMenu(){
+
+    scm.loadSharedCalendarList();
+    
+    // scm.showSharedCalendarList();
+
     while(true){
         int a, b, c, d;
 
@@ -79,9 +84,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage == 0) return;
 
     if(stage == 5){
-        string sd = currentDateTime();
-
-        Date startDate(stoi(sd.substr(0, 1)), stoi(sd.substr(3,4)), stoi(sd.substr(6,7)));
+        Date startDate = currentDateTime();
 
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate,
          Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
@@ -122,7 +125,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
         int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
         if(x < 0){
             cout << scInfo[1] << endl;
-            cout << x << endl;
+            // cout << x << endl;
             cout << err[1];
             return;
         }
@@ -156,6 +159,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
     joinSC(scInfo, stage+1);
 }
 
+
 void MenuInput::intoSC(){
     cout << signInShardCalendar[0];
     showJoinedList();
@@ -168,16 +172,10 @@ void MenuInput::intoSC(){
 
     if(c.qCheck(input)) return;
 
-    if(c.totalCheck(input, _NORMAL, scm.getSharedCalendarListSize()-1)){
+    if(!c.totalCheck(input, _SCSIZE, scm.getSharedCalendarListSize()-1)){
         cout << err[0];
         intoSC();
     }
-
-    if(stoi(input) < 0 || stoi(input) > scm.getSharedCalendarListSize()-1){
-        cout << err[0];
-        intoSC();
-    }
-
     cout << "[" << scm.getSharedCalendarList()[stoi(input)].getSharedCalendarName()<<"기능선택]\n";
 }   
 
@@ -186,6 +184,7 @@ bool MenuInput::delSc(){ }
 
 
 void MenuInput::showJoinedList(){
+    int i = 0;
     for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList()){
         bool isMyCalendar = false;
         for(User m : sc.getMemberList())
@@ -194,20 +193,23 @@ void MenuInput::showJoinedList(){
                 break;
             }
         if(isMyCalendar)
-            cout << sc.getSharedCalendarName() << "\n";
+            cout << i << " " << sc.getSharedCalendarName() << "\n";
+        ++i;
     }
 }
 
 // 현재시간을 string type으로 return하는 함수
 
-string MenuInput::currentDateTime() {
+Date MenuInput::currentDateTime() {
     time_t     now = time(0); //현재 시간을 time_t 타입으로 저장
     struct tm  tstruct;
     char       buf[80];
     tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct); // YYYY-MM-DD.HH:mm:ss 형태의 스트링
+    strftime(buf, sizeof(buf), "%Y%m%d", &tstruct); // YYYY-MM-DD.HH:mm:ss 형태의 스트링
     
-    string ret(buf);
+    string ret = string(buf);
 
-    return ret.substr(2, 8);
+    // cout << ret << endl;
+    ret = ret.substr(2, ret.size());
+    return Date(stoi(ret.substr(0, 2)), stoi(ret.substr(2, 2)), stoi(ret.substr(4, 5)));
 }

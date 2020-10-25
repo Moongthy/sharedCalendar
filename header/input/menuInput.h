@@ -15,6 +15,7 @@
 #define _PW 2
 #define _ACCEPTABLE 3
 #define _DATE 4
+#define _SCSIZE 5
 #include<time.h>
 #include<string>
 using namespace std;
@@ -53,7 +54,7 @@ public:
     // 참가된 공유캘린더들의 이름을 출력한다.
     void showJoinedList();
 
-    string currentDateTime();
+    Date currentDateTime();
 };
 
 #include"../../source/menuInput.hpp"

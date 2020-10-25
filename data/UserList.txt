@@ -1,4 +1,1 @@
-apple$applepass$사과
-banana$bananapass$바나나
-tree$treepass$나무
-lemon$lemonpass$레몬
+123$1234$ans

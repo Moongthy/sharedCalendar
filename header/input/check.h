@@ -11,6 +11,7 @@ using std::string;
 #define _PW 2
 #define _ACCEPTABLE 3
 #define _DATE 4
+#define _SCSIZE 5
 
 class check{
 public:
@@ -29,13 +30,25 @@ public:
         string e = "";
         for(int i = (int)'a'; i <= (int)'z'; ++i) e += (char)i;
         for(int i = (int)'A'; i <= (int)'Z'; ++i) e += (char)i;
-        // for(int i = 44032; i <= 55203; ++i) e+= (wchar_t)i;
+        for(int i = 44032; i <= 55203; ++i) e+= (char)i;
         for(int i = (int)'0'; i <= (int)'9'; ++i) e += (char)i;
 
         for(char u : s)
             if(e.find(u) == string::npos)
                 return false;
 
+        return true;
+    }
+
+    
+        
+    
+
+    bool isOnlyNumber(const string& s){
+        string num = "0123456789";
+        for(char c : s)
+            if(num.find(c) == string::npos)
+                return false;
         return true;
     }
 
@@ -54,6 +67,11 @@ public:
         if(n == _NORMAL){
             if(s.size() != 1) return false;
             return numberCheck(s, upper);
+        }
+
+        if(n == _SCSIZE){
+            if(!isOnlyNumber(s)) return false;
+            if(stoi(s) > upper) return false;
         }
 
         // 캘이름

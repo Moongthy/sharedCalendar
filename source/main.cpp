@@ -5,22 +5,25 @@
 
 #include<string>
 
+#include"../header/ReadFile.h"
+
 using namespace std;
 
-
-
+#include"../header/type/Users.h"
 
 int main(){
 
-    User user = User("ans", "123");
+    string a = "ans", b = "123";
+
+    User user = User(a, b);
     
     SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
-    
+
     MenuInput mi = MenuInput(user, scm);
 
     mi.mainMenu();
 
-    // cout << currentDateTime() << endl;
+    // cout << (int)L'가' << endl;
 
     return 0;
 }
