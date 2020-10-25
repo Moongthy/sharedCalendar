@@ -4,6 +4,8 @@
 #define __CHECK__
 
 #include<string>
+#include<algorithm>
+#include"../strings.h"
 using std::string;
 
 #define _NORMAL 0
@@ -25,25 +27,26 @@ public:
         return false;
     }
 
+    bool hangeulCheck(string& s);
+
     // 인코딩 체크
-    bool encodingCheck(const string& s){
+    bool encodingCheck(string& s){
+        // cout << s << endl;
+
         string e = "";
+
         for(int i = (int)'a'; i <= (int)'z'; ++i) e += (char)i;
         for(int i = (int)'A'; i <= (int)'Z'; ++i) e += (char)i;
-        for(int i = 44032; i <= 55203; ++i) e+= (char)i;
         for(int i = (int)'0'; i <= (int)'9'; ++i) e += (char)i;
 
-        for(char u : s)
-            if(e.find(u) == string::npos)
-                return false;
+        for(int i = 0; i < s.size(); ++i)
+            if(e.find(s[i]) == string::npos)
+                return hangeulCheck(s);
 
         return true;
     }
 
     
-        
-    
-
     bool isOnlyNumber(const string& s){
         string num = "0123456789";
         for(char c : s)
@@ -101,4 +104,5 @@ public:
     }
 };
 
+#include"check.hpp"
 #endif

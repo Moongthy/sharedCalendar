@@ -96,6 +96,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     cout << inputCreateSharedCalendar[stage];
 
     string input;
+
     getline(cin, input);
 
     check c = check();

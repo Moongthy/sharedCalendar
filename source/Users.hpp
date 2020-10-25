@@ -27,10 +27,6 @@ string Users::getUserPw()
 	return userPw;
 }
 
-
-
-
-
 void Users::firstMenu()
 {
 	int select;
@@ -137,6 +133,7 @@ void Users::signIn()
 	if (flag == -1) {
 		firstMenu();
 	}
+
 	else if (flag == 1) {
 		cout << "로그인 성공!";
 		setUserId(id);
@@ -200,7 +197,6 @@ void Users::signUp()
 		//캘린더 선택 메뉴로 이동
 	}
 }
-
 
 bool Users::isOverlap(string id)
 {
