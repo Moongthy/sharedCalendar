@@ -5,6 +5,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include "../header/type/User.h"
 
 using namespace std;
 
@@ -20,6 +21,15 @@ class ReadFile {
         string separator = "$";
 
     public:
+    
+        /**
+         * UserList.txt 파일에 저장되어있는 사용자 아이디와 이름을 User 타입저장 후 반환
+         * 
+         * @return 
+         *      User 타입으로 저장한 list
+         */
+        vector<User> getUserIdName();
+
 
         /**
          * UserList.txt 파일에 저장되어있는 사용자들의 아이디
