@@ -1,5 +1,8 @@
-    bool check::hangeulCheck(string& s){
-    cout << s << endl;
+
+// °¡³ª´Ù¶ó,,,ÆR = true ¹ÝÈ¯
+// ¤¡¤¤¤§¤© ¤± ,, ¤² ,,,¤¾ = false ¹ÝÈ¯
+bool check::hangeulCheck(string& s){
+    // cout << s << endl;
     string r = "¤¡";
     string h = "¤¾";
     for(char c : s)
@@ -10,4 +13,4 @@
             return false; 
     }
     return true;
-    }
+}

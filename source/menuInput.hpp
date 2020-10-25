@@ -64,6 +64,7 @@ int MenuInput::sharedCalendarActions(){
     for(string s : choiceSharedCalendarAction) cout << s;
 
     string input;
+    
     getline(cin, input);
 
     check c = check();

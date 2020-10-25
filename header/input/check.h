@@ -22,6 +22,7 @@ public:
 
     // 뒤로가기 체크
     bool qCheck(const string& s){
+        // 문자열 길이가 1이고 그것이 q라면.
         if(s.size() == 1 && s[0] == 'q')
             return true;
         return false;
@@ -40,13 +41,18 @@ public:
         for(int i = (int)'0'; i <= (int)'9'; ++i) e += (char)i;
 
         for(int i = 0; i < s.size(); ++i)
-            if(e.find(s[i]) == string::npos)
-                return hangeulCheck(s);
+            // 이게 소문자 or 대문자 or 숫자가 아니라면
+            if(e.find(s[i]) == string::npos){
+                // 해당위치에서 자름.
+                string hanguelStart = s.substr(i, s.size());
+                // 한글인지 검사한다.
+                return hangeulCheck(hanguelStart);
+            }
 
         return true;
     }
 
-    
+    // 이 문자열이 숫자로만 이루어진 문자열이라면 true
     bool isOnlyNumber(const string& s){
         string num = "0123456789";
         for(char c : s)
@@ -55,12 +61,10 @@ public:
         return true;
     }
 
-    // 숫자 체크
+    // 숫자로만 이루어졌고, 1이상 upper이하의 숫자라면 true
     bool numberCheck(const string& s, int upper){
-        string num = "0123456789";
-        if(num.find(s) == string::npos)
-            return false;
-        if(stoi(s) > upper) return false;
+        if(!isOnlyNumber(s)) return false;
+        if(stoi(s) > upper || stoi(s) < 1) return false;
         return true;
     }
 
