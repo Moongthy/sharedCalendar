@@ -6,7 +6,7 @@
 #include"UserInput.h"
 
 class SharedCalendar : public UserInput{
-
+    
     int yy;
     int mm;
     int dd;

@@ -3,9 +3,9 @@
 #ifndef __USER__
 #define __USER__
 
-#include<string>
+#include <bits/stdc++.h>
 
-using std::string;
+using namespace std;
 
 class User{
 public:

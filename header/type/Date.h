@@ -13,7 +13,7 @@ public:
 		if (0 <= yy && yy < 70) yy += 2000;
 		else if (70 <= yy && yy < 100) yy += 1900;
 	}
-
+	
 	bool operator>(Date date) {
 		if (yy > date.yy) {
 			return true;

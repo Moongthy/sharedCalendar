@@ -5,6 +5,7 @@
 
 #include <bits/stdc++.h>
 #include "Date.h"
+
 using namespace std;
 
 class Schedule{
@@ -24,6 +25,7 @@ private:
         }
         cout << "";
     }
+
 public :
     string getTitle() {
         return title;
