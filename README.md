@@ -7,7 +7,7 @@ data하위 문서/check.hpp/strings.h 만 euc-kr
     
         ~/shared_calendar$ g++ -o execution/main source/main.cpp
 
-📦shared_calendar
+📦shared_calendar  
  ┣ 📂data  
  ┃ ┣ 📂Calendar  
  ┃ ┃ ┗ 📜apple.txt  
