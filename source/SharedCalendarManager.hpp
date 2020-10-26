@@ -1,6 +1,13 @@
     
 template<typename S, typename U, typename D>
-SharedCalendarManager<S, U, D>::SharedCalendarManager(){};
+SharedCalendarManager<S, U, D>::SharedCalendarManager(){
+    loadSharedCalendarList();
+};
+
+template<typename S, typename U, typename D>
+SharedCalendarManager<S, U, D>::~SharedCalendarManager(){
+    saveSharedCalendarList();
+};
 
 template<typename S, typename U, typename D>
 vector<SharedCalendar<S, U, D>> SharedCalendarManager<S, U, D>::getSharedCalendarList(){
@@ -82,12 +89,14 @@ void SharedCalendarManager<S, U, D>::showSharedCalendarList(){
     cout << endl;
 }
 
-
+template<typename S, typename U, typename D>
+int SharedCalendarManager<S, U, D>::deleteSharedCalendar(U user, int scIdx){
+    if(scIdx < 0 || scIdx > sharedCalendarList.size()-1) return 0;
+    sharedCalendarList.erase(sharedCalendarList.begin()+scIdx);
+    return 1;
+}
 
 /******************************파일 입출력 파트************************************/
-
-
-
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
     

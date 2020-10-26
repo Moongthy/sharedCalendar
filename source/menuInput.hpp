@@ -3,8 +3,6 @@ MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
 
 void MenuInput::mainMenu(){
 
-    scm.loadSharedCalendarList();
-    
     // scm.showSharedCalendarList();
 
     while(true){
@@ -17,7 +15,7 @@ void MenuInput::mainMenu(){
         if(a == 2) b = sharedCalendarActions();
         // 종료
         if(a == 3) {
-            scm.saveSharedCalendarList();
+            delete &scm;
             exit(0);
         }
         
@@ -177,12 +175,34 @@ void MenuInput::intoSC(){
     if(!c.totalCheck(input, _SCSIZE, scm.getSharedCalendarListSize()-1)){
         cout << err[0];
         intoSC();
+        return;
     }
-    cout << "[" << scm.getSharedCalendarList()[stoi(input)].getSharedCalendarName()<<"기능선택]\n";
+    cout << signInShardCalendar[2] << scm.getSharedCalendarList()[stoi(input)].getSharedCalendarName()<< signInShardCalendar[3];
 }   
 
 // 공유캘린더를 삭제한다.
-bool MenuInput::delSc(){ }
+bool MenuInput::delSc(int scIdx){ 
+    cout << delSharedCalenadr[0];
+    cout << delSharedCalenadr[1];
+
+    string input;
+    check c = check();
+    
+    getline(cin, input);
+
+    if(c.qCheck(input)) return true;
+
+    if(input[0] == 'y' || input[0] == 'Y'){
+        scm.deleteSharedCalendar(user, scIdx);
+        delSharedCalenadr[3];
+        return true;
+    }
+
+    if(input[0] == 'n' || input[0] == 'N') return false;
+
+    cout << err[0];
+    delSc(scIdx);
+}
 
 
 void MenuInput::showJoinedList(){

@@ -49,7 +49,7 @@ public:
     void intoSC();
 
     // 공유캘린더를 삭제한다.
-    bool delSc();
+    bool delSc(int scIdx);
 
     // 참가된 공유캘린더들의 이름을 출력한다.
     void showJoinedList();
