@@ -5,10 +5,9 @@ data하위 문서/check.hpp/strings.h 만 euc-kr
 
 컴파일 명령어 
     
-        ~/shared_calendar$ g++ -o main main.cpp
+        ~/shared_calendar$ g++ -o execution/main source/main.cpp
 
 📦shared_calendar
-
  ┣ 📂data  
  ┃ ┣ 📂Calendar  
  ┃ ┃ ┗ 📜apple.txt  
