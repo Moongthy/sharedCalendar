@@ -3,25 +3,31 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
 #include <vector>
 #include "../header/type/User.h"
 
 using namespace std;
-
-//UserList.txt
-//SharedCalendarList.txt
-//(캘린더 ID).txt
 
 class ReadFile {
     private:
         ifstream read;
         ofstream write;
         int separatorIndex;
-        string separator = "$";
+        char separator = '$';
 
     public:
-    
+        /**
+         * UserList.txt 파일에 저장되어 있는 정보
+         * 
+         * @param index 0:id, 1:password, 2:name
+         * 
+         * @return
+         *      index에 맞는 list
+         */
+        vector<string> readUserList(int index);
+
+
+
         /**
          * UserList.txt 파일에 저장되어있는 사용자 아이디와 이름을 User 타입저장 후 반환
          * 
@@ -61,7 +67,34 @@ class ReadFile {
          *
          */  
         void writeUserList(string id, string password, string name);
-        
+
+
+
+        /**
+         * SharedCalendarList.txt 파일에 저장되어 있는 정보
+         * 
+         * @param index 0:id, 1:title, 2:password, 3:startday, 4:endday, 5:admin
+         * 
+         * @return
+         *      index에 맞는 list
+         */
+        vector<string> readSCList(int index);
+
+
+        /**
+         * SharedCalendarList.txt 전체 불러오기 
+         * 
+         * @return
+         *      line별 내용
+         */          
+        vector<string> getSCList();
+
+
+        /**
+         * SharedCalendarList.txt 전체 삭제 
+         */          
+        void clearSCList();
+
 
         /**
          * SharedCalendarList.txt에 생성한 공유 캘린더 정보 입력
@@ -77,20 +110,7 @@ class ReadFile {
          * 
          */  
         void writeSCList(string title, string password, string startday, string endday, string admin);
-        
-
-        /**
-         * SharedCalendarList.txt 전체 불러오기 
-         * 
-         * @return
-         *      line별 내용
-         */          
-        vector<string> getSCList();
-        
-        /**
-         * SharedCalendarList.txt 전체 삭제 
-         */          
-        void clearSCList();
+    
         
         
         /**
@@ -122,6 +142,17 @@ class ReadFile {
          * 
          */
         void writeSCMember(string title, string member);
+
+        /**
+         * 캘린더 UserID.txt 파일에 저장되어 있는 정보
+         *  
+         * @param userID 사용자 아이디
+         * @param index 0:id, 1:name, 2:date, 3:starttime, 4:endtime, 5:loc, 6:memo
+         * 
+         * @return
+         *      index에 맞는 list
+         */
+        vector<string> readCalendar(string userID, int index);
 
 
         /**
@@ -159,9 +190,6 @@ class ReadFile {
          */
         void deleteSchedule(string userID, string scheID);
 
-        
-
 };
-
 
 #include"../source/ReadFile.hpp"

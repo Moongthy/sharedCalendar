@@ -2,112 +2,87 @@
 
 using namespace std;
 
-vector<User> ReadFile::getUserIdName() 
+vector<string> ReadFile::readUserList(int index) 
 {
     read.open("../data/UserList.txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
-    vector<User> userlist;
-    string id, name;
-
+    string temp;
+    vector<string> return_list;
+    
     if(read.good())
     {
         while(!read.eof())
         {
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
 
-            id = "", name = "";
             separatorIndex = 0;
+            temp = "";
             for(i=0; i<sizeof(read); i++)
             {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==0) id += str[i];
-                else if(separatorIndex==2) name += str[i];
+                if(str[i]==separator) separatorIndex++;
+                else if(separatorIndex==index) temp += str[i];
                 else if(str[i]=='\0') break;
             }
-            cout << id << name << endl;
-            userlist.push_back(User(id, name));
+            return_list.push_back(temp);
         }
-        
     }
     else cout << "[UserList.txt] read error!" << endl;
     
     read.close();
 
-    return userlist; 
+    return return_list;    
+}
+
+vector<User> ReadFile::getUserIdName() 
+{
+    vector<User> return_list;
+    vector<string> id_list = readUserList(0); 
+    vector<string> name_list = readUserList(2);
+
+    int i = 0;
+    for(i=0; i<id_list.size(); i++)
+    {
+        return_list.push_back(User(id_list[i], name_list[i]));
+    }
+
+    return return_list; 
 }
 
 vector<string> ReadFile::getUserIDList() 
 {
-    read.open("../data/UserList.txt");
-    char str[sizeof(read)]={'\0'};
+    vector<string> return_list;
+    vector<string> id_list = readUserList(0);
+
     int i = 0;
-    vector<string> userId;
-
-    if(read.good())
+    for(i=0; i<id_list.size(); i++)
     {
-        while(!read.eof())
-        {
-            read.getline(str, sizeof(read));
-            if(read.eof()) break;
-
-            string id = "";
-            separatorIndex = 0;
-            for(i=0; i<sizeof(read); i++)
-            {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==0) id += str[i];
-                else if(separatorIndex==1) break;
-            }
-            userId.push_back(id);
-        }
-        
+        return_list.push_back(id_list[i]);
     }
-    else cout << "[UserList.txt] read error!" << endl;
-    
-    read.close();
 
-    return userId;
+    return return_list; 
 }
-
 
 string ReadFile::getUserpassword(string userID)
 {
-    read.open("../data/UserList.txt");
-    char str[sizeof(read)]={'\0'};
+    vector<string> id_list = readUserList(0);
+    vector<string> pwd_list = readUserList(1);
+
     int i = 0;
-    string id, password;
-    vector<string> SCTitle;
-
-    if(read.good())
+    string return_pwd;
+    for(i=0; i<id_list.size(); i++)
     {
-        while(!read.eof())
+        if(id_list[i]==userID) 
         {
-            read.getline(str, sizeof(read));
-            if(read.eof()) break;
-
-            id = "", password = "";
-            separatorIndex = 0;
-            for(i=0; i<sizeof(read); i++)
-            {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==0) id += str[i];
-                else if(separatorIndex==1) password += str[i];
-                else if(separatorIndex==2) break;
-            }
-            if(userID == id) break;
+            return_pwd = pwd_list[i];
+            cout << return_pwd;
+            break;
         }
-        
     }
-    else cout << "[UserList.txt] read error!" << endl;
-    
-    read.close();
 
-    return password;   
+    return return_pwd; 
 }
-
-
 
 void ReadFile::writeUserList(string id, string password, string name) {
     write.open("../data/UserList.txt", ios::app);
@@ -115,44 +90,40 @@ void ReadFile::writeUserList(string id, string password, string name) {
     write.close();
 }
 
-void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
-    read.open("../data/SharedCalendarList.txt");
-    char str[sizeof(read)]={'\0'};
-    int i = 0;
-    string preID;
 
+
+vector<string> ReadFile::readSCList(int index) 
+{
+    read.open("../data/SharedCalendarList.txt");
+    int i = 0;
+    string temp;
+    vector<string> return_list;
+    
     if(read.good())
     {
         while(!read.eof())
         {
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
 
-            preID = "";
             separatorIndex = 0;
+            temp = "";
             for(i=0; i<sizeof(read); i++)
             {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==0) preID += str[i];
-                else if(separatorIndex==1) break;
+                if(str[i]==separator) separatorIndex++;
+                else if(separatorIndex==index) temp += str[i];
+                else if(str[i]=='\0') break;
             }
+            return_list.push_back(temp);
         }
-        
     }
-    else cout << "[UserList.txt] read error!" << endl;
+    else cout << "[SharedCalendarList.txt] read error!" << endl;
     
     read.close();
 
-    if(preID == "") preID = "0";
-    int id = stoi(preID)+1;
-    // 처음 SharedCalendar 등록할 때는 admin이 제일 첫번째에 들어가서 admin만 넣음.
-    write.open("../data/SharedCalendarList.txt", ios::app);
-    write << id;
-    write << separator + title + separator + password + separator
-                + startday + separator + endday + separator + admin << endl;
-    write.close();
+    return return_list;    
 }
-
 
 vector<string> ReadFile::getSCList() {
     read.open("../data/SharedCalendarList.txt");
@@ -174,7 +145,6 @@ vector<string> ReadFile::getSCList() {
                 if(str[i]=='\0') break;
                 SCdata += str[i];
             }
-            cout << SCdata << endl;
             SCAll.push_back(SCdata);
         }
         
@@ -186,77 +156,58 @@ vector<string> ReadFile::getSCList() {
     return SCAll;
 }
 
+
 void ReadFile::clearSCList() {
     write.open("../data/SharedCalendarList.txt", ios::out);
     write.close();
 }
 
 
-vector<string> ReadFile::getSCTitleList() {
-    read.open("../data/SharedCalendarList.txt");
-    char str[sizeof(read)]={'\0'};
-    int i = 0;
-    vector<string> SCTitle;
+void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
+    vector<string> id_list = readSCList(0);
 
-    if(read.good())
-    {
-        while(!read.eof())
-        {
-            read.getline(str, sizeof(read));
-            if(read.eof()) break;
-            
-            string title = "";
-            separatorIndex = 0;
-            for(i=0; i<sizeof(read); i++)
-            {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==1) title += str[i];
-                else if(separatorIndex==2) break;
-            }
-            SCTitle.push_back(title);
-        }
-        
-    }
-    else cout << "[SharedCalendarList.txt] read error!" << endl;
+    int id = id_list.size()+1;
     
-    read.close();
+    // 처음 SharedCalendar 등록할 때는 admin이 제일 첫번째에 들어가서 admin만 넣음.
+    write.open("../data/SharedCalendarList.txt", ios::app);
+    write << id;
+    write << separator + title + separator + password + separator
+                + startday + separator + endday + separator + admin << endl;
+    write.close();
+}
 
-    return SCTitle;
+
+vector<string> ReadFile::getSCTitleList() 
+{
+    vector<string> return_list;
+    vector<string> title_list = readUserList(1);
+
+    int i = 0;
+    for(i=0; i<title_list.size(); i++)
+    {
+        return_list.push_back(title_list[i]);
+    }
+
+    return return_list; 
 }
 
 
 string ReadFile::getSCPassword(string inputTitle) {
-    read.open("../data/SharedCalendarList.txt");
-    char str[sizeof(read)]={'\0'};
+    vector<string> title_list = readUserList(0);
+    vector<string> pwd_list = readUserList(1);
+
     int i = 0;
-    string title, password;
-    vector<string> SCTitle;
-
-    if(read.good())
+    string return_pwd;
+    for(i=0; i<title_list.size(); i++)
     {
-        while(!read.eof())
+        if(title_list[i]==inputTitle) 
         {
-            read.getline(str, sizeof(read));
-            if(read.eof()) break;
-
-            title = "", password = "";
-            separatorIndex = 0;
-            for(i=0; i<sizeof(read); i++)
-            {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==1) title += str[i];
-                else if(separatorIndex==2) password += str[i];
-                else if(separatorIndex==3) break;
-            }
-            if(inputTitle == title) break;
+            return_pwd = pwd_list[i];
+            break;
         }
-        
     }
-    else cout << "[SharedCalendarList.txt] read error!" << endl;
-    
-    read.close();
 
-    return password;
+    return return_pwd;
 }
 
 
@@ -303,37 +254,46 @@ void ReadFile::writeSCMember(string title, string member) {
     write.close();
 }
 
-
-void ReadFile::writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo) {
+vector<string> ReadFile::readCalendar(string userID, int index)
+{
     read.open("../data/Calendar/"+userID+".txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
-    string preID;
-
+    string temp;
+    vector<string> return_list;
+    
     if(read.good())
     {
         while(!read.eof())
         {
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
 
-            preID = "";
             separatorIndex = 0;
+            temp = "";
             for(i=0; i<sizeof(read); i++)
             {
-                if(str[i]=='$') separatorIndex++;
-                else if(separatorIndex==0) preID += str[i];
-                else if(separatorIndex==1) break;
+                if(str[i]==separator) separatorIndex++;
+                else if(separatorIndex==index) temp += str[i];
+                else if(str[i]=='\0') break;
             }
+            return_list.push_back(temp);
         }
-        
     }
-    else cout << "read error!" << endl;
+    else cout << "[" << userID << ".txt] read error!" << endl;
     
     read.close();
 
-    if(preID == "") preID = "0";
-    int id = stoi(preID)+1;
+    return return_list;    
+}
+
+
+void ReadFile::writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo) 
+{
+    vector<string> id_list = readCalendar(userID, 0);
+
+    int id = id_list.size()+1;
+
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
