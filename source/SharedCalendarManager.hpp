@@ -28,7 +28,7 @@ void SharedCalendarManager<S, U, D>::addSharedCalendar(U user, string sharedCale
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>::searchSharedCalendarIdx(string keyword){
     for(int idx = 0; idx < sharedCalendarList.size(); ++idx)
-        if(sharedCalendarList[idx].getSharedCalendarName() == keyword)
+        if(sharedCalendarList[idx].getSharedCalendarName().find(keyword) != string::npos)
             return idx;
     return -3;
 }
@@ -112,6 +112,9 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
         endDate = to_string(sc.getEndDate().yy) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
         
         rf.writeSCList(sc.getSharedCalendarName(), sc.getPassWord(), startDate, endDate, sc.getCalendarAdministrator().getUserId());
+
+        for(int i = 1; i < sc.getMemberList().size(); ++i)
+            rf.writeSCMember(sc.getSharedCalendarName(), sc.getMemberList()[i].getUserId());
     
     }
     return 0;

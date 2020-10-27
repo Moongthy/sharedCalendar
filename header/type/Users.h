@@ -1,53 +1,34 @@
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <direct.h>
-#include <errno.h>
-#include <locale>
-#include <Map>
-#include <regex>
 #include <io.h>
 
-#include"User.h"
+#include "User.h"
+#include "../ReadFile.h"
+#include "../input/check.h"
 
 using namespace std;
 
 class Users : public User
 {
 private:
-	
 	string userPw;
 
-	ifstream read;
-	ofstream write;
-	int separatorIndex;
-	string separator = "$";
-
 public:
-	Users(string userId, string userName);
-
-	void setUserId(const string& id);
-	void setUserPw(const string& pw);
-	void setUserName(const string& name);
+	Users(string userName, string userId);
 
 	string getUserPw();
+	void setUserPw(string pw);
 
-	void firstMenu(); // 첫화면
-	void signIn(); //로그인
-	void signUp(); //회원가입
+	void firstMenu(); 
+	void signIn();
+	void signUp();
 
-	map<string, string> getUserList();
-	map<string, string> getUserIdName();
+	bool isOverlap(string id); // id already exist?
+	bool isFine(string id, string pw); // (id, pw) match?
 
-	bool isOverlap(string id); // 회원가입 시 ID 중복검사
-	bool isFine(string id, string pw); // 로그인 시 ID PW 매칭 검사
-	void writeUserList(string id, string pw, string name);
-
-	bool wencodingCheck(const wstring& s);
-	wstring getwInput(wstring menuname, wstring purpose, int start,int end);
-	string convertWstring(wstring const& wstr, locale const& loc);
+	string getUserNameList(string userId);
+	string getInput(string menuname, string purpose, int start, int end);
 
 	void isDirExist(const char* dirpath);
 	void isFileExist(const char* filepath);

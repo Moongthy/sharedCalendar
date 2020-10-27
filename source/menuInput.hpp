@@ -1,5 +1,12 @@
 MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
- :user(user), scm(scm) { }
+ :user(user), scm(scm) { 
+    //  // 유효기간 끝났으면 해당 공캘 폭파.
+    //  for(int i = 0; i < scm.getSharedCalendarListSize(); ++i)
+    //  {
+    //      if(currentDateTime() > scm.getSharedCalendarList()[i].getEndDate())
+    //         scm.getSharedCalendarList().erase(scm.getSharedCalendarList().begin() + i);
+    //  }
+ }
 
 void MenuInput::mainMenu(){
 
@@ -172,12 +179,17 @@ void MenuInput::intoSC(){
 
     if(c.qCheck(input)) return;
 
-    if(!c.totalCheck(input, _SCSIZE, scm.getSharedCalendarListSize()-1)){
+    if(!c.totalCheck(input, _SCSIZE, scm.getSharedCalendarListSize()) || stoi(input) == 0){ 
         cout << err[0];
         intoSC();
         return;
     }
-    cout << signInShardCalendar[2] << scm.getSharedCalendarList()[stoi(input)].getSharedCalendarName()<< signInShardCalendar[3];
+
+    cout << signInShardCalendar[2] << scm.getSharedCalendarList()[stoi(input)-1].getSharedCalendarName()<< signInShardCalendar[3];
+
+    // 로그인한 userId가 해당 공캘을 만든 userId이다
+    if(scm.getSharedCalendarList()[stoi(input)-1].getMemberList()[0].getUserId() == user.getUserId())
+        cout << choiceSpecifiedSharedCalendarAction[1];
 }   
 
 // 공유캘린더를 삭제한다.
@@ -204,7 +216,6 @@ bool MenuInput::delSc(int scIdx){
     delSc(scIdx);
 }
 
-
 void MenuInput::showJoinedList(){
     int i = 0;
     for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList()){
@@ -215,7 +226,7 @@ void MenuInput::showJoinedList(){
                 break;
             }
         if(isMyCalendar)
-            cout << i << " " << sc.getSharedCalendarName() << "\n";
+            cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
         ++i;
     }
 }

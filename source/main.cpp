@@ -13,15 +13,19 @@ using namespace std;
 
 int main(){
 
-    string a = "ans", b = "123";
+    // string a = "ans", b = "123";
 
-    User user = User(a, b);
+    // User user = User(a, b);
     
-    SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
+    // SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
 
-    MenuInput mi = MenuInput(user, scm);
+    // MenuInput mi = MenuInput(user, scm);
 
-    mi.mainMenu();
+    // mi.mainMenu();
+
+    Users users = Users("ansrms", "1234");
+
+    users.firstMenu();
 
     // cout << (int)L'가' << endl;
 
