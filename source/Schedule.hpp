@@ -40,6 +40,7 @@ void Calendar<S, U, D>::modifySchedule()
     //parameter 수정 필요
     //수정하는 항목 별로 있음 항목별로 함수 만들어야함.
 }
+
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyTitle(S s, string title){
     if(title.length() >= 20 && title.length() < 1) {

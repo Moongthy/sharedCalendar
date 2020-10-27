@@ -81,10 +81,13 @@ public:
      *  일정을 수정함
      */
     void modifySchedule();
-    int modifyTitle(S s, string title)
-    int modifyETime()
-    int modifyContent()
-    int modifyLocation()
+    int modifyTitle(S s, string title);
+    int modifyETime();
+    int modifyContent();
+    int modifyLocation();
+    int modifySTime();
+    int modifyDate(string hhmm);
+
     /**
      *  일정을 삭제함.
      * 
