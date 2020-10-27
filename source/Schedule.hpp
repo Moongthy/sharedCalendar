@@ -49,7 +49,7 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
 }
 
 template<typename S, typename U, typename D>
-void Calendar<S, U, D>::modifyDate(string hhmm){
+int Calendar<S, U, D>::modifyDate(string hhmm){
     if(title.length() >= 20 && title.length() < 1) {
         cout << "1~20자의 제목을 입력해주세요."
         return 3;
@@ -65,22 +65,22 @@ void Calendar<S, U, D>::modifyDate(string hhmm){
 }
 
 template<typename S, typename U, typename D>
-void Calendar<S, U, D>::modifySTime(){
+int Calendar<S, U, D>::modifySTime(){
     
 }
 
 template<typename S, typename U, typename D>
-void Calendar<S, U, D>::modifyETime(){
+int Calendar<S, U, D>::modifyETime(){
     
 }
 
 template<typename S, typename U, typename D>
-void Calendar<S, U, D>::modifyContent(){
+int Calendar<S, U, D>::modifyContent(){
     
 }
 
 template<typename S, typename U, typename D>
-void Calendar<S, U, D>::modifyLocation(){
+int Calendar<S, U, D>::modifyLocation(){
     
 }
 

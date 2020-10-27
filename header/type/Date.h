@@ -9,8 +9,8 @@ public:
 	int mm;
 	int dd;
 	Date(string yymmdd) {
-		yymmdd.erase(std::remove(str.begin(), str.end(), '#'), str.end());
-		yymmdd.erase(std::remove(str.begin(), str.end(), '#'), str.end());
+		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '#'), str.end());
+		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '#'), str.end());
 
 		yy = stoi(yymmdd[0]+yymmdd[1]);
 		mm = stoi(yymmdd[2]+yymmdd[3]);
