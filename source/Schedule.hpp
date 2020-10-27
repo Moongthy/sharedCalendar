@@ -50,18 +50,7 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyDate(string hhmm){
-    if(title.length() >= 20 && title.length() < 1) {
-        cout << "1~20자의 제목을 입력해주세요."
-        return 3;
-    }
-    else if( title.length() == 1 && title[0] == 'q') {
-        //q를 입력했을 때 행동 수행
-        return 2;
-    }
-    else {
-        s.setTitle(title);
-        return 1;
-    }
+    
 }
 
 template<typename S, typename U, typename D>
