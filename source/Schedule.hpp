@@ -1,6 +1,5 @@
 
 /*************************일정 파트********************************/
-#define endl '\n'
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option()
@@ -9,27 +8,7 @@ void Calendar<S, U, D>::select_Schedules_option()
     show_Schedules(ym_idx);
 
     for(string s : calendarSelectionOption) cout << s;
-    string selection;
-    cin >> selection;
-
-    if(selection.length()!=1) {
-        cout << "올바른 입력 형식이 아닙니다.\n";
-    }
-    else {
-        if(selection == "q") {
-            // q에 대한 처리
-        }
-        else {
-            selection = stoi(selection);
-            if(selection <= 0 || selection > 6) {
-                cout << "올바른 입력 형식이 아닙니다.\n";   
-            }
-        }
-    }
-    
-    /**
-     *  selection에 대한 오류처리
-     */
+    int selection = checkValidSelection(6);
 
     switch (selection)
     {
@@ -92,8 +71,6 @@ void Calendar<S, U, D>::show_Schedules(int ym_idx)
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::addSchedule()
 {
-    Schedule new_schedule = new Schedule();
-
     //제목, 날짜, 시작시간, 종료시간, 장소, 내용
 
     //scheduleList.push_back(S(startDate, endDate, content));
@@ -106,15 +83,14 @@ void Calendar<S, U, D>::modifySchedule()
     string input_id;
     cin >> input_id;
 
+    /**
+     * 
+     * ID 유효한지 검사
+     * 
+     **/
 
     for(string s : modifyScheduleOption) cout << s;
-    string selection;
-    cin >> selection;
-
-
-    /**
-     *  selection에 대한 오류처리
-     */
+    int selection = checkValidSelection(6);
 
     switch (selection)
     {
@@ -128,11 +104,11 @@ void Calendar<S, U, D>::modifySchedule()
         break;
     case 3:
         /* 시작시간 수정 */
-        modifySTime();
+        modifyTime();
         break;
     case 4:
         /* 종료시간 수정 */
-        modifyETime();
+        modifyTime();
         break; 
     case 5:
         /* 내용 수정 */
@@ -146,9 +122,6 @@ void Calendar<S, U, D>::modifySchedule()
         /* 오류 */
         break;
     }
-    //id로 수정하는건데
-    //parameter 수정 필요
-    //수정하는 항목 별로 있음 항목별로 함수 만들어야함.
 }
 
 template<typename S, typename U, typename D>
@@ -161,6 +134,7 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
         return 1;
     }
 }
+
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
     int select;
@@ -169,6 +143,7 @@ int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
         s.setDate(new_date);
     }
 }
+
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyTime(S s, string hhmm){
     int select;
@@ -183,9 +158,17 @@ int Calendar<S, U, D>::modifyContent(){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyLocation(){
-    
+int Calendar<S, U, D>::modifyLocation() {
+    string input;
+    while(1) {
+        cin >> input;
+        titleVaild(input);
+
+    }
+    S.setLocation(input);
+    return 0;
 }
+
 /*
 오류 체크 함수(???Vaild)의 리턴 값 설명
 0 : 정상 종료
@@ -307,5 +290,37 @@ void Calendar<S, U, D>::showPrevMonthSchedules()
     {
         ym_idx--;
         show_Schedules(ym_idx);
+    }
+}
+
+int checkValidSelection(int boundary) {
+    string input;
+    int selection;
+    while (1)
+    {
+        cin >> input;
+        if (input.length() != 1)
+        {
+            cout << "올바른 입력 형식이 아닙니다.\n";
+        }
+        else
+        {
+            if (input == "q")
+            {
+                // q에 대한 처리
+            }
+            else
+            {
+                selection = stoi(input);
+                if (selection <= 0 || selection > boundary)
+                {
+                    cout << "올바른 입력 형식이 아닙니다.\n";
+                }
+                else 
+                {
+                    return selection;
+                }
+            }
+        }
     }
 }
