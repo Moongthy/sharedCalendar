@@ -41,8 +41,7 @@ public:
      *  @param endDate              유효기간
      */
     SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, int acceptable, D startDate, D endDate);
-    string s;
-    s.length
+    
     string getSharedCalendarName();
 
     // @return 수용가능인원 

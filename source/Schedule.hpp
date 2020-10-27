@@ -4,13 +4,11 @@
 template<typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month){
     //현재 날짜에 대한 정보 필요
-    struct tm curr_tm;
     time_t curr_time = time(nullptr);
+    struct tm * curr_tm = localtime(&curr_time);
 
-    localtime_r(&curr_time, &curr_tm);
-
-    int currentYear = curr_tm.tm_year + 1900;
-    int currentMonth = curr_tm.tm_mon + 1;
+    int currentYear = curr_tm -> tm_year + 1900;
+    int currentMonth = curr_tm -> tm_mon + 1;
     int idx = (curr_year * 100 + curr_month) - 197001;
 
     if (scheduleList[idx].length() != 0) {
