@@ -89,11 +89,12 @@ public:
     /**
      *  일정을 수정함
      */
-    void modifySchedule();
+    void modifySchedule(S schedule, U users, D date);
     int modifyTitle(S s, string title);
-    int modifyTime(S s, string hhmm);
-    int modifyContent();
-    int modifyLocation();
+    int modifySTime(S s, string hhmm);
+    int modifyETime(S s, string hhmm);
+    int modifyContent(S s, string content);
+    int modifyLocation(S s, string location);
     int modifyDate(S s, string yymmdd);
 
     /**
