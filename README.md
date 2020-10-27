@@ -14,8 +14,6 @@ data하위 문서/check.hpp/strings.h 만 euc-kr
  ┃ ┣ 📜SharedCalendarList.txt  
  ┃ ┗ 📜UserList.txt  
  ┣ 📂execution  
- ┃ ┣ 📂data  
- ┃ ┃ ┗ 📜UserList.txt  
  ┃ ┗ 📜main.exe  
  ┣ 📂header  
  ┃ ┣ 📂input  
