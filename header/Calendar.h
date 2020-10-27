@@ -24,7 +24,10 @@ protected:
     U administrator;
 
     // 일정 목록
-    vector<vector <S>> scheduleList(1200, vector<S>);
+    vector<vector <Schedule>> scheduleList(1200, vector<Schedule>);
+
+    // 캘린더 현재 년도/월에 대한 index (0 ~ 1199)
+    int ym_idx;
 
 public:
     /**
@@ -45,6 +48,12 @@ public:
     Calendar(U user, string sharedCalendarId);
 
     /**
+     *  캘린더 생성자
+     *  MenuInput의 currentDateTime으로 ym_idx 초기화
+     */
+    Calendar();  
+
+    /**
      *  getter of caledarID 
      */
     string getCalendarID();
@@ -56,7 +65,7 @@ public:
     /**
      *  일정을 보여줌
      */
-    void show_Schedules(int curr_year, int curr_month);
+    void show_Schedules(int ym_idx);
 
     /**
      *  새로운 일정을 일정목록에 추가함
