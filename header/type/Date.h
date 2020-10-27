@@ -2,6 +2,9 @@
 
 #ifndef ___date___
 #define ___date___
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class Date {
 public:
@@ -9,12 +12,15 @@ public:
 	int mm;
 	int dd;
 	Date(string yymmdd) {
-		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '#'), str.end());
-		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '#'), str.end());
+		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
-		yy = stoi(yymmdd[0]+yymmdd[1]);
-		mm = stoi(yymmdd[2]+yymmdd[3]);
-		dd = stoi(yymmdd[4]+yymmdd[5]);
+		yy = stoi(yymmdd.substr(0,1));
+		mm = stoi(yymmdd.substr(2,3));
+		dd = stoi(yymmdd.substr(4,5));
+
+		if (0 <= yy && yy < 70) yy += 2000;
+		else if (70 <= yy && yy < 100) yy += 1900;
 	}
 	Date(int yy, int mm, int dd) : mm(mm), dd(dd) {
 		if (0 <= yy && yy < 70) yy += 2000;
@@ -36,7 +42,6 @@ public:
 		}
 		return false;
 	}
-
 };
 
 #endif

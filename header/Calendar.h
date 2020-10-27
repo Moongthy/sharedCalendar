@@ -15,7 +15,9 @@ using namespace std;
  * 
  * @author 문근 & 예슬
  */
-template <typename S, typename U, typename D> class Calendar{
+template <typename S, typename U, typename D>
+class Calendar
+{
 protected:
     // 캘린더 id
     string calendarID;
@@ -24,7 +26,10 @@ protected:
     U administrator;
 
     // 일정 목록
-    vector<vector <S>> scheduleList(1200, vector<S>);
+    vector<vector<S>> scheduleList(1200, vector<S>);
+
+    // 캘린더 현재 년도/월에 대한 index (0 ~ 1199)
+    int ym_idx;
 
 public:
     /**
@@ -33,7 +38,7 @@ public:
      * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
-    Calendar(U user); 
+    Calendar(U user);
 
     /**
      *  공유 캘린더 생성자에서 호출될 생성자
@@ -45,18 +50,23 @@ public:
     Calendar(U user, string sharedCalendarId);
 
     /**
+     *  캘린더 생성자
+     *  MenuInput의 currentDateTime으로 ym_idx 초기화
+     */
+    Calendar();
+
+    /**
      *  getter of caledarID 
      */
     string getCalendarID();
 
-
     U getCalendarAdministrator();
 
-/*************************일정 파트********************************/
+    /*************************일정 파트********************************/
     /**
      *  일정을 보여줌
      */
-    void show_Schedules(int curr_year, int curr_month);
+    void show_Schedules(int ym_idx);
 
     /**
      *  새로운 일정을 일정목록에 추가함
@@ -72,9 +82,18 @@ public:
      */
     void modifySchedule();
     int modifyTitle(S s, string title);
+<<<<<<< HEAD
     int modifyETime()
     int modifyContent();
     int modifyLocation();
+=======
+    int modifyETime();
+    int modifyContent();
+    int modifyLocation();
+    int modifySTime();
+    int modifyDate(string hhmm);
+
+>>>>>>> 10ac031d87c0fd545afd734084de776663cac42b
     /**
      *  일정을 삭제함.
      * 
@@ -88,16 +107,15 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    vector<S>& searchSchedule(string keyword);
+    vector<S> &searchSchedule(string keyword);
 
     /**
      *  저번달, 다음달 일정을 보여줌
      */
     void showNextMonthSchedules();
     void showPrevMonthSchedules();
-
 };
 
-#include"../source/Calendar.hpp"
-#include"../source/Schedule.hpp"
+#include "../source/Calendar.hpp"
+#include "../source/Schedule.hpp"
 #endif
