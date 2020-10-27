@@ -13,11 +13,11 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month){
     int currentMonth = curr_tm.tm_mon + 1;
     int idx = (curr_year * 100 + curr_month) - 197001;
 
-    if (scheduleList[index].length() != 0) {
+    if (scheduleList[idx].length() != 0) {
         cout << "Noting to show" << endl;
     }
     else {
-        for(int i = 0; i<scheduleList[index].length(); i++) {
+        for(int i = 0; i<scheduleList[idx].length(); i++) {
             // Schedule Print
         }
     }
@@ -41,12 +41,23 @@ void Calendar<S, U, D>::deleteSchedule(string keyword){
 }
 
 template<typename S, typename U, typename D>
-S& Calendar<S, U, D>::searchSchedule(string keyword){
+vector<S>& Calendar<S, U, D>::searchSchedule(string keyword){
     vector<S> SearchScheduleList;
+    for(int i = 0; i<1200; i++) {
+        int len = scheduleList[i].length();
+        for(int j = 0; j<len; j++) {
+            string content = S.getContent();
+            if(content.find(keyword)) {
+                SearchScheduleList.push_back(S);
+            }
+        }
+    }
     //schedulelist 탐색하면서 keyword 들어있는 S탐색
     //SearchScheduleList에 넣어줌
 
     // SearchScheduleList의 크기 0이면 해당하는 것 없음
+
+    return SearchScheduleList;
 }
 
 template<typename S, typename U, typename D>
@@ -57,11 +68,11 @@ void Calendar<S, U, D>::showNextMonthSchedules(){
     // show schedules 함수 사용 하면 좋을듯
     int idx = (currentYear * 100 + currentMonth) - 197001;
     if(idx - 1 >= 0) {
-        if (scheduleList[index-1].length() != 0) {
+        if (scheduleList[idx-1].length() == 0) {
             cout << "Noting to show" << endl;
         }
         else {
-            for(int i = 0; i<scheduleList[index].length(); i++) {
+            for(int i = 0; i<scheduleList[idx-1].length(); i++) {
             // Schedule Print
             }
         }
@@ -75,11 +86,11 @@ template<typename S, typename U, typename D>
 void Calendar<S, U, D>::showPrevMonthSchedules(){
     int idx = (currentYear * 100 + currentMonth) - 197001;
     if(idx + 1 >= 1200) {
-        if (scheduleList[index].length() != 0) {
+        if (scheduleList[idx+1].length() == 0) {
             cout << "Noting to show" << endl;
         }
         else {
-            for(int i = 0; i<scheduleList[index].length(); i++) {
+            for(int i = 0; i<scheduleList[idx+1].length(); i++) {
             // Schedule Print
             }
         }

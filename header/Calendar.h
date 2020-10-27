@@ -24,7 +24,7 @@ protected:
     U administrator;
 
     // 일정 목록
-    vector<vector <S>> scheduleList(1200);
+    vector<vector <S>> scheduleList(1200, vector<S>);
 
 public:
     /**
@@ -85,7 +85,7 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    S& searchSchedule(string keyword);
+    vector<S>& searchSchedule(string keyword);
 
     /**
      *  저번달, 다음달 일정을 보여줌
