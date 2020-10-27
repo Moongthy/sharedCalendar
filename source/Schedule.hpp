@@ -31,6 +31,58 @@ void Calendar<S, U, D>::modifySchedule(){
     //parameter 수정 필요
     //수정하는 항목 별로 있음 항목별로 함수 만들어야함.
 }
+template<typename S, typename U, typename D>
+int Calendar<S, U, D>::modifyTitle(S s, string title){
+    if(title.length() >= 20 && title.length() < 1) {
+        cout << "1~20자의 제목을 입력해주세요."
+        return 3;
+    }
+    else if( title.length() == 1 && title[0] == 'q') {
+        //q를 입력했을 때 행동 수행
+        return 2;
+    }
+    else {
+        s.setTitle(title);
+        return 1;
+    }
+    
+}
+
+template<typename S, typename U, typename D>
+void Calendar<S, U, D>::modifyDate(string hhmm){
+    if(title.length() >= 20 && title.length() < 1) {
+        cout << "1~20자의 제목을 입력해주세요."
+        return 3;
+    }
+    else if( title.length() == 1 && title[0] == 'q') {
+        //q를 입력했을 때 행동 수행
+        return 2;
+    }
+    else {
+        s.setTitle(title);
+        return 1;
+    }
+}
+
+template<typename S, typename U, typename D>
+void Calendar<S, U, D>::modifySTime(){
+    
+}
+
+template<typename S, typename U, typename D>
+void Calendar<S, U, D>::modifyETime(){
+    
+}
+
+template<typename S, typename U, typename D>
+void Calendar<S, U, D>::modifyContent(){
+    
+}
+
+template<typename S, typename U, typename D>
+void Calendar<S, U, D>::modifyLocation(){
+    
+}
 
 template<typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteSchedule(string keyword){
