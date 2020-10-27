@@ -183,7 +183,8 @@ void Calendar<S, U, D>::modifySchedule(S schedule, U users, D date)
     {
     case 1:
         /* 제목수정 */
-        modifyTitle();
+        //내부적으로 입력받게해야함
+        modifyTitle(schedule);
         break;
     case 2:
         /* 날짜수정 */
@@ -338,7 +339,7 @@ int hhmmVaild(string hhmm) {
         cout << err[0] << endl;
         return 2;
     }//string::npos 이면은 못찾은거임
-    else if((findCheck(hhmm,"/") || (findCheck(hhmm,"-")) || (hhmm.length() == 4 && hhmm.length() == 5)) {
+    else if((findCheck(hhmm,"/") || (findCheck(hhmm,"-")) || (hhmm.length() == 4 || hhmm.length() == 5))) {
         //10.21 / 9시 20분 마지막 수정 부분
         return 0;
     }
@@ -354,7 +355,7 @@ int hhmmVaild(string hhmm) {
     }
 }
 int contentVaild(string contents) {
-    if( contents.length() > 100 || contents.length() = 0 ) {
+    if( contents.length() > 100 || contents.length() == 0 ) {
         cout << err[0] << endl;
         return 2;
     }
