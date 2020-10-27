@@ -22,7 +22,7 @@ class Calendar
 {
 protected:
     // 일정 목록
-    vector<vector<S>> scheduleList(1200, vector<S>);
+    vector<vector<S>> scheduleList(1200,(1,NULL));
     
     // 캘린더 현재 년도월에 대한 index (0 ~ 1199)
     int ym_idx;
@@ -88,11 +88,12 @@ public:
     /**
      *  일정을 수정함
      */
-    void modifySchedule();
+    void modifySchedule(S schedule, U users, D date);
     int modifyTitle(S s, string title);
-    int modifyTime(S s, string hhmm);
-    int modifyContent();
-    int modifyLocation();
+    int modifySTime(S s, string hhmm);
+    int modifyETime(S s, string hhmm);
+    int modifyContent(S s, string content);
+    int modifyLocation(S s, string location);
     int modifyDate(S s, string yymmdd);
 
     /**

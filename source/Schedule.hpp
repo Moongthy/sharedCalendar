@@ -1,8 +1,11 @@
 
 /*************************일정 파트********************************/
+bool findCheck(string ss,string s);
 int titleVaild(string title);
 int dateVaild(string yymmdd);
 int hhmmVaild(string hhmm);
+int contentVaild(string contents);
+int locationVaild(string location);
 int checkValidSelection(int boundary) {
     string input;
     int selection;
@@ -111,7 +114,7 @@ void Calendar<S, U, D>::addSchedule()
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::modifySchedule()
+void Calendar<S, U, D>::modifySchedule(S schedule, U users, D date)
 {
     cout << "[일정 수정]\n수정할 일정 ID >";
     string input_id;
@@ -164,9 +167,8 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
     if( ( select = titleVaild(title) ) == 0) {
         s.setTitle(title);
         return 0;
-    } else if (select == 1) {
-        return 1;
     }
+    return select;
 }
 
 template<typename S, typename U, typename D>
@@ -176,29 +178,54 @@ int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
         Date new_date = Date(yymmdd);
         s.setDate(new_date);
     }
+    return select;
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyTime(S s, string hhmm){
+int Calendar<S, U, D>::modifySTime(S s, string hhmm){
     int select;
     if( ( select = hhmmVaild(hhmm) ) == 0) {
-        
-    }
+        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+        int hh = stoi(hhmm.substr(0,1));
+        int mm = stoi(hhmm.substr(2,3));
+        s.setEndTime(hh*100+mm);
+        return 0;
+    } 
+    return select;
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyContent(){
-    
+int Calendar<S, U, D>::modifyETime(S s, string hhmm){
+    int select;
+    if( ( select = hhmmVaild(hhmm) ) == 0) {
+        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+        int hh = stoi(hhmm.substr(0,1));
+        int mm = stoi(hhmm.substr(2,3));
+        s.setStartTime(hh*100+mm);
+        return 0;
+    }
+    return select;
+}
+template<typename S, typename U, typename D>
+int Calendar<S, U, D>::modifyContent(S s, string content){
+    int select;
+    if( ( select = contentVaild(content) ) == 0) {
+        s.setContent(content);
+        return 0;
+    }
+    return select;
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyLocation() {
-    string input;
-    while(1) {
-        cin >> input;
-
+int Calendar<S, U, D>::modifyLocation(S s, string location) {
+   int select;
+    if( ( select = contentVaild(location) ) == 0) {
+        s.setLocation(location);
+        return 0;
     }
-    return 0;
+    return select;
 }
 
 /*
@@ -207,20 +234,27 @@ int Calendar<S, U, D>::modifyLocation() {
 1 : q 입력
 2~ : 오류 출력
 */
+bool findCheck(string ss, string s) {
+    int it = ss.find(s);
+    if(it == string::npos) {
+        return false;
+    }
+    else return true;
+}
 int titleVaild(string title) {
     if(title.length() >= 20 && title.length() < 1) {
         //문자 길이가 다를 때 오류
-        cout << "[error code:2] 1~20자의 제목을 입력해주세요.";
+        cout << err[0] << endl;
         return 2;
     }
     else if( title.length() == 1 && title[0] == 'q') {
         //q를 입력했을 때 행동 수행
-        cout << "[제목]에서 뒤로 갑니다.";
+        //cout << "[제목]에서 뒤로 갑니다.";
         return 1;
     }
     else if(title.length() ==1 && title[0] == ' ') {
         //공백을 입력했을 때 오류
-        cout << "[error code:3]공백만 입력은 불가합니다.";
+        cout << err[0] << endl;
         return 3;
     }
     else {
@@ -228,49 +262,58 @@ int titleVaild(string title) {
     }
 }
 int dateVaild(string yymmdd) {
-    if((yymmdd.find('/') || yymmdd.find('-')) || (yymmdd.length() >= 6 && yymmdd.length() <=8)) {
-        return 0;
+    if((findCheck(yymmdd,"/") || findCheck(yymmdd,"-")) || yymmdd.length() >= 6) {
+        if(yymmdd.length() >= 6 && yymmdd.length() <=8) {
+            return 0;
+        }
     }
     else if((yymmdd.length() < 6 && yymmdd.length() > 8)) {
         
-        cout << "[error code:3]YYMMDD 또는 YY-MM-DD 또는 YY/MM/DD의 형식으로 입력해주세요.";
+        cout << err[0] << endl;;
         return 3;
     }
     else if( yymmdd.length() == 1 && yymmdd[0] == 'q') {
         //q를 입력했을 때 행동 수행
-        cout << "[날짜]에서 뒤로 갑니다.";
+        //cout << "[날짜]에서 뒤로 갑니다.";
         return 1;
     }
     else if(yymmdd.length() ==1 && yymmdd[0] == ' ') {
         //공백을 입력했을 때 오류
-        cout << "[error code:2]공백만 입력은 불가합니다.";
+        cout << err[0] << endl;
         return 2;
     }
 }
 int hhmmVaild(string hhmm) {
     if(hhmm.length() > 5 && hhmm.length() < 4) {
-        cout << "[error code:2] 올바른 입력 형식이 아닙니다.";
+        cout << err[0] << endl;
         return 2;
     }//string::npos 이면은 못찾은거임
-    else if((hhmm.find('/') || hhmm.find('-')) || (hhmm.length() == 4 && hhmm.length() == 5)) {
-        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
-		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
-        int hh = stoi(hhmm.substr(0,1));
-        int mm = stoi(hhmm.substr(2,3));
+    else if((findCheck(hhmm,"/") || (findCheck(hhmm,"-")) || (hhmm.length() == 4 && hhmm.length() == 5)) {
         //10.21 / 9시 20분 마지막 수정 부분
         return 0;
     }
     else if( hhmm.length() == 1 && hhmm[0] == 'q') {
         //q를 입력했을 때 행동 수행
-        cout << "[날짜]에서 뒤로 갑니다.";
+        //cout << "[날짜]에서 뒤로 갑니다.";
         return 1;
     }
     else if(hhmm.length() ==1 && hhmm[0] == ' ') {
         //공백을 입력했을 때 오류
-        cout << "[error code:2]공백만 입력은 불가합니다.";
+        cout << err[0] << endl;
         return 2;
     }
 }
+int contentVaild(string contents) {
+    if( contents.length() > 100 || contents.length() = 0 ) {
+        cout << err[0] << endl;
+        return 2;
+    }
+    else if (contents.length() == 1 && contents[0] == 'q') {
+        return 1;
+    }
+    else return 0;
+}
+
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteSchedule(string keyword)
 {
