@@ -63,7 +63,7 @@ void Calendar<S, U, D>::select_Schedules_option()
     }
 }
 
-template <typename S, typename U, typenㅉame D>
+template <typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(int ym_idx)
 {
     if (scheduleList[ym_idx].length() != 0)
