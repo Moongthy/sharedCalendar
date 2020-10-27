@@ -1,6 +1,38 @@
 
 /*************************일정 파트********************************/
 
+int checkValidSelection(int boundary) {
+    string input;
+    int selection;
+    while (1)
+    {
+        cin >> input;
+        if (input.length() != 1)
+        {
+            cout << "올바른 입력 형식이 아닙니다.\n";
+        }
+        else
+        {
+            if (input == "q")
+            {
+                // q에 대한 처리
+            }
+            else
+            {
+                selection = stoi(input);
+                if (selection <= 0 || selection > boundary)
+                {
+                    cout << "올바른 입력 형식이 아닙니다.\n";
+                }
+                else 
+                {
+                    return selection;
+                }
+            }
+        }
+    }
+}
+
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option()
 {
@@ -49,10 +81,10 @@ void Calendar<S, U, D>::show_Schedules(int ym_idx)
     {
         for (int i = 0; i < scheduleList[ym_idx].length(); i++)
         {
-            D search = scheduleList[ym_idx][i].getDate();
-            int s_yy = D.yy;
-            int s_mm = D.mm;
-            int s_dd = D.dd;
+            Date search = scheduleList[ym_idx][i].getDate();
+            int s_yy = search.yy;
+            int s_mm = search.mm;
+            int s_dd = search.dd;
 
             cout << "제목 : " << scheduleList[ym_idx][i].getTitle() << endl;
             cout << "날짜 : " << s_yy << "년 " << s_mm << "월 " << s_dd << "일" << endl;
@@ -138,7 +170,7 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
     int select;
-    if( ( select = dateVaild(yymmdd) ) == 0) {
+    if((select = dateVaild(yymmdd)) == 0) {
         Date new_date = Date(yymmdd);
         s.setDate(new_date);
     }
@@ -162,10 +194,8 @@ int Calendar<S, U, D>::modifyLocation() {
     string input;
     while(1) {
         cin >> input;
-        titleVaild(input);
 
     }
-    S.setLocation(input);
     return 0;
 }
 
@@ -290,37 +320,5 @@ void Calendar<S, U, D>::showPrevMonthSchedules()
     {
         ym_idx--;
         show_Schedules(ym_idx);
-    }
-}
-
-int checkValidSelection(int boundary) {
-    string input;
-    int selection;
-    while (1)
-    {
-        cin >> input;
-        if (input.length() != 1)
-        {
-            cout << "올바른 입력 형식이 아닙니다.\n";
-        }
-        else
-        {
-            if (input == "q")
-            {
-                // q에 대한 처리
-            }
-            else
-            {
-                selection = stoi(input);
-                if (selection <= 0 || selection > boundary)
-                {
-                    cout << "올바른 입력 형식이 아닙니다.\n";
-                }
-                else 
-                {
-                    return selection;
-                }
-            }
-        }
     }
 }

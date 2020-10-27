@@ -10,6 +10,7 @@
 using namespace std;
 
 #include"../header/type/Users.h"
+#include"../header/Calendar.h"
 
 int main(){
 
@@ -25,7 +26,11 @@ int main(){
 
     Users users = Users("ansrms", "1234");
 
-    users.firstMenu();
+    Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
+
+    cal.select_Schedules_option();
+
+    // users.firstMenu();
 
     // cout << (int)L'가' << endl;
 

@@ -15,22 +15,23 @@ using namespace std;
  * 
  * @author 문근 & 예슬
  */
+
 template <typename S, typename U, typename D>
 class Calendar
 {
 protected:
-    // 캘린더 id
-    string calendarID;
+    // 일정 목록
+    vector<vector<S>> scheduleList(1200, vector<S>);
+    
+    // 캘린더 현재 년도월에 대한 index (0 ~ 1199)
+    int ym_idx;
 
     // 만든사람
     U administrator;
 
-    // 일정 목록
-    vector<vector<S>> scheduleList(1200, vector<S>);
-
-    // 캘린더 현재 년도/월에 대한 index (0 ~ 1199)
-    int ym_idx;
-
+    // 캘린더 id
+    string calendarID;
+    
 public:
     /**
      *  개인 캘린더 생성자
@@ -106,7 +107,7 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    vector<S> &searchSchedule(string keyword);
+    vector<S>& searchSchedule(string keyword);
 
     /**
      *  저번달, 다음달 일정을 보여줌
