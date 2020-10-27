@@ -13,7 +13,8 @@ void MenuInput::mainMenu(){
     // scm.showSharedCalendarList();
 
     while(true){
-        int a, b, c, d;
+
+        int a , b , c = -1, d;
 
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
@@ -38,7 +39,16 @@ void MenuInput::mainMenu(){
         }
         /**********************************/
         // 공유캘린더 조회
-        if(b == 3) intoSC();
+        if(b == 3) 
+        {
+            int scIdx = intoSC();
+            if(scIdx < 0) continue;
+            
+            if(!getIntoSpecifiedCalendar(scIdx))
+                delSc(scIdx);
+        }
+
+        
     }
 
  }
@@ -167,7 +177,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
 }
 
 
-void MenuInput::intoSC(){
+int MenuInput::intoSC(){
     cout << signInShardCalendar[0];
     showJoinedList();
     cout << signInShardCalendar[1];
@@ -177,20 +187,36 @@ void MenuInput::intoSC(){
 
     check c = check();
 
-    if(c.qCheck(input)) return;
+    if(c.qCheck(input)) return -1;
 
     if(!c.totalCheck(input, _SCSIZE, scm.getSharedCalendarListSize()) || stoi(input) == 0){ 
         cout << err[0];
-        intoSC();
-        return;
+        return intoSC();
     }
 
-    cout << signInShardCalendar[2] << scm.getSharedCalendarList()[stoi(input)-1].getSharedCalendarName()<< signInShardCalendar[3];
-
-    // 로그인한 userId가 해당 공캘을 만든 userId이다
-    if(scm.getSharedCalendarList()[stoi(input)-1].getMemberList()[0].getUserId() == user.getUserId())
-        cout << choiceSpecifiedSharedCalendarAction[1];
+    return stoi(input) - 1;
 }   
+
+int MenuInput::getIntoSpecifiedCalendar(int scIdx)
+{
+    cout << signInShardCalendar[2] << scm.getSharedCalendarList()[scIdx].getSharedCalendarName() <<
+     signInShardCalendar[3];
+    
+    // 들어온 사람이 관리자라면
+    if(user.getUserId() == scm.getSharedCalendarList()[scIdx].getMemberList()[0].getUserId())
+        cout << choiceSpecifiedSharedCalendarAction[1];
+    
+    cout << choiceSpecifiedSharedCalendarAction[2];
+
+    string input;
+    check c = check();
+
+    getline(cin, input);
+
+    if(c.qCheck(input)) return -1;
+        
+    return stoi(input);
+}
 
 // 공유캘린더를 삭제한다.
 bool MenuInput::delSc(int scIdx){ 

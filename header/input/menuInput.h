@@ -46,13 +46,15 @@ public:
 
     // 캘린더 번호를 입력하여 
     // 캘린더에 들어간다.
-    void intoSC();
+    int intoSC();
 
     // 공유캘린더를 삭제한다.
     bool delSc(int scIdx);
 
     // 참가된 공유캘린더들의 이름을 출력한다.
     void showJoinedList();
+
+    int getIntoSpecifiedCalendar(int scIdx);
 
     Date currentDateTime();
 };
