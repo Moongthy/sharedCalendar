@@ -4,7 +4,7 @@
 
 #include <bits/stdc++.h>
 #include "strings.h"
-
+#include "./type/Date.h"
 using namespace std;
 
 /**
@@ -120,4 +120,5 @@ public:
 #include "../source/Calendar.hpp"
 #include "../source/Schedule.hpp"
 #include "../source/ScheduleManager.hpp"
+
 #endif

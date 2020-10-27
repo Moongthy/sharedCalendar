@@ -1,6 +1,8 @@
 
 /*************************일정 파트********************************/
-
+int titleVaild(string title);
+int dateVaild(string yymmdd);
+int hhmmVaild(string hhmm);
 int checkValidSelection(int boundary) {
     string input;
     int selection;
