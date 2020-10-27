@@ -8,7 +8,6 @@ using namespace std;
 
 class Date {
 public:
-<<<<<<< HEAD
 	int yy;
 	int mm;
 	int dd;
@@ -43,13 +42,6 @@ public:
 		}
 		return false;
 	}
-=======
-    int yy;
-    int mm;
-    int dd;
-
-    Date(int yy, int mm, int dd) : yy(yy), mm(mm), dd(dd) { }
->>>>>>> 1b639908ec041da71eca208f9cfc4b37a8f71b08
 };
 
 #endif

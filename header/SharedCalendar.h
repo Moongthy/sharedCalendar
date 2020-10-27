@@ -40,13 +40,8 @@ public:
      *  @param startDate            만든날짜
      *  @param endDate              유효기간
      */
-<<<<<<< HEAD
-    SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, int acceptable, D startDate, D endDate);
-    
-=======
     SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, string pw, int acceptable, D startDate, D endDate);
 
->>>>>>> 1b639908ec041da71eca208f9cfc4b37a8f71b08
     string getSharedCalendarName();
 
     // @return 수용가능인원 
