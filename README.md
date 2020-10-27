@@ -1,44 +1,49 @@
 Calendar / sharedCalendar
 =========================
 
-data하위 문서/check.hpp/strings.h 만 euc-kr
+g++로만 컴파일 해봄
+
+주석은 거의다 헤더에 있음
 
 컴파일 명령어 
     
-        ~/shared_calendar$ g++ -o execution/main source/main.cpp
+        ~/shared_calendar$ g++ -o main main.cpp
 
-📦shared_calendar  
- ┣ 📂data  
- ┃ ┣ 📂Calendar  
- ┃ ┃ ┗ 📜apple.txt  
- ┃ ┣ 📜SharedCalendarList.txt  
- ┃ ┗ 📜UserList.txt  
- ┣ 📂execution  
- ┃ ┣ 📂data  
- ┃ ┃ ┗ 📜UserList.txt  
- ┃ ┗ 📜main.exe  
- ┣ 📂header  
- ┃ ┣ 📂input  
- ┃ ┃ ┣ 📜check.h  
- ┃ ┃ ┣ 📜check.hpp  
- ┃ ┃ ┗ 📜menuInput.h  
- ┃ ┣ 📂type  
- ┃ ┃ ┣ 📜Date.h  
- ┃ ┃ ┣ 📜Schedule.h  
- ┃ ┃ ┣ 📜User.h  
- ┃ ┃ ┗ 📜Users.h  
- ┃ ┣ 📜Calendar.h  
- ┃ ┣ 📜ReadFile.h  
- ┃ ┣ 📜SharedCalendar.h  
- ┃ ┣ 📜SharedCalendarManager.h  
- ┃ ┗ 📜strings.h  
- ┣ 📂source  
- ┃ ┣ 📜Calendar.hpp  
- ┃ ┣ 📜main.cpp  
- ┃ ┣ 📜menuInput.hpp  
- ┃ ┣ 📜ReadFile.hpp  
- ┃ ┣ 📜SharedCalendar.hpp  
- ┃ ┣ 📜SharedCalendarManager.hpp  
- ┃ ┗ 📜Users.hpp  
- ┗ 📜README.md  
+  header
+      
+      ReadFile.h
+      
+      Calendar.h
+      
+      SharedCalendar.h
+      
+      SharedCalendarManager.h
+      
+      Strings.h
+      
+      type
+        
+                Schedule.h
+        
+                Date.h
+        
+                User.h
+      
+      input
+      
+              check.h
+              
+              menuInput.h
+    
+  source
+      
+      Calendar.hpp
+      
+      SharedCalendar.hpp
+      
+      SharedCalendarManager.hpp
+      
+      menuInput.hpp
+      
+      ReadFile.hpp
     

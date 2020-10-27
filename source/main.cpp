@@ -6,24 +6,25 @@
 #include<string>
 
 #include"../header/ReadFile.h"
+#include"../header/type/Users.h"
 
 using namespace std;
 
-#include"../header/type/Users.h"
-
 int main(){
+    string name;
+    string id;
 
-    string a = "ans", b = "123";
-
-    User user = User(a, b);
+    User user = User(name, id);
+    
+    Users users = Users(name,id);
+    
+    users.firstMenu();
     
     SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
 
     MenuInput mi = MenuInput(user, scm);
 
     mi.mainMenu();
-
-    // cout << (int)L'가' << endl;
 
     return 0;
 }

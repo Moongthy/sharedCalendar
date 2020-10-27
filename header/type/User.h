@@ -27,6 +27,18 @@ public:
     string getUserId(){
         return userId;
     }
+
+    // setter
+    void setUserId(string id)
+    {
+	    userId = id;
+    }
+    
+    void setUserName(string name)
+    {
+	    userName = name;
+    }
+
 };
 
 #endif
