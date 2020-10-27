@@ -5,6 +5,7 @@
 #include <bits/stdc++.h>
 #include "strings.h"
 #include "./type/Date.h"
+#include "./type/Schedule.h"
 using namespace std;
 
 /**
@@ -22,7 +23,7 @@ class Calendar
 {
 protected:
     // 일정 목록
-    vector<vector<S>> scheduleList(1200, vector<S>);
+    vector<Schedule> scheduleList();
     
     // 캘린더 현재 년도월에 대한 index (0 ~ 1199)
     int ym_idx;
@@ -74,7 +75,7 @@ public:
     /**
      *  일정을 보여줌
      */
-    void show_Schedules(int ym_idx);
+    void show_Schedules(int curr_year, int curr_month);
 
     /**
      *  새로운 일정을 일정목록에 추가함
