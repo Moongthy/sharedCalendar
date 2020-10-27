@@ -32,7 +32,7 @@ protected:
 
     // 캘린더 id
     string calendarID;
-    
+
 public:
     /**
      *  개인 캘린더 생성자
