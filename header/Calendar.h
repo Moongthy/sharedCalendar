@@ -63,6 +63,12 @@ public:
     U getCalendarAdministrator();
 
     /*************************일정 파트********************************/
+        
+    /**
+     *  일정 옵션 선택
+     */
+    void select_Schedules_option();
+
     /**
      *  일정을 보여줌
      */
@@ -75,7 +81,7 @@ public:
      *  @param endTime  일정 끝 시간
      *  @param content 일정 내용
      */
-    void addSchedule(D startDate, D endDate, string content);
+    void addSchedule();
 
     /**
      *  일정을 수정함
@@ -112,4 +118,5 @@ public:
 
 #include "../source/Calendar.hpp"
 #include "../source/Schedule.hpp"
+#include "../source/ShowSchedule.hpp"
 #endif

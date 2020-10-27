@@ -1,5 +1,67 @@
 
 /*************************일정 파트********************************/
+#define endl '\n'
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::select_Schedules_option()
+{
+    cout << "[개인 캘린더]\n";
+    show_Schedules(ym_idx);
+
+    for(string s : calendarSelectionOption) cout << s;
+    string selection;
+    cin >> selection;
+
+    if(selection.length()!=1) {
+        cout << "올바른 입력 형식이 아닙니다.\n";
+    }
+    else {
+        if(selection == "q") {
+            // q에 대한 처리
+        }
+        else {
+            selection = stoi(selection);
+            if(selection <= 0 || selection > 6) {
+                cout << "올바른 입력 형식이 아닙니다.\n";   
+            }
+        }
+    }
+    
+    /**
+     *  selection에 대한 오류처리
+     */
+
+    switch (selection)
+    {
+    case 1:
+        /* 일정생성 */
+        addSchedule();
+        break;
+    case 2:
+        /* 일정수정 */
+        modifySchedule();
+        break;
+    case 3:
+        /* 일정삭제 */
+        deleteSchedule();
+        break;
+    case 4:
+        /* 일정검색 */
+        searchSchedule();
+        break; 
+    case 5:
+        /* 이전 달 일정 */
+        showNextMonthSchedules();
+        break; 
+    case 6:
+        /* 다음 달 일정 */
+        showPrevMonthSchedules();
+        break; 
+    default:
+        /* 오류 */
+        break;
+    }
+}
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(int ym_idx)
@@ -28,14 +90,62 @@ void Calendar<S, U, D>::show_Schedules(int ym_idx)
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::addSchedule(D startDate, D endDate, string content)
+void Calendar<S, U, D>::addSchedule()
 {
-    scheduleList.push_back(S(startDate, endDate, content));
+    Schedule new_schedule = new Schedule();
+
+    //제목, 날짜, 시작시간, 종료시간, 장소, 내용
+
+    //scheduleList.push_back(S(startDate, endDate, content));
 }
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::modifySchedule()
 {
+    cout << "[일정 수정]\n수정할 일정 ID >";
+    string input_id;
+    cin >> input_id;
+
+
+    for(string s : modifyScheduleOption) cout << s;
+    string selection;
+    cin >> selection;
+
+
+    /**
+     *  selection에 대한 오류처리
+     */
+
+    switch (selection)
+    {
+    case 1:
+        /* 제목수정 */
+        modifyTitle();
+        break;
+    case 2:
+        /* 날짜수정 */
+        modifyDate();
+        break;
+    case 3:
+        /* 시작시간 수정 */
+        modifySTime();
+        break;
+    case 4:
+        /* 종료시간 수정 */
+        modifyETime();
+        break; 
+    case 5:
+        /* 내용 수정 */
+        modifyContent();
+        break; 
+    case 6:
+        /* 장소 수정 */
+        modifyLocation();
+        break; 
+    default:
+        /* 오류 */
+        break;
+    }
     //id로 수정하는건데
     //parameter 수정 필요
     //수정하는 항목 별로 있음 항목별로 함수 만들어야함.
@@ -55,7 +165,6 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
         s.setTitle(title);
         return 1;
     }
-    
 }
 
 template<typename S, typename U, typename D>
