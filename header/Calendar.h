@@ -15,7 +15,9 @@ using namespace std;
  * 
  * @author 문근 & 예슬
  */
-template <typename S, typename U, typename D> class Calendar{
+template <typename S, typename U, typename D>
+class Calendar
+{
 protected:
     // 캘린더 id
     string calendarID;
@@ -24,7 +26,7 @@ protected:
     U administrator;
 
     // 일정 목록
-    vector<vector <Schedule>> scheduleList(1200, vector<Schedule>);
+    vector<vector<S>> scheduleList(1200, vector<S>);
 
     // 캘린더 현재 년도/월에 대한 index (0 ~ 1199)
     int ym_idx;
@@ -36,7 +38,7 @@ public:
      * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
-    Calendar(U user); 
+    Calendar(U user);
 
     /**
      *  공유 캘린더 생성자에서 호출될 생성자
@@ -51,17 +53,16 @@ public:
      *  캘린더 생성자
      *  MenuInput의 currentDateTime으로 ym_idx 초기화
      */
-    Calendar();  
+    Calendar();
 
     /**
      *  getter of caledarID 
      */
     string getCalendarID();
 
-
     U getCalendarAdministrator();
 
-/*************************일정 파트********************************/
+    /*************************일정 파트********************************/
     /**
      *  일정을 보여줌
      */
@@ -94,16 +95,15 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    vector<S>& searchSchedule(string keyword);
+    vector<S> &searchSchedule(string keyword);
 
     /**
      *  저번달, 다음달 일정을 보여줌
      */
     void showNextMonthSchedules();
     void showPrevMonthSchedules();
-
 };
 
-#include"../source/Calendar.hpp"
-#include"../source/Schedule.hpp"
+#include "../source/Calendar.hpp"
+#include "../source/Schedule.hpp"
 #endif

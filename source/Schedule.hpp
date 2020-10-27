@@ -4,18 +4,21 @@
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(int ym_idx)
 {
-    // int idx = ((curr_year - 1970) * 12 + curr_month - 1);
     if (scheduleList[ym_idx].length() != 0)
     {
         for (int i = 0; i < scheduleList[ym_idx].length(); i++)
         {
+            D search = scheduleList[ym_idx][i].getDate();
+            int s_yy = D.yy;
+            int s_mm = D.mm;
+            int s_dd = D.dd;
+
             cout << "제목 : " << scheduleList[ym_idx][i].getTitle() << endl;
-            cout << "날짜 : " << scheduleList[ym_idx][i].getDate() << endl;
+            cout << "날짜 : " << s_yy << "년 " << s_mm << "월 " << s_dd << "일" << endl;
             cout << "시작시간 : " << scheduleList[ym_idx][i].getStartTime() << endl;
             cout << "종료시간 : " << scheduleList[ym_idx][i].getEndtime() << endl;
             cout << "내용 : " << scheduleList[ym_idx][i].getContent() << endl;
             cout << "장소 : " << scheduleList[ym_idx][i].getLocation() << endl;
-            scheduleList[ym_idx][i].
         }
     }
     else
@@ -52,18 +55,13 @@ vector<S> &Calendar<S, U, D>::searchSchedule(string keyword)
         int len = scheduleList[i].length();
         for (int j = 0; j < len; j++)
         {
-            string content = S.getContent();
-            if (content.find(keyword))
+            string content = scheduleList[i][j].getTitle();
+            if (content.find(keyword) != string::npos)
             {
-                SearchScheduleList.push_back(S);
+                SearchScheduleList.push_back(scheduleList[i][j]);
             }
         }
     }
-    //schedulelist 탐색하면서 keyword 들어있는 S탐색
-    //SearchScheduleList에 넣어줌
-
-    // SearchScheduleList의 크기 0이면 해당하는 것 없음
-
     return SearchScheduleList;
 }
 

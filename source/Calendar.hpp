@@ -11,8 +11,10 @@ template<typename S, typename U, typename D>
 Calendar<S, U, D>::Calendar() {
     // 현재 날짜에 대한 정보 필요
     // 메뉴 인풋에서 Date 가져와서
-    Date curr = MenuInput::currentDateTime();
-    ym_idx = ((curr.yy - 1970) * 12 + curr.mm - 1);
+
+    //D curr = MenuInput::currentDateTime();
+    //ym_idx = ((curr.yy - 1970) * 12 + curr.mm - 1);
+    
     // time_t curr_time = time(nullptr);
     // struct tm * curr_tm = localtime(&curr_time);
 
