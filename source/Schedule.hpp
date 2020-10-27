@@ -35,6 +35,7 @@ void Calendar<S, U, D>::modifySchedule(){
 template<typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteSchedule(string keyword){
     // searchSchedule에서 vector에 추가 대신 원래 vector에서 pop해주면 될듯
+    // pop 보다는 erase해주면 됩니다
 }
 
 template<typename S, typename U, typename D>
