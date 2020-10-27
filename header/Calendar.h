@@ -117,5 +117,5 @@ public:
 
 #include "../source/Calendar.hpp"
 #include "../source/Schedule.hpp"
-#include "../source/ShowSchedule.hpp"
+#include "../source/ScheduleManager.hpp"
 #endif
