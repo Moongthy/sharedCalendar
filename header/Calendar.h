@@ -26,11 +26,15 @@ protected:
     U administrator;
 
     // 일정 목록
+<<<<<<< HEAD
     vector<vector<S>> scheduleList(1200, vector<S>);
 
     // 캘린더 현재 년도/월에 대한 index (0 ~ 1199)
     int ym_idx;
 
+=======
+    vector<S> scheduleList;
+>>>>>>> 1b639908ec041da71eca208f9cfc4b37a8f71b08
 public:
     /**
      *  개인 캘린더 생성자

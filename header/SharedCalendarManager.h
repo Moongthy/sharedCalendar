@@ -4,6 +4,9 @@
 #define __SHAREDCALENDARMANGER__
 
 #include"SharedCalendar.h"
+
+#include"ReadFile.h"
+
 #include<iostream>
 
 using std::cout;
@@ -26,6 +29,7 @@ public:
     
     // 생성자
     SharedCalendarManager();
+    ~SharedCalendarManager();
 
     // @return 공유캘린더 목록
     vector<SharedCalendar<S, U, D>> getSharedCalendarList();
@@ -42,7 +46,7 @@ public:
      * @param startDate 공유캘린더 만든 날짜
      * @param endDate 공유캘린더 유효기간
      **/
-    void addSharedCalendar(U user, string sharedCalendarName,
+    void addSharedCalendar(U user, string sharedCalendarName, string pw,
      int acceptable, D startDate, D endDate);
 
     /**
@@ -85,6 +89,17 @@ public:
      *      성공 : 1
      */
     int joinSharedCalendar(U user, string inputCalendarName, string inputPassWord);
+
+    /**
+     * 관리자일 경우 해당 캘린더를 삭제 건웅.
+     * 
+     * @param user 관리자
+     * @param scIdx 삭제할 공캘 인덱스
+     * 
+     * @return 성공여부
+     * 
+     */
+    int deleteSharedCalendar(U user, int scIdx);
 
     // 공유캘린더 목록 출력
     void showSharedCalendarList();
