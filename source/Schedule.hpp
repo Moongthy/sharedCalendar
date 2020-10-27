@@ -236,7 +236,7 @@ int hhmmVaild(string hhmm) {
     if(hhmm.length() > 5 && hhmm.length() < 4) {
         cout << "[error code:2] 올바른 입력 형식이 아닙니다.";
         return 2;
-    }
+    }//string::npos 이면은 못찾은거임
     else if((hhmm.find('/') || hhmm.find('-')) || (hhmm.length() == 4 && hhmm.length() == 5)) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
 		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
