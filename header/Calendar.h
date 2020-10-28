@@ -132,7 +132,11 @@ public:
                 to_string(s.getStartTime()),
                 to_string(s.getEndTime()),
                 s.getLocation(),
+<<<<<<< HEAD
                 s.getContent()
+=======
+                s.getContent(),
+>>>>>>> a8a325921324f6ca2eea1f168ed1dfef6862b210
             );
         }
     }
@@ -141,7 +145,11 @@ public:
     {
         ReadFile rf = ReadFile();
 
+<<<<<<< HEAD
         string adminId = administrator.getUserId(); // 관리자 아이디
+=======
+        string adminId = administrator.getUserId() // 관리자 아이디
+>>>>>>> a8a325921324f6ca2eea1f168ed1dfef6862b210
 
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(adminId, 0);
@@ -168,6 +176,7 @@ public:
         ReadFile rf = ReadFile();
 
         // userId.txt 파일에서 읽어옮.
+
         vector<string> sId          = rf.readSCCalendar(calendarID, 0);
         vector<string> sName        = rf.readSCCalendar(calendarID, 1);
         vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
@@ -175,6 +184,8 @@ public:
         vector<string> sEndTime     = rf.readSCCalendar(calendarID, 4);
         vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
         vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
+
+
 
         // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)

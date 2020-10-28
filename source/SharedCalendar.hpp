@@ -2,6 +2,9 @@
 template<typename S, typename U, typename D>
 SharedCalendar<S, U, D>::SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, string pw, int acceptable, D startDate, D endDate)
  :Calendar<S, U, D>(administrator, sharedCalendarId), sharedCalendarName(sharedCalendarName), passWord(pw), acceptable(acceptable), startDate(startDate), endDate(endDate) { 
+     
+     loadSharedScheduleList();
+     
      memberList.push_back(administrator);
  }
 
