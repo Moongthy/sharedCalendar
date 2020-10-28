@@ -132,7 +132,7 @@ public:
                 to_string(s.getStartTime()),
                 to_string(s.getEndTime()),
                 s.getLocation(),
-                s.getContent(),
+                s.getContent()
             );
         }
     }
@@ -141,7 +141,7 @@ public:
     {
         ReadFile rf = ReadFile();
 
-        string adminId = administrator.getUserId() // 관리자 아이디
+        string adminId = administrator.getUserId(); // 관리자 아이디
 
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(adminId, 0);
@@ -168,13 +168,13 @@ public:
         ReadFile rf = ReadFile();
 
         // userId.txt 파일에서 읽어옮.
-        vector<string> sId          = rf.readSCalendar(calendarID, 0);
-        vector<string> sName        = rf.readSCalendar(calendarID, 1);
-        vector<string> sDate        = rf.readSCalendar(calendarID, 2);
-        vector<string> sStartTime   = rf.readSCalendar(calendarID, 3);
-        vector<string> sEndTime     = rf.readSCalendar(calendarID, 4);
-        vector<string> sLoc         = rf.readSCalendar(calendarID, 5);
-        vector<string> sMemo        = rf.readSCalendar(calendarID, 6);
+        vector<string> sId          = rf.readSCCalendar(calendarID, 0);
+        vector<string> sName        = rf.readSCCalendar(calendarID, 1);
+        vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
+        vector<string> sStartTime   = rf.readSCCalendar(calendarID, 3);
+        vector<string> sEndTime     = rf.readSCCalendar(calendarID, 4);
+        vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
+        vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
 
         // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
@@ -220,13 +220,13 @@ public:
     int modifyLocation(S s);
     int modifyDate(S s);
 
-    void deleteS();
+    void deleteS(U user);
     /**
      *  일정을 삭제함.
      * 
      *  @param keyword  사용자가 입력한 문자열
      */
-    void deleteSchedule();
+    void deleteSchedule(U user);
 
     /**
      *  일정을 검색함.
