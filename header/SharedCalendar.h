@@ -45,7 +45,7 @@ public:
 
     ~SharedCalendar()
     {
-        saveSharedScheduleList();
+        Calendar<S, U, D>::saveSharedScheduleList();
     }
     
     string getSharedCalendarName();
