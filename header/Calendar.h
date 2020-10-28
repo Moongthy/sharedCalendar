@@ -7,6 +7,7 @@
 #include "./type/Date.h"
 #include "./type/Schedule.h"
 #include "../header/input/check.h"
+#include "./ReadFile.h"
 
 using namespace std;
 
@@ -74,7 +75,7 @@ public:
     /**
      *  일정 옵션 선택
      */
-    void select_Schedules_option();
+    void select_Schedules_option(U user);
 
     /**
      *  일정을 보여줌

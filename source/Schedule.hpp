@@ -40,46 +40,85 @@ int checkValidSelection(int boundary) {
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::select_Schedules_option()
+void Calendar<S, U, D>::select_Schedules_option(U user)
 {
     cout << myCalendar[0];
     cout << curr_year << ScheduleInfo[2] <<curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
-
+    ReadFile readFile;
     for(string s : calendarSelectionOption) cout << s;
     int selection = checkValidSelection(6);
     system("cls");
-    switch (selection)
-    {
-    case 1:
+    if(readFile.getUserIDList()[0] == user.getUserId) {
+        switch (selection)
+        {
+        case 0:
+        /*캘린더 삭제 공유 캘린더 관리자만*/
+            //deleteSharedCalendar(user, scIdx);
+        case 1:
         /* 일정생성 */
-        addSchedule();
-        break;
-    case 2:
+            addSchedule();
+            break;
+        case 2:
         /* 일정수정 */
-        modifySchedule();
-        break;
-    case 3:
+            modifySchedule();
+            break;
+        case 3:
         /* 일정삭제 */
-        deleteSchedule();
-        break;
-    case 4:
+            deleteSchedule();
+            break;
+        case 4:
         /* 일정검색 */
-        searchSchedule();
-        break; 
-    case 5:
+            searchSchedule();
+            break; 
+        case 5:
         /* 이전 달 일정 */
-        showPrevMonthSchedules();
-        break; 
-    case 6:
+            showPrevMonthSchedules();
+            break; 
+        case 6:
         /* 다음 달 일정 */
-        showNextMonthSchedules();
-        break; 
-    default:
-        cout << err[0];
+            showNextMonthSchedules();
+            break; 
+        default:
+            cout << err[0];
         /* 오류 */
-        break;
+            break;
+        }
     }
+    else {
+        switch (selection)
+        {
+        case 1:
+        /* 일정생성 */
+            addSchedule();
+            break;
+        case 2:
+        /* 일정수정 */
+            modifySchedule();
+            break;
+        case 3:
+        /* 일정삭제 */
+            deleteSchedule();
+            break;
+        case 4:
+        /* 일정검색 */
+            searchSchedule();
+            break; 
+        case 5:
+        /* 이전 달 일정 */
+            showPrevMonthSchedules();
+            break; 
+        case 6:
+        /* 다음 달 일정 */
+            showNextMonthSchedules();
+            break; 
+        default:
+            cout << err[0];
+        /* 오류 */
+            break;
+        }
+    }
+    
 }
 
 template <typename S, typename U, typename D>
@@ -460,7 +499,7 @@ int hhmmVaild(string hhmm) {
     if(C.isOnlyNumber(hhmm)) {
         if(hhmm.length() == 4) {
             if( (0<= stoi(hhmm.substr(0,2)) && stoi(hhmm.substr(0,2)) <= 23) && (0<= stoi(hhmm.substr(2,2)) && stoi(hhmm.substr(2,2)) <= 59) ) {
-                cout << "debugging : " << stoi(hhmm.substr(0,1)) <<",,,," << stoi(hhmm.substr(2,3)) << endl;
+                cout << "debugging : " << stoi(hhmm.substr(0,2)) <<",,,," << stoi(hhmm.substr(2,2)) << endl;
                 // 시침은 00부터 23월까지 분침은 00~59까지..ㅠㅠ
                 return 0;
             }
