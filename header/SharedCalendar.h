@@ -43,6 +43,11 @@ public:
      */
     SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, string pw, int acceptable, D startDate, D endDate);
 
+    ~SharedCalendar()
+    {
+        saveSharedScheduleList();
+    }
+    
     string getSharedCalendarName();
 
     // @return 수용가능인원 

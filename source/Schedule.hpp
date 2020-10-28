@@ -4,11 +4,12 @@ bool findCheck(string ss, string s);
 bool boundaryCheck(string ss, int boundary);
 int titleVaild(string title);
 int dateVaild(string yymmdd);
+int yymm_dateVaild(string yymmdd);
 int hhmmVaild(string hhmm);
 int hhmm_ahead_Vaild(string startTime, string endTime);
 int contentVaild(string contents);
 int locationVaild(string location);
-void deleteCalendar();
+void deleteCalendar(U user,int index);
 bool admin = false;
 int checkValidSelection(bool admin, int boundary)
 {
@@ -269,9 +270,24 @@ void Calendar<S, U, D>::modify(U user)
     }
     else if (input_int == 2)
     {
+        string yymmdd;
+        //여기 yy 네글자? 두글자?기획서 보자
         //yyyymm 받아서
-        //curr_year, month 변경 후
-        modify(user);
+        do
+        {
+            cout << promt;
+            cin >> yymmdd;
+        } while (yymm_dateVaild(yymmdd) == 0)
+            //기획서는 yymm 으로 받는데,
+            //따로 vaild 체크해주기위해서는 함수가 필요함.
+            //지금 그 함수 만들러 갑니다.
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+            int yy = stoi(yymmdd.substr(0, 2));
+            int mm = stoi(yymmdd.substr(2, 2));
+            //curr_year, month 변경 후
+            //여기 해야됨
+            modify(user);
         return;
     }
 }
@@ -283,91 +299,74 @@ void Calendar<S, U, D>::modifySchedule(U user)
     string input;
     do
     {
-        cout << modifyString[0];
-        cout << modifyString[1];
-        cout << modifyString[2];
-        cout << prompt;
-        cin >> input;
-        if (Check.qCheck(input))
+        do
         {
-            // q 동작 수행
-            modify(user);
-            return;
+            cout << modifySchedulesString[0];
+            cin >> input;
+            if (Check.qCheck(input))
+            {
+                // q 동작 수행
+                modify();
+                return;
+            }
+        } while (!Check.isOnlyNumber(input));
+
+        int input_id = stoi(input);
+        modify_id = -1;
+
+        for (int i = 0; i < scheduleList.size(); i++)
+        {
+            if (scheduleList[i].getID() == input_id)
+            {
+                modify_id = i;
+                break;
+            }
         }
-    } while (!(boundaryCheck(input, 2) && Check.isOnlyNumber(input)));
 
-    int input_int = stoi(input);
+        if (modify_id == -1)
+        {
+            cout << noID;
+        }
 
-    switch (input_int)
+    } while (modify_id == -1);
+
+    // 포인터로 가져와야되지않나?
+
+    Schedule modSchedule = &scheduleList[modify_id];
+
+    for (string s : modifyScheduleOption)
+        cout << s;
+    int selection = checkValidSelection(6);
+
+    switch (selection)
     {
-        case 1: {
-            string input_id;
-            do
-            {
-                /*
-                여기에 일정 목록 출력해야댐~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                */
-                cin >> input_id;
-            } while (!(Check.isOnlyNumber(input) && boundaryCheck(input_id, scheduleList.size())));
-            modify_id = -1;
-            for (int i = 0; i < scheduleList.size(); i++)
-            {
-                if (scheduleList[i].getID() == input_int)
-                {
-                    modify_id = i;
-                }
-                break;
-            }
-            if (modify_id == -1)
-            {
-                cout << noID;
-            }
-            Schedule modSchedule = scheduleList[modify_id];
-
-            for (string s : modifyScheduleOption)
-                cout << s;
-            int selection = checkValidSelection(admin, 6);
-
-            switch (selection)
-            {
-            case 1:
-            /* 제목수정 */
-                modifyTitle(modSchedule);
-                break;
-            case 2:
-            /* 날짜수정 */
-                modifyDate(modSchedule);
-                break;
-            case 3:
-            /* 시작시간 수정 */
-                modifySTime(modSchedule);
-                break;
-            case 4:
-            /* 종료시간 수정 */
-                modifyETime(modSchedule);
-                break;
-            case 5:
-            /* 내용 수정 */
-                modifyContent(modSchedule);
-                break;
-            case 6:
-            /* 장소 수정 */
-                modifyLocation(modSchedule);
-                break;
-            default:
-            /* 오류 */
-                break;
-            }
-            break;
-        }
-        case 2: {
-            /*
-                여기는 일정목록을 변경하는건가?
-            */
-            break;
-        }
-        default:
-            break;
+    case 1:
+        /* 제목수정 */
+        modifyTitle(modSchedule);
+        break;
+    case 2:
+        /* 날짜수정 */
+        modifyDate(modSchedule);
+        break;
+    case 3:
+        /* 시작시간 수정 */
+        modifySTime(modSchedule);
+        break;
+    case 4:
+        /* 종료시간 수정 */
+        modifyETime(modSchedule);
+        break;
+    case 5:
+        /* 내용 수정 */
+        modifyContent(modSchedule);
+        break;
+    case 6:
+        /* 장소 수정 */
+        modifyLocation(modSchedule);
+        break;
+    default:
+        /* 오류 */
+        break;
     }
 RetryYN:
     cout << modifySchedulesString[8];
@@ -375,12 +374,12 @@ RetryYN:
     cin >> input;
     if (input == "Y" || input == "y")
     {
-        modifySchedule(user);
+        modifySchedule();
         return;
     }
     else if (input == "N" || input == "n")
     {
-        select_Schedules_option(user);
+        select_Schedules_option();
         return;
     }
     else
@@ -399,7 +398,7 @@ int Calendar<S, U, D>::modifyTitle(S &s)
     int select;
     if ((select = titleVaild(title)) == 0)
     {
-        s.setTitle(title);
+        s.setTitle(&title);
         return 0;
     }
     return select;
@@ -516,7 +515,18 @@ bool findCheck(string ss, string s)
 
 bool boundaryCheck(string ss, int boundary)
 {
-    int num = stoi(ss);
+    int num;
+    check c = check();
+    if (c.isOnlyNumber(ss))
+    {
+        num = stoi(ss);
+    }
+    else
+    {
+        cout << err[0];
+        return false;
+    }
+
     if (0 < num && num < boundary)
     {
         return true;
@@ -527,6 +537,7 @@ bool boundaryCheck(string ss, int boundary)
         return false;
     }
 }
+
 int titleVaild(string title)
 {
     if (title.length() > 20 || title.length() < 1)
@@ -551,6 +562,7 @@ int titleVaild(string title)
         return 0;
     }
 }
+
 int dateVaild(string yymmdd)
 {
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
@@ -586,6 +598,34 @@ int dateVaild(string yymmdd)
     }
 }
 
+int yymm_dateVaild(string yymmdd)
+{
+    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+    check C = check();
+    if (yymmdd.length() == 4)
+    {
+        if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12))
+        {
+            return 0;
+        }
+        else
+        {
+            cout << err[0];
+            return 1;
+        }
+    }
+    else if (C.qCheck(yymmdd))
+    {
+        //cout << "뒤로가기...이거 바꿔조" << endl;
+        return 1;
+    }
+    else
+    {
+        cout << err[0];
+        return 2;
+    }
+}
 int hhmmVaild(string hhmm)
 {
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
@@ -679,17 +719,119 @@ int contentVaild(string contents)
     else
         return 0;
 }
-void deleteCalendar()
+
+void deleteCalendar(U user,int index)
 {
-    //삭제해야되는데 감이 안잡히네~ 허.
+    SharedCalendarManager scm;
+    scm.deleteSharedCalendar(user,scIdx);
 }
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::deleteS()
+{
+    cout << modifyString[0];
+    cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
+    show_Schedules(curr_year, curr_month);
+    cout << endl;
+    cout << modifyString[1];
+    cout << modifyString[2];
+    string input;
+    
+    do
+    {
+        cout << prompt;
+        cin >> input;
+    } while (!Check.numberCheck(input, 2));
+    
+    int input_int = stoi(input);
+    if (input_int == 1)
+    {
+        deleteSchedule();
+        return;
+    }
+    else if (input_int == 2)
+    {
+        string yymmdd;
+        //여기 yy 네글자? 두글자?기획서 보자
+        //yyyymm 받아서
+        do
+        {
+            cout << promt;
+            cin >> yymmdd;
+        } while (yymm_dateVaild(yymmdd) == 0)
+            //기획서는 yymm 으로 받는데,
+            //따로 vaild 체크해주기위해서는 함수가 필요함.
+            //지금 그 함수 만들러 갑니다.
+            int yy = stoi(yymmdd.substr(0, 2));
+            int mm = stoi(yymm)
+            //curr_year, month 변경 후
+            //여기 해야됨
+            deleteS(user);
+        return;
+    }
+}
+
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteSchedule()
 {
-    string keyword;
-    cin >> keyword;
-    // searchSchedule에서 vector에 추가 대신 원래 vector에서 pop해주면 될듯
-    // pop 보다는 erase해주면 됩니다
+    
+    int modify_id;
+    string input;
+    do
+    {
+        do
+        {
+            cout << modifySchedulesString[0];
+            cin >> input;
+            if (Check.qCheck(input))
+            {
+                // q 동작 수행
+                deleteS();
+                return;
+            }
+        } while (!Check.isOnlyNumber(input));
+
+        int input_id = stoi(input);
+        modify_id = -1;
+
+        for (int i = 0; i < scheduleList.size(); i++)
+        {
+            if (scheduleList[i].getID() == input_id)
+            {
+                modify_id = i;
+                break;
+            }
+        }
+
+        if (modify_id == -1)
+        {
+            cout << noID;
+        }
+
+    } while (modify_id == -1);
+
+    // 포인터로 가져와야되지않나?
+
+    Schedule modSchedule = &scheduleList[modify_id];
+
+RetryYN:
+    cout << modifySchedulesString[8];
+    cin >> input;
+    if (input == "Y" || input == "y")
+    {
+        modifySchedule();
+        return;
+    }
+    else if (input == "N" || input == "n")
+    {
+        select_Schedules_option();
+        return;
+    }
+    else
+    {
+        cout << err[0];
+        goto RetryYN;
+    }
 }
 
 template <typename S, typename U, typename D>

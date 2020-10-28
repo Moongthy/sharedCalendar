@@ -1,7 +1,9 @@
 
 template<typename S, typename U, typename D>
 Calendar<S, U, D>::Calendar(U user)
- :administrator(user), calendarID(user.getUserId()) { }
+ :administrator(user), calendarID(user.getUserId()) { 
+     loadPersonalScheduleList();
+ }
 
 template<typename S, typename U, typename D>
 Calendar<S, U, D>::Calendar(U user, string sharedCalendarId)

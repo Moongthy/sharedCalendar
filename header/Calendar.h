@@ -22,10 +22,12 @@ using namespace std;
  * 
  * @author 문근 & 예슬
  */
-template <typename S, typename U, typename D> class Calendar{
+template <typename S, typename U, typename D> class Calendar
+{
 protected:
     // 일정 목록
     vector<Schedule> scheduleList;
+
 
     int curr_year = 2020;
     int curr_month = 10;
@@ -40,6 +42,8 @@ public:
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
      * 
+     * 여기서 load() 호출
+     * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
     Calendar(U user); 
@@ -48,10 +52,19 @@ public:
      *  공유 캘린더 생성자에서 호출될 생성자
      *  일정목록의 크기는 0으로 초기화됨
      * 
+     *  load() 호출
+     * 
      *  @param administrator 이 캘린더를 생성한 사람. 관리자
      *  @param sharedCalendarId 공유캘린더 Id. 현재있는 공유캘린더 수 + 1000 으로 매겨짐
      */
     Calendar(U user, string sharedCalendarId);
+
+    // 여기서 save 호출
+    // 개인 캘린더 소멸자
+    virtual ~Calendar()
+    {
+        savePersonalScheduleList();
+    }
 
     /**
      *  getter of caledarID 
@@ -61,6 +74,120 @@ public:
     U getCalendarAdministrator();
 
 /*************************일정 파트********************************/
+
+    #include"ReadFile.h"
+
+    /**
+    * (Calendar/UserID).txt에 일정 입력
+    * 
+     * @param userID 사용자 아이디
+     * @param name 일정 제목
+     * @param date 날짜
+     * @param starttime 시작 시간
+     * @param endtime 종료 시간
+     * @param loc 장소(없으면 null 넘겨주기)
+     * @param memo 메모(없으면 null 넘겨주기)
+     * 
+     */
+    // void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
+        
+    
+
+    void savePersonalScheduleList()
+    {
+        ReadFile rf = ReadFile();
+
+        // 스케줄 갯수만큼, userId.txt 파일에 써벌임
+        for(Schedule s : scheduleList)
+        {
+            // Date 를 string 으로 변환
+            string d = to_string(s.getDate().yy) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+            
+            rf.writeSchedule(
+                administrator.getUserId(),
+                s.getTitle(),
+                d,
+                to_string(s.getStartTime()),
+                to_string(s.getEndTime()),
+                s.getLocation(),
+                s.getContent(),
+            );
+        }
+    }
+
+    void saveSharedScheduleList()
+    {
+        ReadFile rf = ReadFile();
+
+        // 스케줄 갯수만큼, userId.txt 파일에 써벌임
+        for(Schedule s : scheduleList)
+        {
+            // Date 를 string 으로 변환
+            string d = to_string(s.getDate().yy) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+            
+            rf.writeSCSchedule(
+                calendarID,
+                s.getTitle(),
+                d,
+                to_string(s.getStartTime()),
+                to_string(s.getEndTime()),
+                s.getLocation(),
+                s.getContent(),
+            );
+        }
+    }
+
+    void loadPersonalScheduleList()
+    {
+        ReadFile rf = ReadFile();
+
+        string adminId = administrator.getUserId() // 관리자 아이디
+
+        // userId.txt 파일에서 읽어옮.
+        vector<string> sId          = rf.readCalendar(adminId, 0);
+        vector<string> sName        = rf.readCalendar(adminId, 1);
+        vector<string> sDate        = rf.readCalendar(adminId, 2);
+        vector<string> sStartTime   = rf.readCalendar(adminId, 3);
+        vector<string> sEndTime     = rf.readCalendar(adminId, 4);
+        vector<string> sLoc         = rf.readCalendar(adminId, 5);
+        vector<string> sMemo        = rf.readCalendar(adminId, 6);
+
+        // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // 하나의 스케줄 생성
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            
+            // 끝에다 넣어줌
+            scheduleList.push_back(s);
+        }
+    }
+
+    void loadSharedScheduleList()
+    {
+        ReadFile rf = ReadFile();
+
+        // userId.txt 파일에서 읽어옮.
+        vector<string> sId          = rf.readSCalendar(calendarID, 0);
+        vector<string> sName        = rf.readSCalendar(calendarID, 1);
+        vector<string> sDate        = rf.readSCalendar(calendarID, 2);
+        vector<string> sStartTime   = rf.readSCalendar(calendarID, 3);
+        vector<string> sEndTime     = rf.readSCalendar(calendarID, 4);
+        vector<string> sLoc         = rf.readSCalendar(calendarID, 5);
+        vector<string> sMemo        = rf.readSCalendar(calendarID, 6);
+
+        // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // 하나의 스케줄 생성
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            
+            // 끝에다 넣어줌
+            scheduleList.push_back(s);
+        }
+    }
+
+
     check Check = check();
     /**
      *  일정 옵션 선택
@@ -93,6 +220,7 @@ public:
     int modifyLocation(S s);
     int modifyDate(S s);
 
+    void deleteS();
     /**
      *  일정을 삭제함.
      * 

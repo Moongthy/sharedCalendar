@@ -14,12 +14,30 @@ using namespace std;
 
 class Schedule{
 private:
+    
+    // 일정 아이디.
     int id;
+    
+    // 이게 뭐죠?
     string title;
+
     Date date;
+    
+    // 일정 시작 시간
     int startTime;
+    
+    // 일정 끝 시간
     int endTime;
+    
+    // 일정 내용
     string content;
+    
+    // 일정 장소
+    
+    // 일정 내용
+    string content;
+    
+    // 일정 장소
     string location;
 
 public :

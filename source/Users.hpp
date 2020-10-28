@@ -35,7 +35,7 @@ void Users::firstMenu()
 			system("cls");
 			cout << loginMenu[0];
 			cout << err[0];
-			////sleep(1500);
+			//cin.ignore();
 		}
 	}
 
@@ -139,7 +139,7 @@ void Users::signUp(){
 		}
 		else {
 			cout << err[2];
-			//sleep(1500);
+			//cin.ignore();
 		}
 	}
 
@@ -229,7 +229,7 @@ string Users::getUserNameList(string userID){
         
     }
     else cout << "[UserList.txt] read error!" << endl;
-    
+    //cin.ignore();
     read.close();
 
     return name;   
@@ -253,11 +253,12 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 			}
 			else {
 				cout << err[0];
+				//cin.ignore();
 			}
 		}
 		else {
 			cout << err[0];
-			
+			//cin.ignore();
 		}
 	}
 	return str;
@@ -278,11 +279,13 @@ void Users::isFileExist(const char* filepath)
 	if (_access(filepath, 0) != 0) {
 		FILE* f;
 		if (fopen(filepath, "w") != 0) {
-			cout << "[" << filepath << ("] read/create error!\n"); 
+			cout << "[" << filepath << ("] read/create error!\n");
+			//cin.ignore(); 
 		}
 		else {
 			if (fclose(f) != 0) {
 				cout << "[" << filepath << ("] close error!\n"); 
+				//cin.ignore();
 			}
 		}
 	}
