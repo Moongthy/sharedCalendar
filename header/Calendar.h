@@ -99,7 +99,7 @@ public:
     int modifyETime(S s);
     int modifyContent(S s);
     int modifyLocation(S s);
-    int modifyDate(S &s);
+    int modifyDate(S s);
 
     /**
      *  일정을 삭제함.

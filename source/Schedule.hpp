@@ -45,9 +45,7 @@ void Calendar<S, U, D>::select_Schedules_option()
 {
     cout << myCalendar[0];
     cout << curr_year << ScheduleInfo[2] <<curr_month << ScheduleInfo[3] << endl;
-    cout << line << endl;
     show_Schedules(curr_year, curr_month);
-    cout << line << endl;
 
     for(string s : calendarSelectionOption) cout << s;
     int selection = checkValidSelection(6);
@@ -88,13 +86,6 @@ void Calendar<S, U, D>::select_Schedules_option()
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
 {
-    // struct tm curr_tm;
-    // time_t curr_time = time(nullptr);
-
-    // localtime_r(&curr_time, &curr_tm);
-    // int curr_year = curr_tm.tm_year + 1900;
-    // int curr_month = curr_tm.tm_mon + 1;
-
     if (scheduleList.size() != 0)
     {
         bool check = false;
@@ -107,15 +98,17 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
 
             if(s_yy == curr_year && s_mm == curr_month) {
                 check = true;
+                cout << line << endl;
                 cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
                 cout << ScheduleInfo[1] << s_yy << ScheduleInfo[2] << s_mm << ScheduleInfo[3] << s_dd << ScheduleInfo[4] << endl;
                 cout << ScheduleInfo[5] << scheduleList[i].getStartTime()/100 << ScheduleInfo[6] << scheduleList[i].getStartTime()%100 << ScheduleInfo[7] << endl;
                 cout << ScheduleInfo[8] << scheduleList[i].getEndTime()/100 << ScheduleInfo[6] << scheduleList[i].getEndTime()%100 << ScheduleInfo[7] << endl;
                 cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
                 cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+                cout << line << endl;
             }
-            if(!check) cout << showSchedulesString[0];
         }
+        if(!check) cout << showSchedulesString[0];
     }
     else
     {
@@ -249,7 +242,7 @@ int Calendar<S, U, D>::modifyTitle(S &s){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyDate(S &s){
+int Calendar<S, U, D>::modifyDate(S s){
     cout << modifySchedulesString[2];
     string yymmdd;
     cin >> yymmdd;
@@ -440,16 +433,14 @@ TryAgain:
         {
             state = true;
             Date search = scheduleList[i].getDate();
-            int s_yy = search.yy;
-            int s_mm = search.mm;
-            int s_dd = search.dd;
-
+            cout << line << endl;
             cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
-            cout << ScheduleInfo[1] << s_yy << ScheduleInfo[2] << s_mm << ScheduleInfo[3] << s_dd << ScheduleInfo[4] << endl;
+            cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
             cout << ScheduleInfo[5] << scheduleList[i].getStartTime()/100 << ScheduleInfo[6] << scheduleList[i].getStartTime()%100 << ScheduleInfo[7] << endl;
             cout << ScheduleInfo[8] << scheduleList[i].getEndTime()/100 << ScheduleInfo[6] << scheduleList[i].getEndTime()%100 << ScheduleInfo[7] << endl;
             cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
             cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << line << endl;
         }
     }
     if(!state) {
