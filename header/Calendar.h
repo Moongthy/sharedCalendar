@@ -132,11 +132,7 @@ public:
                 to_string(s.getStartTime()),
                 to_string(s.getEndTime()),
                 s.getLocation(),
-<<<<<<< HEAD
                 s.getContent()
-=======
-                s.getContent(),
->>>>>>> a8a325921324f6ca2eea1f168ed1dfef6862b210
             );
         }
     }
