@@ -11,35 +11,27 @@ int locationVaild(string location);
 int checkValidSelection(int boundary) {
     string input;
     int selection;
-    while (1)
-    {
+    while (1) {
         cout << prompt;
         cin >> input;
-        if (input.length() != 1)
-        {
+        if (input.length() != 1) {
             cout << err[0];
         }
-        else
-        {
-            if (input == "q")
-            {
+        else{
+            if (input == "q") {
                 // q에 대한 처리
             }
-            else
-            {   
+            else {   
                 if(isNumber(input)) {
                     selection = stoi(input);
                 } else {
                     selection = -1;
                     return selection;
                 }
-                
-                if (selection <= 0 || selection > boundary)
-                {
+                if (selection <= 0 || selection > boundary) {
                     cout << err[0];
                 }
-                else 
-                {
+                else {
                     return selection;
                 }
             }
