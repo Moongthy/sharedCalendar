@@ -28,40 +28,30 @@ int checkValidSelection(bool admin, int boundary)
         {
             if (c.qCheck(input))
             {
-                // cout << "########q입력받음##########";
                 return -2;
             }
             else
             {
-                // cout << "!!!!!!!!!!여기까지됨!!!!!!!";
                 if (input.size() == 1 && c.isOnlyNumber(input))
                 {
-                    // cout << "#########숫자인지 확인함#########";
                     selection = stoi(input);
-                }
-                else
-                {
-                    selection = -1;
-                    return selection;
-                }
-                // 내가 관리자면
-                if (admin)
-                {
-                    if (selection < 0 || selection > boundary)
+                    if (admin)
                     {
-                        cout << err[0];
+                        if (selection >= 0 && selection <= boundary)
+                        {
+                            return selection;
+                        }
                     }
-                    // 내가 관리자가아니면
-                }
-                else if (!admin)
-                {
-                    if (selection <= 0 || selection > boundary)
+                    else
                     {
-                        cout << err[0];
+                        if (selection > 0 && selection <= boundary)
+                        {
+                            return selection;
+                        }
                     }
+                    cout << err[0];
                 }
 
-                return selection;
             }
         }
     }
@@ -85,9 +75,6 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
 
     int selection = checkValidSelection(admin, 6);
 
-    if (selection < 0)
-        return;
-
     system("cls");
     switch (selection)
     {
@@ -95,7 +82,6 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         /*캘린더 삭제 공유 캘린더 관리자만*/
         deleteCalendar();
         break;
-        //deleteSharedCalendar(user, scIdx);
     case 1:
         /* 일정생성 */
         addSchedule(user);
@@ -208,6 +194,10 @@ Stime:
         }
     } while (hhmmVaild(startTime) != 0);
 
+    startTime.erase(std::remove(startTime.begin(), startTime.end(), '-'), startTime.end());
+    startTime.erase(std::remove(startTime.begin(), startTime.end(), ':'), startTime.end());
+    startTime.erase(std::remove(startTime.begin(), startTime.end(), '/'), startTime.end());
+
 Etime:
     do
     {
@@ -218,6 +208,10 @@ Etime:
             goto Stime;
         }
     } while (hhmm_ahead_Vaild(startTime, endTime) != 0);
+
+    endTime.erase(std::remove(endTime.begin(), endTime.end(), '-'), endTime.end());
+    endTime.erase(std::remove(endTime.begin(), endTime.end(), ':'), endTime.end());
+    endTime.erase(std::remove(endTime.begin(), endTime.end(), '/'), endTime.end());
     
 Location:
     do
@@ -429,7 +423,9 @@ int Calendar<S, U, D>::modifySTime(S s)
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         int hh = stoi(hhmm.substr(0, 2));
+        cout << "####" << hh << endl;
         int mm = stoi(hhmm.substr(2, 2));
+        cout << "####" << mm << endl;
         s.setEndTime(hh * 100 + mm);
         return 0;
     }
@@ -594,6 +590,8 @@ int dateVaild(string yymmdd)
         cout << err[0];
         return 2;
     }
+    cout << err[0];
+    return 3;
 }
 
 int yymm_dateVaild(string yymmdd)
@@ -625,38 +623,20 @@ int yymm_dateVaild(string yymmdd)
     }
 }
 int hhmmVaild(string hhmm)
-{
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+{   //12:10 or 1210 // 1::1 ->11
     check C = check();
-    if (C.isOnlyNumber(hhmm))
-    {
-        if (hhmm.length() == 4)
-        {
-            if ((0 <= stoi(hhmm.substr(0, 2)) && stoi(hhmm.substr(0, 2)) <= 23) && (0 <= stoi(hhmm.substr(2, 2)) && stoi(hhmm.substr(2, 2)) <= 59))
-            {
-                cout << "debugging : " << stoi(hhmm.substr(0, 1)) << ",,,," << stoi(hhmm.substr(2, 3)) << endl;
-                // 시침은 00부터 23월까지 분침은 00~59까지..ㅠㅠ
+    if(hhmm.length() == 4 || hhmm.length() == 5) {
+        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
+        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+        if(C.isOnlyNumber(hhmm)) {
+            if(hhmm.length() == 4 ) {
                 return 0;
             }
         }
-        else
-        {
-            cout << err[0];
-            return 1;
-        }
     }
-    else if (hhmm.length() == 1 && hhmm[0] == 'q')
-    {
-        cout << "뒤로가기...이거 바꿔조2" << endl;
-        return 1;
-    }
-    else
-    {
-        cout << err[0];
-        return 2;
-    }
+    cout << err[0];
+    return 2;
 }
 
 int hhmm_ahead_Vaild(string startTime, string hhmm)
