@@ -115,11 +115,17 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
                 cout << line << endl;
             }
         }
-        if(!check) cout << showSchedulesString[0];
+        if(!check) {   
+            cout << line << endl;
+            cout << showSchedulesString[0];
+            cout << line << endl;
+        }
     }
     else
     {
+        cout << line << endl;
         cout << showSchedulesString[0];
+        cout << line << endl;
     }
 }
 
@@ -128,36 +134,60 @@ void Calendar<S, U, D>::addSchedule()
 {
     cout << addSchedulesString[0];
     string title, yymmdd, startTime, endTime, location, content;
+Title:
     do {
         cout << addSchedulesString[1];
         cin >> title;
+        if(Check.qCheck(title)) {
+            select_Schedules_option();
+            return;
+        }
     } while(titleVaild(title) != 0);
 
+Date:
     do {
         cout << addSchedulesString[2];
         cin >> yymmdd;
-        cout << "debugging : "<< endl;
+        if(Check.qCheck(yymmdd)) {
+            goto Title;
+        }
     } while(dateVaild(yymmdd) != 0);
     Date newD = Date(yymmdd);
 
+Stime:
     do {
         cout << addSchedulesString[3];
         cin >> startTime;
+        if(Check.qCheck(startTime)) {
+            goto Date;
+        }
     } while(hhmmVaild(startTime) != 0);
 
+Etime:
     do {
         cout << addSchedulesString[4];
         cin >> endTime;
+        if(Check.qCheck(endTime)) {
+            goto Stime;
+        }
     } while(hhmmVaild(endTime) != 0);
-        
+
+Location:
     do {
         cout << addSchedulesString[5];
         cin >> location;
+        if(Check.qCheck(location)) {
+            goto Etime;
+        }        
     } while(contentVaild(location) != 0);    
 
+Content:
     do {
         cout << addSchedulesString[6];
         cin >> content;
+        if(Check.qCheck(content)) {
+            goto Location;
+        }        
     } while(contentVaild(content) != 0);
 
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
@@ -166,6 +196,33 @@ void Calendar<S, U, D>::addSchedule()
     system("cls");
     cout << addSchedulesString[7];
     select_Schedules_option();
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::modify()
+{
+    cout << modify[0];
+    cout << curr_year << ScheduleInfo[2] <<curr_month << ScheduleInfo[3] << endl;
+    show_Schedules(curr_year, curr_month);
+    cout << endl;
+    cout << modify[1];
+    cout << modify[2];
+    string input;
+    do {
+        cout << prompt;
+        cin >> input;
+    } while(!Check.numberCheck(input, 2));
+    int input_int = stoi(input);
+    if(input_int == 1) {
+        modifySchedule();
+        return;
+    }
+    else if(input_int == 2) {
+        //yymm 받아서
+        //curr_year, month 변경 후
+        Modify();
+        return;
+    }
 }
 
 template <typename S, typename U, typename D>
@@ -179,6 +236,8 @@ void Calendar<S, U, D>::modifySchedule()
             cin >> input;
             if(Check.qCheck(input)) {
                 // q 동작 수행
+                Modify();
+                return;
             }
         } while(!Check.isOnlyNumber(input));
 
@@ -208,7 +267,6 @@ void Calendar<S, U, D>::modifySchedule()
     case 1:
         /* 제목수정 */
         modifyTitle(modSchedule);
-        select_Schedules_option();
         break;
     case 2:
         /* 날짜수정 */
@@ -233,6 +291,22 @@ void Calendar<S, U, D>::modifySchedule()
     default:
         /* 오류 */
         break;
+    }
+RetryYN:
+    cout << modifySchedulesString[8];
+    string yninput;
+    cin >> input;
+    if(input == "Y" || input == "y") {
+        modifySchedule();
+        return;
+    }
+    else if(input == "N" || input == "n") {
+        select_Schedules_option();
+        return;
+    }
+    else {
+        cout << err[0];
+        goto RetryYN;
     }
 }
 
@@ -333,6 +407,7 @@ bool isNumber(const string& str) {
     }
     return true;
 }
+
 bool findCheck(string ss, string s) {
     int it = ss.find(s);
     if(it == string::npos) {
@@ -340,6 +415,7 @@ bool findCheck(string ss, string s) {
     }
     else return true;
 }
+
 int titleVaild(string title) {
     if(title.length() > 20 || title.length() < 1) {
         //문자 길이가 다를 때 오류
@@ -363,30 +439,33 @@ int dateVaild(string yymmdd) {
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
 	yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
-    if(isNumber(yymmdd)) {
+    check C = check();
+
+    if(C.isOnlyNumber(yymmdd)) {
         if(yymmdd.length() == 6) {
-            if( (1<= stoi(yymmdd.substr(2,2)) && stoi(yymmdd.substr(2,2)) <= 12) && (1<= stoi(yymmdd.substr(4,2)) && stoi(yymmdd.substr(4,2)) <= 31) ) {
+            if((1<= stoi(yymmdd.substr(2,2)) && stoi(yymmdd.substr(2,2)) <= 12) && (1<= stoi(yymmdd.substr(4,2)) && stoi(yymmdd.substr(4,2)) <= 31) ) {
                 //달이 1월부터 12월까지 날이 1일부터 31일까지..ㅠㅠ
                 return 0;
             }
         } else {
-            cout << err[0] << endl;
+            cout << err[0];
             return 1;
         }
-        
-    }else if(yymmdd.length() == 1 && yymmdd[0] == 'q') {
+    } else if(C.qCheck(yymmdd)) {
         cout << "뒤로가기...이거 바꿔조" << endl;
         return 1;
     } else {
-        cout << err[0] << endl;
+        cout << err[0];
         return 2;
     }
 }
+
 int hhmmVaild(string hhmm) {
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
 	hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
-    if(isNumber(hhmm)) {
+    check C = check();
+    if(C.isOnlyNumber(hhmm)) {
         if(hhmm.length() == 4) {
             if( (0<= stoi(hhmm.substr(0,2)) && stoi(hhmm.substr(0,2)) <= 23) && (0<= stoi(hhmm.substr(2,2)) && stoi(hhmm.substr(2,2)) <= 59) ) {
                 cout << "debugging : " << stoi(hhmm.substr(0,1)) <<",,,," << stoi(hhmm.substr(2,3)) << endl;
@@ -394,21 +473,21 @@ int hhmmVaild(string hhmm) {
                 return 0;
             }
         } else {
-            cout << err[0] << endl;
+            cout << err[0];
             return 1;
         }
-        
-    }else if(hhmm.length() == 1 && hhmm[0] == 'q') {
+    } else if(hhmm.length() == 1 && hhmm[0] == 'q') {
         cout << "뒤로가기...이거 바꿔조2" << endl;
         return 1;
     } else {
-        cout << err[0] << endl;
+        cout << err[0];
         return 2;
     }
 }
+
 int contentVaild(string contents) {
     if(contents.length() > 100 || contents.length() == 0) {
-        cout << err[0] << endl;
+        cout << err[0];
         return 2;
     }
     else if (contents.length() == 1 && contents[0] == 'q') {
@@ -429,10 +508,19 @@ void Calendar<S, U, D>::deleteSchedule()
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::searchSchedule()
 {
+cout << searchSchedulesString[0];
 TryAgain:
-    cout << searchSchedulesString[0];
+    cout << searchSchedulesString[3];
     string keyword;
     cin >> keyword;
+    if(Check.qCheck(keyword)) {
+        select_Schedules_option();
+        return;
+    }
+    if(keyword.length() < 2) {
+        cout << err[0];
+        goto TryAgain;
+    }
     cout << searchSchedulesString[1];
     bool state = false;
     for (int i = 0; i < scheduleList.size(); i++)
@@ -453,7 +541,9 @@ TryAgain:
         }
     }
     if(!state) {
+        cout << line << endl;
         cout << searchSchedulesString[2];
+        cout << line << endl;
         goto TryAgain;
     }
     select_Schedules_option();

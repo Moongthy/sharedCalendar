@@ -132,13 +132,15 @@ string modifySchedulesString[10] = {
     "종료시간 > ",
     "장소 > ",
     "내용 > ",
-    "일정 생성에 성공하였습니다.\n\n"
+    "일정 생성에 성공하였습니다.\n\n",
+    "[다른 항목 수정] Y/N > "
 };
 
 string searchSchedulesString[10] = {
-    "[일정 검색]\n검색어 입력 > ",
+    "[일정 검색]\n",
     "[일정 검색 결과]\n",
     "검색 결과가 없습니다.\n",
+    "검색어 입력 > "
 };
 
 string ScheduleInfo[11] = {
@@ -158,3 +160,9 @@ string ScheduleInfo[11] = {
 string line = "====================================================";
 string prompt = "> ";
 string noID = "없는 ID입니다.\n";
+
+string modify[10] = {
+    "[일정 수정]\n",
+    "1. 수정할 일정 선택\n",
+    "2. 이동할 연/월 선택\n"
+};

@@ -93,6 +93,7 @@ public:
     /**
      *  일정을 수정함
      */
+    void modify();
     void modifySchedule();
     int modifyTitle(S &s);
     int modifySTime(S s);
