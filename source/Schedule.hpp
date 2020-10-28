@@ -275,7 +275,7 @@ void Calendar<S, U, D>::modify(U user)
         //yyyymm 받아서
         do
         {
-            cout << promt;
+            cout << prompt;
             cin >> yymmdd;
         } while (yymm_dateVaild(yymmdd) == 0)
             //기획서는 yymm 으로 받는데,

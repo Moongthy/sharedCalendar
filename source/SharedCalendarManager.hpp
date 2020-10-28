@@ -7,7 +7,7 @@ SharedCalendarManager<S, U, D>::SharedCalendarManager(){
 template<typename S, typename U, typename D>
 SharedCalendarManager<S, U, D>::~SharedCalendarManager(){
 
-    for(SharedCalendar sc : sharedCalendarList)
+    for(SharedCalendar<S, U, D> sc : sharedCalendarList)
     {
         delete &sc;
     }
