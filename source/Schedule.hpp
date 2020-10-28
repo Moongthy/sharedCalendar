@@ -272,24 +272,20 @@ void Calendar<S, U, D>::modify(U user)
     }
     else if (input_int == 2)
     {
-        string yymmdd;
-        //여기 yy 네글자? 두글자?기획서 보자
-        //yyyymm 받아서
+        string yymm;
+        
         do
         {
             cout << prompt;
-            cin >> yymmdd;
-        } while (yymm_dateVaild(yymmdd) == 0);
-            //기획서는 yymm 으로 받는데,
-            //따로 vaild 체크해주기위해서는 함수가 필요함.
-            //지금 그 함수 만들러 갑니다.
-            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
-            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
-            int yy = stoi(yymmdd.substr(0, 2));
-            int mm = stoi(yymmdd.substr(2, 2));
-            //curr_year, month 변경 후
-            //여기 해야됨
-            modify(user);
+            cin >> yymm;
+        } while (yymm_dateVaild(yymm) == 0);
+
+        yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
+        yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
+        int yy = stoi(yymm.substr(0, 2));
+        int mm = stoi(yymm.substr(2, 2));
+        
+        modify(user);
         return;
     }
 }
@@ -334,7 +330,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
 
     // 포인터로 가져와야되지않나?
 
-    Schedule modSchedule = scheduleList[modify_id];
+    //Schedule modSchedule = scheduleList[modify_id];
 
     for (string s : modifyScheduleOption)
         cout << s;
@@ -344,27 +340,27 @@ void Calendar<S, U, D>::modifySchedule(U user)
     {
     case 1:
         /* 제목수정 */
-        modifyTitle(modSchedule);
+        modifyTitle(scheduleList[modify_id]);
         break;
     case 2:
         /* 날짜수정 */
-        modifyDate(modSchedule);
+        modifyDate(scheduleList[modify_id]);
         break;
     case 3:
         /* 시작시간 수정 */
-        modifySTime(modSchedule);
+        modifySTime(scheduleList[modify_id]);
         break;
     case 4:
         /* 종료시간 수정 */
-        modifyETime(modSchedule);
+        modifyETime(scheduleList[modify_id]);
         break;
     case 5:
         /* 내용 수정 */
-        modifyContent(modSchedule);
+        modifyContent(scheduleList[modify_id]);
         break;
     case 6:
         /* 장소 수정 */
-        modifyLocation(modSchedule);
+        modifyLocation(scheduleList[modify_id]);
         break;
     default:
         /* 오류 */
@@ -753,22 +749,20 @@ void Calendar<S, U, D>::deleteS(U user)
     }
     else if (input_int == 2)
     {
-        string yymmdd;
-        //여기 yy 네글자? 두글자?기획서 보자
-        //yyyymm 받아서
+        string yymm;
+        
         do
         {
             cout << prompt;
-            cin >> yymmdd;
-        } while (yymm_dateVaild(yymmdd) == 0);
-            //기획서는 yymm 으로 받는데,
-            //따로 vaild 체크해주기위해서는 함수가 필요함.
-            //지금 그 함수 만들러 갑니다.
-            int yy = stoi(yymmdd.substr(0, 2));
-            int mm = stoi(yymmdd);
-            //curr_year, month 변경 후
-            //여기 해야됨
-            deleteS(user);
+            cin >> yymm;
+        } while (yymm_dateVaild(yymm) == 0);
+
+        yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
+        yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
+        int yy = stoi(yymm.substr(0, 2));
+        int mm = stoi(yymm.substr(2, 2));
+        
+        deleteS(user);
         return;
     }
 }
