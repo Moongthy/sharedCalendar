@@ -3,6 +3,7 @@
 #ifndef __SHAREDCALENDAR__
 #define __SHAREDCALENDAR__
 
+#include"input/check.h"
 #include"Calendar.h"
 
 /**

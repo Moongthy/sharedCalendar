@@ -8,6 +8,8 @@ MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
     //  }
  }
 
+#include"../header/Calendar.h"
+
 void MenuInput::mainMenu(){
 
     // scm.showSharedCalendarList();
@@ -18,7 +20,10 @@ void MenuInput::mainMenu(){
 
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
-        if(a == 1) { }
+        if(a == 1) { 
+            Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
+            personalCal.select_Schedules_option(user);
+        }
         // a에서 공유 캘린더 메뉴로 들어감.
         if(a == 2) b = sharedCalendarActions();
         // 종료
@@ -44,6 +49,10 @@ void MenuInput::mainMenu(){
             int scIdx = intoSC();
             if(scIdx < 0) continue;
             
+            SharedCalendar<Schedule, User, Date> sc = scm.getSharedCalendarList()[scIdx];
+
+            sc.select_Schedules_option(user);
+
             if(!getIntoSpecifiedCalendar(scIdx))
                 delSc(scIdx);
         }
