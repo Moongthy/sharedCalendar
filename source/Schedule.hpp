@@ -9,7 +9,7 @@ int hhmmVaild(string hhmm);
 int hhmm_ahead_Vaild(string startTime, string endTime);
 int contentVaild(string contents);
 int locationVaild(string location);
-void deleteCalendar(U user,int index);
+void deleteCalendar();
 bool admin = false;
 int checkValidSelection(bool admin, int boundary)
 {
@@ -77,7 +77,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     if (user.getUserId() == getCalendarAdministrator().getUserId())
     {
         cout << choiceSpecifiedSharedCalendarAction[1];
-        admin == true;
+        admin = true;
     }
 
     for (string s : calendarSelectionOption)
@@ -720,10 +720,10 @@ int contentVaild(string contents)
         return 0;
 }
 
-void deleteCalendar(U user,int index)
+void deleteCalendar()
 {
-    SharedCalendarManager scm;
-    scm.deleteSharedCalendar(user,scIdx);
+    //SharedCalendarManager scm;
+    //scm.deleteSharedCalendar(user,scIdx);
 }
 
 template <typename S, typename U, typename D>
@@ -774,7 +774,6 @@ void Calendar<S, U, D>::deleteS()
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteSchedule()
 {
-    
     int modify_id;
     string input;
     do
@@ -812,9 +811,9 @@ void Calendar<S, U, D>::deleteSchedule()
 
     // 포인터로 가져와야되지않나?
 
-    Schedule modSchedule = &scheduleList[modify_id];
+    Schedule modSchedule = scheduleList[modify_id];
 
-RetryYN:
+deleteRetryYN:
     cout << modifySchedulesString[8];
     cin >> input;
     if (input == "Y" || input == "y")
@@ -830,7 +829,7 @@ RetryYN:
     else
     {
         cout << err[0];
-        goto RetryYN;
+        goto deleteRetryYN;
     }
 }
 
@@ -838,7 +837,7 @@ template <typename S, typename U, typename D>
 void Calendar<S, U, D>::searchSchedule(U user)
 {
     cout << searchSchedulesString[0];
-TryAgain:
+SearchTryAgain:
     cout << searchSchedulesString[3];
     string keyword;
     cin >> keyword;
@@ -876,7 +875,7 @@ TryAgain:
         cout << line << endl;
         cout << searchSchedulesString[2];
         cout << line << endl;
-        goto TryAgain;
+        goto SearchTryAgain;
     }
     select_Schedules_option(user);
 }

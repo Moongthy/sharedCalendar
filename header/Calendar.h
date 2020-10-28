@@ -110,7 +110,7 @@ public:
                 to_string(s.getStartTime()),
                 to_string(s.getEndTime()),
                 s.getLocation(),
-                s.getContent(),
+                s.getContent()
             );
         }
     }

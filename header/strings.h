@@ -81,7 +81,7 @@ string delSharedCalenadr[10]= {
 };
 
 string calendarSelectionOption[10] = {
-    "[기능 선택]\n",
+    "[캘린더 기능 선택]\n",
     "1. 일정 생성\n",
     "2. 일정 수정\n",
     "3. 일정 삭제\n"

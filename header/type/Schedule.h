@@ -33,11 +33,6 @@ private:
     string content;
     
     // 일정 장소
-    
-    // 일정 내용
-    string content;
-    
-    // 일정 장소
     string location;
 
 public :
@@ -55,37 +50,37 @@ public :
     string getTitle() {
         return title;
     }
-    string setTitle(string title) {
+    void setTitle(string title) {
         title = title;
     }
     Date getDate() {
         return date;
     }
-    Date setDate(Date date) {
+    void setDate(Date date) {
         date = date;
     }
     int getStartTime(){
         return startTime;
     }
-    int setStartTime(int startTime) {
+    void setStartTime(int startTime) {
         startTime = startTime;
     }
     int getEndTime(){
         return endTime;
     }
-    int setEndTime(int endTime) {
+    void setEndTime(int endTime) {
         endTime = endTime;
     }
     string getContent(){
         return content;
     }
-    string setContent(string content) {
+    void setContent(string content) {
         content = content;
     }
     string getLocation() {
         return location;
     }
-    string setLocation(string location) {
+    void setLocation(string location) {
         location = location;
     }
     int getID() {
