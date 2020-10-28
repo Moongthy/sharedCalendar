@@ -176,6 +176,8 @@ public:
         vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
         vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
 
+
+
         // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
         {
