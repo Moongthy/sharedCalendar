@@ -212,7 +212,7 @@ void Calendar<S, U, D>::modify()
     else if(input_int == 2) {
         //yymm 받아서
         //curr_year, month 변경 후
-        Modify();
+        modify();
         return;
     }
 }
@@ -228,7 +228,7 @@ void Calendar<S, U, D>::modifySchedule()
             cin >> input;
             if(Check.qCheck(input)) {
                 // q 동작 수행
-                Modify();
+                modify();
                 return;
             }
         } while(!Check.isOnlyNumber(input));
