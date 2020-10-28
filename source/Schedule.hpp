@@ -14,7 +14,7 @@ int checkValidSelection(int boundary) {
         cin >> input;
         if (input.length() != 1)
         {
-            cout << "올바른 입력 형식이 아닙니다.\n";
+            cout << err[0];
         }
         else
         {
@@ -27,7 +27,7 @@ int checkValidSelection(int boundary) {
                 selection = stoi(input);
                 if (selection <= 0 || selection > boundary)
                 {
-                    cout << "올바른 입력 형식이 아닙니다.\n";
+                    cout << err[0];
                 }
                 else 
                 {
@@ -41,7 +41,7 @@ int checkValidSelection(int boundary) {
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option()
 {
-    cout << "[개인 캘린더]\n";
+    cout << myCalendar[0];
     show_Schedules(2020, 10);
 
     for(string s : calendarSelectionOption) cout << s;
@@ -67,11 +67,11 @@ void Calendar<S, U, D>::select_Schedules_option()
         break; 
     case 5:
         /* 이전 달 일정 */
-        showNextMonthSchedules();
+        showPrevMonthSchedules();
         break; 
     case 6:
         /* 다음 달 일정 */
-        showPrevMonthSchedules();
+        showNextMonthSchedules();
         break; 
     default:
         /* 오류 */
@@ -91,90 +91,91 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
 
     if (scheduleList.size() != 0)
     {
-        for (int i = 0; i < scheduleList.length(); i++)
+        for (int i = 0; i < scheduleList.size(); i++)
         {
             Date search = scheduleList[i].getDate();
             int s_yy = search.yy;
             int s_mm = search.mm;
             int s_dd = search.dd;
+            cout << s_yy << endl << s_mm << endl << s_dd << endl;
 
             if(s_yy == curr_year && s_mm == curr_month) {
                 cout << "제목 : " << scheduleList[i].getTitle() << endl;
                 cout << "날짜 : " << s_yy << "년 " << s_mm << "월 " << s_dd << "일" << endl;
-                cout << "시작시간 : " << scheduleList[i].getStartTime() << endl;
-                cout << "종료시간 : " << scheduleList[i].getEndTime() << endl;
+                cout << "시작시간 : " << scheduleList[i].getStartTime()%100 << "시 " << scheduleList[i].getStartTime()/100 << "분 " << endl;
+                cout << "종료시간 : " << scheduleList[i].getEndTime()%100 << "시 " << scheduleList[i].getEndTime()/100 << "분 "<< endl;
                 cout << "내용 : " << scheduleList[i].getContent() << endl;
                 cout << "장소 : " << scheduleList[i].getLocation() << endl;
             }
-
-
         }
     }
     else
     {
-        cout << "해당 월에 스케줄이 없습니다!" << endl;
+        cout << showSchedulesString[0];
     }
 }
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::addSchedule()
 {
-    cout << "[일정 생성]\n";
-    cout << "제목 > ";
-    string title;
+    cout << addSchedulesString[0];
+
+    string title, yymmdd, startTime, endTime, location, content;
     do {
+        cout << addSchedulesString[1];
         cin >> title;
-    } while(titleVaild(title) == 0);
+    } while(titleVaild(title) != 0);
 
-    cout << "날짜 > ";
-    string yymmdd;
     do {
+        cout << addSchedulesString[2];
         cin >> yymmdd;
-    } while(hhmmVaild(yymmdd) == 0);
+    } while(dateVaild(yymmdd) != 0);
+    Date newD = Date(yymmdd);
 
-    //제목, 날짜, 시작시간, 종료시간, 장소, 내용
-    cout << "시작시간 > ";
-    string startTime;
     do {
+        cout << addSchedulesString[3];
         cin >> startTime;
-    } while(hhmmVaild(yymmdd) == 0);
+    } while(hhmmVaild(startTime) != 0);
 
-    cout << "종료시간 > ";
-    string endTime;
     do {
+        cout << addSchedulesString[4];
         cin >> endTime;
-    } while(hhmmVaild(yymmdd) == 0);    
+    } while(hhmmVaild(endTime) != 0);
         
-    cout << "장소 > ";
-    string location;
     do {
+        cout << addSchedulesString[5];
         cin >> location;
-    } while(stringVaild(location) == 0);    
+    } while(contentVaild(location) != 0);    
 
-    cout << "내용 > ";
-    string content;
     do {
+        cout << addSchedulesString[6];
         cin >> content;
-    } while(stringVaild(content) == 0);
+    } while(contentVaild(content) != 0);
 
-    Schedule(title, , startTime, endTime, content, location);
-    //scheduleList.push_back(S(startDate, endDate, content));
-
-    cout << "일정 생성에 성공하였습니다. > ";
+    Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, 100);
+    scheduleList.push_back(new_s);
+    cout << addSchedulesString[7];
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::modifySchedule(S schedule, U users, D date)
+void Calendar<S, U, D>::modifySchedule()
 {
     cout << "[일정 수정]\n수정할 일정 ID >";
-    string input_id;
-    cin >> input_id;
+    string input;
+    cin >> input;
 
-    /**
-     * 
-     * ID 유효한지 검사
-     * 
-     **/
+    int input_id = stoi(input);
+
+    int modify_id;
+
+    for(int i = 0; i<scheduleList.size(); i++) {
+        if(scheduleList[i].getID() == input_id) {
+            modify_id = i;
+            break;
+        }
+    }
+    
+    Schedule modSchedule = scheduleList[modify_id];
 
     for(string s : modifyScheduleOption) cout << s;
     int selection = checkValidSelection(6);
@@ -183,27 +184,27 @@ void Calendar<S, U, D>::modifySchedule(S schedule, U users, D date)
     {
     case 1:
         /* 제목수정 */
-        modifyTitle();
+        modifyTitle(modSchedule);
         break;
     case 2:
         /* 날짜수정 */
-        modifyDate();
+        modifyDate(modSchedule);
         break;
     case 3:
         /* 시작시간 수정 */
-        modifyTime();
+        modifySTime(modSchedule);
         break;
     case 4:
         /* 종료시간 수정 */
-        modifyTime();
+        modifyETime(modSchedule);
         break; 
     case 5:
         /* 내용 수정 */
-        modifyContent();
+        modifyContent(modSchedule);
         break; 
     case 6:
         /* 장소 수정 */
-        modifyLocation();
+        modifyLocation(modSchedule);
         break; 
     default:
         /* 오류 */
@@ -212,7 +213,9 @@ void Calendar<S, U, D>::modifySchedule(S schedule, U users, D date)
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyTitle(S s, string title){
+int Calendar<S, U, D>::modifyTitle(S &s){
+    string title;
+    cin >> title;
     int select;
     if( ( select = titleVaild(title) ) == 0) {
         s.setTitle(title);
@@ -222,7 +225,9 @@ int Calendar<S, U, D>::modifyTitle(S s, string title){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
+int Calendar<S, U, D>::modifyDate(S &s){
+    string yymmdd;
+    cin >> yymmdd;
     int select;
     if((select = dateVaild(yymmdd)) == 0) {
         Date new_date = Date(yymmdd);
@@ -232,7 +237,9 @@ int Calendar<S, U, D>::modifyDate(S s, string yymmdd){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifySTime(S s, string hhmm){
+int Calendar<S, U, D>::modifySTime(S s){
+    string hhmm;
+    cin >> hhmm;
     int select;
     if( ( select = hhmmVaild(hhmm) ) == 0) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
@@ -246,7 +253,9 @@ int Calendar<S, U, D>::modifySTime(S s, string hhmm){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyETime(S s, string hhmm){
+int Calendar<S, U, D>::modifyETime(S s){
+    string hhmm;
+    cin >> hhmm;
     int select;
     if( ( select = hhmmVaild(hhmm) ) == 0) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
@@ -259,7 +268,9 @@ int Calendar<S, U, D>::modifyETime(S s, string hhmm){
     return select;
 }
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyContent(S s, string content){
+int Calendar<S, U, D>::modifyContent(S s){
+    string content;
+    cin >> content;
     int select;
     if( ( select = contentVaild(content) ) == 0) {
         s.setContent(content);
@@ -269,8 +280,10 @@ int Calendar<S, U, D>::modifyContent(S s, string content){
 }
 
 template<typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyLocation(S s, string location) {
-   int select;
+int Calendar<S, U, D>::modifyLocation(S s) {
+    string location;
+    cin >> location;
+    int select;
     if( ( select = contentVaild(location) ) == 0) {
         s.setLocation(location);
         return 0;
@@ -292,19 +305,18 @@ bool findCheck(string ss, string s) {
     else return true;
 }
 int titleVaild(string title) {
-    if(title.length() >= 20 && title.length() < 1) {
+    if(title.length() > 20 || title.length() < 1) {
         //문자 길이가 다를 때 오류
-        cout << err[0] << endl;
+        cout << err[0];
         return 2;
     }
-    else if( title.length() == 1 && title[0] == 'q') {
+    else if(title.length() == 1 && title[0] == 'q') {
         //q를 입력했을 때 행동 수행
-        //cout << "[제목]에서 뒤로 갑니다.";
         return 1;
     }
-    else if(title.length() ==1 && title[0] == ' ') {
+    else if(title.length() == 1 && title[0] == ' ') {
         //공백을 입력했을 때 오류
-        cout << err[0] << endl;
+        cout << err[0];
         return 3;
     }
     else {
@@ -334,11 +346,21 @@ int dateVaild(string yymmdd) {
     }
 }
 int hhmmVaild(string hhmm) {
-    if(hhmm.length() > 5 && hhmm.length() < 4) {
+    if(hhmm.length() == 4) {
+
+    }
+    else if(hhmm.length() == 5) {
+        if(hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':') {
+        }
+        else {
+
+        }
+    }
+    if(hhmm.length() > 5 || hhmm.length() < 4) {
         cout << err[0] << endl;
         return 2;
     }//string::npos 이면은 못찾은거임
-    else if((findCheck(hhmm,"/") || (findCheck(hhmm,"-")) || (hhmm.length() == 4 && hhmm.length() == 5)) {
+    else if(findCheck(hhmm,"/") || findCheck(hhmm,"-") || hhmm.length() == 4 || hhmm.length() == 5) {
         //10.21 / 9시 20분 마지막 수정 부분
         return 0;
     }
@@ -354,7 +376,7 @@ int hhmmVaild(string hhmm) {
     }
 }
 int contentVaild(string contents) {
-    if( contents.length() > 100 || contents.length() = 0 ) {
+    if(contents.length() > 100 || contents.length() == 0) {
         cout << err[0] << endl;
         return 2;
     }
@@ -365,55 +387,71 @@ int contentVaild(string contents) {
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::deleteSchedule(string keyword)
+void Calendar<S, U, D>::deleteSchedule()
 {
+    string keyword;
+    cin >> keyword;
     // searchSchedule에서 vector에 추가 대신 원래 vector에서 pop해주면 될듯
     // pop 보다는 erase해주면 됩니다
 }
 
 template <typename S, typename U, typename D>
-vector<S> &Calendar<S, U, D>::searchSchedule(string keyword)
+void Calendar<S, U, D>::searchSchedule()
 {
-    vector<S> SearchScheduleList;
-    for (int i = 0; i < 1200; i++)
+    string keyword;
+    cin >> keyword;
+    for (int i = 0; i < scheduleList.size(); i++)
     {
-        int len = scheduleList[i].length();
-        for (int j = 0; j < len; j++)
+        string content = scheduleList[i].getTitle();
+        if (content.find(keyword) != string::npos)
         {
-            string content = scheduleList[i][j].getTitle();
-            if (content.find(keyword) != string::npos)
-            {
-                SearchScheduleList.push_back(scheduleList[i][j]);
-            }
+            Date search = scheduleList[i].getDate();
+            int s_yy = search.yy;
+            int s_mm = search.mm;
+            int s_dd = search.dd;
+
+            cout << "제목 : " << scheduleList[i].getTitle() << endl;
+            cout << "날짜 : " << s_yy << "년 " << s_mm << "월 " << s_dd << "일" << endl;
+            cout << "시작시간 : " << scheduleList[i].getStartTime()%100 << "시 " << scheduleList[i].getStartTime()/100 << "분 " << endl;
+            cout << "종료시간 : " << scheduleList[i].getEndTime()%100 << "시 " << scheduleList[i].getEndTime()/100 << "분 "<< endl;
+            cout << "내용 : " << scheduleList[i].getContent() << endl;
+            cout << "장소 : " << scheduleList[i].getLocation() << endl;
         }
     }
-    return SearchScheduleList;
 }
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::showNextMonthSchedules()
 {
-    if (ym_idx + 1 >= 1200)
-    {
-        // 다음 달이 없습니다
-    }
-    else
-    {
-        ym_idx++;
-        show_Schedules(ym_idx);
+    if(curr_year == 2069 && curr_month == 12) {
+        //마지막 달    
+    } 
+    else {
+        if(curr_month == 12) {
+            curr_month = 1;
+        }
+        else {
+            curr_month++;
+        }
+        curr_year++;
+        show_Schedules(curr_year, curr_month);
     }
 }
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::showPrevMonthSchedules()
 {
-    if (ym_idx - 1 < 0)
-    {
-        // 이전 달이 없습니다
-    }
-    else
-    {
-        ym_idx--;
-        show_Schedules(ym_idx);
+    if(curr_year == 1970 && curr_month == 1) {
+        //첫 달    
+    } 
+    else {
+        if(curr_month == 1) {
+            curr_month = 12;
+        }
+        else {
+            curr_month--;
+        }
+        curr_year--;
+        show_Schedules(curr_year, curr_month);
     }
 }

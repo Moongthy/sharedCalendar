@@ -15,13 +15,17 @@ public:
 		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
 		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
-		yy = stoi(yymmdd.substr(0,1));
-		mm = stoi(yymmdd.substr(2,3));
-		dd = stoi(yymmdd.substr(4,5));
+		cout << yymmdd << endl;
+		yy = stoi(yymmdd.substr(0,2));
+		cout << yymmdd << endl;
+		mm = stoi(yymmdd.substr(2,4));
+		dd = stoi(yymmdd.substr(4,6));
+		cout << yy <<endl<< mm <<endl<< dd << endl;
 
 		if (0 <= yy && yy < 70) yy += 2000;
 		else if (70 <= yy && yy < 100) yy += 1900;
 	}
+
 	Date(int yy, int mm, int dd) : mm(mm), dd(dd) {
 		if (0 <= yy && yy < 70) yy += 2000;
 		else if (70 <= yy && yy < 100) yy += 1900;

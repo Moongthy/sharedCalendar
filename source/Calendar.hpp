@@ -15,11 +15,11 @@ Calendar<S, U, D>::Calendar() {
     //D curr = MenuInput::currentDateTime();
     //ym_idx = ((curr.yy - 1970) * 12 + curr.mm - 1);
     
-    // time_t curr_time = time(nullptr);
-    // struct tm * curr_tm = localtime(&curr_time);
+    time_t curr_time = time(nullptr);
+    struct tm * curr_tm = localtime(&curr_time);
 
-    // int currentYear = curr_tm -> tm_year + 1900;
-    // int currentMonth = curr_tm -> tm_mon + 1;
+    curr_year = curr_tm -> tm_year + 1900;
+    curr_month = curr_tm -> tm_mon + 1;
 }
 
 template<typename S, typename U, typename D>

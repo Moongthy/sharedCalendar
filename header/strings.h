@@ -105,3 +105,22 @@ string modifyScheduleOption[10] = {
     "6. 장소\n",
     "> "
 };
+
+string myCalendar[10] = {
+    "[개인 캘린더]\n"
+};
+
+string showSchedulesString[10] = {
+    "해당 월에 스케줄이 없습니다!\n"
+};
+
+string addSchedulesString[10] = {
+    "[일정 생성]\n",
+    "제목 > ",
+    "날짜 > ",
+    "시작시간 > ",
+    "종료시간 > ",
+    "장소 > ",
+    "내용 > ",
+    "일정 생성에 성공하였습니다.\n"
+};

@@ -23,10 +23,10 @@ class Calendar
 {
 protected:
     // 일정 목록
-    vector<Schedule> scheduleList();
+    vector<Schedule> scheduleList;
     
-    // 캘린더 현재 년도월에 대한 index (0 ~ 1199)
-    int ym_idx;
+    int curr_year;
+    int curr_month;
 
     // 만든사람
     U administrator;
@@ -89,20 +89,20 @@ public:
     /**
      *  일정을 수정함
      */
-    void modifySchedule(S schedule, U users, D date);
-    int modifyTitle(S s, string title);
-    int modifySTime(S s, string hhmm);
-    int modifyETime(S s, string hhmm);
-    int modifyContent(S s, string content);
-    int modifyLocation(S s, string location);
-    int modifyDate(S s, string yymmdd);
+    void modifySchedule();
+    int modifyTitle(S &s);
+    int modifySTime(S s);
+    int modifyETime(S s);
+    int modifyContent(S s);
+    int modifyLocation(S s);
+    int modifyDate(S &s);
 
     /**
      *  일정을 삭제함.
      * 
      *  @param keyword  사용자가 입력한 문자열
      */
-    void deleteSchedule(string keyword);
+    void deleteSchedule();
 
     /**
      *  일정을 검색함.
@@ -110,7 +110,7 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    vector<S>& searchSchedule(string keyword);
+    void searchSchedule();
 
     /**
      *  저번달, 다음달 일정을 보여줌

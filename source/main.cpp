@@ -29,7 +29,7 @@ int main(){
     Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
 
     cal.select_Schedules_option();
-
+    cal.select_Schedules_option();
     // users.firstMenu();
 
     // cout << (int)L'가' << endl;

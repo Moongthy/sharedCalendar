@@ -17,7 +17,8 @@ private:
     int endTime;
     string content;
     string location;
-    
+
+public :
     Schedule(string title, Date date, int startTime, int endTime, string content = "", string location = "", int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime), location(location), content(content) {
         if (this -> date > date) {
@@ -26,7 +27,9 @@ private:
         cout << "";
     }
 
-public :
+    //임시 생성자
+    Schedule();
+
     string getTitle() {
         return title;
     }
@@ -62,6 +65,9 @@ public :
     }
     string setLocation(string location) {
         location = location;
+    }
+    int getID() {
+        return id;
     }
 };
 
