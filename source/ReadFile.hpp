@@ -166,7 +166,7 @@ void ReadFile::clearSCList() {
 void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
     vector<string> id_list = readSCList(0);
 
-    int id = id_list.size()+1;
+    int id = stoi(id_list[id_list.size()-1])+1;
     
     // 처음 SharedCalendar 등록할 때는 admin이 제일 첫번째에 들어가서 admin만 넣음.
     write.open("../data/SharedCalendarList.txt", ios::app);
@@ -292,7 +292,7 @@ void ReadFile::writeSchedule(string userID, string name, string date, string sta
 {
     vector<string> id_list = readCalendar(userID, 0);
 
-    int id = id_list.size()+1;
+    int id = stoi(id_list[id_list.size()-1])+1;
 
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     write << id;
