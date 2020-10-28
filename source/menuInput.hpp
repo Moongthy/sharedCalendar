@@ -8,17 +8,22 @@ MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
     //  }
  }
 
+#include"../header/Calendar.h"
+
 void MenuInput::mainMenu(){
 
     // scm.showSharedCalendarList();
 
     while(true){
 
-        int a , b , c = -1, d;
+        int a , b , c = -1;
 
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
-        if(a == 1) { }
+        if(a == 1) { 
+            Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
+            personalCal.select_Schedules_option(user);
+        }
         // a에서 공유 캘린더 메뉴로 들어감.
         if(a == 2) b = sharedCalendarActions();
         // 종료
@@ -44,6 +49,10 @@ void MenuInput::mainMenu(){
             int scIdx = intoSC();
             if(scIdx < 0) continue;
             
+            SharedCalendar<Schedule, User, Date> sc = scm.getSharedCalendarList()[scIdx];
+
+            sc.select_Schedules_option(user);
+
             if(!getIntoSpecifiedCalendar(scIdx))
                 delSc(scIdx);
         }
@@ -120,6 +129,14 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(c.qCheck(input)){
         if(scInfo.size()) scInfo.pop_back();
         createNewSc(scInfo, stage-1);
+        return;
+    }
+
+    // 공캘이 이미 있는 공캘이다?
+    if(stage == _SCNAME && c.totalCheck(input, stage, 0) && scm.searchSharedCalendarIdx(input) >= 0)
+    {
+        cout << err[0];
+        createNewSc(scInfo, stage);
         return;
     }
 
@@ -206,6 +223,10 @@ int MenuInput::getIntoSpecifiedCalendar(int scIdx)
     if(user.getUserId() == scm.getSharedCalendarList()[scIdx].getMemberList()[0].getUserId())
         cout << choiceSpecifiedSharedCalendarAction[1];
     
+    for(int i = 2; i < 8; ++i)
+        cout << choiceSharedCalendarAction[i];
+
+
     cout << choiceSpecifiedSharedCalendarAction[2];
 
     string input;

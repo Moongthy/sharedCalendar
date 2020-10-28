@@ -2,10 +2,16 @@
 #ifndef __CALENDER__
 #define __CALENDER__
 
-#include<string>
-#include<vector>
-using std::vector;
-using std::string;
+#include <string>
+#include <vector>
+#include <algorithm>
+#include "strings.h"
+#include "./type/Date.h"
+#include "./type/Schedule.h"
+#include "../header/input/check.h"
+#include "./ReadFile.h"
+
+using namespace std;
 
 /**
  * 개인 캘린더 클래스 및 공유캘린더 부모 클래스
@@ -18,14 +24,17 @@ using std::string;
  */
 template <typename S, typename U, typename D> class Calendar{
 protected:
+    // 일정 목록
+    vector<Schedule> scheduleList;
+
+    int curr_year = 2020;
+    int curr_month = 10;
+    int maximum_id = 1;
     // 캘린더 id
     string calendarID;
 
     // 만든사람
     U administrator;
-
-    // 일정 목록
-    vector<S> scheduleList;
 public:
     /**
      *  개인 캘린더 생성자
@@ -52,10 +61,16 @@ public:
     U getCalendarAdministrator();
 
 /*************************일정 파트********************************/
+    check Check = check();
+    /**
+     *  일정 옵션 선택
+     */
+    void select_Schedules_option(U user);
+
     /**
      *  일정을 보여줌
      */
-    void show_Schedules();
+    void show_Schedules(int curr_year, int curr_month);
 
     /**
      *  새로운 일정을 일정목록에 추가함
@@ -64,19 +79,26 @@ public:
      *  @param endTime  일정 끝 시간
      *  @param content 일정 내용
      */
-    void addSchedule(D startDate, D endDate, string content);
+    void addSchedule(U user);
 
     /**
      *  일정을 수정함
      */
-    void modifySchedule();
+    void modify(U user);
+    void modifySchedule(U user);
+    int modifyTitle(S &s);
+    int modifySTime(S s);
+    int modifyETime(S s);
+    int modifyContent(S s);
+    int modifyLocation(S s);
+    int modifyDate(S s);
 
     /**
      *  일정을 삭제함.
      * 
      *  @param keyword  사용자가 입력한 문자열
      */
-    void deleteSchedule(string keyword);
+    void deleteSchedule();
 
     /**
      *  일정을 검색함.
@@ -84,14 +106,16 @@ public:
      *  @param keyword  검색한 문자열
      *  @return 검색한 일정 
      */
-    S& searchSchedule(string keyword);
+    void searchSchedule(U user);
 
     /**
      *  저번달, 다음달 일정을 보여줌
      */
-    void showNextMonthSchedules();
-    void showPrevMonthSchedules();
+    void showNextMonthSchedules(U user);
+    void showPrevMonthSchedules(U user);
 };
 
 #include"../source/Calendar.hpp"
+#include"../source/Schedule.hpp"
+#include "../source/ScheduleManager.hpp"
 #endif
