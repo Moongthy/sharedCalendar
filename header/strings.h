@@ -125,7 +125,7 @@ string addSchedulesString[10] = {
 };
 
 string modifySchedulesString[10] = {
-    "[일정 수정]\n수정할 일정 ID > ",
+    "[일정 수정] ",
     "제목 > ",
     "날짜 > ",
     "시작시간 > ",
