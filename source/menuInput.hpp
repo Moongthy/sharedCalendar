@@ -14,7 +14,7 @@ void MenuInput::mainMenu(){
 
     while(true){
 
-        int a , b , c = -1, d;
+        int a , b , c = -1;
 
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
@@ -123,6 +123,14 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
         return;
     }
 
+    // 공캘이 이미 있는 공캘이다?
+    if(stage == _SCNAME && c.totalCheck(input, stage, 0) && scm.searchSharedCalendarIdx(input) >= 0)
+    {
+        cout << err[0];
+        createNewSc(scInfo, stage);
+        return;
+    }
+
     if(!c.totalCheck(input, stage, 0)){
         cout << err[0];
         createNewSc(scInfo, stage);
@@ -206,6 +214,10 @@ int MenuInput::getIntoSpecifiedCalendar(int scIdx)
     if(user.getUserId() == scm.getSharedCalendarList()[scIdx].getMemberList()[0].getUserId())
         cout << choiceSpecifiedSharedCalendarAction[1];
     
+    for(int i = 2; i < 8; ++i)
+        cout << choiceSharedCalendarAction[i];
+
+
     cout << choiceSpecifiedSharedCalendarAction[2];
 
     string input;
