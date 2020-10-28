@@ -1,5 +1,6 @@
 
 /*************************일정 파트********************************/
+bool isNumber(const string& str);
 bool findCheck(string ss,string s);
 int titleVaild(string title);
 int dateVaild(string yymmdd);
@@ -24,8 +25,14 @@ int checkValidSelection(int boundary) {
                 // q에 대한 처리
             }
             else
-            {
-                selection = stoi(input);
+            {   
+                if(isNumber(input)) {
+                    selection = stoi(input);
+                } else {
+                    selection = -1;
+                    return selection;
+                }
+                
                 if (selection <= 0 || selection > boundary)
                 {
                     cout << err[0];
@@ -135,6 +142,7 @@ void Calendar<S, U, D>::addSchedule()
     do {
         cout << addSchedulesString[2];
         cin >> yymmdd;
+        cout << "debugging : "<< endl;
     } while(dateVaild(yymmdd) != 0);
     Date newD = Date(yymmdd);
 
@@ -254,8 +262,8 @@ int Calendar<S, U, D>::modifySTime(S s){
     if( ( select = hhmmVaild(hhmm) ) == 0) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
 		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
-        int hh = stoi(hhmm.substr(0,1));
-        int mm = stoi(hhmm.substr(2,3));
+        int hh = stoi(hhmm.substr(0,2));
+        int mm = stoi(hhmm.substr(2,2));
         s.setEndTime(hh*100+mm);
         return 0;
     } 
@@ -271,8 +279,8 @@ int Calendar<S, U, D>::modifyETime(S s){
     if( ( select = hhmmVaild(hhmm) ) == 0) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
 		hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
-        int hh = stoi(hhmm.substr(0,1));
-        int mm = stoi(hhmm.substr(2,3));
+        int hh = stoi(hhmm.substr(0,2));
+        int mm = stoi(hhmm.substr(2,2));
         s.setStartTime(hh*100+mm);
         return 0;
     }
@@ -310,6 +318,12 @@ int Calendar<S, U, D>::modifyLocation(S s) {
 1 : q 입력
 2~ : 오류 출력
 */
+bool isNumber(const string& str) {
+    for(char const &c : str) {
+        if(std::isdigit(c) == 0) return false;
+    }
+    return true;
+}
 bool findCheck(string ss, string s) {
     int it = ss.find(s);
     if(it == string::npos) {
@@ -337,53 +351,48 @@ int titleVaild(string title) {
     }
 }
 int dateVaild(string yymmdd) {
-    if((findCheck(yymmdd,"/") || findCheck(yymmdd,"-")) || yymmdd.length() >= 6) {
-        if(yymmdd.length() >= 6 && yymmdd.length() <=8) {
-            return 0;
+    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+	yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+
+    if(isNumber(yymmdd)) {
+        if(yymmdd.length() == 6) {
+            if( (1<= stoi(yymmdd.substr(2,2)) && stoi(yymmdd.substr(2,2)) <= 12) && (1<= stoi(yymmdd.substr(4,2)) && stoi(yymmdd.substr(4,2)) <= 31) ) {
+                //달이 1월부터 12월까지 날이 1일부터 31일까지..ㅠㅠ
+                return 0;
+            }
+        } else {
+            cout << err[0] << endl;
+            return 1;
         }
-    }
-    else if((yymmdd.length() < 6 && yymmdd.length() > 8)) {
         
-        cout << err[0] << endl;;
-        return 3;
-    }
-    else if( yymmdd.length() == 1 && yymmdd[0] == 'q') {
-        //q를 입력했을 때 행동 수행
-        //cout << "[날짜]에서 뒤로 갑니다.";
+    }else if(yymmdd.length() == 1 && yymmdd[0] == 'q') {
+        cout << "뒤로가기...이거 바꿔조" << endl;
         return 1;
-    }
-    else if(yymmdd.length() ==1 && yymmdd[0] == ' ') {
-        //공백을 입력했을 때 오류
+    } else {
         cout << err[0] << endl;
         return 2;
     }
 }
 int hhmmVaild(string hhmm) {
-    if(hhmm.length() == 4) {
-
-    }
-    else if(hhmm.length() == 5) {
-        if(hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':') {
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
+	hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+    if(isNumber(hhmm)) {
+        if(hhmm.length() == 4) {
+            if( (0<= stoi(hhmm.substr(0,2)) && stoi(hhmm.substr(0,2)) <= 23) && (0<= stoi(hhmm.substr(2,2)) && stoi(hhmm.substr(2,2)) <= 59) ) {
+                cout << "debugging : " << stoi(hhmm.substr(0,1)) <<",,,," << stoi(hhmm.substr(2,3)) << endl;
+                // 시침은 00부터 23월까지 분침은 00~59까지..ㅠㅠ
+                return 0;
+            }
+        } else {
+            cout << err[0] << endl;
+            return 1;
         }
-        else {
-
-        }
-    }
-    if(hhmm.length() > 5 || hhmm.length() < 4) {
-        cout << err[0] << endl;
-        return 2;
-    }//string::npos 이면은 못찾은거임
-    else if(findCheck(hhmm,"/") || findCheck(hhmm,"-") || hhmm.length() == 4 || hhmm.length() == 5) {
-        //10.21 / 9시 20분 마지막 수정 부분
-        return 0;
-    }
-    else if( hhmm.length() == 1 && hhmm[0] == 'q') {
-        //q를 입력했을 때 행동 수행
-        //cout << "[날짜]에서 뒤로 갑니다.";
+        
+    }else if(hhmm.length() == 1 && hhmm[0] == 'q') {
+        cout << "뒤로가기...이거 바꿔조2" << endl;
         return 1;
-    }
-    else if(hhmm.length() ==1 && hhmm[0] == ' ') {
-        //공백을 입력했을 때 오류
+    } else {
         cout << err[0] << endl;
         return 2;
     }

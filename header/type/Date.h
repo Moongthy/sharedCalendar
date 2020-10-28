@@ -14,7 +14,7 @@ public:
 	Date(string yymmdd) {
 		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
 		yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
-
+		
 		yy = stoi(yymmdd.substr(0,2));
 		mm = stoi(yymmdd.substr(2,2));
 		dd = stoi(yymmdd.substr(4,6));

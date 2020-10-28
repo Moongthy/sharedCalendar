@@ -15,7 +15,6 @@ using namespace std;
 int main(){
 
     // string a = "ans", b = "123";
-
     // User user = User(a, b);
     
     // SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
@@ -23,7 +22,6 @@ int main(){
     // MenuInput mi = MenuInput(user, scm);
 
     // mi.mainMenu();
-
     Users users = Users("ansrms", "1234");
 
     Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
