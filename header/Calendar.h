@@ -6,6 +6,8 @@
 #include "strings.h"
 #include "./type/Date.h"
 #include "./type/Schedule.h"
+#include "../header/input/check.h"
+
 using namespace std;
 
 /**
@@ -27,6 +29,7 @@ protected:
     
     int curr_year = 2020;
     int curr_month = 10;
+    int maximum_id = 1;
 
     // 만든사람
     U administrator;
@@ -66,7 +69,8 @@ public:
     U getCalendarAdministrator();
 
     /*************************일정 파트********************************/
-        
+    
+    check Check = check();
     /**
      *  일정 옵션 선택
      */
