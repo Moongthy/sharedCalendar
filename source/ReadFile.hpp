@@ -111,8 +111,6 @@ string ReadFile::getUserpassword(string userID)
     return password;   
 }
 
-
-
 void ReadFile::writeUserList(string id, string password, string name) {
     write.open("../data/UserList.txt", ios::app);
     write << id + separator + password + separator + name << endl;

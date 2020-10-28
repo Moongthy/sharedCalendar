@@ -3,8 +3,8 @@
 #ifndef __CHECK__
 #define __CHECK__
 
-#include<string>
-#include<algorithm>
+#include <string>
+#include <algorithm>
 #include"../strings.h"
 using std::string;
 
@@ -17,7 +17,6 @@ using std::string;
 
 class check{
 public:
-
     check(){ }
 
     // 뒤로가기 체크

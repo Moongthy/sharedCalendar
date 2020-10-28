@@ -101,8 +101,7 @@ string modifyScheduleOption[10] = {
     "3. 시작 시간\n",
     "4. 종료 시간\n",
     "5. 내용\n",
-    "6. 장소\n",
-    "> "
+    "6. 장소\n"
 };
 
 string myCalendar[10] = {
@@ -136,6 +135,12 @@ string modifySchedulesString[10] = {
     "일정 생성에 성공하였습니다.\n\n"
 };
 
+string searchSchedulesString[10] = {
+    "[일정 검색]\n검색어 입력 > ",
+    "[일정 검색 결과]\n",
+    "검색 결과가 없습니다.\n",
+};
+
 string ScheduleInfo[11] = {
     "제목 : ",
     "날짜 : ",
@@ -152,3 +157,4 @@ string ScheduleInfo[11] = {
 
 string line = "====================================================";
 string prompt = "> ";
+string noID = "없는 ID입니다.\n";
