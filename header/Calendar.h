@@ -143,7 +143,6 @@ public:
 
         string adminId = administrator.getUserId(); // 관리자 아이디
 
-
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(adminId, 0);
         vector<string> sName        = rf.readCalendar(adminId, 1);
@@ -169,7 +168,6 @@ public:
         ReadFile rf = ReadFile();
 
         // userId.txt 파일에서 읽어옮.
-
         vector<string> sId          = rf.readSCCalendar(calendarID, 0);
         vector<string> sName        = rf.readSCCalendar(calendarID, 1);
         vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
@@ -224,13 +222,13 @@ public:
     int modifyLocation(S s);
     int modifyDate(S s);
 
-    void deleteS();
+    void deleteS(U user);
     /**
      *  일정을 삭제함.
      * 
      *  @param keyword  사용자가 입력한 문자열
      */
-    void deleteSchedule();
+    void deleteSchedule(U user);
 
     /**
      *  일정을 검색함.

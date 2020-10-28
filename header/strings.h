@@ -136,6 +136,13 @@ string modifySchedulesString[10] = {
     "[다른 항목 수정] Y/N > "
 };
 
+string deleteString[10] = {
+    "[일정 삭제]\n",
+    "1. 삭제할 일정 선택\n",
+    "2. 이동할 연/월 선택\n",
+    "[다른 항목 삭제] Y/N > "
+};
+
 string searchSchedulesString[10] = {
     "[일정 검색]\n",
     "[일정 검색 결과]\n",

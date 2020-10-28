@@ -94,6 +94,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     case 0:
         /*캘린더 삭제 공유 캘린더 관리자만*/
         deleteCalendar();
+        break;
         //deleteSharedCalendar(user, scIdx);
     case 1:
         /* 일정생성 */
@@ -105,7 +106,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         break;
     case 3:
         /* 일정삭제 */
-        deleteSchedule();
+        deleteSchedule(user);
         break;
     case 4:
         /* 일정검색 */
@@ -217,6 +218,7 @@ Etime:
             goto Stime;
         }
     } while (hhmm_ahead_Vaild(startTime, endTime) != 0);
+    
 Location:
     do
     {
@@ -277,7 +279,7 @@ void Calendar<S, U, D>::modify(U user)
         {
             cout << prompt;
             cin >> yymmdd;
-        } while (yymm_dateVaild(yymmdd) == 0)
+        } while (yymm_dateVaild(yymmdd) == 0);
             //기획서는 yymm 으로 받는데,
             //따로 vaild 체크해주기위해서는 함수가 필요함.
             //지금 그 함수 만들러 갑니다.
@@ -306,7 +308,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
             if (Check.qCheck(input))
             {
                 // q 동작 수행
-                modify();
+                modify(user);
                 return;
             }
         } while (!Check.isOnlyNumber(input));
@@ -332,11 +334,11 @@ void Calendar<S, U, D>::modifySchedule(U user)
 
     // 포인터로 가져와야되지않나?
 
-    Schedule modSchedule = &scheduleList[modify_id];
+    Schedule modSchedule = scheduleList[modify_id];
 
     for (string s : modifyScheduleOption)
         cout << s;
-    int selection = checkValidSelection(6);
+    int selection = checkValidSelection(admin, 6);
 
     switch (selection)
     {
@@ -374,12 +376,12 @@ RetryYN:
     cin >> input;
     if (input == "Y" || input == "y")
     {
-        modifySchedule();
+        modifySchedule(user);
         return;
     }
     else if (input == "N" || input == "n")
     {
-        select_Schedules_option();
+        select_Schedules_option(user);
         return;
     }
     else
@@ -398,7 +400,7 @@ int Calendar<S, U, D>::modifyTitle(S &s)
     int select;
     if ((select = titleVaild(title)) == 0)
     {
-        s.setTitle(&title);
+        s.setTitle(title);
         return 0;
     }
     return select;
@@ -727,14 +729,14 @@ void deleteCalendar()
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::deleteS()
+void Calendar<S, U, D>::deleteS(U user)
 {
-    cout << modifyString[0];
+    cout << deleteString[0];
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
     cout << endl;
-    cout << modifyString[1];
-    cout << modifyString[2];
+    cout << deleteString[1];
+    cout << deleteString[2];
     string input;
     
     do
@@ -746,7 +748,7 @@ void Calendar<S, U, D>::deleteS()
     int input_int = stoi(input);
     if (input_int == 1)
     {
-        deleteSchedule();
+        deleteSchedule(user);
         return;
     }
     else if (input_int == 2)
@@ -756,14 +758,14 @@ void Calendar<S, U, D>::deleteS()
         //yyyymm 받아서
         do
         {
-            cout << promt;
+            cout << prompt;
             cin >> yymmdd;
-        } while (yymm_dateVaild(yymmdd) == 0)
+        } while (yymm_dateVaild(yymmdd) == 0);
             //기획서는 yymm 으로 받는데,
             //따로 vaild 체크해주기위해서는 함수가 필요함.
             //지금 그 함수 만들러 갑니다.
             int yy = stoi(yymmdd.substr(0, 2));
-            int mm = stoi(yymm)
+            int mm = stoi(yymmdd);
             //curr_year, month 변경 후
             //여기 해야됨
             deleteS(user);
@@ -772,7 +774,7 @@ void Calendar<S, U, D>::deleteS()
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::deleteSchedule()
+void Calendar<S, U, D>::deleteSchedule(U user)
 {
     int modify_id;
     string input;
@@ -780,12 +782,12 @@ void Calendar<S, U, D>::deleteSchedule()
     {
         do
         {
-            cout << modifySchedulesString[0];
+            cout << deleteString[0];
             cin >> input;
             if (Check.qCheck(input))
             {
                 // q 동작 수행
-                deleteS();
+                deleteS(user);
                 return;
             }
         } while (!Check.isOnlyNumber(input));
@@ -810,20 +812,21 @@ void Calendar<S, U, D>::deleteSchedule()
     } while (modify_id == -1);
 
     // 포인터로 가져와야되지않나?
-
+    // 삭제하는 부분
+    
     Schedule modSchedule = scheduleList[modify_id];
 
 deleteRetryYN:
-    cout << modifySchedulesString[8];
+    cout << deleteString[3];
     cin >> input;
     if (input == "Y" || input == "y")
     {
-        modifySchedule();
+        select_Schedules_option(user);
         return;
     }
     else if (input == "N" || input == "n")
     {
-        select_Schedules_option();
+        deleteSchedule(user);
         return;
     }
     else
@@ -849,7 +852,7 @@ SearchTryAgain:
     if (keyword.length() < 2)
     {
         cout << err[0];
-        goto TryAgain;
+        goto SearchTryAgain;
     }
     cout << searchSchedulesString[1];
     bool state = false;
