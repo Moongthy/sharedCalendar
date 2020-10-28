@@ -88,7 +88,6 @@ string calendarSelectionOption[10] = {
     "4. 일정 검색\n",
     "5. 이전 달 일정 보기\n",
     "6. 다음 달 일정 보기\n",
-    "> "
 };
 
 string makeScheduleOption[10] = {
@@ -108,6 +107,7 @@ string modifyScheduleOption[10] = {
 
 string myCalendar[10] = {
     "[개인 캘린더]\n"
+
 };
 
 string showSchedulesString[10] = {
@@ -122,5 +122,33 @@ string addSchedulesString[10] = {
     "종료시간 > ",
     "장소 > ",
     "내용 > ",
-    "일정 생성에 성공하였습니다.\n"
+    "일정 생성에 성공하였습니다.\n\n"
 };
+
+string modifySchedulesString[10] = {
+    "[일정 수정]\n수정할 일정 ID > ",
+    "제목 > ",
+    "날짜 > ",
+    "시작시간 > ",
+    "종료시간 > ",
+    "장소 > ",
+    "내용 > ",
+    "일정 생성에 성공하였습니다.\n\n"
+};
+
+string ScheduleInfo[11] = {
+    "제목 : ",
+    "날짜 : ",
+    "년 ",
+    "월 ",
+    "일 ",
+    "시작시간 : ",
+    "시 ",
+    "분 ",
+    "종료시간 : ",
+    "내용 : ",
+    "장소 : "
+};
+
+string line = "====================================================";
+string prompt = "> ";

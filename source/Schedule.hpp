@@ -11,6 +11,7 @@ int checkValidSelection(int boundary) {
     int selection;
     while (1)
     {
+        cout << prompt;
         cin >> input;
         if (input.length() != 1)
         {
@@ -28,6 +29,7 @@ int checkValidSelection(int boundary) {
                 if (selection <= 0 || selection > boundary)
                 {
                     cout << err[0];
+                    cout << calendarSelectionOption[7];
                 }
                 else 
                 {
@@ -42,7 +44,9 @@ template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option()
 {
     cout << myCalendar[0];
+    cout << line << endl;
     show_Schedules(2020, 10);
+    cout << line << endl;
 
     for(string s : calendarSelectionOption) cout << s;
     int selection = checkValidSelection(6);
@@ -91,22 +95,25 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
 
     if (scheduleList.size() != 0)
     {
+        bool check = false;
         for (int i = 0; i < scheduleList.size(); i++)
         {
             Date search = scheduleList[i].getDate();
             int s_yy = search.yy;
             int s_mm = search.mm;
             int s_dd = search.dd;
-            cout << s_yy << endl << s_mm << endl << s_dd << endl;
 
             if(s_yy == curr_year && s_mm == curr_month) {
-                cout << "제목 : " << scheduleList[i].getTitle() << endl;
-                cout << "날짜 : " << s_yy << "년 " << s_mm << "월 " << s_dd << "일" << endl;
-                cout << "시작시간 : " << scheduleList[i].getStartTime()%100 << "시 " << scheduleList[i].getStartTime()/100 << "분 " << endl;
-                cout << "종료시간 : " << scheduleList[i].getEndTime()%100 << "시 " << scheduleList[i].getEndTime()/100 << "분 "<< endl;
-                cout << "내용 : " << scheduleList[i].getContent() << endl;
-                cout << "장소 : " << scheduleList[i].getLocation() << endl;
+                check = true;
+                cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
+                cout << ScheduleInfo[1] << s_yy << ScheduleInfo[2] << s_mm << ScheduleInfo[3] << s_dd << ScheduleInfo[4] << endl;
+                cout << ScheduleInfo[5] << scheduleList[i].getStartTime()/100 << ScheduleInfo[6] << scheduleList[i].getStartTime()%100 << ScheduleInfo[7] << endl;
+                cout << ScheduleInfo[8] << scheduleList[i].getEndTime()/100 << ScheduleInfo[6] << scheduleList[i].getEndTime()%100 << ScheduleInfo[7] << endl;
+                cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+                cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
             }
+
+            if(!check) cout << showSchedulesString[0];
         }
     }
     else
@@ -154,13 +161,14 @@ void Calendar<S, U, D>::addSchedule()
 
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, 100);
     scheduleList.push_back(new_s);
+    system("cls");
     cout << addSchedulesString[7];
 }
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::modifySchedule()
 {
-    cout << "[일정 수정]\n수정할 일정 ID >";
+    cout << modifySchedulesString[0];
     string input;
     cin >> input;
 
@@ -214,6 +222,7 @@ void Calendar<S, U, D>::modifySchedule()
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyTitle(S &s){
+    cout << modifySchedulesString[1];
     string title;
     cin >> title;
     int select;
@@ -226,6 +235,7 @@ int Calendar<S, U, D>::modifyTitle(S &s){
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyDate(S &s){
+    cout << modifySchedulesString[2];
     string yymmdd;
     cin >> yymmdd;
     int select;
@@ -238,6 +248,7 @@ int Calendar<S, U, D>::modifyDate(S &s){
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifySTime(S s){
+    cout << modifySchedulesString[3];
     string hhmm;
     cin >> hhmm;
     int select;
@@ -254,6 +265,7 @@ int Calendar<S, U, D>::modifySTime(S s){
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyETime(S s){
+    cout << modifySchedulesString[4];
     string hhmm;
     cin >> hhmm;
     int select;
@@ -269,6 +281,7 @@ int Calendar<S, U, D>::modifyETime(S s){
 }
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyContent(S s){
+    cout << modifySchedulesString[6];
     string content;
     cin >> content;
     int select;
@@ -281,6 +294,7 @@ int Calendar<S, U, D>::modifyContent(S s){
 
 template<typename S, typename U, typename D>
 int Calendar<S, U, D>::modifyLocation(S s) {
+    cout << modifySchedulesString[5];
     string location;
     cin >> location;
     int select;
