@@ -161,7 +161,7 @@ string line = "====================================================";
 string prompt = "> ";
 string noID = "없는 ID입니다.\n";
 
-string modify[10] = {
+string modifyString[10] = {
     "[일정 수정]\n",
     "1. 수정할 일정 선택\n",
     "2. 이동할 연/월 선택\n"
