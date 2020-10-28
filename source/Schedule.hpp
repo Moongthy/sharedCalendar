@@ -193,12 +193,12 @@ Content:
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::modify()
 {
-    cout << modify[0];
+    cout << modifyString[0];
     cout << curr_year << ScheduleInfo[2] <<curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
     cout << endl;
-    cout << modify[1];
-    cout << modify[2];
+    cout << modifyString[1];
+    cout << modifyString[2];
     string input;
     do {
         cout << prompt;
@@ -210,7 +210,7 @@ void Calendar<S, U, D>::modify()
         return;
     }
     else if(input_int == 2) {
-        //yymm 받아서
+        //yyyymm 받아서
         //curr_year, month 변경 후
         modify();
         return;
