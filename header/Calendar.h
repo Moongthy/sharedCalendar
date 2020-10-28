@@ -145,11 +145,8 @@ public:
     {
         ReadFile rf = ReadFile();
 
-<<<<<<< HEAD
         string adminId = administrator.getUserId(); // 관리자 아이디
-=======
-        string adminId = administrator.getUserId() // 관리자 아이디
->>>>>>> a8a325921324f6ca2eea1f168ed1dfef6862b210
+
 
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(adminId, 0);
