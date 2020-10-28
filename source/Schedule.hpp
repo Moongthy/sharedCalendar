@@ -106,7 +106,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         break;
     case 3:
         /* 일정삭제 */
-        deleteSchedule();
+        deleteSchedule(user);
         break;
     case 4:
         /* 일정검색 */
@@ -782,7 +782,7 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     {
         do
         {
-            cout << modifySchedulesString[0];
+            cout << deleteString[0];
             cin >> input;
             if (Check.qCheck(input))
             {
@@ -817,7 +817,7 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     Schedule modSchedule = scheduleList[modify_id];
 
 deleteRetryYN:
-    cout << modifySchedulesString[8];
+    cout << deleteString[3];
     cin >> input;
     if (input == "Y" || input == "y")
     {
@@ -826,7 +826,7 @@ deleteRetryYN:
     }
     else if (input == "N" || input == "n")
     {
-        deleteSchedule();
+        deleteSchedule(user);
         return;
     }
     else
