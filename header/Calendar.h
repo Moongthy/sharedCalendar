@@ -25,8 +25,8 @@ protected:
     // 일정 목록
     vector<Schedule> scheduleList;
     
-    int curr_year;
-    int curr_month;
+    int curr_year = 2020;
+    int curr_month = 10;
 
     // 만든사람
     U administrator;

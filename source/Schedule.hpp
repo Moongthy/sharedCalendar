@@ -29,7 +29,6 @@ int checkValidSelection(int boundary) {
                 if (selection <= 0 || selection > boundary)
                 {
                     cout << err[0];
-                    cout << calendarSelectionOption[7];
                 }
                 else 
                 {
@@ -50,7 +49,7 @@ void Calendar<S, U, D>::select_Schedules_option()
 
     for(string s : calendarSelectionOption) cout << s;
     int selection = checkValidSelection(6);
-
+    system("cls");
     switch (selection)
     {
     case 1:
@@ -78,6 +77,7 @@ void Calendar<S, U, D>::select_Schedules_option()
         showNextMonthSchedules();
         break; 
     default:
+        cout << err[0];
         /* 오류 */
         break;
     }
@@ -112,7 +112,6 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
                 cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
                 cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
             }
-
             if(!check) cout << showSchedulesString[0];
         }
     }
@@ -443,12 +442,14 @@ void Calendar<S, U, D>::showNextMonthSchedules()
     else {
         if(curr_month == 12) {
             curr_month = 1;
+            curr_year++;
         }
         else {
             curr_month++;
         }
-        curr_year++;
-        show_Schedules(curr_year, curr_month);
+        cout << curr_year << curr_month << endl;
+        select_Schedules_option();
+        //show_Schedules(curr_year, curr_month);
     }
 }
 
@@ -461,11 +462,13 @@ void Calendar<S, U, D>::showPrevMonthSchedules()
     else {
         if(curr_month == 1) {
             curr_month = 12;
+            curr_year--;
         }
         else {
             curr_month--;
         }
-        curr_year--;
-        show_Schedules(curr_year, curr_month);
+        cout << curr_year << endl << curr_month << endl;
+        select_Schedules_option();
+        //show_Schedules(curr_year, curr_month);
     }
 }
