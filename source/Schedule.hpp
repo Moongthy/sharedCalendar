@@ -16,7 +16,7 @@ int checkValidSelection(bool admin, int boundary)
     string input;
     int selection;
     check c = check();
-    bool status = flse;
+    bool status = false;
     while (1)
     {
         if(status) cout << err[0];
@@ -316,8 +316,11 @@ void Calendar<S, U, D>::modify(U user)
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
+        if (0 <= yy && yy < 70) yy += 2000;
+		else if (70 <= yy && yy < 100) yy += 1900;
+        curr_year = yy;
+        curr_month = mm;
 
-        //curr_month +=1;
         modify(user);
         return;
     }
@@ -394,7 +397,10 @@ ModifyRetry:
         /* 장소 수정 */
         modifyLocation(modify_id);
         break;
-    default:
+    default: 
+        {
+            cout << err[0];
+        }
         /* 오류 */
         break;
     }
