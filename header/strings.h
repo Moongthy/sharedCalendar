@@ -152,7 +152,7 @@ string searchSchedulesString[10] = {
     "검색어 입력 > "
 };
 
-string ScheduleInfo[11] = {
+string ScheduleInfo[12] = {
     "제목 : ",
     "날짜 : ",
     "년 ",
@@ -163,7 +163,8 @@ string ScheduleInfo[11] = {
     "분 ",
     "종료시간 : ",
     "내용 : ",
-    "장소 : "
+    "장소 : ",
+    "ID : "
 };
 
 string line = "====================================================";

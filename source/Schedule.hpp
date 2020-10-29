@@ -51,7 +51,6 @@ int checkValidSelection(bool admin, int boundary)
                     }
                     cout << err[0];
                 }
-
             }
         }
     }
@@ -60,27 +59,35 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option(U user)
 {
-    if(!isShared) cout << myCalendar[0];
-    else cout << myCalendar[1];
+    if (!isShared)
+        cout << myCalendar[0];
+    else
+        cout << myCalendar[1];
 
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
 
-    if(isShared && user.getUserId() == getCalendarAdministrator().getUserId()) {
+    if (isShared && user.getUserId() == getCalendarAdministrator().getUserId())
+    {
         admin = true;
     }
 
-    for(int i = 0; i<8; i++) {
-        if(i==1) {
-            if(admin) cout << calendarSelectionOption[i];
+    for (int i = 0; i < 8; i++)
+    {
+        if (i == 1)
+        {
+            if (admin)
+                cout << calendarSelectionOption[i];
         }
-        else {
+        else
+        {
             cout << calendarSelectionOption[i];
         }
     }
 
     int selection = checkValidSelection(admin, 6);
-    if(selection == -2) {
+    if (selection == -2)
+    {
         // q기능 수행
         // 캘린더 선택으로 가야함
     }
@@ -90,10 +97,12 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     {
     case 0:
         /*캘린더 삭제 공유 캘린더 관리자만*/
-        if(admin) {
+        if (admin)
+        {
             deleteCalendar();
         }
-        else {
+        else
+        {
             cout << err[0];
         }
         break;
@@ -145,6 +154,7 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
             {
                 check = true;
                 cout << line << endl;
+                cout << ScheduleInfo[11] << scheduleList[i].getID() << endl;
                 cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
                 cout << ScheduleInfo[1] << s_yy << ScheduleInfo[2] << s_mm << ScheduleInfo[3] << s_dd << ScheduleInfo[4] << endl;
                 cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
@@ -227,7 +237,7 @@ Etime:
     endTime.erase(std::remove(endTime.begin(), endTime.end(), '-'), endTime.end());
     endTime.erase(std::remove(endTime.begin(), endTime.end(), ':'), endTime.end());
     endTime.erase(std::remove(endTime.begin(), endTime.end(), '/'), endTime.end());
-    
+
 Location:
     do
     {
@@ -271,7 +281,8 @@ void Calendar<S, U, D>::modify(U user)
     {
         cout << prompt;
         getline(cin, input);
-        if(Check.qCheck(input)) {
+        if (Check.qCheck(input))
+        {
             system("cls");
             select_Schedules_option(user);
             return;
@@ -291,7 +302,8 @@ void Calendar<S, U, D>::modify(U user)
         {
             cout << prompt;
             getline(cin, yymm);
-            if(Check.qCheck(yymm)) {
+            if (Check.qCheck(yymm))
+            {
                 system("cls");
                 modify(user);
                 return;
@@ -347,7 +359,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
         }
 
     } while (modify_id == -1);
-    
+
 ModifyRetry:
     for (string s : modifyScheduleOption)
         cout << s;
@@ -459,7 +471,7 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(),hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(), hhmm)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -554,7 +566,8 @@ bool boundaryCheck(string ss, int boundary)
 
 int titleVaild(string title)
 {
-    if(findCheck(title, "$")) {
+    if (findCheck(title, "$"))
+    {
         cout << err[0];
         return 2;
     }
@@ -584,52 +597,58 @@ int titleVaild(string title)
 
 int dateVaild(string yymmdd)
 {
-    if(findCheck(yymmdd, "$")) {
+    if (findCheck(yymmdd, "$") || yymmdd.length() < 6 || yymmdd.length() == 7 || yymmdd.length() > 8)
+    {
+        cout << err[0];
+        return 2;
+    }
+
+    if (yymmdd.length() == 8 && !((yymmdd[2] == '-' || yymmdd[2] == '/') && (yymmdd[5] == '-' || yymmdd[5] == '/')))
+    {
         cout << err[0];
         return 2;
     }
 
     check C = check();
-    yymmdd.at(0);
-    if( yymmdd.length() >= 6 && yymmdd.length() <=8){
-        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) && (!C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1))))) {
-            cout << err[0] << "molly";
-            return 2;
-        }
-        else {
-            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
-            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
-            if (yymmdd.length() == 6)
-            {
-                if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12) && (1 <= stoi(yymmdd.substr(4, 2)) && stoi(yymmdd.substr(4, 2))) < 31)
-                {
-                    return 0;
-                }
-                else
-                {
-                    cout << err[0];
-                    return 1;
-                }
-            }
-        }
+
+    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+
+    if (!C.isOnlyNumber(yymmdd) || yymmdd.length() != 6)
+    {
+        cout << err[0];
+        return 2;
     }
-    return 3;
+
+    int mm = stoi(yymmdd.substr(2, 2));
+    int dd = stoi(yymmdd.substr(4, 2));
+    if (mm < 1 || mm > 12 || dd < 1 || dd > 31)
+    {
+        cout << err[0];
+        return 1;
+    }
+
+    return 0;
 }
 
 int yymm_dateVaild(string yymmdd)
 {
-    if(findCheck(yymmdd, "$")) {
+    if (findCheck(yymmdd, "$"))
+    {
         cout << err[0];
         return 2;
     }
     check C = check();
     yymmdd.at(0);
-    if( yymmdd.length() >= 4 && yymmdd.length() <=5){
-        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
+    if (yymmdd.length() >= 4 && yymmdd.length() <= 5)
+    {
+        if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
+        {
             cout << err[0];
             return 2;
         }
-        else {
+        else
+        {
             yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
             yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
             if (yymmdd.length() == 4)
@@ -649,79 +668,86 @@ int yymm_dateVaild(string yymmdd)
     return 3;
 }
 int hhmmVaild(string hhmm)
-{   
-    if(findCheck(hhmm, "$")) {
+{
+    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 8)
+    {
         cout << err[0];
         return 2;
     }
-    check C = check();
-    if(hhmm.length() == 4 || hhmm.length() == 5) {
-        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
-        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
-        hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
-        if(C.isOnlyNumber(hhmm)) {
-            if(hhmm.length() == 4 ) {
-                int hh = stoi(hhmm.substr(0,2));
-                int mm = stoi(hhmm.substr(2,2));
-                if( 0<=hh&&hh<=23 && 0<=mm&&mm<=59) {
-                    return 0;
-                }
-            }
-        }
+
+    if ( hhmm.length() == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')) )
+    {
+        cout << err[0];
+        return 2;
     }
-    cout << err[0];
-    return 2;
+
+    check C = check();
+
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
+
+    if (!C.isOnlyNumber(hhmm) || hhmm.length() != 4)
+    {
+        cout << err[0];
+        return 2;
+    }
+
+    int hh = stoi(hhmm.substr(0, 2));
+    int mm = stoi(hhmm.substr(2, 2));
+    if (mm < 0 || mm > 59 || hh < 0 || hh > 23)
+    {
+        cout << err[0];
+        return 1;
+    }
+
+    return 0;
 }
 
 int hhmm_ahead_Vaild(int startTime, string hhmm)
 {
-    if(findCheck(hhmm, "$")) {
+    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 8)
+    {
         cout << err[0];
         return 2;
     }
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
-    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+
+    if (hhmm.length() == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')))
+    {
+        cout << err[0];
+        return 2;
+    }
 
     check C = check();
-    if (C.isOnlyNumber(hhmm))
-    {
-        if (hhmm.length() == 4)
-        {
-            if ((0 <= stoi(hhmm.substr(0, 2)) && stoi(hhmm.substr(0, 2)) <= 23) && (0 <= stoi(hhmm.substr(2, 2)) && stoi(hhmm.substr(2, 2)) <= 59))
-            {
-                int int_hhmm = stoi(hhmm);
-                //cout << "debugging : " << stoi(hhmm.substr(0,2)) <<",,,," << stoi(hhmm.substr(2,3)) << endl;
-                // 시침은 00부터 23월까지 분침은 00~59까지..ㅠㅠ
-                if (startTime > int_hhmm)
-                {
-                    cout << err[0];
-                    return 3;
-                }
-                return 0;
-            }
-        }
-        else
-        {
-            cout << err[0];
-            return 1;
-        }
-    }
-    else if (C.qCheck(hhmm))
-    {
-        //cout << "뒤로가기...이거 바꿔조2" << endl;
-        return 1;
-    }
-    else
+
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
+    hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
+
+    if (!C.isOnlyNumber(hhmm) || hhmm.length() != 4)
     {
         cout << err[0];
         return 2;
     }
+
+    int hh = stoi(hhmm.substr(0, 2));
+    int mm = stoi(hhmm.substr(2, 2));
+    if (mm < 1 || mm > 59 || hh < 0 || hh > 23)
+    {
+        cout << err[0];
+        return 1;
+    }
+    if ( startTime > hh*100+mm ) {
+        cout << err[0];
+        return 2;
+    }
+    return 0;
 }
 
 int contentVaild(string contents)
 {
-    if(findCheck(contents, "$") || contents.length() > 100) {
+    if (findCheck(contents, "$") || contents.length() > 100)
+    {
         cout << err[0];
         return 2;
     }
@@ -752,12 +778,13 @@ void Calendar<S, U, D>::deleteS(U user)
     {
         cout << prompt;
         getline(cin, input);
-        if(Check.qCheck(input)) {
+        if (Check.qCheck(input))
+        {
             select_Schedules_option(user);
             return;
         }
     } while (!Check.numberCheck(input, 2));
-    
+
     int input_int = stoi(input);
     if (input_int == 1)
     {
@@ -767,7 +794,7 @@ void Calendar<S, U, D>::deleteS(U user)
     else if (input_int == 2)
     {
         string yymm;
-        
+
         do
         {
             cout << prompt;
@@ -778,7 +805,7 @@ void Calendar<S, U, D>::deleteS(U user)
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
-        
+
         deleteS(user);
         return;
     }
@@ -794,7 +821,8 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         int tmp = 0;
         do
         {
-            if(tmp > 0) cout << err[0];
+            if (tmp > 0)
+                cout << err[0];
             cout << deleteString[0];
             cout << prompt;
             getline(cin, input);
