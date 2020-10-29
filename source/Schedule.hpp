@@ -69,10 +69,6 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     /*
         시간 설정
     */
-    time_t curTime = time(NULL);
-    struct tm *pLocal = localtime(&curTime);
-    curr_year = pLocal->tm_year + 1900;
-    curr_month = pLocal->tm_mon+1;
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
 
