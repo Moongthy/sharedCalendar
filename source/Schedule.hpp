@@ -654,7 +654,7 @@ int yymm_dateVaild(string yymmdd)
         return 2;
     }
     check C = check();
-    yymmdd.at(0);
+
     if (yymmdd.length() >= 4 && yymmdd.length() <= 5)
     {
         if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
