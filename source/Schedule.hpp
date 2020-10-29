@@ -682,7 +682,7 @@ int yymm_dateVaild(string yymmdd)
 }
 int hhmmVaild(string hhmm)
 {
-    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 8)
+    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 5)
     {
         cout << err[0];
         return 2;
@@ -719,7 +719,7 @@ int hhmmVaild(string hhmm)
 
 int hhmm_ahead_Vaild(int startTime, string hhmm)
 {
-    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 8)
+    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 5)
     {
         cout << err[0];
         return 2;
@@ -745,7 +745,7 @@ int hhmm_ahead_Vaild(int startTime, string hhmm)
 
     int hh = stoi(hhmm.substr(0, 2));
     int mm = stoi(hhmm.substr(2, 2));
-    if (mm < 1 || mm > 59 || hh < 0 || hh > 23)
+    if (mm < 0 || mm > 59 || hh < 0 || hh > 23)
     {
         cout << err[0];
         return 1;
