@@ -108,7 +108,7 @@ public:
             
             rf.writeSchedule(
                 administrator.getUserId(),
-                idx,
+                to_string(idx),
                 s.getTitle(),
                 d,
                 to_string(s.getStartTime()),

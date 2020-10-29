@@ -122,19 +122,12 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage == 0) return;
 
     if(stage == 5){
-<<<<<<< HEAD
-        int yy = scm.getSharedCalendarList()[0].curr_year;
-        int mm = scm.getSharedCalendarList()[0].curr_month;
-        int dd = scm.getSharedCalendarList()[0].curr_day;
-        Date startDate = Date(yy, mm, dd);\
-=======
 
         int yy = scm.getSharedCalendarList()[0].curr_year;
         int mm = scm.getSharedCalendarList()[0].curr_month;
         int dd = scm.getSharedCalendarList()[0].curr_day;
         
         Date startDate = Date(yy, mm, dd);
->>>>>>> ca8610318a82287021e7014e9282e4e7ccf6b356
 
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate,
          Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
