@@ -269,6 +269,19 @@ Content:
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
     maximum_id++;
     scheduleList.push_back(new_s);
+
+    /*******************스케줄 저장 실험*ㅑ****************ㅑ***********/
+    // ReadFile rf = ReadFile();
+    // rf.writeSchedule(
+    //     administrator.getUserId(),
+    //     title,
+    //     yymmdd,
+    //     startTime,
+    //     endTime,
+    //     location,
+    //     content
+    // );
+
     system("cls");
     cout << addSchedulesString[7];
     select_Schedules_option(user);
