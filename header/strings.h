@@ -82,6 +82,7 @@ string delSharedCalenadr[10]= {
 
 string calendarSelectionOption[10] = {
     "[캘린더 기능 선택]\n",
+    "0. 캘린더 삭제\n",
     "1. 일정 생성\n",
     "2. 일정 수정\n",
     "3. 일정 삭제\n"
@@ -105,8 +106,8 @@ string modifyScheduleOption[10] = {
 };
 
 string myCalendar[10] = {
-    "[개인 캘린더]\n"
-
+    "[개인 캘린더]\n",
+    "[공유 캘린더]\n"
 };
 
 string showSchedulesString[10] = {

@@ -51,37 +51,37 @@ public :
         return title;
     }
     void setTitle(string title) {
-        title = title;
+        this -> title = title;
     }
     Date getDate() {
         return date;
     }
     void setDate(Date date) {
-        date = date;
+        this -> date = date;
     }
     int getStartTime(){
         return startTime;
     }
     void setStartTime(int startTime) {
-        startTime = startTime;
+        this -> startTime = startTime;
     }
     int getEndTime(){
         return endTime;
     }
     void setEndTime(int endTime) {
-        endTime = endTime;
+        this -> endTime = endTime;
     }
     string getContent(){
         return content;
     }
     void setContent(string content) {
-        content = content;
+        this -> content = content;
     }
     string getLocation() {
         return location;
     }
     void setLocation(string location) {
-        location = location;
+        this -> location = location;
     }
     int getID() {
         return id;

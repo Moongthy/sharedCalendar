@@ -60,27 +60,41 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option(U user)
 {
-    cout << myCalendar[0];
+    if(!isShared) cout << myCalendar[1];
+    else cout << myCalendar[0];
+
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
 
-    if (user.getUserId() == getCalendarAdministrator().getUserId())
-    {
-        cout << choiceSpecifiedSharedCalendarAction[1];
+    if(isShared && user.getUserId() == getCalendarAdministrator().getUserId()) {
         admin = true;
     }
 
-    for (string s : calendarSelectionOption)
-        cout << s;
+    for(int i = 0; i<8; i++) {
+        if(i==1) {
+            if(admin) cout << calendarSelectionOption[i];
+        }
+        else {
+            cout << calendarSelectionOption[i];
+        }
+    }
 
     int selection = checkValidSelection(admin, 6);
+    if(selection == -2) {
+        // q기능 수행
+    }
 
     system("cls");
     switch (selection)
     {
     case 0:
         /*캘린더 삭제 공유 캘린더 관리자만*/
-        deleteCalendar();
+        if(admin) {
+            deleteCalendar();
+        }
+        else {
+            cout << err[0];
+        }
         break;
     case 1:
         /* 일정생성 */
@@ -134,8 +148,8 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
                 cout << ScheduleInfo[1] << s_yy << ScheduleInfo[2] << s_mm << ScheduleInfo[3] << s_dd << ScheduleInfo[4] << endl;
                 cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
                 cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
-                cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
                 cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+                cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
                 cout << line << endl;
             }
         }
@@ -163,7 +177,7 @@ Title:
     do
     {
         cout << addSchedulesString[1];
-        cin >> title;
+        getline(cin, title);
         if (Check.qCheck(title))
         {
             select_Schedules_option(user);
@@ -217,7 +231,7 @@ Location:
     do
     {
         cout << addSchedulesString[5];
-        cin >> location;
+        getline(cin, location);
         if (Check.qCheck(location))
         {
             goto Etime;
@@ -228,7 +242,7 @@ Content:
     do
     {
         cout << addSchedulesString[6];
-        cin >> content;
+        getline(cin, content);
         if (Check.qCheck(content))
         {
             goto Location;
@@ -239,6 +253,7 @@ Content:
     maximum_id++;
     scheduleList.push_back(new_s);
     system("cls");
+    cin.ignore();
     cout << addSchedulesString[7];
     select_Schedules_option(user);
 }
@@ -321,11 +336,9 @@ void Calendar<S, U, D>::modifySchedule(U user)
         }
 
     } while (modify_id == -1);
-
-    // 포인터로 가져와야되지않나?
-
-    //Schedule modSchedule = scheduleList[modify_id];
-
+    cin.ignore();
+    
+ModifyRetry:
     for (string s : modifyScheduleOption)
         cout << s;
     int selection = checkValidSelection(admin, 6);
@@ -334,27 +347,27 @@ void Calendar<S, U, D>::modifySchedule(U user)
     {
     case 1:
         /* 제목수정 */
-        modifyTitle(scheduleList[modify_id]);
+        modifyTitle(modify_id);
         break;
     case 2:
         /* 날짜수정 */
-        modifyDate(scheduleList[modify_id]);
+        modifyDate(modify_id);
         break;
     case 3:
         /* 시작시간 수정 */
-        modifySTime(scheduleList[modify_id]);
+        modifySTime(modify_id);
         break;
     case 4:
         /* 종료시간 수정 */
-        modifyETime(scheduleList[modify_id]);
+        modifyETime(modify_id);
         break;
     case 5:
         /* 내용 수정 */
-        modifyContent(scheduleList[modify_id]);
+        modifyContent(modify_id);
         break;
     case 6:
         /* 장소 수정 */
-        modifyLocation(scheduleList[modify_id]);
+        modifyLocation(modify_id);
         break;
     default:
         /* 오류 */
@@ -366,11 +379,14 @@ RetryYN:
     cin >> input;
     if (input == "Y" || input == "y")
     {
-        modifySchedule(user);
-        return;
+        cin.ignore();
+        system("cls");
+        goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
+        cin.ignore();
+        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -382,7 +398,7 @@ RetryYN:
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyTitle(S &s)
+int Calendar<S, U, D>::modifyTitle(int mod_id)
 {
     cout << modifySchedulesString[1];
     string title;
@@ -390,14 +406,14 @@ int Calendar<S, U, D>::modifyTitle(S &s)
     int select;
     if ((select = titleVaild(title)) == 0)
     {
-        s.setTitle(title);
+        scheduleList[mod_id].setTitle(title);
         return 0;
     }
     return select;
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyDate(S s)
+int Calendar<S, U, D>::modifyDate(int mod_id)
 {
     cout << modifySchedulesString[2];
     string yymmdd;
@@ -406,13 +422,13 @@ int Calendar<S, U, D>::modifyDate(S s)
     if ((select = dateVaild(yymmdd)) == 0)
     {
         Date new_date = Date(yymmdd);
-        s.setDate(new_date);
+        scheduleList[mod_id].setDate(new_date);
     }
     return select;
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifySTime(S s)
+int Calendar<S, U, D>::modifySTime(int mod_id)
 {
     cout << modifySchedulesString[3];
     string hhmm;
@@ -423,17 +439,15 @@ int Calendar<S, U, D>::modifySTime(S s)
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         int hh = stoi(hhmm.substr(0, 2));
-        cout << "####" << hh << endl;
         int mm = stoi(hhmm.substr(2, 2));
-        cout << "####" << mm << endl;
-        s.setEndTime(hh * 100 + mm);
+        scheduleList[mod_id].setEndTime(hh * 100 + mm);
         return 0;
     }
     return select;
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyETime(S s)
+int Calendar<S, U, D>::modifyETime(int mod_id)
 {
     cout << modifySchedulesString[4];
     string hhmm;
@@ -445,13 +459,13 @@ int Calendar<S, U, D>::modifyETime(S s)
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         int hh = stoi(hhmm.substr(0, 2));
         int mm = stoi(hhmm.substr(2, 2));
-        s.setStartTime(hh * 100 + mm);
+        scheduleList[mod_id].setStartTime(hh * 100 + mm);
         return 0;
     }
     return select;
 }
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyContent(S s)
+int Calendar<S, U, D>::modifyContent(int mod_id)
 {
     cout << modifySchedulesString[6];
     string content;
@@ -459,14 +473,14 @@ int Calendar<S, U, D>::modifyContent(S s)
     int select;
     if ((select = contentVaild(content)) == 0)
     {
-        s.setContent(content);
+        scheduleList[mod_id].setContent(content);
         return 0;
     }
     return select;
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::modifyLocation(S s)
+int Calendar<S, U, D>::modifyLocation(int mod_id)
 {
     cout << modifySchedulesString[5];
     string location;
@@ -474,7 +488,7 @@ int Calendar<S, U, D>::modifyLocation(S s)
     int select;
     if ((select = contentVaild(location)) == 0)
     {
-        s.setLocation(location);
+        scheduleList[mod_id].setLocation(location);
         return 0;
     }
     return select;
@@ -623,7 +637,7 @@ int yymm_dateVaild(string yymmdd)
     }
 }
 int hhmmVaild(string hhmm)
-{   //12:10 or 1210 // 1::1 ->11
+{   
     check C = check();
     if(hhmm.length() == 4 || hhmm.length() == 5) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
@@ -842,8 +856,8 @@ SearchTryAgain:
             cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
             cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
             cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
-            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
             cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
             cout << line << endl;
         }
     }
