@@ -34,6 +34,8 @@ protected:
     // 캘린더 id
     string calendarID;
 
+    bool isShared = false;
+
     // 만든사람
     U administrator;
 public:
