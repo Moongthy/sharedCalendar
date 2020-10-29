@@ -26,7 +26,7 @@ template <typename S, typename U, typename D> class Calendar
 {
 protected:
     // 일정 목록
-    bool isShared = false;
+    bool isShared = true;
     vector<Schedule> scheduleList;
     int curr_year = 2020;
     int curr_month = 10;
@@ -214,13 +214,6 @@ public:
      */
     void modify(U user);
     void modifySchedule(U user);
-    // int modifyTitle(Schedule &s);
-    // int modifySTime(S &s);
-    // int modifyETime(S &s);
-    // int modifyContent(S &s);
-    // int modifyLocation(S &s);
-    // int modifyDate(S &s);
-
     int modifyTitle(int mod_id);
     int modifySTime(int mod_id);
     int modifyETime(int mod_id);
