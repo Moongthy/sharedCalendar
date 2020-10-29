@@ -726,7 +726,7 @@ int hhmm_ahead_Vaild(string startTime, string hhmm)
 
 int contentVaild(string contents)
 {
-    if(findCheck(contents, "$") || contents.length() > 100)) {
+    if(findCheck(contents, "$") || contents.length() > 100) {
         cout << err[0];
         return 2;
     }
