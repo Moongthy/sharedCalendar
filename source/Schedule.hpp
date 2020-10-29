@@ -297,7 +297,8 @@ void Calendar<S, U, D>::modify(U user)
             select_Schedules_option(user);
             return;
         }
-    } while (!Check.numberCheck(input, 2));
+    } while (!(input=="1" || input =="2"));
+
     int input_int = stoi(input);
     if (input_int == 1)
     {
@@ -318,7 +319,8 @@ void Calendar<S, U, D>::modify(U user)
                 modify(user);
                 return;
             }
-        } while (yymm_dateVaild(yymm) == 0);
+        } while (yymm_dateVaild(yymm) != 0);
+
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
@@ -660,7 +662,7 @@ int yymm_dateVaild(string yymmdd)
         return 2;
     }
     check C = check();
-    yymmdd.at(0);
+
     if (yymmdd.length() == 4 || yymmdd.length() == 5)
     {
         if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
@@ -686,6 +688,7 @@ int yymm_dateVaild(string yymmdd)
             }
         }
     }
+    cout << err[0];
     return 3;
 }
 int hhmmVaild(string hhmm)
