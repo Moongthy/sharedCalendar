@@ -10,6 +10,7 @@
 #include "./type/Schedule.h"
 #include "../header/input/check.h"
 #include "./ReadFile.h"
+#include <time.h>
 
 using namespace std;
 
@@ -28,8 +29,8 @@ protected:
     // 일정 목록
     bool isShared = true;
     vector<Schedule> scheduleList;
-    int curr_year = 2020;
-    int curr_month = 10;
+    int curr_year;
+    int curr_month;
     int maximum_id = 1;
     // 캘린더 id
     string calendarID;
@@ -45,7 +46,7 @@ public:
      * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
-    Calendar(U user); 
+    Calendar(U user);
 
     /**
      *  공유 캘린더 생성자에서 호출될 생성자

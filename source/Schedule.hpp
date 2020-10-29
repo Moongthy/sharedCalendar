@@ -66,7 +66,9 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         cout << myCalendar[0];
     else
         cout << myCalendar[1];
-
+    /*
+        시간 설정
+    */
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
 
