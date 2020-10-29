@@ -866,21 +866,21 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     string input;
     do
     {
-        int tmp = 0;
+        bool status = false;
         do
         {
-            if (tmp > 0)
-                cout << err[0];
+            if (status) cout << err[0];
+            status = true;
             cout << deleteString[0];
             cout << prompt;
             getline(cin, input);
             if (Check.qCheck(input))
             {
+                system("cls");
                 deleteS(user);
                 return;
             }
-            tmp++;
-        } while (!Check.isOnlyNumber(input));
+        } while (!Check.isOnlyNumber(input) || input == "\n");
 
         int input_id = stoi(input);
         modify_id = -1;
@@ -898,7 +898,6 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         {
             cout << noID;
         }
-
     } while (modify_id == -1);
 
 deleteRetryYN:
