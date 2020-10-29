@@ -16,11 +16,8 @@ int checkValidSelection(bool admin, int boundary)
     string input;
     int selection;
     check c = check();
-    bool status = false;
     while (1)
     {
-        if(status) cout << err[0];
-        status = true;
         cout << prompt;
         getline(cin, input);
         if (input.length() != 1)
@@ -44,6 +41,9 @@ int checkValidSelection(bool admin, int boundary)
                         {
                             return selection;
                         }
+                        else {
+                            cout << err[0];
+                        }
                     }
                     else
                     {
@@ -51,7 +51,12 @@ int checkValidSelection(bool admin, int boundary)
                         {
                             return selection;
                         }
+                        else {
+                            cout << err[0];
+                        }
                     }
+                }
+                else {
                     cout << err[0];
                 }
             }
@@ -66,9 +71,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         cout << myCalendar[0];
     else
         cout << myCalendar[1];
-    /*
-        시간 설정
-    */
+
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
 
@@ -96,6 +99,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         return;
         // q기능 수행
         // 캘린더 선택으로 가야함
+        return;
     }
 
     system("cls");
@@ -818,16 +822,12 @@ void Calendar<S, U, D>::deleteS(U user)
         getline(cin, input);
         if (Check.qCheck(input))
         {
+            system("cls");
             select_Schedules_option(user);
             return;
         }
-    } while (!Check.numberCheck(input, 2));
-    int selection = checkValidSelection(admin, 6);
-    if (selection == -2)
-    {
-        // q기능 수행
-        // 캘린더 선택으로 가야함
-    }
+    } while (!(input=="1" || input =="2"));
+
     int input_int = stoi(input);
     if (input_int == 1)
     {
@@ -836,13 +836,19 @@ void Calendar<S, U, D>::deleteS(U user)
     }
     else if (input_int == 2)
     {
+        cout << modifyString[3];
         string yymm;
-
         do
         {
             cout << prompt;
             getline(cin, yymm);
-        } while (yymm_dateVaild(yymm) == 0);
+            if (Check.qCheck(yymm))
+            {
+                system("cls");
+                deleteS(user);
+                return;
+            }
+        } while (yymm_dateVaild(yymm) != 0);
 
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
@@ -864,21 +870,21 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     string input;
     do
     {
-        int tmp = 0;
+        bool status = false;
         do
         {
-            if (tmp > 0)
-                cout << err[0];
+            if (status) cout << err[0];
+            status = true;
             cout << deleteString[0];
             cout << prompt;
             getline(cin, input);
             if (Check.qCheck(input))
             {
+                system("cls");
                 deleteS(user);
                 return;
             }
-            tmp++;
-        } while (!Check.isOnlyNumber(input));
+        } while (!Check.isOnlyNumber(input) || input == "\n");
 
         int input_id = stoi(input);
         modify_id = -1;
@@ -896,7 +902,6 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         {
             cout << noID;
         }
-
     } while (modify_id == -1);
 
 deleteRetryYN:
