@@ -6,7 +6,7 @@ int titleVaild(string title);
 int dateVaild(string yymmdd);
 int yymm_dateVaild(string yymmdd);
 int hhmmVaild(string hhmm);
-int hhmm_ahead_Vaild(string startTime, string endTime);
+int hhmm_ahead_Vaild(int startTime, string endTime);
 int contentVaild(string contents);
 int locationVaild(string location);
 void deleteCalendar();
@@ -222,7 +222,7 @@ Etime:
         {
             goto Stime;
         }
-    } while (hhmm_ahead_Vaild(startTime, endTime) != 0);
+    } while (hhmm_ahead_Vaild(stoi(startTime), endTime) != 0);
 
     endTime.erase(std::remove(endTime.begin(), endTime.end(), '-'), endTime.end());
     endTime.erase(std::remove(endTime.begin(), endTime.end(), ':'), endTime.end());
@@ -302,7 +302,7 @@ void Calendar<S, U, D>::modify(U user)
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
 
-        curr_month +=1;
+        //curr_month +=1;
         modify(user);
         return;
     }
@@ -459,7 +459,7 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmmVaild(hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(),hhmm)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -582,7 +582,7 @@ int dateVaild(string yymmdd)
     check C = check();
     yymmdd.at(0);
     if( yymmdd.length() >= 6 && yymmdd.length() <=8){
-        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) || !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
+        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) && (!C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1))))) {
             cout << err[0];
             return 2;
         }
@@ -611,7 +611,7 @@ int yymm_dateVaild(string yymmdd)
     check C = check();
     yymmdd.at(0);
     if( yymmdd.length() >= 4 && yymmdd.length() <=5){
-        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) || !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
+        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
             cout << err[0];
             return 2;
         }
@@ -643,7 +643,11 @@ int hhmmVaild(string hhmm)
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         if(C.isOnlyNumber(hhmm)) {
             if(hhmm.length() == 4 ) {
-                return 0;
+                int hh = stoi(hhmm.substr(0,2));
+                int mm = stoi(hhmm.substr(2,2));
+                if( 0<=hh&&hh<=23 && 0<=mm&&mm<=59) {
+                    return 0;
+                }
             }
         }
     }
@@ -651,15 +655,12 @@ int hhmmVaild(string hhmm)
     return 2;
 }
 
-int hhmm_ahead_Vaild(string startTime, string hhmm)
+int hhmm_ahead_Vaild(int startTime, string hhmm)
 {
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
 
-    startTime.erase(std::remove(startTime.begin(), startTime.end(), '-'), startTime.end());
-    startTime.erase(std::remove(startTime.begin(), startTime.end(), ':'), startTime.end());
-    startTime.erase(std::remove(startTime.begin(), startTime.end(), '/'), startTime.end());
     check C = check();
     if (C.isOnlyNumber(hhmm))
     {
@@ -667,9 +668,10 @@ int hhmm_ahead_Vaild(string startTime, string hhmm)
         {
             if ((0 <= stoi(hhmm.substr(0, 2)) && stoi(hhmm.substr(0, 2)) <= 23) && (0 <= stoi(hhmm.substr(2, 2)) && stoi(hhmm.substr(2, 2)) <= 59))
             {
+                int int_hhmm = stoi(hhmm);
                 //cout << "debugging : " << stoi(hhmm.substr(0,2)) <<",,,," << stoi(hhmm.substr(2,3)) << endl;
                 // 시침은 00부터 23월까지 분침은 00~59까지..ㅠㅠ
-                if (startTime > hhmm)
+                if (startTime > int_hhmm)
                 {
                     cout << err[0];
                     return 3;
