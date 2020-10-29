@@ -132,7 +132,7 @@ public:
             
             rf.writeSCSchedule(
                 calendarID,
-                idx,
+                to_string(idx),
                 s.getTitle(),
                 d,
                 to_string(s.getStartTime()),

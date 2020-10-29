@@ -4,19 +4,10 @@ using namespace std;
 
 void ReadFile::isFileExist(string filepath)
 {
-	if (_access(filepath.c_str(), 0) != 0) {
-		FILE* f;
-		if (fopen(filepath.c_str(), "w") != 0) {
-			cout << "[" << filepath << ("] read/create error!\n");
-			//cin.ignore(); 
-		}
-		else {
-			if (fclose(f) != 0) {
-				cout << "[" << filepath << ("] close error!\n"); 
-				//cin.ignore();
-			}
-		}
-	}
+   if (_access(filepath.c_str(), 0) != 0) {
+      FILE* f = fopen(filepath.c_str(), "w");
+        fclose(f);
+    }
 }
 
 vector<string> ReadFile::readUserList(int index) 
@@ -306,11 +297,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
 
 void ReadFile::writeSCSchedule(string calID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
-    // vector<string> id_list = readSCCalendar(calID, 0);
-    // int id = 1;
-
-    // if(id_list.size()!=0) id = stoi(id_list[id_list.size()-1])+1;
-
+    isFileExist("../data/SharedCalendar/"+calID+".txt");
     write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
@@ -354,16 +341,7 @@ vector<string> ReadFile::readCalendar(string userID, int index)
 
 void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
-    // 없는 파일에다가 쓰려하면 강제종료됨..?
-
-    // 없는 파일이면 생성하는 코드가 필요할듯.
-
-    // ReadFile re;
-    // vector<string> id_list = re.readCalendar(userID, 0);
-    // int id = 1;
-
-    // if(id_list.size()!=0) id = stoi(id_list[id_list.size()-1])+1;
-
+    isFileExist("../data/Calendar/"+userID+".txt");
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
