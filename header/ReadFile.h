@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <io.h>
 #include "../header/type/User.h"
 
 using namespace std;
