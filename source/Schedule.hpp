@@ -552,6 +552,11 @@ bool boundaryCheck(string ss, int boundary)
 
 int titleVaild(string title)
 {
+    if(findCheck(title, "$")) {
+        cout << err[0];
+        return 2;
+    }
+
     if (title.length() > 20 || title.length() < 1)
     {
         //문자 길이가 다를 때 오류
@@ -577,6 +582,11 @@ int titleVaild(string title)
 
 int dateVaild(string yymmdd)
 {
+    if(findCheck(yymmdd, "$")) {
+        cout << err[0];
+        return 2;
+    }
+
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
@@ -614,6 +624,11 @@ int dateVaild(string yymmdd)
 
 int yymm_dateVaild(string yymmdd)
 {
+    if(findCheck(yymmdd, "$")) {
+        cout << err[0];
+        return 2;
+    }
+
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
     check C = check();
@@ -642,6 +657,10 @@ int yymm_dateVaild(string yymmdd)
 }
 int hhmmVaild(string hhmm)
 {   
+    if(findCheck(hhmm, "$")) {
+        cout << err[0];
+        return 2;
+    }
     check C = check();
     if(hhmm.length() == 4 || hhmm.length() == 5) {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
@@ -659,6 +678,10 @@ int hhmmVaild(string hhmm)
 
 int hhmm_ahead_Vaild(string startTime, string hhmm)
 {
+    if(findCheck(startTime, "$") || findCheck(hhmm, "$")) {
+        cout << err[0];
+        return 2;
+    }
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -703,8 +726,7 @@ int hhmm_ahead_Vaild(string startTime, string hhmm)
 
 int contentVaild(string contents)
 {
-    if (contents.length() > 100)
-    {
+    if(findCheck(contents, "$") || contents.length() > 100)) {
         cout << err[0];
         return 2;
     }
@@ -731,7 +753,6 @@ void Calendar<S, U, D>::deleteS(U user)
     cout << deleteString[1];
     cout << deleteString[2];
     string input;
-    
     do
     {
         cout << prompt;
@@ -780,6 +801,7 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         {
             if(tmp > 0) cout << err[0];
             cout << deleteString[0];
+            cout << prompt;
             getline(cin, input);
             if (Check.qCheck(input))
             {
@@ -814,6 +836,7 @@ deleteRetryYN:
     if (input == "Y" || input == "y")
     {
         scheduleList.erase(scheduleList.begin() + modify_id);
+        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -881,7 +904,9 @@ void Calendar<S, U, D>::showNextMonthSchedules(U user)
 {
     if (curr_year == 2069 && curr_month == 12)
     {
-        //마지막 달
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
     }
     else
     {
@@ -903,7 +928,9 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
 {
     if (curr_year == 1970 && curr_month == 1)
     {
-        //첫 달
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
     }
     else
     {

@@ -18,7 +18,6 @@ private:
     // 일정 아이디.
     int id;
     
-    // 이게 뭐죠?
     string title;
 
     Date date;
