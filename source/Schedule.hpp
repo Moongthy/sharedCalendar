@@ -593,7 +593,7 @@ int dateVaild(string yymmdd)
     yymmdd.at(0);
     if( yymmdd.length() >= 6 && yymmdd.length() <=8){
         if( !(C.isOnlyNumber(yymmdd.substr(0,1)) && (!C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1))))) {
-            cout << err[0];
+            cout << err[0] << "molly";
             return 2;
         }
         else {
@@ -618,16 +618,10 @@ int dateVaild(string yymmdd)
 
 int yymm_dateVaild(string yymmdd)
 {
-<<<<<<< HEAD
-=======
     if(findCheck(yymmdd, "$")) {
         cout << err[0];
         return 2;
     }
-
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
->>>>>>> 5e284933d436c598604ef1d7ff9e766cb14e2512
     check C = check();
     yymmdd.at(0);
     if( yymmdd.length() >= 4 && yymmdd.length() <=5){
@@ -681,7 +675,7 @@ int hhmmVaild(string hhmm)
 
 int hhmm_ahead_Vaild(int startTime, string hhmm)
 {
-    if(findCheck(startTime, "$") || findCheck(hhmm, "$")) {
+    if(findCheck(hhmm, "$")) {
         cout << err[0];
         return 2;
     }
