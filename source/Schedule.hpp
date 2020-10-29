@@ -196,6 +196,7 @@ Title:
         getline(cin, title);
         if (Check.qCheck(title))
         {
+            system("cls");
             select_Schedules_option(user);
             return;
         }
@@ -283,8 +284,11 @@ void Calendar<S, U, D>::modify(U user)
     cout << modifyString[1];
     cout << modifyString[2];
     string input;
+    bool status = false;
     do
     {
+        if(status) cout << err[0];
+        status = true;
         cout << prompt;
         getline(cin, input);
         if (Check.qCheck(input))
@@ -293,7 +297,8 @@ void Calendar<S, U, D>::modify(U user)
             select_Schedules_option(user);
             return;
         }
-    } while (!Check.numberCheck(input, 2));
+    } while (!(input=="1" || input =="2"));
+
     int input_int = stoi(input);
     if (input_int == 1)
     {
@@ -314,7 +319,8 @@ void Calendar<S, U, D>::modify(U user)
                 modify(user);
                 return;
             }
-        } while (yymm_dateVaild(yymm) == 0);
+        } while (yymm_dateVaild(yymm) != 0);
+
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
@@ -323,7 +329,6 @@ void Calendar<S, U, D>::modify(U user)
 		else if (70 <= yy && yy < 100) yy += 1900;
         curr_year = yy;
         curr_month = mm;
-
         modify(user);
         return;
     }
@@ -343,7 +348,6 @@ void Calendar<S, U, D>::modifySchedule(U user)
             getline(cin, input);
             if (Check.qCheck(input))
             {
-                // q 동작 수행
                 system("cls");
                 modify(user);
                 return;
@@ -372,8 +376,13 @@ void Calendar<S, U, D>::modifySchedule(U user)
 ModifyRetry:
     for (string s : modifyScheduleOption)
         cout << s;
-    int selection = checkValidSelection(admin, 6);
 
+    int selection = checkValidSelection(admin, 6);
+    if(selection == -2)
+    {
+        modifySchedule(user);
+        return;
+    }
     switch (selection)
     {
     case 1:
@@ -414,12 +423,11 @@ RetryYN:
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        //system("cls");
         goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
-        //system("cls");
+        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -655,7 +663,11 @@ int yymm_dateVaild(string yymmdd)
     }
     check C = check();
 
+<<<<<<< HEAD
     if (yymmdd.length() >= 4 && yymmdd.length() <= 5)
+=======
+    if (yymmdd.length() == 4 || yymmdd.length() == 5)
+>>>>>>> cdd46dde5ebbf18d866f9676172e93eaf4597956
     {
         if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
         {
@@ -680,6 +692,7 @@ int yymm_dateVaild(string yymmdd)
             }
         }
     }
+    cout << err[0];
     return 3;
 }
 int hhmmVaild(string hhmm)
@@ -799,7 +812,12 @@ void Calendar<S, U, D>::deleteS(U user)
             return;
         }
     } while (!Check.numberCheck(input, 2));
-
+    int selection = checkValidSelection(admin, 6);
+    if (selection == -2)
+    {
+        // q기능 수행
+        // 캘린더 선택으로 가야함
+    }
     int input_int = stoi(input);
     if (input_int == 1)
     {
@@ -900,6 +918,7 @@ SearchTryAgain:
     getline(cin, keyword);
     if (Check.qCheck(keyword))
     {
+        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -918,6 +937,7 @@ SearchTryAgain:
             state = true;
             Date search = scheduleList[i].getDate();
             cout << line << endl;
+            cout << ScheduleInfo[11] << scheduleList[i].getID() << endl;
             cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
             cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
             cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
