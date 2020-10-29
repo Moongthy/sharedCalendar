@@ -82,6 +82,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     int selection = checkValidSelection(admin, 6);
     if(selection == -2) {
         // q기능 수행
+        // 캘린더 선택으로 가야함
     }
 
     system("cls");
@@ -189,7 +190,7 @@ Date:
     do
     {
         cout << addSchedulesString[2];
-        cin >> yymmdd;
+        getline(cin, yymmdd);
         if (Check.qCheck(yymmdd))
         {
             goto Title;
@@ -201,7 +202,7 @@ Stime:
     do
     {
         cout << addSchedulesString[3];
-        cin >> startTime;
+        getline(cin, startTime);
         if (Check.qCheck(startTime))
         {
             goto Date;
@@ -216,7 +217,7 @@ Etime:
     do
     {
         cout << addSchedulesString[4];
-        cin >> endTime;
+        getline(cin, endTime);
         if (Check.qCheck(endTime))
         {
             goto Stime;
@@ -253,7 +254,6 @@ Content:
     maximum_id++;
     scheduleList.push_back(new_s);
     system("cls");
-    cin.ignore();
     cout << addSchedulesString[7];
     select_Schedules_option(user);
 }
@@ -270,8 +270,9 @@ void Calendar<S, U, D>::modify(U user)
     do
     {
         cout << prompt;
-        cin >> input;
+        getline(cin, input);
         if(Check.qCheck(input)) {
+            system("cls");
             select_Schedules_option(user);
             return;
         }
@@ -289,8 +290,9 @@ void Calendar<S, U, D>::modify(U user)
         do
         {
             cout << prompt;
-            cin >> yymm;
+            getline(cin, yymm);
             if(Check.qCheck(yymm)) {
+                system("cls");
                 modify(user);
                 return;
             }
@@ -317,10 +319,11 @@ void Calendar<S, U, D>::modifySchedule(U user)
         {
             cout << modifySchedulesString[0];
             cout << prompt;
-            cin >> input;
+            getline(cin, input);
             if (Check.qCheck(input))
             {
                 // q 동작 수행
+                system("cls");
                 modify(user);
                 return;
             }
@@ -344,7 +347,6 @@ void Calendar<S, U, D>::modifySchedule(U user)
         }
 
     } while (modify_id == -1);
-    cin.ignore();
     
 ModifyRetry:
     for (string s : modifyScheduleOption)
@@ -384,17 +386,13 @@ ModifyRetry:
 RetryYN:
     cout << modifySchedulesString[8];
     string yninput;
-    cin >> input;
+    getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        cin.ignore();
-        system("cls");
         goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
-        cin.ignore();
-        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -410,7 +408,7 @@ int Calendar<S, U, D>::modifyTitle(int mod_id)
 {
     cout << modifySchedulesString[1];
     string title;
-    cin >> title;
+    getline(cin, title);
     int select;
     if ((select = titleVaild(title)) == 0)
     {
@@ -425,7 +423,7 @@ int Calendar<S, U, D>::modifyDate(int mod_id)
 {
     cout << modifySchedulesString[2];
     string yymmdd;
-    cin >> yymmdd;
+    getline(cin, yymmdd);
     int select;
     if ((select = dateVaild(yymmdd)) == 0)
     {
@@ -440,7 +438,7 @@ int Calendar<S, U, D>::modifySTime(int mod_id)
 {
     cout << modifySchedulesString[3];
     string hhmm;
-    cin >> hhmm;
+    getline(cin, hhmm);
     int select;
     if ((select = hhmmVaild(hhmm)) == 0)
     {
@@ -459,7 +457,7 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
 {
     cout << modifySchedulesString[4];
     string hhmm;
-    cin >> hhmm;
+    getline(cin, hhmm);
     int select;
     if ((select = hhmmVaild(hhmm)) == 0)
     {
@@ -477,7 +475,7 @@ int Calendar<S, U, D>::modifyContent(int mod_id)
 {
     cout << modifySchedulesString[6];
     string content;
-    cin >> content;
+    getline(cin, content);
     int select;
     if ((select = contentVaild(content)) == 0)
     {
@@ -492,7 +490,7 @@ int Calendar<S, U, D>::modifyLocation(int mod_id)
 {
     cout << modifySchedulesString[5];
     string location;
-    cin >> location;
+    getline(cin, location);
     int select;
     if ((select = contentVaild(location)) == 0)
     {
@@ -731,7 +729,7 @@ void Calendar<S, U, D>::deleteS(U user)
     do
     {
         cout << prompt;
-        cin >> input;
+        getline(cin, input);
         if(Check.qCheck(input)) {
             select_Schedules_option(user);
             return;
@@ -751,7 +749,7 @@ void Calendar<S, U, D>::deleteS(U user)
         do
         {
             cout << prompt;
-            cin >> yymm;
+            getline(cin, yymm);
         } while (yymm_dateVaild(yymm) == 0);
 
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
@@ -776,7 +774,7 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         {
             if(tmp > 0) cout << err[0];
             cout << deleteString[0];
-            cin >> input;
+            getline(cin, input);
             if (Check.qCheck(input))
             {
                 deleteS(user);
@@ -806,11 +804,10 @@ void Calendar<S, U, D>::deleteSchedule(U user)
 
 deleteRetryYN:
     cout << deleteString[3];
-    cin >> input;
+    getline(cin, input);
     if (input == "Y" || input == "y")
     {
         scheduleList.erase(scheduleList.begin() + modify_id);
-        cin.ignore();
         select_Schedules_option(user);
         return;
     }
@@ -833,7 +830,7 @@ void Calendar<S, U, D>::searchSchedule(U user)
 SearchTryAgain:
     cout << searchSchedulesString[3];
     string keyword;
-    cin >> keyword;
+    getline(cin, keyword);
     if (Check.qCheck(keyword))
     {
         select_Schedules_option(user);
