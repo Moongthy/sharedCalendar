@@ -27,7 +27,7 @@ template <typename S, typename U, typename D> class Calendar
 {
 protected:
     // 일정 목록
-    bool isShared = true;
+    bool isShared = false;
     vector<Schedule> scheduleList;
 
     int maximum_id = 1;
