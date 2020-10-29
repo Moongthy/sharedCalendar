@@ -126,7 +126,7 @@ string addSchedulesString[10] = {
 };
 
 string modifySchedulesString[10] = {
-    "[일정 수정] ",
+    "[일정 수정]\n",
     "제목 > ",
     "날짜 > ",
     "시작시간 > ",
@@ -141,7 +141,7 @@ string deleteString[10] = {
     "[일정 삭제]\n",
     "1. 삭제할 일정 선택\n",
     "2. 이동할 연/월 선택\n",
-    "[다른 항목 삭제] Y/N > "
+    "[정말 삭제하시겠습니까?] Y/N > "
 };
 
 string searchSchedulesString[10] = {
@@ -172,5 +172,6 @@ string noID = "없는 ID입니다.\n";
 string modifyString[10] = {
     "[일정 수정]\n",
     "1. 수정할 일정 선택\n",
-    "2. 이동할 연/월 선택\n"
+    "2. 이동할 연/월 선택\n",
+    "[연 / 월 입력]\n"
 };

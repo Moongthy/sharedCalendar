@@ -60,8 +60,8 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::select_Schedules_option(U user)
 {
-    if(!isShared) cout << myCalendar[1];
-    else cout << myCalendar[0];
+    if(!isShared) cout << myCalendar[0];
+    else cout << myCalendar[1];
 
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
@@ -102,11 +102,11 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         break;
     case 2:
         /* 일정수정 */
-        modifySchedule(user);
+        modify(user);
         break;
     case 3:
         /* 일정삭제 */
-        deleteSchedule(user);
+        deleteS(user);
         break;
     case 4:
         /* 일정검색 */
@@ -264,7 +264,6 @@ void Calendar<S, U, D>::modify(U user)
     cout << modifyString[0];
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
-    cout << endl;
     cout << modifyString[1];
     cout << modifyString[2];
     string input;
@@ -272,6 +271,10 @@ void Calendar<S, U, D>::modify(U user)
     {
         cout << prompt;
         cin >> input;
+        if(Check.qCheck(input)) {
+            select_Schedules_option(user);
+            return;
+        }
     } while (!Check.numberCheck(input, 2));
     int input_int = stoi(input);
     if (input_int == 1)
@@ -281,19 +284,21 @@ void Calendar<S, U, D>::modify(U user)
     }
     else if (input_int == 2)
     {
+        cout << modifyString[3];
         string yymm;
-        
         do
         {
             cout << prompt;
             cin >> yymm;
+            if(Check.qCheck(yymm)) {
+                modify(user);
+                return;
+            }
         } while (yymm_dateVaild(yymm) == 0);
-
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '-'), yymm.end());
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
-        
         modify(user);
         return;
     }
@@ -309,6 +314,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
         do
         {
             cout << modifySchedulesString[0];
+            cout << prompt;
             cin >> input;
             if (Check.qCheck(input))
             {
@@ -699,7 +705,7 @@ int hhmm_ahead_Vaild(string startTime, string hhmm)
 
 int contentVaild(string contents)
 {
-    if (contents.length() > 100 || contents.length() == 0)
+    if (contents.length() > 100)
     {
         cout << err[0];
         return 2;
@@ -724,7 +730,6 @@ void Calendar<S, U, D>::deleteS(U user)
     cout << deleteString[0];
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
-    cout << endl;
     cout << deleteString[1];
     cout << deleteString[2];
     string input;
@@ -733,6 +738,10 @@ void Calendar<S, U, D>::deleteS(U user)
     {
         cout << prompt;
         cin >> input;
+        if(Check.qCheck(input)) {
+            select_Schedules_option(user);
+            return;
+        }
     } while (!Check.numberCheck(input, 2));
     
     int input_int = stoi(input);
@@ -768,16 +777,18 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     string input;
     do
     {
+        int tmp = 0;
         do
         {
+            if(tmp > 0) cout << err[0];
             cout << deleteString[0];
             cin >> input;
             if (Check.qCheck(input))
             {
-                // q 동작 수행
                 deleteS(user);
                 return;
             }
+            tmp++;
         } while (!Check.isOnlyNumber(input));
 
         int input_id = stoi(input);
@@ -799,16 +810,13 @@ void Calendar<S, U, D>::deleteSchedule(U user)
 
     } while (modify_id == -1);
 
-    // 포인터로 가져와야되지않나?
-    // 삭제하는 부분
-    
-    Schedule modSchedule = scheduleList[modify_id];
-
 deleteRetryYN:
     cout << deleteString[3];
     cin >> input;
     if (input == "Y" || input == "y")
     {
+        scheduleList.erase(scheduleList.begin() + modify_id);
+        cin.ignore();
         select_Schedules_option(user);
         return;
     }
