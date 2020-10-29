@@ -167,7 +167,7 @@ string ScheduleInfo[12] = {
     "ID : "
 };
 
-string line = "====================================================";
+string line = "==========================================";
 string prompt = "> ";
 string noID = "없는 ID입니다.\n";
 

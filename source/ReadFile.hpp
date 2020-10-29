@@ -90,8 +90,6 @@ void ReadFile::writeUserList(string id, string password, string name) {
     write.close();
 }
 
-
-
 vector<string> ReadFile::readSCList(int index) 
 {
     read.open("../data/SharedCalendarList.txt");

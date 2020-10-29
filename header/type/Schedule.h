@@ -37,10 +37,7 @@ private:
 public :
     Schedule(string title, Date date, int startTime, int endTime, string content = "", string location = "", int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime), location(location), content(content) {
-        if (this -> date > date) {
-            std::cout << "";
-        }
-        std::cout << "";
+            
     }
 
     //임시 생성자
