@@ -274,6 +274,7 @@ Content:
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::modify(U user)
 {
+    system("cls");
     cout << modifyString[0];
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
@@ -402,6 +403,7 @@ ModifyRetry:
             cout << err[0];
         }
         /* 오류 */
+        return;
         break;
     }
 RetryYN:
@@ -410,12 +412,12 @@ RetryYN:
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        system("cls");
+        //system("cls");
         goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
-        system("cls");
+        //system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -482,13 +484,13 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(), hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getEndTime(), hhmm)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         int hh = stoi(hhmm.substr(0, 2));
         int mm = stoi(hhmm.substr(2, 2));
-        scheduleList[mod_id].setStartTime(hh * 100 + mm);
+        scheduleList[mod_id].setEndTime(hh * 100 + mm);
         return 0;
     }
     return select;
