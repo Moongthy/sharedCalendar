@@ -14,10 +14,11 @@ using namespace std;
 int main(){
 
     Users users = Users("ansrms", "1234");
+    Users another = Users("test", "2345");
 
     Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
 
-    cal.select_Schedules_option(users);
+    cal.select_Schedules_option(another);
 
     return 0;
 }

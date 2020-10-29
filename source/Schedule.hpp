@@ -16,8 +16,11 @@ int checkValidSelection(bool admin, int boundary)
     string input;
     int selection;
     check c = check();
+    bool status = flse;
     while (1)
     {
+        if(status) cout << err[0];
+        status = true;
         cout << prompt;
         getline(cin, input);
         if (input.length() != 1)
@@ -401,10 +404,12 @@ RetryYN:
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
+        system("cls");
         goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
+        system("cls");
         select_Schedules_option(user);
         return;
     }
