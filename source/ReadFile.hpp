@@ -315,7 +315,7 @@ vector<string> ReadFile::readCalendar(string userID, int index)
         {
             char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
-            if(read.eof()) break;
+            
 
             separatorIndex = 0;
             temp = "";
@@ -326,6 +326,7 @@ vector<string> ReadFile::readCalendar(string userID, int index)
                 else if(str[i]=='\0') break;
             }
             return_list.push_back(temp);
+            if(read.eof()) break;
         }
     }
     else cout << "[" << userID << ".txt] read error!" << endl;
