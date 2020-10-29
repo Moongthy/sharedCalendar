@@ -63,7 +63,7 @@ public:
     // 개인 캘린더 소멸자
     virtual ~Calendar()
     {
-        savePersonalScheduleList();
+        // savePersonalScheduleList();
     }
 
     /**
