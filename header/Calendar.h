@@ -10,6 +10,7 @@
 #include "./type/Schedule.h"
 #include "../header/input/check.h"
 #include "./ReadFile.h"
+#include <time.h>
 
 using namespace std;
 
