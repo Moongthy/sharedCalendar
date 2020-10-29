@@ -16,6 +16,13 @@ class ReadFile {
         char separator = '$';
 
     public:
+
+        /**
+         * 파일 생성 
+         */
+        void isFileExist(string filepath);
+
+
         /**
          * UserList.txt 파일에 저장되어 있는 정보
          * 
@@ -169,7 +176,7 @@ class ReadFile {
          * @param memo 메모(없으면 null 넘겨주기)
          * 
          */
-         void writeSCSchedule(string calID, string name, string date, string starttime, string endtime, string loc, string memo);
+         void writeSCSchedule(string calID, string id, string name, string date, string starttime, string endtime, string loc, string memo);
            
 
         /**
@@ -196,7 +203,7 @@ class ReadFile {
          * @param memo 메모(없으면 null 넘겨주기)
          * 
          */
-        void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
+        void writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo);
 
 
         /**

@@ -2,6 +2,23 @@
 
 using namespace std;
 
+void ReadFile::isFileExist(string filepath)
+{
+	if (_access(filepath.c_str(), 0) != 0) {
+		FILE* f;
+		if (fopen(filepath.c_str(), "w") != 0) {
+			cout << "[" << filepath << ("] read/create error!\n");
+			//cin.ignore(); 
+		}
+		else {
+			if (fclose(f) != 0) {
+				cout << "[" << filepath << ("] close error!\n"); 
+				//cin.ignore();
+			}
+		}
+	}
+}
+
 vector<string> ReadFile::readUserList(int index) 
 {
     read.open("../data/UserList.txt");
@@ -287,11 +304,12 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
 }
 
 
-void ReadFile::writeSCSchedule(string calID, string name, string date, string starttime, string endtime, string loc, string memo) 
+void ReadFile::writeSCSchedule(string calID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
-    vector<string> id_list = readSCCalendar(calID, 0);
+    // vector<string> id_list = readSCCalendar(calID, 0);
+    // int id = 1;
 
-    int id = stoi(id_list[id_list.size()-1])+1;
+    // if(id_list.size()!=0) id = stoi(id_list[id_list.size()-1])+1;
 
     write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
     write << id;
@@ -299,8 +317,6 @@ void ReadFile::writeSCSchedule(string calID, string name, string date, string st
                         + endtime + separator + loc + separator + memo << endl;
     write.close(); 
 }
-
-
 
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
@@ -316,7 +332,6 @@ vector<string> ReadFile::readCalendar(string userID, int index)
             char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             
-
             separatorIndex = 0;
             temp = "";
             for(i=0; i<sizeof(read); i++)
@@ -337,11 +352,17 @@ vector<string> ReadFile::readCalendar(string userID, int index)
 }
 
 
-void ReadFile::writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo) 
+void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
-    vector<string> id_list = readCalendar(userID, 0);
+    // 없는 파일에다가 쓰려하면 강제종료됨..?
 
-    int id = stoi(id_list[id_list.size()-1])+1;
+    // 없는 파일이면 생성하는 코드가 필요할듯.
+
+    // ReadFile re;
+    // vector<string> id_list = re.readCalendar(userID, 0);
+    // int id = 1;
+
+    // if(id_list.size()!=0) id = stoi(id_list[id_list.size()-1])+1;
 
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     write << id;
