@@ -321,7 +321,6 @@ void Calendar<S, U, D>::modify(U user)
 		else if (70 <= yy && yy < 100) yy += 1900;
         curr_year = yy;
         curr_month = mm;
-
         modify(user);
         return;
     }
@@ -412,12 +411,12 @@ RetryYN:
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        //system("cls");
+        system("cls");
         goto ModifyRetry;
     }
     else if (input == "N" || input == "n")
     {
-        //system("cls");
+        system("cls");
         select_Schedules_option(user);
         return;
     }
@@ -653,7 +652,7 @@ int yymm_dateVaild(string yymmdd)
     }
     check C = check();
     yymmdd.at(0);
-    if (yymmdd.length() >= 4 && yymmdd.length() <= 5)
+    if (yymmdd.length() == 4 || yymmdd.length() == 5)
     {
         if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
         {
@@ -898,6 +897,7 @@ SearchTryAgain:
     getline(cin, keyword);
     if (Check.qCheck(keyword))
     {
+        system("cls");
         select_Schedules_option(user);
         return;
     }
