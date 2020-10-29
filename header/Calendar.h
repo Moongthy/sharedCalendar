@@ -16,7 +16,7 @@ using namespace std;
 
 /**
  * 개인 캘린더 클래스 및 공유캘린더 부모 클래스
- * 
+ * / 
  * @param S Schedule(일정) type 
  * @param U User(사용자) type
  * @param D Date(날짜, 시간) type
@@ -29,8 +29,7 @@ protected:
     // 일정 목록
     bool isShared = true;
     vector<Schedule> scheduleList;
-    int curr_year;
-    int curr_month;
+
     int maximum_id = 1;
     // 캘린더 id
     string calendarID;
@@ -38,6 +37,9 @@ protected:
     // 만든사람
     U administrator;
 public:
+    int curr_year;
+    int curr_month;
+    int curr_day;
     /**
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
@@ -96,7 +98,8 @@ public:
     void savePersonalScheduleList()
     {
         ReadFile rf = ReadFile();
-
+        // txt파일 맨앞에 붙는 숫자
+        int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
         for(Schedule s : scheduleList)
         {
@@ -105,6 +108,7 @@ public:
             
             rf.writeSchedule(
                 administrator.getUserId(),
+                idx,
                 s.getTitle(),
                 d,
                 to_string(s.getStartTime()),
@@ -112,13 +116,14 @@ public:
                 s.getLocation(),
                 s.getContent()
             );
+            ++idx;
         }
     }
 
     void saveSharedScheduleList()
     {
         ReadFile rf = ReadFile();
-
+        int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
         for(Schedule s : scheduleList)
         {
@@ -127,6 +132,7 @@ public:
             
             rf.writeSCSchedule(
                 calendarID,
+                idx,
                 s.getTitle(),
                 d,
                 to_string(s.getStartTime()),
@@ -134,15 +140,18 @@ public:
                 s.getLocation(),
                 s.getContent()
             );
+            
+            ++idx;
         }
     }
 
     void loadPersonalScheduleList()
     {
+        
         ReadFile rf = ReadFile();
-
+        
         string adminId = administrator.getUserId(); // 관리자 아이디
-
+        
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(adminId, 0);
         vector<string> sName        = rf.readCalendar(adminId, 1);
@@ -151,7 +160,7 @@ public:
         vector<string> sEndTime     = rf.readCalendar(adminId, 4);
         vector<string> sLoc         = rf.readCalendar(adminId, 5);
         vector<string> sMemo        = rf.readCalendar(adminId, 6);
-
+        
         // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
         {
@@ -176,8 +185,6 @@ public:
         vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
         vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
 
-
-
         // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
         {
@@ -188,7 +195,6 @@ public:
             scheduleList.push_back(s);
         }
     }
-
 
     check Check = check();
     /**

@@ -1,11 +1,18 @@
 MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
  :user(user), scm(scm) { 
-    //  // 유효기간 끝났으면 해당 공캘 폭파.
-    //  for(int i = 0; i < scm.getSharedCalendarListSize(); ++i)
-    //  {
-    //      if(currentDateTime() > scm.getSharedCalendarList()[i].getEndDate())
-    //         scm.getSharedCalendarList().erase(scm.getSharedCalendarList().begin() + i);
-    //  }
+     // MenuInput이 생성되기 전에 이미 scm.sharedCalenarList는 이미 로드되어 있음.
+    int yy = scm.getSharedCalendarList()[0].curr_year;
+    int mm = scm.getSharedCalendarList()[0].curr_month;
+    int dd = scm.getSharedCalendarList()[0].curr_day;
+    Date currDate = Date(yy, mm, dd);
+
+     // 유효기간 끝났으면 해당 공캘 폭파.
+     for(int i = 0; i < scm.getSharedCalendarListSize(); ++i)
+     {
+        // 현재 날짜랑 유효기간 비교. 유효기간 지났으면 erase.
+         if(currDate > scm.getSharedCalendarList()[i].getEndDate())
+            scm.getSharedCalendarList().erase(scm.getSharedCalendarList().begin() + i);
+     }
  }
 
 #include"../header/Calendar.h"
@@ -45,21 +52,23 @@ void MenuInput::mainMenu(){
         /**********************************/
         // 공유캘린더 조회
         if(b == 3) 
-        {
+        {   
+            // 조회할 공유캘린더의 sharedCalendarList 인덱스
             int scIdx = intoSC();
+            
+            // 조회 실패
             if(scIdx < 0) continue;
             
             SharedCalendar<Schedule, User, Date> sc = scm.getSharedCalendarList()[scIdx];
 
+            /********************일정 파트랑 연결***********************/
             sc.select_Schedules_option(user);
+            /*********************************************************/
 
             if(!getIntoSpecifiedCalendar(scIdx))
                 delSc(scIdx);
         }
-
-        
     }
-
  }
 
  // 개인 캘린더 ? 공유 캘린더
@@ -276,20 +285,4 @@ void MenuInput::showJoinedList(){
             cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
         ++i;
     }
-}
-
-// 현재시간을 string type으로 return하는 함수
-
-Date MenuInput::currentDateTime() {
-    time_t     now = time(0); //현재 시간을 time_t 타입으로 저장
-    struct tm  tstruct;
-    char       buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y%m%d", &tstruct); // YYYY-MM-DD.HH:mm:ss 형태의 스트링
-    
-    string ret = string(buf);
-
-    // cout << ret << endl;
-    ret = ret.substr(2, ret.size());
-    return Date(stoi(ret.substr(0, 2)), stoi(ret.substr(2, 2)), stoi(ret.substr(4, 5)));
 }
