@@ -1,10 +1,9 @@
-
-// °¡³ª´Ù¶ó,,,ÆR = true ¹ÝÈ¯
-// ¤¡¤¤¤§¤© ¤± ,, ¤² ,,,¤¾ = false ¹ÝÈ¯
+// øÎ???,,,è¨ = true ??
+// õäñéñýåø ? ,, ? ,,,é· = false ??
 bool check::hangeulCheck(string& s){
     // cout << s << endl;
-    string r = "¤¡";
-    string h = "¤¾";
+    string r = "õä";
+    string h = "é·";
     for(char c : s)
         if(c >= r[0] && c <= h[0])
             return false;
