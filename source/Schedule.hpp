@@ -299,6 +299,8 @@ void Calendar<S, U, D>::modify(U user)
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
+
+        curr_month +=1;
         modify(user);
         return;
     }
@@ -579,68 +581,60 @@ int titleVaild(string title)
 
 int dateVaild(string yymmdd)
 {
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
-
     check C = check();
-
-    if (C.isOnlyNumber(yymmdd))
-    {
-        if (yymmdd.length() == 6)
-        {
-            if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12) && (1 <= stoi(yymmdd.substr(4, 2)) && stoi(yymmdd.substr(4, 2)) <= 31))
+    yymmdd.at(0);
+    if( yymmdd.length() >= 6 && yymmdd.length() <=8){
+        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) || !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
+            cout << err[0];
+            return 2;
+        }
+        else {
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+            if (yymmdd.length() == 6)
             {
-                //달이 1월부터 12월까지 날이 1일부터 31일까지..ㅠㅠ
-                return 0;
+                if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12) && (1 <= stoi(yymmdd.substr(4, 2)) && stoi(yymmdd.substr(4, 2))) < 31)
+                {
+                    return 0;
+                }
+                else
+                {
+                    cout << err[0];
+                    return 1;
+                }
             }
         }
-        else
-        {
-            cout << err[0];
-            return 1;
-        }
     }
-    else if (C.qCheck(yymmdd))
-    {
-        cout << "뒤로가기...이거 바꿔조" << endl;
-        return 1;
-    }
-    else
-    {
-        cout << err[0];
-        return 2;
-    }
-    cout << err[0];
     return 3;
 }
 
 int yymm_dateVaild(string yymmdd)
 {
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
-    yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
     check C = check();
-    if (yymmdd.length() == 4)
-    {
-        if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12))
-        {
-            return 0;
-        }
-        else
-        {
+    yymmdd.at(0);
+    if( yymmdd.length() >= 4 && yymmdd.length() <=5){
+        if( !(C.isOnlyNumber(yymmdd.substr(0,1)) || !C.isOnlyNumber(yymmdd.substr(yymmdd.length()-1,1)))) {
             cout << err[0];
-            return 1;
+            return 2;
+        }
+        else {
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
+            yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
+            if (yymmdd.length() == 4)
+            {
+                if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12))
+                {
+                    return 0;
+                }
+                else
+                {
+                    cout << err[0];
+                    return 1;
+                }
+            }
         }
     }
-    else if (C.qCheck(yymmdd))
-    {
-        //cout << "뒤로가기...이거 바꿔조" << endl;
-        return 1;
-    }
-    else
-    {
-        cout << err[0];
-        return 2;
-    }
+    return 3;
 }
 int hhmmVaild(string hhmm)
 {   
