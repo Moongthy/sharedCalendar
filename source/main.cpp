@@ -18,7 +18,7 @@ int main(){
 
     Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
 
-    cal.select_Schedules_option(another);
+    cal.select_Schedules_option(users);
 
     return 0;
 }

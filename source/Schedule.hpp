@@ -165,7 +165,7 @@ void Calendar<S, U, D>::show_Schedules(int curr_year, int curr_month)
                 cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
                 cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
                 cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
-                cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+                cout << ScheduleInfo[9] << scheduleList[i].getContent() << scheduleList[i].getContent().length()<< endl;
                 cout << line << endl;
             }
         }
