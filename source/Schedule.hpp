@@ -680,11 +680,11 @@ int yymm_dateVaild(string yymmdd)
     }
     check C = check();
 
-    if (yymmdd.length() == 4 || yymmdd.length() == 5)
+    if (yymmdd.length() >= 4 || yymmdd.length() <= 5)
     {
-        if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) && !C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
+        if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) || C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
         {
-            cout << err[0];
+            cout << err[0] << "!";
             return 2;
         }
         else
@@ -699,13 +699,13 @@ int yymm_dateVaild(string yymmdd)
                 }
                 else
                 {
-                    cout << err[0];
+                    cout << err[0] << "@";
                     return 1;
                 }
             }
         }
     }
-    cout << err[0];
+    cout << err[0] << "#";
     return 3;
 }
 int hhmmVaild(string hhmm)
@@ -853,7 +853,10 @@ void Calendar<S, U, D>::deleteS(U user)
         yymm.erase(std::remove(yymm.begin(), yymm.end(), '/'), yymm.end());
         int yy = stoi(yymm.substr(0, 2));
         int mm = stoi(yymm.substr(2, 2));
-
+        if (0 <= yy && yy < 70) yy += 2000;
+		else if (70 <= yy && yy < 100) yy += 1900;
+        curr_year = yy;
+        curr_month = mm;
         deleteS(user);
         return;
     }

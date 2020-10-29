@@ -1,4 +1,3 @@
-
 template<typename S, typename U, typename D>
 Calendar<S, U, D>::Calendar(U user)
  :administrator(user), calendarID(user.getUserId()) { 
@@ -6,6 +5,11 @@ Calendar<S, U, D>::Calendar(U user)
     struct tm *pLocal = localtime(&curTime);
     curr_year = pLocal->tm_year + 1900;
     curr_month = pLocal->tm_mon+1;
+
+    ReadFile re;
+    vector<string> id_list = re.readCalendar(user.getUserId(), 0);
+    if(id_list.size()!=0) maximum_id = stoi(id_list[id_list.size()-1])+1;
+
     loadPersonalScheduleList();
  }
 
@@ -14,8 +18,12 @@ Calendar<S, U, D>::Calendar(U user, string sharedCalendarId)
  :administrator(user), calendarID(sharedCalendarId) { 
     time_t curTime = time(NULL);
     struct tm *pLocal = localtime(&curTime);
-    curr_year = pLocal -> tm_year + 1900;
-    curr_month = pLocal -> tm_mon+1;
+    curr_year = pLocal->tm_year + 1900;
+    curr_month = pLocal->tm_mon+1;
+    curr_day = pLocal->tm_mday;
+    ReadFile re;
+    vector<string> id_list = re.readCalendar(sharedCalendarId, 0);
+    if(id_list.size()!=0) maximum_id = stoi(id_list[id_list.size()-1])+1;
  }
 
 template<typename S, typename U, typename D>
