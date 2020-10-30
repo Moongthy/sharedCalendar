@@ -84,7 +84,7 @@ string ReadFile::getUserpassword(string userID)
         if(id_list[i]==userID) 
         {
             return_pwd = pwd_list[i];
-            cout << return_pwd;
+            // cout << return_pwd;
             break;
         }
     }
