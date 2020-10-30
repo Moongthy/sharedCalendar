@@ -52,7 +52,7 @@ vector<User> ReadFile::getUserIdName()
     int i = 0;
     for(i=0; i<id_list.size(); i++)
     {
-        return_list.push_back(User(id_list[i], name_list[i]));
+        return_list.push_back(User(name_list[i], id_list[i]));
     }
 
     return return_list; 
@@ -133,7 +133,6 @@ vector<string> ReadFile::readSCList(int index)
 
 vector<string> ReadFile::getSCList() {
     read.open("../data/SharedCalendarList.txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
     string SCdata;
     vector<string> SCAll;
@@ -142,6 +141,7 @@ vector<string> ReadFile::getSCList() {
     {
         while(!read.eof())
         {
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
             
@@ -151,6 +151,7 @@ vector<string> ReadFile::getSCList() {
                 if(str[i]=='\0') break;
                 SCdata += str[i];
             }
+            cout << SCdata << endl;
             SCAll.push_back(SCdata);
         }
         
@@ -164,15 +165,33 @@ vector<string> ReadFile::getSCList() {
 
 
 void ReadFile::clearSCList() {
+    cout << "in clear SCList" << endl;
     write.open("../data/SharedCalendarList.txt", ios::out);
+    write.close();
+}
+
+void ReadFile::clearSCScheList(string calId) {
+    cout << calId + "call clearSCScheduleList" << endl;
+    write.open("../data/SharedCalendar/"+calId+".txt", ios::out);
     write.close();
 }
 
 
 void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
     vector<string> id_list = readSCList(0);
+    cout << "readSCList(0) success" << endl;
 
-    int id = stoi(id_list[id_list.size()-1])+1;
+    /*********************여기서 멈춤*************************/
+    // cout << "idList size : " << id_list.size() << endl;
+    // int tmp = id_list.size()-1;
+    // cout << "int tmp : " + tmp << endl;
+    // string t = id_list[tmp];
+    // cout << "t : " << t << endl;
+    // int id = stoi(t)+1;
+    // cout << "stoi success" << endl;
+    int id =1;
+    if(id_list.size()!=0)
+        id=stoi(id_list[id_list.size()-1])+1;
     
     // 처음 SharedCalendar 등록할 때는 admin이 제일 첫번째에 들어가서 admin만 넣음.
     write.open("../data/SharedCalendarList.txt", ios::app);
@@ -219,7 +238,6 @@ string ReadFile::getSCPassword(string inputTitle) {
 
 void ReadFile::writeSCMember(string title, string member) {
     read.open("../data/SharedCalendarList.txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
     string checkTitle, temp;
     string saveAll = "";
@@ -228,6 +246,7 @@ void ReadFile::writeSCMember(string title, string member) {
     {
         while(!read.eof())
         {
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
             
@@ -263,7 +282,9 @@ void ReadFile::writeSCMember(string title, string member) {
 
 vector<string> ReadFile::readSCCalendar(string calID, int index)
 {
+    cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     read.open("../data/SharedCalendar/"+calID+".txt");
+    cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -284,25 +305,15 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
                 else if(separatorIndex==index) temp += str[i];
                 else if(str[i]=='\0') break;
             }
+            cout << "temp : " << temp << endl;
             return_list.push_back(temp);
         }
     }
-    else cout << "[" << calID << ".txt] read error!" << endl;
+    else cout << "readSCCalendar [" << calID << ".txt] read error!" << endl;
     
     read.close();
-
+    cout << "in readSCCalednar success" << endl;
     return return_list;    
-}
-
-
-void ReadFile::writeSCSchedule(string calID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
-{
-    isFileExist("../data/SharedCalendar/"+calID+".txt");
-    write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
-    write << id;
-    write << separator + name + separator + date + separator + starttime + separator 
-                        + endtime + separator + loc + separator + memo << endl;
-    write.close(); 
 }
 
 vector<string> ReadFile::readCalendar(string userID, int index)
@@ -331,12 +342,25 @@ vector<string> ReadFile::readCalendar(string userID, int index)
             if(read.eof()) break;
         }
     }
-    else cout << "[" << userID << ".txt] read error!" << endl;
+    else cout << "readCalendar [" << userID << ".txt] read error!" << endl;
     
     read.close();
 
     return return_list;    
 }
+
+
+void ReadFile::writeSCSchedule(string calID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
+{
+    isFileExist("../data/SharedCalendar/"+calID+".txt");
+    write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
+    write << id;
+    write << separator + name + separator + date + separator + starttime + separator 
+                        + endtime + separator + loc + separator + memo << endl;
+    write.close(); 
+}
+
+
 
 
 void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
@@ -351,7 +375,6 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
 
 void ReadFile::editSchedule(string userID, string scheID, int index, string text) {
     read.open("../data/Calendar/"+userID+".txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
     int is_edit = 0;
     string temp, id;
@@ -361,6 +384,8 @@ void ReadFile::editSchedule(string userID, string scheID, int index, string text
     {
         while(!read.eof())
         {
+
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
 
@@ -398,7 +423,6 @@ void ReadFile::editSchedule(string userID, string scheID, int index, string text
 
 void ReadFile::deleteSchedule(string userID, string scheID) {
     read.open("../data/Calendar/"+userID+".txt");
-    char str[sizeof(read)]={'\0'};
     int i = 0;
     string temp, id;
     string saveAll = "";
@@ -407,6 +431,8 @@ void ReadFile::deleteSchedule(string userID, string scheID) {
     {
         while(!read.eof())
         {
+
+            char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
 

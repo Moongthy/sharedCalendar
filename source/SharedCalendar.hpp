@@ -2,12 +2,13 @@
 template<typename S, typename U, typename D>
 SharedCalendar<S, U, D>::SharedCalendar(U administrator, string sharedCalendarId, string sharedCalendarName, string pw, int acceptable, D startDate, D endDate)
  :Calendar<S, U, D>(administrator, sharedCalendarId), sharedCalendarName(sharedCalendarName), passWord(pw), acceptable(acceptable), startDate(startDate), endDate(endDate) { 
-     
+     cout << "this is sharedCalendar constructor" << endl;
     Calendar<S, U, D>::isShared = true;
 
-    Calendar<S, U, D>::loadSharedScheduleList();
-     
-     memberList.push_back(administrator);
+    // cout << "load shared schedule list" << endl;
+    // Calendar<S, U, D>::loadSharedScheduleList();
+
+    memberList.push_back(administrator);
  }
 
 template<typename S, typename U, typename D>
@@ -42,7 +43,8 @@ string SharedCalendar<S, U, D>::getPassWord(){
 
 template<typename S, typename U, typename D>
 int SharedCalendar<S, U, D>::addMember(U newMember){
-    if(memberList.size() == acceptable) return 0;
+    // if(memberList.size() == acceptable) return 0;
+    cout << Calendar<S, U, D> :: calendarID << " " << newMember.getUserId() + "addMemeber" << endl;
     memberList.push_back(newMember);
     return 1;
 }

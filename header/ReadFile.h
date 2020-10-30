@@ -103,6 +103,12 @@ class ReadFile {
          */          
         void clearSCList();
 
+        /**
+         * SharedCalendarList.txt 전체 삭제 
+         */          
+        void clearSCScheList(string calId);
+
+
 
         /**
          * SharedCalendarList.txt에 생성한 공유 캘린더 정보 입력

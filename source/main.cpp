@@ -13,12 +13,21 @@ using namespace std;
 
 int main(){
 
-    Users users = Users("ansrms", "1234");
-    Users another = Users("test", "2345");
+    string name;
+    string id;
 
-    Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
+    User user = User(name, id);
 
-    cal.select_Schedules_option(users);
+    Users users = Users(name, id);
+    cout << "===========================START==============================" << endl;
+    users.firstMenu();
+
+    // Users users = Users("ansrms", "1234");
+    // Users another = Users("test", "2345");
+
+    // Calendar<Schedule, User, Date> cal = Calendar<Schedule, User, Date> (users);
+
+    // cal.select_Schedules_option(users);
 
     return 0;
 }

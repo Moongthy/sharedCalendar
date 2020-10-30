@@ -94,7 +94,7 @@ public:
     // void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
         
     
-
+    
     void savePersonalScheduleList()
     {
         ReadFile rf = ReadFile();
@@ -123,6 +123,10 @@ public:
     void saveSharedScheduleList()
     {
         ReadFile rf = ReadFile();
+
+        // 여기다가 넣어줏에요
+        rf.clearSCScheList(calendarID);
+        
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
         for(Schedule s : scheduleList)
@@ -175,8 +179,7 @@ public:
     void loadSharedScheduleList()
     {
         ReadFile rf = ReadFile();
-
-        // userId.txt 파일에서 읽어옮.
+        // 캘린더id.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readSCCalendar(calendarID, 0);
         vector<string> sName        = rf.readSCCalendar(calendarID, 1);
         vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
