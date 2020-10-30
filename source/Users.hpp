@@ -35,7 +35,7 @@ void Users::firstMenu()
 			system("cls");
 			cout << loginMenu[0];
 			cout << err[0];
-			//cin.ignore();
+			cin.ignore();
 		}
 	}
 
@@ -63,7 +63,7 @@ void Users::signIn(){
 	string pw;
 	string name;
 
-	while (true) {
+	while (flag!=1) {
 		id = getInput(loginMenu[5], loginMenu[7], 2, 10);
 		if (id.compare("q") == 0) {
 			flag = -1;
@@ -77,35 +77,32 @@ void Users::signIn(){
 		}
 
 		if (isFine(id, pw)) {
-			
 			name = getUserNameList(id);
-			
 			flag = 1;
-			break;
 		}
 		else {
-			cout << loginMenu[3];
+			cout << err[1];
+			cin.ignore();
+			flag=-1;
+			break;
 		}
 	}
-
 	if (flag == -1) {
 		firstMenu();
 	}
 	else if (flag == 1) {
 		cout << loginMenu[3];
+
 		setUserId(id);
+
 		setUserName(name);
+
 		string a = name, b = id;
 
-   		User user = User(a, b);	
-		cout << "call scm Contructor in Users.hpp" << endl;
+   		User user = User(a, b);
+    
     	SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
-		scm.loadSharedCalendarList();
-		for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
-		{
-			cout << "load schedule List in user.hpp"<< endl;
-			sc.loadSharedScheduleList();
-		}
+
     	MenuInput mi = MenuInput(user, scm);
 
     	mi.mainMenu();
@@ -135,7 +132,7 @@ void Users::signUp(){
 			}
 
 			name = getInput(loginMenu[6], loginMenu[9], 2, 10);
-			if (pw.compare("q") == 0) {
+			if (name.compare("q") == 0) {
 				flag = -1;
 				break;
 			}
@@ -144,7 +141,7 @@ void Users::signUp(){
 		}
 		else {
 			cout << err[2];
-			//cin.ignore();
+			cin.ignore();
 		}
 	}
 
@@ -152,7 +149,6 @@ void Users::signUp(){
 		firstMenu();
 	}
 	else if (flag == 1) {
-
 		ReadFile rf = ReadFile();
 		
 		rf.writeUserList(id, pw, name);
@@ -203,41 +199,50 @@ bool Users::isFine(string id, string pw)
 }
 
 string Users::getUserNameList(string userID){
-	ifstream read;
+	ifstream is;
 	int separatorIndex;
     string separator = "$";
 	
-	read.open("../data/UserList.txt");
-    char str[sizeof(read)]={'\0'};
+	is.open("../data/UserList.txt");
+    char str[sizeof(is)]={'\0'};
     int i = 0;
     string id, name;
-    vector<string> SCTitle;
+    map<string,string> map;
+	string retVal;
 
-    if(read.good())
+    if(is.good())
     {
-        while(!read.eof())
+        while(!is.eof())
         {
-            read.getline(str, sizeof(read));
-            if(read.eof()) break;
+            is.getline(str, sizeof(is));
+            if(is.eof()) break;
 
             id = "", name = "";
             separatorIndex = 0;
-            for(i=0; i<sizeof(read); i++)
+            for(i=0; i<sizeof(is); i++)
             {
                 if(str[i]=='$') separatorIndex++;
                 else if(separatorIndex==0) id += str[i];
                 else if(separatorIndex==2) name += str[i];
                  else if(str[i]=='\0') break;
             }
-            if(userID == id) break;
+			map.insert(make_pair(id,name));
         }
-        
     }
     else cout << "[UserList.txt] read error!" << endl;
-    //cin.ignore();
-    read.close();
 
-    return name;   
+	auto it = map.find(userID);
+
+	if(it!=map.end()){
+		retVal = it->second;
+	}
+	else{
+		cout<< "Failed to find name\n";
+	}
+
+    is.close();
+
+    return retVal;   
 }
 
 string Users::getInput(string menuname, string purpose, int start, int end){
@@ -258,12 +263,12 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 			}
 			else {
 				cout << err[0];
-				//cin.ignore();
+				cin.ignore();
 			}
 		}
 		else {
 			cout << err[0];
-			//cin.ignore();
+			cin.ignore();
 		}
 	}
 	return str;
@@ -284,13 +289,13 @@ void Users::isFileExist(const char* filepath)
 	if (_access(filepath, 0) != 0) {
 		FILE* f;
 		if (fopen(filepath, "w") != 0) {
-			cout << "[" << filepath << ("] read/create error!\n");
-			//cin.ignore(); 
+			cout << "[" << filepath << ("] read/create error!\n"); 
+			cin.ignore();
 		}
 		else {
 			if (fclose(f) != 0) {
 				cout << "[" << filepath << ("] close error!\n"); 
-				//cin.ignore();
+				cin.ignore();
 			}
 		}
 	}

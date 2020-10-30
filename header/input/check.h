@@ -52,8 +52,10 @@ public:
             {
                 // 해당위치에서 자름.
                 string hanguelStart = s.substr(i, s.size());
+                
                 // 한글인지 검사한다.
                 return hangeulCheck(hanguelStart);
+
             }
 
         return true;
@@ -88,6 +90,7 @@ public:
         else
             return true;
     }
+    
     int dateVaild(string yymmdd)
     {
         if (findCheck(yymmdd, "$") || yymmdd.length() < 6 || yymmdd.length() == 7 || yymmdd.length() > 8)
@@ -115,6 +118,7 @@ public:
 
         int mm = stoi(yymmdd.substr(2, 2));
         int dd = stoi(yymmdd.substr(4, 2));
+
         if (mm < 1 || mm > 12 || dd < 1 || dd > 31)
         {
             cout << err[0];
@@ -170,9 +174,9 @@ public:
         // 유효기간
         if (n == _DATE)
         {
-            if (dateVaild(s) == 0)
-                return true;
-            return false;
+            cout << "this is dateValid" << endl;
+            if (dateVaild(s) != 0)
+                return false;
         }
 
         return true;

@@ -2,7 +2,7 @@
 
 #include <direct.h>
 #include <io.h>
-
+#include <map>
 #include "User.h"
 #include "../ReadFile.h"
 #include "../input/check.h"

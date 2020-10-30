@@ -172,6 +172,7 @@ void ReadFile::clearSCList() {
 
 void ReadFile::clearSCScheList(string calId) {
     cout << calId + "call clearSCScheduleList" << endl;
+    isFileExist("../data/SharedCalendar/"+calId+".txt");
     write.open("../data/SharedCalendar/"+calId+".txt", ios::out);
     write.close();
 }
@@ -283,6 +284,7 @@ void ReadFile::writeSCMember(string title, string member) {
 vector<string> ReadFile::readSCCalendar(string calID, int index)
 {
     cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
+    isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
     cout << "open success" << endl;
     int i = 0;
@@ -318,6 +320,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
 
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
+    isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
     int i = 0;
     string temp;
@@ -374,6 +377,7 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
 }
 
 void ReadFile::editSchedule(string userID, string scheID, int index, string text) {
+    isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
     int i = 0;
     int is_edit = 0;
@@ -422,6 +426,7 @@ void ReadFile::editSchedule(string userID, string scheID, int index, string text
 
 
 void ReadFile::deleteSchedule(string userID, string scheID) {
+    isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
     int i = 0;
     string temp, id;

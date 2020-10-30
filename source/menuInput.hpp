@@ -39,7 +39,22 @@ void MenuInput::mainMenu(){
         // 종료
         if(a == 3) {
             // delete &scm;
+
+            /************************************************************/
+            //                       종료 되는 시점 임                     /
+            /************************************************************/
+
             scm.saveSharedCalendarList();
+            
+            // 스케줄 리스트 저장하는것.
+            
+            
+
+            for(auto sc : scm.getSharedCalendarList())
+            {
+                sc.saveSharedScheduleList();
+            }
+
             exit(0);
         }
         
@@ -63,14 +78,24 @@ void MenuInput::mainMenu(){
             // 조회 실패
             if(scIdx < 0) continue;
             
+            // 조회 할 공유 캘린더.
             SharedCalendar<Schedule, User, Date> sc = scm.getSharedCalendarList()[scIdx];
 
+            /*********************************************************/
+            /*********************************************************/
+            /*********************************************************/
             /********************일정 파트랑 연결***********************/
+
             sc.select_Schedules_option(user);
+                        
+            /*********************************************************/
+            /*********************************************************/
+            /*********************************************************/
             /*********************************************************/
 
-            if(!getIntoSpecifiedCalendar(scIdx))
-                delSc(scIdx);
+            // 이게 혹시 필요할까,,
+            // if(!getIntoSpecifiedCalendar(scIdx))
+            //     delSc(scIdx);
         }
     }
  }
@@ -122,14 +147,17 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
 
     if(stage == 5){
 
+        cout << "see curr year" << endl;
         int yy = scm.getSharedCalendarList()[0].curr_year;
         int mm = scm.getSharedCalendarList()[0].curr_month;
         int dd = scm.getSharedCalendarList()[0].curr_day;
-        
+        cout << "see success" << endl;
+
         Date startDate = Date(yy, mm, dd);
 
+        
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate,
-         Date(stoi(scInfo[3].substr(0, 1)), stoi(scInfo[3].substr(2,3)), stoi(scInfo[3].substr(4,5))));
+         Date(scInfo[3]) ) ;
         cout << inputCreateSharedCalendar[stage];
         return;
     }
@@ -142,7 +170,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     getline(cin, input);
 
     check c = check();
-
+    cout << "before q check" << endl;
     if(c.qCheck(input)){
         if(scInfo.size()) scInfo.pop_back();
         createNewSc(scInfo, stage-1);
@@ -150,6 +178,8 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     }
 
     // 공캘이 이미 있는 공캘이다?
+    
+    cout << "before total Check1" << endl;
     if(stage == _SCNAME && c.totalCheck(input, stage, 0) && scm.searchSharedCalendarIdx(input) >= 0)
     {
         cout << err[0];
@@ -157,11 +187,14 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
         return;
     }
 
+    cout << "before total Check2" << endl;
     if(!c.totalCheck(input, stage, 0)){
         cout << err[0];
         createNewSc(scInfo, stage);
         return;
     }
+
+    cout << "before total Check3" << endl;
 
     scInfo.push_back(input);
     createNewSc(scInfo, stage+1);
@@ -231,8 +264,10 @@ int MenuInput::intoSC(){
     return stoi(input) - 1;
 }   
 
+// 특정한 공유 캘린더를 선택 했을 때. -> 0.캘린더 제거!
 int MenuInput::getIntoSpecifiedCalendar(int scIdx)
 {
+    
     cout << signInShardCalendar[2] << scm.getSharedCalendarList()[scIdx].getSharedCalendarName() <<
      signInShardCalendar[3];
     
