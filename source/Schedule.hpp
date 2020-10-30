@@ -9,8 +9,9 @@ int hhmmVaild(string hhmm);
 int hhmm_ahead_Vaild(int startTime, string endTime,bool lol);
 int contentVaild(string contents);
 int locationVaild(string location);
-void deleteCalendar(U user);
+int deleteCalendar(U user);
 bool admin = false;
+
 int checkValidSelection(bool admin, int boundary)
 {
     string input;
@@ -65,7 +66,7 @@ int checkValidSelection(bool admin, int boundary)
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::select_Schedules_option(U user)
+int Calendar<S, U, D>::select_Schedules_option(U user)
 {
     if (!isShared)
         cout << myCalendar[0];
@@ -96,7 +97,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     int selection = checkValidSelection(admin, 6);
     if (selection == -2)
     {
-        return;
+        return 0;
     }
 
     system("cls");
@@ -106,7 +107,9 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         /*캘린더 삭제 공유 캘린더 관리자만*/
         if (admin)
         {
-            deleteCalendar(user);
+            if(deleteCalendar(user) == 1) {
+                return -1;
+            }
         }
         else
         {
@@ -142,6 +145,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
         /* 오류 */
         break;
     }
+    return 1;
 }
 
 template <typename S, typename U, typename D>
@@ -812,7 +816,7 @@ int contentVaild(string contents)
 }
 
 template <typename S, typename U, typename D>
-void Calendar<S, U, D>::deleteCalendar(U user)
+int Calendar<S, U, D>::deleteCalendar(U user)
 {
     /*
     이거 다 필요없고 menuinput에 295라인에 delSc를 가져다가 쓰면됨.
@@ -820,7 +824,7 @@ void Calendar<S, U, D>::deleteCalendar(U user)
     근데 이거 쓰면 쓰는데, 공캘 인덱스가 따로 매개변수로 필요해서 그거 또 가져오는거
     추가해서 코딩해야할듯싶은데 지금 말하 ㄹ타이밍이다
     */
-
+   
    // 그럼 저함수 쓰고 다시 리턴해줘야디잖아
    // 메뉴선택으로
     string input;
@@ -831,12 +835,12 @@ deleteCalendarYN:
     {
         // ~Calendar();
         system("cls");
-        return;
+        return 1;
     }
     else if (input == "N" || input == "n")
     {
         select_Schedules_option(user);
-        return;
+        return 0;
     }
     else
     {

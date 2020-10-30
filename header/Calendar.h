@@ -92,8 +92,6 @@ public:
      * 
      */
     // void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
-        
-    
     
     void savePersonalScheduleList()
     {
@@ -208,7 +206,7 @@ public:
     /**
      *  일정 옵션 선택
      */
-    void select_Schedules_option(U user);
+    int select_Schedules_option(U user);
 
     /**
      *  일정을 보여줌
@@ -235,7 +233,7 @@ public:
     int modifyContent(int mod_id);
     int modifyLocation(int mod_id);
     int modifyDate(int mod_id);
-    void deleteCalendar(U user);
+    int deleteCalendar(U user);
     void deleteS(U user);
     /**
      *  일정을 삭제함.
