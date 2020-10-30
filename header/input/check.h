@@ -101,7 +101,8 @@ public:
 
         // 유효기간
         if(n == _DATE){
-            return true;
+            if(dateVaild(s)==0) return true;
+            return false;
         }
 
         return true; 
@@ -109,4 +110,5 @@ public:
 };
 
 #include"check.hpp"
+#include"../type/Schedule.h"
 #endif
