@@ -6,7 +6,7 @@ int titleVaild(string title);
 int dateVaild(string yymmdd);
 int yymm_dateVaild(string yymmdd);
 int hhmmVaild(string hhmm);
-int hhmm_ahead_Vaild(int startTime, string endTime);
+int hhmm_ahead_Vaild(int startTime, string endTime,bool lol);
 int contentVaild(string contents);
 int locationVaild(string location);
 void deleteCalendar();
@@ -243,7 +243,7 @@ Etime:
         {
             goto Stime;
         }
-    } while (hhmm_ahead_Vaild(stoi(startTime), endTime) != 0);
+    } while (hhmm_ahead_Vaild(stoi(startTime), endTime,true) != 0);
 
     endTime.erase(std::remove(endTime.begin(), endTime.end(), '-'), endTime.end());
     endTime.erase(std::remove(endTime.begin(), endTime.end(), ':'), endTime.end());
@@ -493,7 +493,7 @@ int Calendar<S, U, D>::modifySTime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmmVaild(hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getEndTime(),hhmm,false)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -512,7 +512,7 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(), hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(), hhmm,true)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -746,7 +746,7 @@ int hhmmVaild(string hhmm)
     return 0;
 }
 
-int hhmm_ahead_Vaild(int startTime, string hhmm)
+int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
 {
     if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 5)
     {
@@ -779,9 +779,16 @@ int hhmm_ahead_Vaild(int startTime, string hhmm)
         cout << err[0];
         return 1;
     }
-    if ( startTime > hh*100+mm ) {
+    if (lol) {
+        if ( startTime > hh*100+mm ) {
         cout << err[0];
         return 2;
+        }
+    } else {
+        if ( startTime < hh*100+mm ) {
+        cout << err[0];
+        return 2;
+        }
     }
     return 0;
 }
