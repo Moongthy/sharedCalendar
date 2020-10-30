@@ -107,9 +107,13 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         /*캘린더 삭제 공유 캘린더 관리자만*/
         if (admin)
         {
+<<<<<<< HEAD
             if(deleteCalendar(user) == 1) {
                 return -1;
             }
+=======
+            // deleteCalendar(user);
+>>>>>>> 5ec48fb486f1223d1a3fbf81f78f2242964c5111
         }
         else
         {
@@ -815,6 +819,7 @@ int contentVaild(string contents)
         return 0;
 }
 
+<<<<<<< HEAD
 template <typename S, typename U, typename D>
 int Calendar<S, U, D>::deleteCalendar(U user)
 {
@@ -848,6 +853,41 @@ deleteCalendarYN:
         goto deleteRetryYN;
     }
 }
+=======
+// template <typename S, typename U, typename D>
+// void Calendar<S, U, D>::deleteCalendar(U user)
+// {
+//     /*
+//     이거 다 필요없고 menuinput에 295라인에 delSc를 가져다가 쓰면됨.
+
+//     근데 이거 쓰면 쓰는데, 공캘 인덱스가 따로 매개변수로 필요해서 그거 또 가져오는거
+//     추가해서 코딩해야할듯싶은데 지금 말하 ㄹ타이밍이다
+//     */
+
+//    // 그럼 저함수 쓰고 다시 리턴해줘야디잖아
+//    // 메뉴선택으로
+//     string input;
+// deleteCalendarYN:
+//     cout << deleteString[3];
+//     getline(cin, input);
+//     if (input == "Y" || input == "y")
+//     {
+//         // ~Calendar();
+//         system("cls");
+//         return;
+//     }
+//     else if (input == "N" || input == "n")
+//     {
+//         select_Schedules_option(user);
+//         return;
+//     }
+//     else
+//     {
+//         cout << err[0];
+//         goto deleteRetryYN;
+//     }
+// }
+>>>>>>> 5ec48fb486f1223d1a3fbf81f78f2242964c5111
 
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::deleteS(U user)

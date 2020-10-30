@@ -50,10 +50,10 @@ void MenuInput::mainMenu(){
             
             
 
-            for(auto sc : scm.getSharedCalendarList())
-            {
-                sc.saveSharedScheduleList();
-            }
+            // for(auto sc : scm.getSharedCalendarList())
+            // {
+            //     sc.saveSharedScheduleList();
+            // }
 
             exit(0);
         }

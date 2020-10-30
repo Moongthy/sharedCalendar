@@ -99,10 +99,15 @@ void Users::signIn(){
 
 		string a = name, b = id;
 
-   		User user = User(a, b);
-    
+   		User user = User(a, b);	
+		cout << "call scm Contructor in Users.hpp" << endl;
     	SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
-
+		scm.loadSharedCalendarList();
+		// for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
+		// {
+		// 	cout << "load schedule List in user.hpp"<< endl;
+		// 	sc.loadSharedScheduleList();
+		// }
     	MenuInput mi = MenuInput(user, scm);
 
     	mi.mainMenu();

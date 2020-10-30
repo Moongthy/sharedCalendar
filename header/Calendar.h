@@ -93,35 +93,35 @@ public:
      */
     // void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
     
-    void savePersonalScheduleList()
-    {
-        ReadFile rf = ReadFile();
-        // txt파일 맨앞에 붙는 숫자
-        int idx = 1;
-        // 스케줄 갯수만큼, userId.txt 파일에 써벌임
-        for(Schedule s : scheduleList)
-        {
+    // void savePersonalScheduleList()
+    // {
+    //     ReadFile rf = ReadFile();
+    //     // txt파일 맨앞에 붙는 숫자
+    //     int idx = 1;
+    //     // 스케줄 갯수만큼, userId.txt 파일에 써벌임
+    //     for(Schedule s : scheduleList)
+    //     {
             
-            // Date 를 string 으로 변환 --> 이러면 이상해짐
+    //         // Date 를 string 으로 변환 --> 이러면 이상해짐
             
-            // string d = to_string(s.getDate().yy.substr(2, 3) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
-            string d = to_string(s.getDate().yy.substr(2,2) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+    //         // string d = to_string(s.getDate().yy.substr(2, 3) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+    //         string d = to_string(s.getDate().yy.substr(2,2) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
             
-            rf.writeSchedule(
+    //         rf.writeSchedule(
 
-                administrator.getUserId(),
+    //             administrator.getUserId(),
                 
-                to_string(idx),
-                s.getTitle(),
-                d,
-                to_string(s.getStartTime()),
-                to_string(s.getEndTime()),
-                s.getLocation(),
-                s.getContent()
-            );
-            ++idx;
-        }
-    }
+    //             to_string(idx),
+    //             s.getTitle(),
+    //             d,
+    //             to_string(s.getStartTime()),
+    //             to_string(s.getEndTime()),
+    //             s.getLocation(),
+    //             s.getContent()
+    //         );
+    //         ++idx;
+    //     }
+    // }
 
     void saveSharedScheduleList()
     {
