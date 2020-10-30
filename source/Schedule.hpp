@@ -326,8 +326,11 @@ void Calendar<S, U, D>::modify(U user)
     {
         cout << modifyString[3];
         string yymm;
+    bool yymmValidStatus = false;
         do
         {
+            if(yymmValidStatus) cout << err[0];
+            yymmValidStatus = true;
             cout << prompt;
             getline(cin, yymm);
             if (Check.qCheck(yymm))
@@ -705,7 +708,7 @@ int yymm_dateVaild(string yymmdd)
             }
         }
     }
-    cout << err[0] << "#";
+    cout << err[0];
     return 3;
 }
 int hhmmVaild(string hhmm)
@@ -815,8 +818,11 @@ void Calendar<S, U, D>::deleteS(U user)
     cout << deleteString[1];
     cout << deleteString[2];
     string input;
+    bool deleteStatus = false;
     do
     {
+        if(deleteStatus) cout << err[0];
+        deleteStatus = true;
         cout << prompt;
         getline(cin, input);
         if (Check.qCheck(input))
