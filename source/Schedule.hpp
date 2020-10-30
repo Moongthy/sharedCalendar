@@ -361,7 +361,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
     int modify_id;
     string input;
     do
-    {
+    {  
         bool isOnlyNumberStatus = false;
         do
         {
