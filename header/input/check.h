@@ -101,7 +101,7 @@ public:
 
         // 유효기간
         if(n == _DATE){
-            if(dateVaild(s)==0) return true;
+            if(dateVaild(s) == 0) return true;
             return false;
         }
 

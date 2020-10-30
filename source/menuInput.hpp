@@ -1,22 +1,22 @@
 MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
  :user(user), scm(scm) { 
+     cout << "MenuInput contructor" << endl;
+    //  // 비어있으면 리턴
+    // if(!scm.getSharedCalendarListSize()) return;
+    
+    //  // MenuInput이 생성되기 전에 이미 scm.sharedCalenarList는 이미 로드되어 있음.
+    // int yy = scm.getSharedCalendarList()[0].curr_year;
+    // int mm = scm.getSharedCalendarList()[0].curr_month;
+    // int dd = scm.getSharedCalendarList()[0].curr_day;
+    // Date currDate = Date(yy, mm, dd);
 
-     // 비어있으면 리턴
-    if(!scm.getSharedCalendarListSize()) return;
-
-     // MenuInput이 생성되기 전에 이미 scm.sharedCalenarList는 이미 로드되어 있음.
-    int yy = scm.getSharedCalendarList()[0].curr_year;
-    int mm = scm.getSharedCalendarList()[0].curr_month;
-    int dd = scm.getSharedCalendarList()[0].curr_day;
-    Date currDate = Date(yy, mm, dd);
-
-     // 유효기간 끝났으면 해당 공캘 폭파.
-     for(int i = 0; i < scm.getSharedCalendarListSize(); ++i)
-     {
-        // 현재 날짜랑 유효기간 비교. 유효기간 지났으면 erase.
-         if(currDate > scm.getSharedCalendarList()[i].getEndDate())
-            scm.getSharedCalendarList().erase(scm.getSharedCalendarList().begin() + i);
-     }
+    //  // 유효기간 끝났으면 해당 공캘 폭파.
+    //  for(int i = 0; i < scm.getSharedCalendarListSize(); ++i)
+    //  {
+    //     // 현재 날짜랑 유효기간 비교. 유효기간 지났으면 erase.
+    //      if(currDate > scm.getSharedCalendarList()[i].getEndDate())
+    //         scm.getSharedCalendarList().erase(scm.getSharedCalendarList().begin() + i);
+    //  }
  }
 
 #include"../header/Calendar.h"
@@ -28,7 +28,6 @@ void MenuInput::mainMenu(){
     while(true){
 
         int a , b , c = -1;
-
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
         if(a == 1) { 
@@ -39,7 +38,8 @@ void MenuInput::mainMenu(){
         if(a == 2) b = sharedCalendarActions();
         // 종료
         if(a == 3) {
-            delete &scm;
+            // delete &scm;
+            scm.saveSharedCalendarList();
             exit(0);
         }
         
@@ -89,7 +89,6 @@ int MenuInput::whatCalendarDoYouWant(){
     if(c.qCheck(input)) return -1;
 
     if(c.totalCheck(input, _NORMAL, 3)) return stoi(input);
-
     cout << err[0];
 
     return whatCalendarDoYouWant();
