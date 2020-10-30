@@ -362,8 +362,11 @@ void Calendar<S, U, D>::modifySchedule(U user)
     string input;
     do
     {
+        bool isOnlyNumberStatus = false;
         do
         {
+            if(isOnlyNumberStatus) cout << err[0];
+            isOnlyNumberStatus = true;
             cout << modifySchedulesString[0];
             cout << prompt;
             getline(cin, input);
