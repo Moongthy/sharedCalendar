@@ -96,6 +96,7 @@ void Calendar<S, U, D>::select_Schedules_option(U user)
     int selection = checkValidSelection(admin, 6);
     if (selection == -2)
     {
+        return;
         // q기능 수행
         // 캘린더 선택으로 가야함
         return;
@@ -501,7 +502,7 @@ int Calendar<S, U, D>::modifySTime(int mod_id)
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
         int hh = stoi(hhmm.substr(0, 2));
         int mm = stoi(hhmm.substr(2, 2));
-        scheduleList[mod_id].setEndTime(hh * 100 + mm);
+        scheduleList[mod_id].setStartTime(hh * 100 + mm);
         return 0;
     }
     return select;
@@ -514,7 +515,7 @@ int Calendar<S, U, D>::modifyETime(int mod_id)
     string hhmm;
     getline(cin, hhmm);
     int select;
-    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getEndTime(), hhmm)) == 0)
+    if ((select = hhmm_ahead_Vaild(scheduleList[mod_id].getStartTime(), hhmm)) == 0)
     {
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
         hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -863,6 +864,7 @@ void Calendar<S, U, D>::deleteS(U user)
 		else if (70 <= yy && yy < 100) yy += 1900;
         curr_year = yy;
         curr_month = mm;
+        system("cls");
         deleteS(user);
         return;
     }
@@ -875,11 +877,11 @@ void Calendar<S, U, D>::deleteSchedule(U user)
     string input;
     do
     {
-        bool status = false;
+        bool delStatus = false;
         do
         {
-            if (status) cout << err[0];
-            status = true;
+            if (delStatus) cout << err[0];
+            delStatus = true;
             cout << deleteString[0];
             cout << prompt;
             getline(cin, input);
@@ -907,6 +909,7 @@ void Calendar<S, U, D>::deleteSchedule(U user)
         {
             cout << noID;
         }
+
     } while (modify_id == -1);
 
 deleteRetryYN:
@@ -976,6 +979,10 @@ SearchTryAgain:
         cout << searchSchedulesString[2];
         cout << line << endl;
         goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
     }
     select_Schedules_option(user);
 }

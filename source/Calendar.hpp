@@ -17,6 +17,7 @@ Calendar<S, U, D>::Calendar(U user)
 template<typename S, typename U, typename D>
 Calendar<S, U, D>::Calendar(U user, string sharedCalendarId)
  :administrator(user), calendarID(sharedCalendarId) { 
+    isShared = true;
     time_t curTime = time(NULL);
     struct tm *pLocal = localtime(&curTime);
     curr_year = pLocal->tm_year + 1900;
