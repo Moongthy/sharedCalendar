@@ -95,35 +95,35 @@ public:
         
     
     
-    void savePersonalScheduleList()
-    {
-        ReadFile rf = ReadFile();
-        // txt파일 맨앞에 붙는 숫자
-        int idx = 1;
-        // 스케줄 갯수만큼, userId.txt 파일에 써벌임
-        for(Schedule s : scheduleList)
-        {
+    // void savePersonalScheduleList()
+    // {
+    //     ReadFile rf = ReadFile();
+    //     // txt파일 맨앞에 붙는 숫자
+    //     int idx = 1;
+    //     // 스케줄 갯수만큼, userId.txt 파일에 써벌임
+    //     for(Schedule s : scheduleList)
+    //     {
             
-            // Date 를 string 으로 변환 --> 이러면 이상해짐
+    //         // Date 를 string 으로 변환 --> 이러면 이상해짐
             
-            // string d = to_string(s.getDate().yy.substr(2, 3) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
-            string d = to_string(s.getDate().yy.substr(2,2) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+    //         // string d = to_string(s.getDate().yy.substr(2, 3) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
+    //         string d = to_string(s.getDate().yy.substr(2,2) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
             
-            rf.writeSchedule(
+    //         rf.writeSchedule(
 
-                administrator.getUserId(),
+    //             administrator.getUserId(),
                 
-                to_string(idx),
-                s.getTitle(),
-                d,
-                to_string(s.getStartTime()),
-                to_string(s.getEndTime()),
-                s.getLocation(),
-                s.getContent()
-            );
-            ++idx;
-        }
-    }
+    //             to_string(idx),
+    //             s.getTitle(),
+    //             d,
+    //             to_string(s.getStartTime()),
+    //             to_string(s.getEndTime()),
+    //             s.getLocation(),
+    //             s.getContent()
+    //         );
+    //         ++idx;
+    //     }
+    // }
 
     void saveSharedScheduleList()
     {
@@ -235,7 +235,7 @@ public:
     int modifyContent(int mod_id);
     int modifyLocation(int mod_id);
     int modifyDate(int mod_id);
-    void deleteCalendar(U user);
+    // void deleteCalendar(U user);
     void deleteS(U user);
     /**
      *  일정을 삭제함.
