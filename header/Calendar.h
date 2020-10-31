@@ -131,6 +131,8 @@ public:
 
         // 여기다가 넣어줏에요
         rf.clearSCScheList(calendarID);
+
+        cout << "saveSCSchelist write" << endl;
         
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임

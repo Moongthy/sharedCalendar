@@ -43,15 +43,26 @@ void MenuInput::mainMenu(){
             /************************************************************/
             //                       종료 되는 시점 임                     /
             /************************************************************/
+            //personalCal;
+            
+            // sharedCalendarList.txt => SharedCalendarManager.hpp
             scm.saveSharedCalendarList();
-            personalCal.savePersonalScheduleList();
-            // 스케줄 리스트 저장하는것.            
+
 
             // 공유 캘린더 일정 저장
+            // SharedCalendar/(calID).txt => Calendar.h
             for(auto sc : scm.getSharedCalendarList())
             {
                 sc.saveSharedScheduleList();
             }
+
+
+            // 개인 캘린더 일정 저장
+            // (userID).txt => Calendar.h
+            personalCal.savePersonalScheduleList();
+            // 스케줄 리스트 저장하는것.            
+
+
 
             exit(0);
         }
