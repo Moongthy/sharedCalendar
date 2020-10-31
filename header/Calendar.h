@@ -28,9 +28,9 @@ template <typename S, typename U, typename D> class Calendar
 protected:
     // 일정 목록
     bool isShared = false;
-    vector<Schedule> scheduleList;
+    
 
-    int maximum_id = 1;
+    int maximum_id = 0;
     // 캘린더 id
     string calendarID;
 
@@ -40,6 +40,8 @@ public:
     int curr_year;
     int curr_month;
     int curr_day;
+    vector<Schedule> scheduleList;
+    
     /**
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
@@ -79,20 +81,21 @@ public:
 
     #include"ReadFile.h"
 
-    /**
-    * (Calendar/UserID).txt에 일정 입력
-    * 
-     * @param userID 사용자 아이디
-     * @param name 일정 제목
-     * @param date 날짜
-     * @param starttime 시작 시간
-     * @param endtime 종료 시간
-     * @param loc 장소(없으면 null 넘겨주기)
-     * @param memo 메모(없으면 null 넘겨주기)
-     * 
-     */
-    void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
+    // /**
+    // * (Calendar/UserID).txt에 일정 입력
+    // * 
+    //  * @param userID 사용자 아이디
+    //  * @param name 일정 제목
+    //  * @param date 날짜
+    //  * @param starttime 시작 시간
+    //  * @param endtime 종료 시간
+    //  * @param loc 장소(없으면 null 넘겨주기)
+    //  * @param memo 메모(없으면 null 넘겨주기)
+    //  * 
+    //  */
+    // void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
     
+
     // 개인 캘린더 => userID.txt
     void savePersonalScheduleList()
     {
@@ -104,8 +107,8 @@ public:
         // txt파일 맨앞에 붙는 숫자
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
-        cout << "sch size " << this -> scheduleList.size() << endl;
-        for(Schedule s : this -> scheduleList)
+        cout << "sch size " << scheduleList.size() << endl;
+        for(Schedule s : scheduleList)
         {
             // Date 를 string 으로 변환 --> 이러면 이상해짐
             string d = to_string(s.getDate().yy % 100) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
@@ -131,6 +134,7 @@ public:
 
         // 여기다가 넣어줏에요
         rf.clearSCScheList(calendarID);
+        cout << calendarID << endl;
 
         cout << "saveSCSchelist write" << endl;
         
@@ -139,6 +143,7 @@ public:
         for(Schedule s : scheduleList)
         {
             // Date 를 string 으로 변환
+            cout << "in saveSharedScheduleList() PLOLOLO" << endl;
             string d = to_string(s.getDate().yy % 100) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
             
             rf.writeSCSchedule(

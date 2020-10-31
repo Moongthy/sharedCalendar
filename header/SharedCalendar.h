@@ -71,6 +71,7 @@ public:
      */
     int addMember(U newMember);
 
+
 };
 
 #include"../source/SharedCalendar.hpp"

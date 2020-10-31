@@ -51,15 +51,18 @@ void MenuInput::mainMenu(){
 
             // 공유 캘린더 일정 저장
             // SharedCalendar/(calID).txt => Calendar.h
-            for(auto sc : scm.getSharedCalendarList())
-            {
-                sc.saveSharedScheduleList();
-            }
+            // vector<SharedCalendar<Schedule, User, Date>> sc = scm.getSharedCalendarList();
+
+
+            // for(auto sc : scm.getSharedCalendarList())
+            // {
+            //     sc.saveSharedScheduleList();
+            // }
 
 
             // 개인 캘린더 일정 저장
             // (userID).txt => Calendar.h
-            personalCal.savePersonalScheduleList();
+            // personalCal.savePersonalScheduleList();
             // 스케줄 리스트 저장하는것.            
 
 
