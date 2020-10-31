@@ -620,18 +620,18 @@ int titleVaild(string title)
         return 2;
     }
 
-    if (title.length() > 20 || title.length() < 1)
+    if (title.size() > 20 || title.size() < 1)
     {
         //문자 길이가 다를 때 오류
         cout << err[0];
         return 2;
     }
-    else if (title.length() == 1 && title[0] == 'q')
+    else if (title.size() == 1 && title[0] == 'q')
     {
         //q를 입력했을 때 행동 수행
         return 1;
     }
-    else if (title.length() == 1 && title[0] == ' ')
+    else if (title.size() == 1 && title[0] == ' ')
     {
         //공백을 입력했을 때 오류
         cout << err[0];

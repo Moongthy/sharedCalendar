@@ -41,9 +41,11 @@ void Users::firstMenu()
 
 	switch (select) {
 	case 1:
+		system("cls");
 		signIn();
 		break;
 	case 2:
+		system("cls");
 		signUp();
 		break;
 	case 3:
@@ -146,7 +148,7 @@ void Users::signUp(){
 		}
 		else {
 			cout << err[2];
-			cin.ignore();
+			// cin.ignore();
 		}
 	}
 
@@ -253,9 +255,9 @@ string Users::getUserNameList(string userID){
 string Users::getInput(string menuname, string purpose, int start, int end){
 	check ck=check();
 	string str;
+	cout << menuname;
 	while (true) {
 		system("cls");
-		cout << menuname;
 		cout << purpose;
 		getline(cin,str);
 		if (str.compare("q") == 0) {
@@ -268,12 +270,12 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 			}
 			else {
 				cout << err[0];
-				cin.ignore();
+				// cin.ignore();
 			}
 		}
 		else {
 			cout << err[0];
-			cin.ignore();
+			// cin.ignore();
 		}
 	}
 	return str;

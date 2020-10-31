@@ -156,9 +156,16 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage == 5){
 
         cout << "see curr year" << endl;
-        int yy = scm.getSharedCalendarList()[0].curr_year;
-        int mm = scm.getSharedCalendarList()[0].curr_month;
-        int dd = scm.getSharedCalendarList()[0].curr_day;
+
+        Calendar<Schedule, User, Date> tmp = Calendar<Schedule, User, Date>(user);
+
+        int yy = tmp.curr_year;
+        int mm = tmp.curr_year;
+        int dd = tmp.curr_year;
+
+        // int yy = scm.getSharedCalendarList()[0].curr_year;
+        // int mm = scm.getSharedCalendarList()[0].curr_month;
+        // int dd = scm.getSharedCalendarList()[0].curr_day;
         cout << "see success" << endl;
 
         Date startDate = Date(yy, mm, dd);
