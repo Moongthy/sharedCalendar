@@ -29,7 +29,6 @@ protected:
     // 일정 목록
     bool isShared = false;
     
-
     int maximum_id = 0;
     // 캘린더 id
     string calendarID;

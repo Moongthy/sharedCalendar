@@ -126,6 +126,10 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     {
         admin = true;
     }
+    else
+    {
+        admin = false;
+    }
 
     for (int i = 0; i < 8; i++)
     {
@@ -191,6 +195,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         /* ¿À·ù */
         break;
     }
+    admin = false;
     return 1;
 }
 

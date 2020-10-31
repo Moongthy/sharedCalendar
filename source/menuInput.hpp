@@ -95,6 +95,8 @@ void MenuInput::mainMenu(){
             int sReturn = sc.select_Schedules_option(user);
             
             if(sReturn == -1) {
+                ReadFile rf;
+                rf.clearSCScheList(sc.getCalendarID());
                 scm.deleteSharedCalendar(user, scIdx);
             }
 
@@ -143,7 +145,7 @@ int MenuInput::sharedCalendarActions(){
     if(c.qCheck(input)) return -1;
 
     if(c.totalCheck(input, _NORMAL, 3)) {
-        if(input == "\n") {
+        if(input.empty()) {
             cout << err[0];
             return sharedCalendarActions();
         }
@@ -273,10 +275,10 @@ int MenuInput::intoSC(){
     string input;
     getline(cin, input);
 
-    if(input == "\n") {
-        cout << err[0];
-        return intoSC();
-    }
+    // if(input == "\n") {
+    //     cout << err[0];
+    //     return intoSC();
+    // }
 
     check c = check();
 
@@ -286,7 +288,10 @@ int MenuInput::intoSC(){
         cout << err[0];
         return intoSC();
     }
-
+    if ( input.empty()) {
+        cout << err[0];
+        return intoSC();
+    }
     return stoi(input) - 1;
 }   
 
@@ -357,5 +362,5 @@ void MenuInput::showJoinedList(){
         }
         ++i;
     }
-    if(calnum == 0) cout << choiceSharedCalendarAction[5];
+    // if(calnum == 0) cout << choiceSharedCalendarAction[5];
 }
