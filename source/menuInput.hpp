@@ -30,8 +30,8 @@ void MenuInput::mainMenu(){
         int a , b , c = -1;
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
+        Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) { 
-            Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
             personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
@@ -43,17 +43,15 @@ void MenuInput::mainMenu(){
             /************************************************************/
             //                       종료 되는 시점 임                     /
             /************************************************************/
-
             scm.saveSharedCalendarList();
-            
-            // 스케줄 리스트 저장하는것.
-            
-            
+            personalCal.savePersonalScheduleList();
+            // 스케줄 리스트 저장하는것.            
 
-            // for(auto sc : scm.getSharedCalendarList())
-            // {
-            //     sc.saveSharedScheduleList();
-            // }
+            // 공유 캘린더 일정 저장
+            for(auto sc : scm.getSharedCalendarList())
+            {
+                sc.saveSharedScheduleList();
+            }
 
             exit(0);
         }
@@ -156,23 +154,21 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     if(stage == 5){
 
         cout << "see curr year" << endl;
-
-        Calendar<Schedule, User, Date> tmp = Calendar<Schedule, User, Date>(user);
-
-        int yy = tmp.curr_year;
-        int mm = tmp.curr_year;
-        int dd = tmp.curr_year;
-
+        time_t curTime = time(NULL);
+        struct tm *pLocal = localtime(&curTime);
+        int yy = pLocal->tm_year + 1900;
+        int mm = pLocal->tm_mon+1;
+        int dd = pLocal->tm_mday;
+        cout << yy << mm << dd << "this is yymmdd" << endl;
         // int yy = scm.getSharedCalendarList()[0].curr_year;
         // int mm = scm.getSharedCalendarList()[0].curr_month;
         // int dd = scm.getSharedCalendarList()[0].curr_day;
         cout << "see success" << endl;
-
+        yy = yy%100;
         Date startDate = Date(yy, mm, dd);
-
+        cout << startDate.yy << startDate.mm << startDate.dd << "this is yymmdd2" << endl;
         
-        scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate,
-         Date(scInfo[3]) ) ;
+        scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate, Date(scInfo[3])) ;
         cout << inputCreateSharedCalendar[stage];
         return;
     }

@@ -108,17 +108,18 @@ int SharedCalendarManager<S, U, D>::deleteSharedCalendar(U user, int scIdx){
 /******************************파일 입출력 파트************************************/
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
-    
+    // 이 함수는 SharedCalendarList.txt파일에 추가해주는 함수입니다.
     ReadFile rf = ReadFile();
     
     rf.clearSCList();
     cout << "end ClearSCList" << endl;
     for(SharedCalendar<S, U, D> sc : sharedCalendarList){
+
+        // string startDate = "201025", endDate = "201231";
         
-        string startDate = "201025", endDate = "201231";
-        
-        // startDate = to_string(sc.getStartDate().yy) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
-        // endDate = to_string(sc.getEndDate().yy) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
+        string startDate = to_string(sc.getStartDate().yy % 100) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
+        string endDate = to_string(sc.getEndDate().yy % 100) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
+
         cout << "write " + sc.getCalendarID() + " SCList " << endl;
         rf.writeSCList(sc.getSharedCalendarName(), sc.getPassWord(), startDate, endDate, sc.getCalendarAdministrator().getUserId());
 

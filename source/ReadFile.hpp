@@ -177,6 +177,13 @@ void ReadFile::clearSCScheList(string calId) {
     write.close();
 }
 
+void ReadFile::clearPCScheList(string userId) {
+    cout << userId + "call clearPCScheduleList" << endl;
+    isFileExist("../data/Calendar/"+userId+".txt");
+    write.open("../data/Calendar/"+userId+".txt", ios::out);
+    write.close();
+}
+
 
 void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
     vector<string> id_list = readSCList(0);
@@ -317,7 +324,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     cout << "in readSCCalednar success" << endl;
     return return_list;    
 }
-
+//개인캘린더에서 일정 읽는거
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
     isFileExist("../data/Calendar/"+userID+".txt");
@@ -363,13 +370,12 @@ void ReadFile::writeSCSchedule(string calID, string id, string name, string date
     write.close(); 
 }
 
-
-
-
+//개인캘린더에 쓰는것
 void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
     isFileExist("../data/Calendar/"+userID+".txt");
     write.open("../data/Calendar/"+userID+".txt", ios::app);
+    cout << "writeSChedule" << endl;
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;

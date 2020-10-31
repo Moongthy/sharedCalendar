@@ -12,8 +12,7 @@ using namespace std;
 
 #include"../header/type/Users.h"
 
-int main(){
-
+int main() {
     string name;
     string id;
 
