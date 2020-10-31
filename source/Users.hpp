@@ -120,11 +120,12 @@ void Users::signIn(){
 		SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
 		
 		scm.loadSharedCalendarList();
-		// for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
-		// {
-		// 	cout << "load schedule List in user.hpp"<< endl;
-		// 	sc.loadSharedScheduleList();
-		// }
+		
+		for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
+		{
+			cout << "load schedule List in Users.hpp"<< endl;
+			sc.loadSharedScheduleList();
+		}
     	
 		MenuInput mi = MenuInput(user, scm);
 

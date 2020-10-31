@@ -67,7 +67,7 @@ int checkValidSelection(bool admin, int boundary)
 }
 
 template <typename S, typename U, typename D>
-vector<Schedule> Calendar<S, U, D>::select_Schedules_option(U user, vector<Schedule> input)
+int Calendar<S, U, D>::select_Schedules_option(U user)
 {
     scheduleList = input;
     // cout << "scheduleList pointer in select : " << &cal << endl;
@@ -276,11 +276,41 @@ Content:
     } while (contentVaild(content) != 0);
 
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
-    maximum_id++;
+    // maximum_id++;
     scheduleList.push_back(new_s);
-    //readfile.writeSchedule(user.getUserId(),maximum_id,new_s.getTitle(),new_s.getDate("이거 201029처럼 들어가야댐"),new_s.getStartTime(),new_s.getEndTime(),new_s.getLocation(),new_s.getContent());
 
-    /*******************스케줄 저장 실험*ㅑ****************ㅑ***********/
+    string d = to_string(new_s.getDate().yy % 100) 
+                + to_string(new_s.getDate().mm) 
+                + to_string(new_s.getDate().dd); 
+
+    
+    ReadFile rf = ReadFile();
+    
+    if(!isShared) {
+        rf.writeSchedule(
+            user.getUserId(),
+            to_string(maximum_id),
+            new_s.getTitle(),
+            d,
+            to_string(new_s.getStartTime()),
+            to_string(new_s.getEndTime()),
+            new_s.getLocation(),
+            new_s.getContent()
+        );
+    }
+    else {
+            rf.writeSCSchedule(
+            calendarID,
+            to_string(maximum_id),
+            new_s.getTitle(),
+            d,
+            to_string(new_s.getStartTime()),
+            to_string(new_s.getEndTime()),
+            new_s.getLocation(),
+            new_s.getContent()
+        );
+    }
+
     // ReadFile rf = ReadFile();
     // rf.writeSchedule(
     //     administrator.getUserId(),
