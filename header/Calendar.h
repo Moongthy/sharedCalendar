@@ -265,6 +265,7 @@ public:
      */
     void showNextMonthSchedules(U user);
     void showPrevMonthSchedules(U user);
+    void saveSchedule(U user);
 };
 
 #include"../source/Calendar.hpp"

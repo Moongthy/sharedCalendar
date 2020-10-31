@@ -22,11 +22,7 @@ MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
 #include"../header/Calendar.h"
 
 void MenuInput::mainMenu(){
-
-    // scm.showSharedCalendarList();
-
     while(true){
-
         int a , b , c = -1;
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
@@ -41,7 +37,7 @@ void MenuInput::mainMenu(){
             // delete &scm;
 
             /************************************************************/
-            //                       종료 되는 시점 임                     /
+            //                     종료 되는 시점 임                     /
             /************************************************************/
             //personalCal;
             
@@ -53,20 +49,15 @@ void MenuInput::mainMenu(){
             // SharedCalendar/(calID).txt => Calendar.h
             // vector<SharedCalendar<Schedule, User, Date>> sc = scm.getSharedCalendarList();
 
-
             // for(auto sc : scm.getSharedCalendarList())
             // {
             //     sc.saveSharedScheduleList();
             // }
 
-
             // 개인 캘린더 일정 저장
             // (userID).txt => Calendar.h
             // personalCal.savePersonalScheduleList();
-            // 스케줄 리스트 저장하는것.            
-
-
-
+            // 스케줄 리스트 저장하는것.
             exit(0);
         }
         
@@ -97,7 +88,6 @@ void MenuInput::mainMenu(){
             /*********************************************************/
             /*********************************************************/
             /********************일정 파트랑 연결***********************/
-            
 
             // 0 리턴되면 이상 없이 진행
             // 1 리턴되면 

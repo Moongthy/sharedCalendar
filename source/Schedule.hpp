@@ -1,4 +1,4 @@
-/*************************ì¼ì • íŒŒíŠ¸********************************/
+/*************************ÀÏÁ¤ ÆÄÆ®********************************/
 bool isNumber(const string &str);
 bool findCheck(string ss, string s);
 bool boundaryCheck(string ss, int boundary);
@@ -9,7 +9,6 @@ int hhmmVaild(string hhmm);
 int hhmm_ahead_Vaild(int startTime, string endTime,bool lol);
 int contentVaild(string contents);
 int locationVaild(string location);
-//int deleteCalendar(U user);
 bool admin = false;
 
 ReadFile readfile;
@@ -70,10 +69,53 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 int Calendar<S, U, D>::select_Schedules_option(U user)
 {
-    if (!isShared)
+    if (!isShared) {
         cout << myCalendar[0];
-    else
+        ReadFile rf = ReadFile();
+        string userID = user.userId;
+        // userId.txt ÆÄÀÏ¿¡¼­ ÀĞ¾î¿Å.
+        vector<string> sId          = rf.readCalendar(userID, 0);
+        vector<string> sName        = rf.readCalendar(userID, 1);
+        vector<string> sDate        = rf.readCalendar(userID, 2);
+        vector<string> sStartTime   = rf.readCalendar(userID, 3);
+        vector<string> sEndTime     = rf.readCalendar(userID, 4);
+        vector<string> sLoc         = rf.readCalendar(userID, 5);
+        vector<string> sMemo        = rf.readCalendar(userID, 6);
+        
+        // ÀúÀåµÈ ½ºÄÉÁÙ °¹¼ö ¸¸Å­. ½ºÄÉÁÙ¸®½ºÆ®¿¡ ºÒ·¯¿Â´Ù.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // ÇÏ³ªÀÇ ½ºÄÉÁÙ »ı¼º
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            // ³¡¿¡´Ù ³Ö¾îÁÜ
+            scheduleList.push_back(s);
+        }
+    }
+    else {
         cout << myCalendar[1];
+
+        ReadFile rf = ReadFile();
+        
+        // calid.txt ÆÄÀÏ¿¡¼­ ÀĞ¾î¿Å.
+        vector<string> sId          = rf.readSCCalendar(calendarID, 0);
+        vector<string> sName        = rf.readSCCalendar(calendarID, 1);
+        vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
+        vector<string> sStartTime   = rf.readSCCalendar(calendarID, 3);
+        vector<string> sEndTime     = rf.readSCCalendar(calendarID, 4);
+        vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
+        vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
+
+        // ÀúÀåµÈ ½ºÄÉÁÙ °¹¼ö ¸¸Å­. ½ºÄÉÁÙ¸®½ºÆ®¿¡ ºÒ·¯¿Â´Ù.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // ÇÏ³ªÀÇ ½ºÄÉÁÙ »ı¼º
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            
+            // ³¡¿¡´Ù ³Ö¾îÁÜ
+            scheduleList.push_back(s);
+        }
+
+    }
 
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
@@ -106,7 +148,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     switch (selection)
     {
     case 0:
-        /*ìº˜ë¦°ë” ì‚­ì œ ê³µìœ  ìº˜ë¦°ë” ê´€ë¦¬ìë§Œ*/
+        /*Ä¶¸°´õ »èÁ¦ °øÀ¯ Ä¶¸°´õ °ü¸®ÀÚ¸¸*/
         if (admin)
         {
             if(deleteCalendar(user) == 1) {
@@ -119,32 +161,32 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         }
         break;
     case 1:
-        /* ì¼ì •ìƒì„± */
+        /* ÀÏÁ¤»ı¼º */
         addSchedule(user);
         break;
     case 2:
-        /* ì¼ì •ìˆ˜ì • */
+        /* ÀÏÁ¤¼öÁ¤ */
         modify(user);
         break;
     case 3:
-        /* ì¼ì •ì‚­ì œ */
+        /* ÀÏÁ¤»èÁ¦ */
         deleteS(user);
         break;
     case 4:
-        /* ì¼ì •ê²€ìƒ‰ */
+        /* ÀÏÁ¤°Ë»ö */
         searchSchedule(user);
         break;
     case 5:
-        /* ì´ì „ ë‹¬ ì¼ì • */
+        /* ÀÌÀü ´Ş ÀÏÁ¤ */
         showPrevMonthSchedules(user);
         break;
     case 6:
-        /* ë‹¤ìŒ ë‹¬ ì¼ì • */
+        /* ´ÙÀ½ ´Ş ÀÏÁ¤ */
         showNextMonthSchedules(user);
         break;
     default:
         cout << err[0];
-        /* ì˜¤ë¥˜ */
+        /* ¿À·ù */
         break;
     }
     return 1;
@@ -275,51 +317,9 @@ Content:
     } while (contentVaild(content) != 0);
 
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
-    // maximum_id++;
     scheduleList.push_back(new_s);
 
-    string d = to_string(new_s.getDate().yy % 100) 
-                + to_string(new_s.getDate().mm) 
-                + to_string(new_s.getDate().dd); 
-
-    
-    ReadFile rf = ReadFile();
-    
-    if(!isShared) {
-        rf.writeSchedule(
-            user.getUserId(),
-            to_string(maximum_id),
-            new_s.getTitle(),
-            d,
-            to_string(new_s.getStartTime()),
-            to_string(new_s.getEndTime()),
-            new_s.getLocation(),
-            new_s.getContent()
-        );
-    }
-    else {
-            rf.writeSCSchedule(
-            calendarID,
-            to_string(maximum_id),
-            new_s.getTitle(),
-            d,
-            to_string(new_s.getStartTime()),
-            to_string(new_s.getEndTime()),
-            new_s.getLocation(),
-            new_s.getContent()
-        );
-    }
-
-    // ReadFile rf = ReadFile();
-    // rf.writeSchedule(
-    //     administrator.getUserId(),
-    //     title,
-    //     yymmdd,
-    //     startTime,
-    //     endTime,
-    //     location,
-    //     content
-    // );
+    saveSchedule(user);
 
     system("cls");
     cout << addSchedulesString[7];
@@ -444,37 +444,36 @@ ModifyRetry:
     switch (selection)
     {
     case 1:
-        /* ì œëª©ìˆ˜ì • */
+        /* Á¦¸ñ¼öÁ¤ */
         modifyTitle(modify_id);
         break;
     case 2:
-        /* ë‚ ì§œìˆ˜ì • */
+        /* ³¯Â¥¼öÁ¤ */
         modifyDate(modify_id);
         break;
     case 3:
-        /* ì‹œì‘ì‹œê°„ ìˆ˜ì • */
+        /* ½ÃÀÛ½Ã°£ ¼öÁ¤ */
         modifySTime(modify_id);
         break;
     case 4:
-        /* ì¢…ë£Œì‹œê°„ ìˆ˜ì • */
+        /* Á¾·á½Ã°£ ¼öÁ¤ */
         modifyETime(modify_id);
         break;
     case 5:
-        /* ë‚´ìš© ìˆ˜ì • */
+        /* ³»¿ë ¼öÁ¤ */
         modifyContent(modify_id);
         break;
     case 6:
-        /* ì¥ì†Œ ìˆ˜ì • */
+        /* Àå¼Ò ¼öÁ¤ */
         modifyLocation(modify_id);
         break;
     default: 
         {
             cout << err[0];
+            return;
         }
-        /* ì˜¤ë¥˜ */
-        return;
-        break;
     }
+    saveSchedule(user);
 RetryYN:
     cout << modifySchedulesString[8];
     string yninput;
@@ -594,10 +593,10 @@ int Calendar<S, U, D>::modifyLocation(int mod_id)
 }
 
 /*
-ì˜¤ë¥˜ ì²´í¬ í•¨ìˆ˜(???Vaild)ì˜ ë¦¬í„´ ê°’ ì„¤ëª…
-0 : ì •ìƒ ì¢…ë£Œ
-1 : q ì…ë ¥
-2~ : ì˜¤ë¥˜ ì¶œë ¥
+¿À·ù Ã¼Å© ÇÔ¼ö(???Vaild)ÀÇ ¸®ÅÏ °ª ¼³¸í
+0 : Á¤»ó Á¾·á
+1 : q ÀÔ·Â
+2~ : ¿À·ù Ãâ·Â
 */
 bool isNumber(const string &str)
 {
@@ -647,26 +646,27 @@ bool boundaryCheck(string ss, int boundary)
 
 int titleVaild(string title)
 {
+    check c;
     if (findCheck(title, "$"))
     {
         cout << err[0];
         return 2;
     }
 
-    if (title.length() > 20 || title.length() < 1)
+    if (c.stringSize(title) > 20 || c.stringSize(title) < 1)
     {
-        //ë¬¸ì ê¸¸ì´ê°€ ë‹¤ë¥¼ ë•Œ ì˜¤ë¥˜
+        //¹®ÀÚ ±æÀÌ°¡ ´Ù¸¦ ¶§ ¿À·ù
         cout << err[0];
         return 2;
     }
-    else if (title.length() == 1 && title[0] == 'q')
+    else if (c.stringSize(title) == 1 && title[0] == 'q')
     {
-        //që¥¼ ì…ë ¥í–ˆì„ ë•Œ í–‰ë™ ìˆ˜í–‰
+        //q¸¦ ÀÔ·ÂÇßÀ» ¶§ Çàµ¿ ¼öÇà
         return 1;
     }
-    else if (title.length() == 1 && title[0] == ' ')
+    else if (c.stringSize(title) == 1 && title[0] == ' ')
     {
-        //ê³µë°±ì„ ì…ë ¥í–ˆì„ ë•Œ ì˜¤ë¥˜
+        //°ø¹éÀ» ÀÔ·ÂÇßÀ» ¶§ ¿À·ù
         cout << err[0];
         return 3;
     }
@@ -852,14 +852,14 @@ template <typename S, typename U, typename D>
 int Calendar<S, U, D>::deleteCalendar(U user)
 {
     /*
-    ì´ê±° ë‹¤ í•„ìš”ì—†ê³  menuinputì— 295ë¼ì¸ì— delScë¥¼ ê°€ì ¸ë‹¤ê°€ ì“°ë©´ë¨.
+    ÀÌ°Å ´Ù ÇÊ¿ä¾ø°í menuinput¿¡ 295¶óÀÎ¿¡ delSc¸¦ °¡Á®´Ù°¡ ¾²¸éµÊ.
 
-    ê·¼ë° ì´ê±° ì“°ë©´ ì“°ëŠ”ë°, ê³µìº˜ ì¸ë±ìŠ¤ê°€ ë”°ë¡œ ë§¤ê°œë³€ìˆ˜ë¡œ í•„ìš”í•´ì„œ ê·¸ê±° ë˜ ê°€ì ¸ì˜¤ëŠ”ê±°
-    ì¶”ê°€í•´ì„œ ì½”ë”©í•´ì•¼í• ë“¯ì‹¶ì€ë° ì§€ê¸ˆ ë§í•˜ ã„¹íƒ€ì´ë°ì´ë‹¤
+    ±Ùµ¥ ÀÌ°Å ¾²¸é ¾²´Âµ¥, °øÄ¶ ÀÎµ¦½º°¡ µû·Î ¸Å°³º¯¼ö·Î ÇÊ¿äÇØ¼­ ±×°Å ¶Ç °¡Á®¿À´Â°Å
+    Ãß°¡ÇØ¼­ ÄÚµùÇØ¾ßÇÒµí½ÍÀºµ¥ Áö±İ ¸»ÇÏ ¤©Å¸ÀÌ¹ÖÀÌ´Ù
     */
    
-   // ê·¸ëŸ¼ ì €í•¨ìˆ˜ ì“°ê³  ë‹¤ì‹œ ë¦¬í„´í•´ì¤˜ì•¼ë””ì–ì•„
-   // ë©”ë‰´ì„ íƒìœ¼ë¡œ
+   // ±×·³ ÀúÇÔ¼ö ¾²°í ´Ù½Ã ¸®ÅÏÇØÁà¾ßµğÀİ¾Æ
+   // ¸Ş´º¼±ÅÃÀ¸·Î
     string input;
 deleteCalendarYN:
     cout << deleteString[3];
@@ -867,6 +867,7 @@ deleteCalendarYN:
     if (input == "Y" || input == "y")
     {
         // ~Calendar();
+        saveSchedule(user);
         system("cls");
         return 1;
     }
@@ -1013,6 +1014,7 @@ void Calendar<S, U, D>::searchSchedule(U user)
 SearchTryAgain:
     cout << searchSchedulesString[3];
     string keyword;
+    check c;
     getline(cin, keyword);
     if (Check.qCheck(keyword))
     {
@@ -1020,7 +1022,7 @@ SearchTryAgain:
         select_Schedules_option(user);
         return;
     }
-    if (keyword.length() < 2)
+    if (c.stringSize(keyword) < 2)
     {
         cout << err[0];
         goto SearchTryAgain;
@@ -1053,7 +1055,7 @@ SearchTryAgain:
         goto SearchTryAgain;
     }
     else {
-        //ë³´ê¸° í¸í•˜ê²Œ ê°œí–‰ ì„¸ë²ˆ
+        //º¸±â ÆíÇÏ°Ô °³Çà ¼¼¹ø
         cout << "\n\n\n";
     }
     select_Schedules_option(user);
@@ -1104,5 +1106,66 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
             curr_month--;
         }
         select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::saveSchedule(U user)
+{
+    ReadFile rf = ReadFile();
+    int idx = 1;    
+    check c;
+    if(!isShared) {
+        cout << "savePersonalSchelist write" << endl;
+
+        rf.clearPCScheList(user.userId);
+
+        cout << "PS size : " << scheduleList.size() << endl;
+        
+        int i = 0;
+        for(i=0; i<scheduleList.size(); i++){
+            string d = to_string(scheduleList[i].getDate().yy % 100) 
+                + to_string(scheduleList[i].getDate().mm)
+                + to_string(scheduleList[i].getDate().dd);
+
+            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            rf.writeSchedule(
+                user.getUserId(),
+                to_string(idx),
+                scheduleList[i].getTitle(),
+                d,
+                to_string(scheduleList[i].getStartTime()),
+                to_string(scheduleList[i].getEndTime()),
+                scheduleList[i].getLocation(),
+                scheduleList[i].getContent()
+            );
+            ++idx;
+        }
+    }
+    else {
+        cout << "saveSharedCalendarSchelist write" << endl;
+        rf.clearSCScheList(calendarID);
+        
+        int i = 0;
+        cout << scheduleList.size() << endl;
+        for(i=0; i<scheduleList.size(); i++){
+            string d = to_string(scheduleList[i].getDate().yy % 100) 
+                + to_string(scheduleList[i].getDate().mm)
+                + to_string(scheduleList[i].getDate().dd); 
+
+            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            rf.writeSCSchedule(
+                calendarID,
+                to_string(idx),
+                scheduleList[i].getTitle(),
+                d,
+                to_string(scheduleList[i].getStartTime()),
+                to_string(scheduleList[i].getEndTime()),
+                scheduleList[i].getLocation(),
+                scheduleList[i].getContent()
+            );
+            idx++;
+        }
+
     }
 }
