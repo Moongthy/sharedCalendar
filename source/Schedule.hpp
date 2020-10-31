@@ -69,6 +69,8 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 int Calendar<S, U, D>::select_Schedules_option(U user)
 {
+    scheduleList.clear();
+
     if (!isShared) {
         cout << myCalendar[0];
         ReadFile rf = ReadFile();
@@ -866,8 +868,7 @@ deleteCalendarYN:
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        // ~Calendar();
-        saveSchedule(user);
+        // ~Calendar();        
         system("cls");
         return 1;
     }
@@ -991,6 +992,7 @@ deleteRetryYN:
     if (input == "Y" || input == "y")
     {
         scheduleList.erase(scheduleList.begin() + modify_id);
+        saveSchedule(user);
         system("cls");
         select_Schedules_option(user);
         return;

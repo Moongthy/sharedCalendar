@@ -142,7 +142,13 @@ int MenuInput::sharedCalendarActions(){
 
     if(c.qCheck(input)) return -1;
 
-    if(c.totalCheck(input, _NORMAL, 3)) return stoi(input);
+    if(c.totalCheck(input, _NORMAL, 3)) {
+        if(input == "\n") {
+            cout << err[0];
+            return sharedCalendarActions();
+        }
+        return stoi(input);
+    }
 
     cout << err[0];
 
@@ -267,6 +273,11 @@ int MenuInput::intoSC(){
     string input;
     getline(cin, input);
 
+    if(input == "\n") {
+        cout << err[0];
+        return intoSC();
+    }
+
     check c = check();
 
     if(c.qCheck(input)) return -1;
@@ -331,7 +342,8 @@ bool MenuInput::delSc(int scIdx){
 }
 
 void MenuInput::showJoinedList(){
-    int i = 0;
+    int i = 0;  
+    int calnum = 0;
     for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList()){
         bool isMyCalendar = false;
         for(User m : sc.getMemberList())
@@ -339,8 +351,11 @@ void MenuInput::showJoinedList(){
                 isMyCalendar = true;
                 break;
             }
-        if(isMyCalendar)
+        if(isMyCalendar) {
             cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
+            calnum++;
+        }
         ++i;
     }
+    if(calnum == 0) cout << choiceSharedCalendarAction[5];
 }

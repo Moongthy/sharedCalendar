@@ -45,7 +45,7 @@ public :
         if(location.empty()) {
             this -> location.clear();
         }
-        
+
     }
 
     //임시 생성자
