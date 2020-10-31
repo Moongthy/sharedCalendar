@@ -25,6 +25,8 @@ void MenuInput::mainMenu(){
 
     // scm.showSharedCalendarList();
 
+    vector <Schedule> p_schedule;
+
     while(true){
 
         int a , b , c = -1;
@@ -32,7 +34,7 @@ void MenuInput::mainMenu(){
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) { 
-            personalCal.select_Schedules_option(user);
+            p_schedule = personalCal.select_Schedules_option(user, p_schedule);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
         if(a == 2) b = sharedCalendarActions();
@@ -61,6 +63,7 @@ void MenuInput::mainMenu(){
             // (userID).txt => Calendar.h
             vector <Schedule> tempS = personalCal.scheduleList;
             cout << "tempSlength" << tempS.size() << endl;
+            cout << "scheduleList pointer : " << &personalCal.scheduleList << endl;
             personalCal.savePersonalScheduleList(tempS);
             // 스케줄 리스트 저장하는것.            
 
@@ -101,9 +104,9 @@ void MenuInput::mainMenu(){
             // 0 리턴되면 이상 없이 진행
             // 1 리턴되면 
             // -1 리턴되면 삭제가 이미 된거! scIdx로 여기서 삭제
-            int sReturn = sc.select_Schedules_option(user);
+            vector<Schedule> sReturn = sc.select_Schedules_option(user);
             
-            if(sReturn == -1) {
+            if(sReturn == nullptr) {
                 scm.deleteSharedCalendar(user, scIdx);
             }
 

@@ -28,8 +28,6 @@ template <typename S, typename U, typename D> class Calendar
 protected:
     // 일정 목록
     bool isShared = false;
-    
-
     int maximum_id = 1;
     // 캘린더 id
     string calendarID;
@@ -212,7 +210,7 @@ public:
     /**
      *  일정 옵션 선택
      */
-    int select_Schedules_option(U user);
+    vector<Schedule> select_Schedules_option(U user,vector<Schedule> input);
 
     /**
      *  일정을 보여줌
