@@ -228,7 +228,6 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
 
         // showSharedCalendarList();
     }
-
     return 0;
 }
 

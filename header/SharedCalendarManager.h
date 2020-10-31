@@ -107,6 +107,7 @@ public:
     /****************************파일 입출력 파트*********************************/
     int saveSharedCalendarList();
     int loadSharedCalendarList();
+
 };
 
 #include"../source/SharedCalendarManager.hpp"
