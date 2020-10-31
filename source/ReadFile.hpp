@@ -317,7 +317,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     cout << "in readSCCalednar success" << endl;
     return return_list;    
 }
-
+//개인캘린더에서 일정 읽는거
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
     isFileExist("../data/Calendar/"+userID+".txt");
@@ -365,7 +365,7 @@ void ReadFile::writeSCSchedule(string calID, string id, string name, string date
 
 
 
-
+//개인캘린더에 쓰는것
 void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
     isFileExist("../data/Calendar/"+userID+".txt");

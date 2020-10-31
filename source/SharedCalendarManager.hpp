@@ -115,10 +115,11 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
     cout << "end ClearSCList" << endl;
     for(SharedCalendar<S, U, D> sc : sharedCalendarList){
         
-        string startDate = "201025", endDate = "201231";
+        // string startDate = "201025", endDate = "201231";
         
-        // startDate = to_string(sc.getStartDate().yy) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
-        // endDate = to_string(sc.getEndDate().yy) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
+        string startDate = to_string(sc.getStartDate().yy % 100) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
+        string endDate = to_string(sc.getEndDate().yy % 100) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
+
         cout << "write " + sc.getCalendarID() + " SCList " << endl;
         rf.writeSCList(sc.getSharedCalendarName(), sc.getPassWord(), startDate, endDate, sc.getCalendarAdministrator().getUserId());
 

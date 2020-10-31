@@ -12,6 +12,8 @@ int locationVaild(string location);
 //int deleteCalendar(U user);
 bool admin = false;
 
+ReadFile readfile;
+
 int checkValidSelection(bool admin, int boundary)
 {
     string input;
@@ -275,6 +277,7 @@ Content:
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
     maximum_id++;
     scheduleList.push_back(new_s);
+    //readfile.writeSchedule(user.getUserId(),maximum_id,new_s.getTitle(),new_s.getDate("이거 201029처럼 들어가야댐"),new_s.getStartTime(),new_s.getEndTime(),new_s.getLocation(),new_s.getContent());
 
     /*******************스케줄 저장 실험*ㅑ****************ㅑ***********/
     // ReadFile rf = ReadFile();

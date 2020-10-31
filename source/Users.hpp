@@ -1,6 +1,7 @@
 Users::Users(string userName, string userId)
 	: User(userId, userName)
 {
+	cout<<"Users Constructor"<<endl;
 }
 
 string Users::getUserPw()
@@ -15,35 +16,42 @@ void Users::setUserPw(string pw)
 
 void Users::firstMenu()
 {
+	cout<<"Check if  \"../data\", \"../dataUserList.txt\"  exist... if they don't, create."<<endl;
 	isDirExist("../data");
 	isFileExist("../data/UserList.txt");
 	int select;
 
-	while (true) {
-		string s_select;
-		system("cls");
-		cout << loginMenu[0];
-		cout << loginMenu[1];
+	// while (true) {
+	// system("cls");
+	// 	string s_select;
 
-		getline(cin,s_select);
+	// 	cout << loginMenu[0];
+	// 	cout << loginMenu[1];
+
+	// 	getline(cin,s_select);
 		
-		if (s_select.compare("1") == 0 || s_select.compare("2") == 0 || s_select.compare("3") == 0 || s_select.compare("4") == 0) {
-			select = stoi(s_select);
-			break;
-		}
-		else {
-			system("cls");
-			cout << loginMenu[0];
-			cout << err[0];
-			cin.ignore();
-		}
-	}
+	// 	if (s_select.compare("1") == 0 || s_select.compare("2") == 0 || s_select.compare("3") == 0) {
+	// 		select = stoi(s_select);
+	// 		break;
+	// 	}
+	// 	else {
+	// 		system("cls");
+	// 		cout << loginMenu[0];
+	// 		cout << err[0];
+	// 		// cin.ignore();
+	// 	}
+	// }
+		
+		
+	select=mainmenuInput(loginMenu[0],loginMenu[1]);
 
 	switch (select) {
 	case 1:
+		system("cls");
 		signIn();
 		break;
 	case 2:
+		system("cls");
 		signUp();
 		break;
 	case 3:
@@ -55,7 +63,9 @@ void Users::firstMenu()
 }
 
 void Users::signIn(){
+	cout<<"//Users::signIn()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
 	ReadFile rf = ReadFile();
+	cout<<"call ReadFile::getUserIdName() in Users.hpp"<<endl;
 	vector<User> userList = rf.getUserIdName();
 	
 	int flag = 0;
@@ -64,6 +74,7 @@ void Users::signIn(){
 	string name;
 
 	while (flag!=1) {
+		// cout<<loginMenu[5]<< endl;
 		id = getInput(loginMenu[5], loginMenu[7], 2, 10);
 		if (id.compare("q") == 0) {
 			flag = -1;
@@ -76,13 +87,15 @@ void Users::signIn(){
 			break;
 		}
 
+		cout<<"call ReadFile::isFine() in Users.hpp  <-- To check a login-verification"<<endl;
 		if (isFine(id, pw)) {
+			cout<<"//Users::signIn()//  call Users::getUserNameList() in Users.hpp  <-- Load NAME of account from \"UserList.txt\""<<endl;
 			name = getUserNameList(id);
 			flag = 1;
 		}
 		else {
 			cout << err[1];
-			cin.ignore();
+			// cin.ignore();
 			flag=-1;
 			break;
 		}
@@ -100,15 +113,20 @@ void Users::signIn(){
 		string a = name, b = id;
 
    		User user = User(a, b);	
+
+		cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
 		cout << "call scm Contructor in Users.hpp" << endl;
-    	SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
+		
+		SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
+		
 		scm.loadSharedCalendarList();
 		// for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
 		// {
 		// 	cout << "load schedule List in user.hpp"<< endl;
 		// 	sc.loadSharedScheduleList();
 		// }
-    	MenuInput mi = MenuInput(user, scm);
+    	
+		MenuInput mi = MenuInput(user, scm);
 
     	mi.mainMenu();
 		//move to Calender Select Menu
@@ -146,7 +164,7 @@ void Users::signUp(){
 		}
 		else {
 			cout << err[2];
-			cin.ignore();
+			// cin.ignore();
 		}
 	}
 
@@ -154,8 +172,9 @@ void Users::signUp(){
 		firstMenu();
 	}
 	else if (flag == 1) {
+		cout<<"//In Users::signUp()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
 		ReadFile rf = ReadFile();
-		
+		cout<<"call ReadFile::writeUserList() in Users.hpp  <-- Save new ID, PW, NAME in \"UserList.txt\""<<endl;
 		rf.writeUserList(id, pw, name);
 		
 		cout << loginMenu[4];
@@ -166,24 +185,26 @@ void Users::signUp(){
 
 		string a = name, b = id;
 
-   		User user = User(a, b);	
+   		User user = User(a, b);
+
+		cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
 		cout << "call scm Contructor in Users.hpp" << endl;
-    	SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
-		scm.loadSharedCalendarList();
-		// for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
-		// {
-		// 	cout << "load schedule List in user.hpp"<< endl;
-		// 	sc.loadSharedScheduleList();
-		// }
+    	
+		SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
+
     	MenuInput mi = MenuInput(user, scm);
 
     	mi.mainMenu();
+
+		//move to Calender Select Menu
 	}
 }
 
 bool Users::isOverlap(string id)
 {
+	cout<<"//Users::isOverlap()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
 	ReadFile rf = ReadFile();
+	cout<<"call ReadFile::getUserIDList() in Users.hpp"<<endl;
 	vector<string> idList = rf.getUserIDList();
 	if(find(idList.begin(),idList.end(),id) != idList.end()){
 		//id already exist
@@ -196,7 +217,9 @@ bool Users::isOverlap(string id)
 
 bool Users::isFine(string id, string pw)
 {
+	cout<<"//Users::isFine()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
 	ReadFile rf = ReadFile();
+	cout<<"call ReadFile::getUserpassword() in Users.hpp  <-- To check if ID and PW match"<<endl;
 	if(pw == rf.getUserpassword(id)){
 		//id pw match
 		return true;
@@ -232,7 +255,7 @@ string Users::getUserNameList(string userID){
                 if(str[i]=='$') separatorIndex++;
                 else if(separatorIndex==0) id += str[i];
                 else if(separatorIndex==2) name += str[i];
-                 else if(str[i]=='\0') break;
+                else if(str[i]=='\0') break;
             }
 			map.insert(make_pair(id,name));
         }
@@ -253,12 +276,41 @@ string Users::getUserNameList(string userID){
     return retVal;   
 }
 
+int Users::mainmenuInput(string menuname,string purpose){
+	int retVal;
+	string str;
+	
+	while(true){
+		cout<<menuname;
+		cout<<purpose;
+		getline(cin,str);
+		
+		if(str.compare("1")==0){
+			break;
+		}
+		if(str.compare("2")==0){
+			break;
+		}
+		if(str.compare("3")==0){
+			break;
+		}else{
+			cout<<err[0];
+		}
+	}
+
+	retVal = stoi(str);
+
+	return retVal;
+}
+
 string Users::getInput(string menuname, string purpose, int start, int end){
 	check ck=check();
 	string str;
-	while (true) {
-		system("cls");
+	if(purpose.compare(loginMenu[7])==0){
 		cout << menuname;
+	}
+	while (true) {
+		// system("cls");
 		cout << purpose;
 		getline(cin,str);
 		if (str.compare("q") == 0) {
@@ -267,16 +319,17 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 
 		if (ck.encodingCheck(str)) {
 			if (str.length() >= start && str.length() <= end) {
+				cout<<"length: "<<str.length()<<endl;
 				break;
 			}
 			else {
 				cout << err[0];
-				cin.ignore();
+				// cin.ignore();
 			}
 		}
 		else {
 			cout << err[0];
-			cin.ignore();
+			// cin.ignore();
 		}
 	}
 	return str;
@@ -303,7 +356,7 @@ void Users::isFileExist(const char* filepath)
 		else {
 			if (fclose(f) != 0) {
 				cout << "[" << filepath << ("] close error!\n"); 
-				cin.ignore();
+				// cin.ignore();
 			}
 		}
 	}

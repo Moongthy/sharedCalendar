@@ -27,6 +27,7 @@ public:
 	bool isOverlap(string id); // id already exist?
 	bool isFine(string id, string pw); // (id, pw) match?
 
+	int mainmenuInput(string menuname,string purpose);
 	string getUserNameList(string userId);
 	string getInput(string menuname, string purpose, int start, int end);
 
