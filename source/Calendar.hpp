@@ -9,7 +9,6 @@ Calendar<S, U, D>::Calendar(U user)
 
     ReadFile re;
     vector<string> id_list = re.readCalendar(user.getUserId(), 0);
-    maximum_id = 1;
     if(id_list.size()!=0) maximum_id = stoi(id_list[id_list.size()-1])+1;
 
     //loadPersonalScheduleList();
