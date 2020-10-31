@@ -68,7 +68,7 @@ int checkValidSelection(bool admin, int boundary)
 }
 
 template <typename S, typename U, typename D>
-int Calendar<S, U, D>::select_Schedules_option(U user)
+int Calendar<S, U, D>::select_Schedules_option(U user,)
 {
     if (!isShared)
         cout << myCalendar[0];

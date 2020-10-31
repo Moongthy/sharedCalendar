@@ -28,7 +28,7 @@ template <typename S, typename U, typename D> class Calendar
 protected:
     // 일정 목록
     bool isShared = false;
-    vector<Schedule> scheduleList;
+    
 
     int maximum_id = 1;
     // 캘린더 id
@@ -40,6 +40,7 @@ public:
     int curr_year;
     int curr_month;
     int curr_day;
+    vector<Schedule> scheduleList;
     /**
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
@@ -94,7 +95,7 @@ public:
     void writeSchedule(string userID, string name, string date, string starttime, string endtime, string loc, string memo);
     
     // 개인 캘린더 => userID.txt
-    void savePersonalScheduleList()
+    void savePersonalScheduleList(vector <Schedule> inputS)
     {
         ReadFile rf = ReadFile();
 
@@ -104,8 +105,8 @@ public:
         // txt파일 맨앞에 붙는 숫자
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
-        cout << "sch size " << this -> scheduleList.size() << endl;
-        for(Schedule s : this -> scheduleList)
+        cout << "sch size " << inputS.size() << endl;
+        for(Schedule s : inputS)
         {
             // Date 를 string 으로 변환 --> 이러면 이상해짐
             string d = to_string(s.getDate().yy % 100) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 

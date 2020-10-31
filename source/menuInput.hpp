@@ -59,7 +59,9 @@ void MenuInput::mainMenu(){
 
             // 개인 캘린더 일정 저장
             // (userID).txt => Calendar.h
-            personalCal.savePersonalScheduleList();
+            vector <Schedule> tempS = personalCal.scheduleList;
+            cout << "tempSlength" << tempS.size() << endl;
+            personalCal.savePersonalScheduleList(tempS);
             // 스케줄 리스트 저장하는것.            
 
 
