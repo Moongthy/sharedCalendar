@@ -150,8 +150,7 @@ public:
         // 캘이름
         if (n == _SCNAME)
         {
-            if (s.size() < 2 || s.size() > 10)
-                return false;
+            if (s.size() < 2 || s.size() > 10) return false;
             return encodingCheck(s);
         }
 
