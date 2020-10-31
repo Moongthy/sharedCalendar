@@ -108,6 +108,12 @@ class ReadFile {
          */          
         void clearSCScheList(string calId);
 
+        
+        /**
+         * Userid.txt 전체 삭제 
+         */          
+        void clearPCScheList(string userId);
+
 
 
         /**

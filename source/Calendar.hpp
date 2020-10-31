@@ -12,7 +12,7 @@ Calendar<S, U, D>::Calendar(U user)
     maximum_id = 1;
     if(id_list.size()!=0) maximum_id = stoi(id_list[id_list.size()-1])+1;
 
-    loadPersonalScheduleList();
+    //loadPersonalScheduleList();
  }
 
 template<typename S, typename U, typename D>

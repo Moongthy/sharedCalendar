@@ -30,8 +30,8 @@ void MenuInput::mainMenu(){
         int a , b , c = -1;
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
+        Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) { 
-            Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
             personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
@@ -43,17 +43,16 @@ void MenuInput::mainMenu(){
             /************************************************************/
             //                       종료 되는 시점 임                     /
             /************************************************************/
-
+            personalCal
             scm.saveSharedCalendarList();
-            
-            // 스케줄 리스트 저장하는것.
-            
-            
+            personalCal.savePersonalScheduleList();
+            // 스케줄 리스트 저장하는것.            
 
-            // for(auto sc : scm.getSharedCalendarList())
-            // {
-            //     sc.saveSharedScheduleList();
-            // }
+            // 공유 캘린더 일정 저장
+            for(auto sc : scm.getSharedCalendarList())
+            {
+                sc.saveSharedScheduleList();
+            }
 
             exit(0);
         }
