@@ -121,11 +121,11 @@ void Users::signIn(){
 		
 		scm.loadSharedCalendarList();
 		
-		for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
-		{
-			cout << "load schedule List in Users.hpp"<< endl;
-			sc.loadSharedScheduleList();
-		}
+		// for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList())
+		// {
+		// 	cout << "load schedule List in Users.hpp"<< endl;
+		// 	sc.loadSharedScheduleList();
+		// }
     	
 		MenuInput mi = MenuInput(user, scm);
 
@@ -319,8 +319,8 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 		}
 
 		if (ck.encodingCheck(str)) {
-			if (str.length() >= start && str.length() <= end) {
-				cout<<"length: "<<str.length()<<endl;
+			if (ck.stringSize(str) >= start && ck.stringSize(str) <= end) {
+				cout<<"length: "<<ck.stringSize(str)<<endl;
 				break;
 			}
 			else {

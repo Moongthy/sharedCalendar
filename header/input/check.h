@@ -29,7 +29,24 @@ public:
             return true;
         return false;
     }
-
+    //한글이랑 문자 포함해서 2바이트로 계산안하고 진짜 로우한 길이 재는 함수.
+    int stringSize(string s) {
+	    int hcount = 0;
+	    int count = 0;
+	    cout << s.size() << endl;
+	    cout << s.length() << endl;
+	    for (int i = 0; i < s.size(); i++) {
+		    if ((s[i] & 0x80) == 0x80) {
+			    hcount += 1;
+			    //cout << hcount << "@" << endl;
+		    }
+		    else {
+			    count += 1;
+			    //cout << count << "!" << endl;
+		    }
+	    }
+	    return (hcount / 2 + count);
+    }
     bool hangeulCheck(string &s);
 
     // 인코딩 체크
@@ -150,14 +167,14 @@ public:
         // 캘이름
         if (n == _SCNAME)
         {
-            if (s.size() < 2 || s.size() > 10) return false;
+            if (stringSize(s) < 2 || stringSize(s) > 10) return false;
             return encodingCheck(s);
         }
 
         // 캘 비번
         if (n == _PW)
         {
-            if (s.size() < 2 || s.size() > 15)
+            if (stringSize(s) < 2 || stringSize(s) > 15)
                 return false;
             return encodingCheck(s);
         }
@@ -165,7 +182,7 @@ public:
         // 입장인원
         if (n == _ACCEPTABLE)
         {
-            if (s.size() != 1)
+            if (stringSize(s) != 1)
                 return false;
             return numberCheck(s, 5);
         }

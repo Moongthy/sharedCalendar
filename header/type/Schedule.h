@@ -35,9 +35,17 @@ private:
     string location;
 
 public :
-    Schedule(string title, Date date, int startTime, int endTime, string content = "", string location = "", int id = -1)
-        : id(id), title(title), date(date), startTime(startTime), endTime(endTime), location(location), content(content) {
-            
+    Schedule(string title, Date date, int startTime, int endTime, string content, string location, int id = -1)
+        : id(id), title(title), date(date), startTime(startTime), endTime(endTime) {
+
+        if(content.empty()) {
+            this -> content.clear();
+        }
+
+        if(location.empty()) {
+            this -> location.clear();
+        }
+
     }
 
     //임시 생성자

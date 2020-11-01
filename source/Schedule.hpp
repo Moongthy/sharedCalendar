@@ -1,4 +1,4 @@
-/*************************일정 파트********************************/
+/*************************���� ��Ʈ********************************/
 bool isNumber(const string &str);
 bool findCheck(string ss, string s);
 bool boundaryCheck(string ss, int boundary);
@@ -69,12 +69,55 @@ int checkValidSelection(bool admin, int boundary)
 template <typename S, typename U, typename D>
 int Calendar<S, U, D>::select_Schedules_option(U user)
 {
-    scheduleList = input;
-    // cout << "scheduleList pointer in select : " << &cal << endl;
-    if (!isShared)
+    scheduleList.clear();
+
+    if (!isShared) {
         cout << myCalendar[0];
-    else
+        ReadFile rf = ReadFile();
+        string userID = user.userId;
+        // userId.txt ���Ͽ��� �о��.
+        vector<string> sId          = rf.readCalendar(userID, 0);
+        vector<string> sName        = rf.readCalendar(userID, 1);
+        vector<string> sDate        = rf.readCalendar(userID, 2);
+        vector<string> sStartTime   = rf.readCalendar(userID, 3);
+        vector<string> sEndTime     = rf.readCalendar(userID, 4);
+        vector<string> sLoc         = rf.readCalendar(userID, 5);
+        vector<string> sMemo        = rf.readCalendar(userID, 6);
+        
+        // ����� ������ ���� ��ŭ. �����ٸ���Ʈ�� �ҷ��´�.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // �ϳ��� ������ ����
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            // ������ �־���
+            scheduleList.push_back(s);
+        }
+    }
+    else {
         cout << myCalendar[1];
+
+        ReadFile rf = ReadFile();
+        
+        // calid.txt ���Ͽ��� �о��.
+        vector<string> sId          = rf.readSCCalendar(calendarID, 0);
+        vector<string> sName        = rf.readSCCalendar(calendarID, 1);
+        vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
+        vector<string> sStartTime   = rf.readSCCalendar(calendarID, 3);
+        vector<string> sEndTime     = rf.readSCCalendar(calendarID, 4);
+        vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
+        vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
+
+        // ����� ������ ���� ��ŭ. �����ٸ���Ʈ�� �ҷ��´�.
+        for(int i = 0; i < sId.size(); ++i)
+        {
+            // �ϳ��� ������ ����
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            
+            // ������ �־���
+            scheduleList.push_back(s);
+        }
+
+    }
 
     cout << curr_year << ScheduleInfo[2] << curr_month << ScheduleInfo[3] << endl;
     show_Schedules(curr_year, curr_month);
@@ -82,6 +125,10 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     if (isShared && user.getUserId() == getCalendarAdministrator().getUserId())
     {
         admin = true;
+    }
+    else
+    {
+        admin = false;
     }
 
     for (int i = 0; i < 8; i++)
@@ -107,7 +154,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     switch (selection)
     {
     case 0:
-        /*캘린더 삭제 공유 캘린더 관리자만*/
+        /*Ķ���� ���� ���� Ķ���� �����ڸ�*/
         if (admin)
         {
             if(deleteCalendar(user) == 1) {
@@ -120,35 +167,36 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         }
         break;
     case 1:
-        /* 일정생성 */
+        /* �������� */
         addSchedule(user);
         break;
     case 2:
-        /* 일정수정 */
+        /* �������� */
         modify(user);
         break;
     case 3:
-        /* 일정삭제 */
+        /* �������� */
         deleteS(user);
         break;
     case 4:
-        /* 일정검색 */
+        /* �����˻� */
         searchSchedule(user);
         break;
     case 5:
-        /* 이전 달 일정 */
+        /* ���� �� ���� */
         showPrevMonthSchedules(user);
         break;
     case 6:
-        /* 다음 달 일정 */
+        /* ���� �� ���� */
         showNextMonthSchedules(user);
         break;
     default:
         cout << err[0];
-        /* 오류 */
+        /* ���� */
         break;
     }
-    return scheduleList;
+    admin = false;
+    return 1;
 }
 
 template <typename S, typename U, typename D>
@@ -276,51 +324,9 @@ Content:
     } while (contentVaild(content) != 0);
 
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
-    // maximum_id++;
     scheduleList.push_back(new_s);
 
-    string d = to_string(new_s.getDate().yy % 100) 
-                + to_string(new_s.getDate().mm) 
-                + to_string(new_s.getDate().dd); 
-
-    
-    ReadFile rf = ReadFile();
-    
-    if(!isShared) {
-        rf.writeSchedule(
-            user.getUserId(),
-            to_string(maximum_id),
-            new_s.getTitle(),
-            d,
-            to_string(new_s.getStartTime()),
-            to_string(new_s.getEndTime()),
-            new_s.getLocation(),
-            new_s.getContent()
-        );
-    }
-    else {
-            rf.writeSCSchedule(
-            calendarID,
-            to_string(maximum_id),
-            new_s.getTitle(),
-            d,
-            to_string(new_s.getStartTime()),
-            to_string(new_s.getEndTime()),
-            new_s.getLocation(),
-            new_s.getContent()
-        );
-    }
-
-    // ReadFile rf = ReadFile();
-    // rf.writeSchedule(
-    //     administrator.getUserId(),
-    //     title,
-    //     yymmdd,
-    //     startTime,
-    //     endTime,
-    //     location,
-    //     content
-    // );
+    saveSchedule(user);
 
     system("cls");
     cout << addSchedulesString[7];
@@ -445,37 +451,36 @@ ModifyRetry:
     switch (selection)
     {
     case 1:
-        /* 제목수정 */
+        /* ������� */
         modifyTitle(modify_id);
         break;
     case 2:
-        /* 날짜수정 */
+        /* ��¥���� */
         modifyDate(modify_id);
         break;
     case 3:
-        /* 시작시간 수정 */
+        /* ���۽ð� ���� */
         modifySTime(modify_id);
         break;
     case 4:
-        /* 종료시간 수정 */
+        /* ����ð� ���� */
         modifyETime(modify_id);
         break;
     case 5:
-        /* 내용 수정 */
+        /* ���� ���� */
         modifyContent(modify_id);
         break;
     case 6:
-        /* 장소 수정 */
+        /* ��� ���� */
         modifyLocation(modify_id);
         break;
     default: 
         {
             cout << err[0];
+            return;
         }
-        /* 오류 */
-        return;
-        break;
     }
+    saveSchedule(user);
 RetryYN:
     cout << modifySchedulesString[8];
     string yninput;
@@ -595,10 +600,10 @@ int Calendar<S, U, D>::modifyLocation(int mod_id)
 }
 
 /*
-오류 체크 함수(???Vaild)의 리턴 값 설명
-0 : 정상 종료
-1 : q 입력
-2~ : 오류 출력
+���� üũ �Լ�(???Vaild)�� ���� �� ����
+0 : ���� ����
+1 : q �Է�
+2~ : ���� ���
 */
 bool isNumber(const string &str)
 {
@@ -648,26 +653,27 @@ bool boundaryCheck(string ss, int boundary)
 
 int titleVaild(string title)
 {
+    check c;
     if (findCheck(title, "$"))
     {
         cout << err[0];
         return 2;
     }
 
-    if (title.length() > 20 || title.length() < 1)
+    if (c.stringSize(title) > 20 || c.stringSize(title) < 1)
     {
-        //문자 길이가 다를 때 오류
+        //���� ���̰� �ٸ� �� ����
         cout << err[0];
         return 2;
     }
-    else if (title.length() == 1 && title[0] == 'q')
+    else if (c.stringSize(title) == 1 && title[0] == 'q')
     {
-        //q를 입력했을 때 행동 수행
+        //q�� �Է����� �� �ൿ ����
         return 1;
     }
-    else if (title.length() == 1 && title[0] == ' ')
+    else if (c.stringSize(title) == 1 && title[0] == ' ')
     {
-        //공백을 입력했을 때 오류
+        //������ �Է����� �� ����
         cout << err[0];
         return 3;
     }
@@ -853,21 +859,21 @@ template <typename S, typename U, typename D>
 int Calendar<S, U, D>::deleteCalendar(U user)
 {
     /*
-    이거 다 필요없고 menuinput에 295라인에 delSc를 가져다가 쓰면됨.
+    �̰� �� �ʿ���� menuinput�� 295���ο� delSc�� �����ٰ� �����.
 
-    근데 이거 쓰면 쓰는데, 공캘 인덱스가 따로 매개변수로 필요해서 그거 또 가져오는거
-    추가해서 코딩해야할듯싶은데 지금 말하 ㄹ타이밍이다
+    �ٵ� �̰� ���� ���µ�, ��Ķ �ε����� ���� �Ű������� �ʿ��ؼ� �װ� �� �������°�
+    �߰��ؼ� �ڵ��ؾ��ҵ������� ���� ���� ��Ÿ�̹��̴�
     */
    
-   // 그럼 저함수 쓰고 다시 리턴해줘야디잖아
-   // 메뉴선택으로
+   // �׷� ���Լ� ���� �ٽ� ��������ߵ��ݾ�
+   // �޴���������
     string input;
 deleteCalendarYN:
     cout << deleteString[3];
     getline(cin, input);
     if (input == "Y" || input == "y")
     {
-        // ~Calendar();
+        // ~Calendar();        
         system("cls");
         return 1;
     }
@@ -991,6 +997,7 @@ deleteRetryYN:
     if (input == "Y" || input == "y")
     {
         scheduleList.erase(scheduleList.begin() + modify_id);
+        saveSchedule(user);
         system("cls");
         select_Schedules_option(user, scheduleList);
         return;
@@ -1014,6 +1021,7 @@ void Calendar<S, U, D>::searchSchedule(U user)
 SearchTryAgain:
     cout << searchSchedulesString[3];
     string keyword;
+    check c;
     getline(cin, keyword);
     if (Check.qCheck(keyword))
     {
@@ -1021,7 +1029,7 @@ SearchTryAgain:
         select_Schedules_option(user, scheduleList);
         return;
     }
-    if (keyword.length() < 2)
+    if (c.stringSize(keyword) < 2)
     {
         cout << err[0];
         goto SearchTryAgain;
@@ -1054,7 +1062,7 @@ SearchTryAgain:
         goto SearchTryAgain;
     }
     else {
-        //보기 편하게 개행 세번
+        //���� ���ϰ� ���� ����
         cout << "\n\n\n";
     }
     select_Schedules_option(user, scheduleList);
@@ -1105,5 +1113,66 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
             curr_month--;
         }
         select_Schedules_option(user, scheduleList);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::saveSchedule(U user)
+{
+    ReadFile rf = ReadFile();
+    int idx = 1;    
+    check c;
+    if(!isShared) {
+        cout << "savePersonalSchelist write" << endl;
+
+        rf.clearPCScheList(user.userId);
+
+        cout << "PS size : " << scheduleList.size() << endl;
+        
+        int i = 0;
+        for(i=0; i<scheduleList.size(); i++){
+            string d = to_string(scheduleList[i].getDate().yy % 100) 
+                + to_string(scheduleList[i].getDate().mm)
+                + to_string(scheduleList[i].getDate().dd);
+
+            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            rf.writeSchedule(
+                user.getUserId(),
+                to_string(idx),
+                scheduleList[i].getTitle(),
+                d,
+                to_string(scheduleList[i].getStartTime()),
+                to_string(scheduleList[i].getEndTime()),
+                scheduleList[i].getLocation(),
+                scheduleList[i].getContent()
+            );
+            ++idx;
+        }
+    }
+    else {
+        cout << "saveSharedCalendarSchelist write" << endl;
+        rf.clearSCScheList(calendarID);
+        
+        int i = 0;
+        cout << scheduleList.size() << endl;
+        for(i=0; i<scheduleList.size(); i++){
+            string d = to_string(scheduleList[i].getDate().yy % 100) 
+                + to_string(scheduleList[i].getDate().mm)
+                + to_string(scheduleList[i].getDate().dd); 
+
+            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            rf.writeSCSchedule(
+                calendarID,
+                to_string(idx),
+                scheduleList[i].getTitle(),
+                d,
+                to_string(scheduleList[i].getStartTime()),
+                to_string(scheduleList[i].getEndTime()),
+                scheduleList[i].getLocation(),
+                scheduleList[i].getContent()
+            );
+            idx++;
+        }
+
     }
 }
