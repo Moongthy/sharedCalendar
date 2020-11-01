@@ -1,6 +1,6 @@
 MenuInput::MenuInput(User user, SharedCalendarManager<Schedule, User, Date> scm)
  :user(user), scm(scm) { 
-     cout << "MenuInput contructor" << endl;
+    //  cout << "MenuInput contructor" << endl;
     //  // 비어있으면 리턴
     // if(!scm.getSharedCalendarListSize()) return;
     
@@ -166,20 +166,20 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
 
     if(stage == 5){
 
-        cout << "see curr year" << endl;
+        // cout << "see curr year" << endl;
         time_t curTime = time(NULL);
         struct tm *pLocal = localtime(&curTime);
         int yy = pLocal->tm_year + 1900;
         int mm = pLocal->tm_mon+1;
         int dd = pLocal->tm_mday;
-        cout << yy << mm << dd << "this is yymmdd" << endl;
+        // cout << yy << mm << dd << "this is yymmdd" << endl;
         // int yy = scm.getSharedCalendarList()[0].curr_year;
         // int mm = scm.getSharedCalendarList()[0].curr_month;
         // int dd = scm.getSharedCalendarList()[0].curr_day;
-        cout << "see success" << endl;
+        // cout << "see success" << endl;
         yy = yy%100;
         Date startDate = Date(yy, mm, dd);
-        cout << startDate.yy << startDate.mm << startDate.dd << "this is yymmdd2" << endl;
+        // cout << startDate.yy << startDate.mm << startDate.dd << "this is yymmdd2" << endl;
         
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate, Date(scInfo[3])) ;
         cout << inputCreateSharedCalendar[stage];
@@ -194,7 +194,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
     getline(cin, input);
 
     check c = check();
-    cout << "before q check" << endl;
+    // cout << "before q check" << endl;
     if(c.qCheck(input)){
         if(scInfo.size()) scInfo.pop_back();
         createNewSc(scInfo, stage-1);
@@ -203,7 +203,7 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
 
     // 공캘이 이미 있는 공캘이다?
     
-    cout << "before total Check1" << endl;
+    // cout << "before total Check1" << endl;
     if(stage == _SCNAME && c.totalCheck(input, stage, 0) && scm.searchSharedCalendarIdx(input) >= 0)
     {
         cout << err[0];
@@ -211,14 +211,14 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
         return;
     }
 
-    cout << "before total Check2" << endl;
+    // cout << "before total Check2" << endl;
     if(!c.totalCheck(input, stage, 0)){
         cout << err[0];
         createNewSc(scInfo, stage);
         return;
     }
 
-    cout << "before total Check3" << endl;
+    // cout << "before total Check3" << endl;
 
     scInfo.push_back(input);
     createNewSc(scInfo, stage+1);
@@ -275,10 +275,10 @@ int MenuInput::intoSC(){
     string input;
     getline(cin, input);
 
-    // if(input == "\n") {
-    //     cout << err[0];
-    //     return intoSC();
-    // }
+    if(input.compare("\0")==0) {
+        cout << err[0];
+        return intoSC();
+    }
 
     check c = check();
 

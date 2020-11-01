@@ -1,9 +1,7 @@
-// ψΞ???,,,θ¨ = true ??
-// υδριρύεψ ? ,, ? ,,,ι· = false ??
 bool check::hangeulCheck(string& s){
     // cout << s << endl;
-    string r = "υδ";
-    string h = "ι·";
+    string r = "γ„±";
+    string h = "γ…";
     for(char c : s)
         if(c >= r[0] && c <= h[0])
             return false;
