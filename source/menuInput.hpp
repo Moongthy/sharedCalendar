@@ -80,10 +80,14 @@ void MenuInput::mainMenu(){
             int scIdx = intoSC();
             
             // 조회 실패
-            if(scIdx < 0) continue;
-            
+            if(scIdx < 0) {
+                continue;
+            }
             // 조회 할 공유 캘린더.
             SharedCalendar<Schedule, User, Date> sc = scm.getSharedCalendarList()[scIdx];
+            //if(sc == NULL) {
+              //  cout << choiceSharedCalendarAction[5];
+            //}
 
             /*********************************************************/
             /*********************************************************/

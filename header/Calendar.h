@@ -45,7 +45,6 @@ public:
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
      * 
-     * 여기서 load() 호출
      * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
@@ -54,8 +53,6 @@ public:
     /**
      *  공유 캘린더 생성자에서 호출될 생성자
      *  일정목록의 크기는 0으로 초기화됨
-     * 
-     *  load() 호출
      * 
      *  @param administrator 이 캘린더를 생성한 사람. 관리자
      *  @param sharedCalendarId 공유캘린더 Id. 현재있는 공유캘린더 수 + 1000 으로 매겨짐
@@ -66,7 +63,7 @@ public:
     // 개인 캘린더 소멸자
     virtual ~Calendar()
     {
-        // savePersonalScheduleList();
+
     }
 
     /**

@@ -1,7 +1,7 @@
 #include "../header/ReadFile.h"
-
 using namespace std;
 
+check ck;
 void ReadFile::isFileExist(string filepath)
 {
    if (_access(filepath.c_str(), 0) != 0) {
@@ -292,7 +292,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
-    // cout << "open success" << endl;
+    cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -320,14 +320,16 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     else cout << "readSCCalendar [" << calID << ".txt] read error!" << endl;
     
     read.close();
-    // cout << "in readSCCalednar success" << endl;
+    cout << "in readSCCalednar success" << endl;
     return return_list;    
 }
 //개인캘린더에서 일정 읽는거
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
+    cout << "open the ../data/Calendar/"+userID+".txt" << endl << endl;
     isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
+    cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -348,12 +350,18 @@ vector<string> ReadFile::readCalendar(string userID, int index)
                 else if(separatorIndex==index) temp += str[i];
                 else if(str[i]=='\0') break;
             }
+            //cout << "temp# : " << temp << endl;
+            if(temp.empty()) {
+                cout << "this temp is empty, cleared now" << endl;
+                temp.clear();
+            }
             return_list.push_back(temp);
         }
     }
     else cout << "readCalendar [" << userID << ".txt] read error!" << endl;
     
     read.close();
+    cout << "in readSCCalednar success" << endl;
 
     return return_list;    
 }
@@ -363,6 +371,7 @@ void ReadFile::writeSCSchedule(string calID, string id, string name, string date
 {
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
+    cout << "writeSharedSchedule" << endl;
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;
@@ -372,12 +381,38 @@ void ReadFile::writeSCSchedule(string calID, string id, string name, string date
 //개인캘린더에 쓰는것
 void ReadFile::writeSchedule(string userID, string id, string name, string date, string starttime, string endtime, string loc, string memo) 
 {
+    // write2.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t,0x10ffff, std::generate_header>));
+    // write2.open("../data/Calendar/"+userID+".txt", ios::app);
+    // write2.write(name,10);
+    // write2 << separator + name + separator + date + separator + starttime + separator 
+    //                     + endtime + separator + loc + separator + memo << endl;
+    // write2.close(); 
+    //
+    cout << " in write check content ! : " << memo << endl;
+    cin.ignore();
     isFileExist("../data/Calendar/"+userID+".txt");
+    cin.ignore();
     write.open("../data/Calendar/"+userID+".txt", ios::app);
-    // cout << "writeSChedule" << endl;
+    cin.ignore();
+    cout << "writePersonalChedule" << endl;
+    cout << loc << endl;
+    cout << memo << endl;
+    /***********************************************************************/
     write << id;
-    write << separator + name + separator + date + separator + starttime + separator 
-                        + endtime + separator + loc + separator + memo << endl;
+    write << separator 
+            + name 
+            + separator
+            + date
+            + separator
+            + starttime 
+            + separator 
+            + endtime 
+            + separator 
+            + loc 
+            + separator 
+            + memo << endl;
+    /***********************************************************************/
+    cin.ignore();
     write.close(); 
 }
 
