@@ -712,7 +712,7 @@ int dateVaild(string yymmdd)
     int dd = stoi(yymmdd.substr(4, 2));
     if (mm < 1 || mm > 12 || dd < 1 || dd > C.getNumberOfDays(mm,yy))
     {
-        cout << yy << mm<< dd << err[0];
+        cout << err[0];
         return 1;
     }
 
@@ -732,7 +732,7 @@ int yymm_dateVaild(string yymmdd)
     {
         if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) || C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
         {
-            cout << err[0] << "!";
+            cout << err[0];
             return 2;
         }
         else
@@ -747,7 +747,7 @@ int yymm_dateVaild(string yymmdd)
                 }
                 else
                 {
-                    cout << err[0] << "@";
+                    cout << err[0];
                     return 1;
                 }
             }
@@ -1123,7 +1123,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
     int idx = 1;    
     check c;
     if(!isShared) {
-        cout << "savePersonalSchelist write" << endl;
+        //cout << "savePersonalSchelist write" << endl;
 
         rf.clearPCScheList(user.userId);
 
@@ -1135,7 +1135,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 + to_string(scheduleList[i].getDate().mm)
                 + to_string(scheduleList[i].getDate().dd);
 
-            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            //cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
             rf.writeSchedule(
                 user.getUserId(),
                 to_string(idx),
@@ -1150,7 +1150,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
         }
     }
     else {
-        cout << "saveSharedCalendarSchelist write" << endl;
+        //cout << "saveSharedCalendarSchelist write" << endl;
         rf.clearSCScheList(calendarID);
         
         int i = 0;
@@ -1160,7 +1160,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 + to_string(scheduleList[i].getDate().mm)
                 + to_string(scheduleList[i].getDate().dd); 
 
-            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            //cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
             rf.writeSCSchedule(
                 calendarID,
                 to_string(idx),
