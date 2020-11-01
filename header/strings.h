@@ -41,8 +41,6 @@ string choiceSharedCalendarAction[10] = {
     "> "
 };
 
-string NOcalendar = "내가 속한 공유캘린더가 없습니다.\n";
-
 string inputCreateSharedCalendar[10] = {
     "[새로운 공유 캘린더 생성]\n",
     "캘린더 제목 > ",

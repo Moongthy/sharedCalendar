@@ -54,7 +54,7 @@ public:
         for(int i = (int)'a'; i <= (int)'z'; ++i) e += (char)i;
         for(int i = (int)'A'; i <= (int)'Z'; ++i) e += (char)i;
         for(int i = (int)'0'; i <= (int)'9'; ++i) e += (char)i;
-
+        e += ' ';
         // for(int i = 0; i < s.size(); ++i)
         //     // 이게 소문자 or 대문자 or 숫자가 아니라면
         //     if(e.find(s[i]) == string::npos){
@@ -89,7 +89,7 @@ public:
 	    else 		
 	    	return 30;
     } 
-    
+
     // 이 문자열이 숫자로만 이루어진 문자열이라면 true
     bool isOnlyNumber(const string& s){
         string num = "0123456789";

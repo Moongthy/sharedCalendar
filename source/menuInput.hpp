@@ -25,15 +25,17 @@ void MenuInput::mainMenu(){
     while(true){
         int a , b , c = -1;
         a = whatCalendarDoYouWant();
-        if(a==-1) system("cls");
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) {
-            system("cls");
             personalCal.select_Schedules_option(user);
+            system("cls");
         }
         // a에서 공유 캘린더 메뉴로 들어감.
-        if(a == 2) b = sharedCalendarActions();
+        if(a == 2) {
+            b = sharedCalendarActions();
+            system("cls");
+        }
         // 종료
         if(a == 3) {
             // delete &scm;
@@ -157,11 +159,8 @@ int MenuInput::sharedCalendarActions(){
         }
         return stoi(input);
     }
-
     cout << err[0];
-
     return sharedCalendarActions();
-
 }
 
 // 새로운 캘린더 정보를 입력받아 
@@ -230,7 +229,7 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
     if(stage == 3){
         int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
         if(x < 0){
-            cout << scInfo[1] << endl;
+            //cout << scInfo[1] << endl;
             cout << err[1];
             return;
         }
@@ -346,7 +345,6 @@ bool MenuInput::delSc(int scIdx){
 
 void MenuInput::showJoinedList(){
     int i = 0;
-    int calnum = 0;
     for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList()){
         bool isMyCalendar = false;
         for(User m : sc.getMemberList())
@@ -355,10 +353,8 @@ void MenuInput::showJoinedList(){
                 break;
             }
         if(isMyCalendar) {
-            calnum++;
             cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
         }
         ++i;
     }
-    if(calnum == 0) cout << NOcalendar;
 }
