@@ -1024,6 +1024,7 @@ SearchTryAgain:
     {
         system("cls");
         select_Schedules_option(user);
+        system("cls");
         return;
     }
     if (c.stringSize(keyword) < 2)
