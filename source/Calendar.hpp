@@ -38,10 +38,10 @@ Calendar<S, U, D>::Calendar(U user, string sharedCalendarId)
      */
     vector<string> id_list = re.readSCCalendar(sharedCalendarId, 0);
     // cout << "id_list" << endl;
-    for(string s : id_list)
-    {
-        cout << s << endl;
-    }
+    // for(string s : id_list)
+    // {
+    //     cout << s << endl;
+    // }
     if(id_list.size()!=0) maximum_id = stoi(id_list[id_list.size()-1])+1;
  }
 
