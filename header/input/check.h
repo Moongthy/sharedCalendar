@@ -46,7 +46,7 @@ public:
 		    }
 	    }
 	    return (hcount / 2 + count);
-}
+    }
     bool hangeulCheck(string &s);
 
     // 인코딩 체크
@@ -167,14 +167,14 @@ public:
         // 캘이름
         if (n == _SCNAME)
         {
-            if (s.size() < 2 || s.size() > 10) return false;
+            if (stringSize(s) < 2 || stringSize(s) > 10) return false;
             return encodingCheck(s);
         }
 
         // 캘 비번
         if (n == _PW)
         {
-            if (s.size() < 2 || s.size() > 15)
+            if (stringSize(s) < 2 || stringSize(s) > 15)
                 return false;
             return encodingCheck(s);
         }
@@ -182,7 +182,7 @@ public:
         // 입장인원
         if (n == _ACCEPTABLE)
         {
-            if (s.size() != 1)
+            if (stringSize(s) != 1)
                 return false;
             return numberCheck(s, 5);
         }
