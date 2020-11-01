@@ -39,7 +39,6 @@ public :
     Schedule(string title, Date date, int startTime, int endTime, string content, string location, int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime) {
             
-        //cout << title << "num check" << endl;
         int real_length = 0;
         for(int i = 0; i<content.length(); i++) {
             if(int(content[i]) != 0) {
