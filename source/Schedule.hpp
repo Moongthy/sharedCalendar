@@ -685,13 +685,14 @@ int titleVaild(string title)
 
 int dateVaild(string yymmdd)
 {
-    if (findCheck(yymmdd, "$") || yymmdd.length() < 6 || yymmdd.length() == 7 || yymmdd.length() > 8)
+    check C;
+    if (findCheck(yymmdd, "$") || C.stringSize(yymmdd) < 6 || C.stringSize(yymmdd) == 7 || C.stringSize(yymmdd) > 8)
     {
         cout << err[0];
         return 2;
     }
 
-    if (yymmdd.length() == 8 && !((yymmdd[2] == '-' || yymmdd[2] == '/') && (yymmdd[5] == '-' || yymmdd[5] == '/')))
+    if (C.stringSize(yymmdd) == 8 && !((yymmdd[2] == '-' || yymmdd[2] == '/') && (yymmdd[5] == '-' || yymmdd[5] == '/')))
     {
         cout << err[0];
         return 2;
@@ -702,7 +703,7 @@ int dateVaild(string yymmdd)
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
-    if (!C.isOnlyNumber(yymmdd) || yymmdd.length() != 6)
+    if (!C.isOnlyNumber(yymmdd) || C.stringSize(yymmdd) != 6)
     {
         cout << err[0];
         return 2;
@@ -728,9 +729,9 @@ int yymm_dateVaild(string yymmdd)
     }
     check C = check();
 
-    if (yymmdd.length() >= 4 || yymmdd.length() <= 5)
+    if (C.stringSize(yymmdd) >= 4 || C.stringSize(yymmdd) <= 5)
     {
-        if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) || C.isOnlyNumber(yymmdd.substr(yymmdd.length() - 1, 1))))
+        if (!(C.isOnlyNumber(yymmdd.substr(0, 1)) || C.isOnlyNumber(yymmdd.substr(C.stringSize(yymmdd) - 1, 1))))
         {
             cout << err[0];
             return 2;
@@ -739,7 +740,7 @@ int yymm_dateVaild(string yymmdd)
         {
             yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
             yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
-            if (yymmdd.length() == 4)
+            if (C.stringSize(yymmdd) == 4)
             {
                 if ((1 <= stoi(yymmdd.substr(2, 2)) && stoi(yymmdd.substr(2, 2)) <= 12))
                 {
@@ -758,13 +759,13 @@ int yymm_dateVaild(string yymmdd)
 }
 int hhmmVaild(string hhmm)
 {
-    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 5)
+    if (findCheck(hhmm, "$") || C.stringSize(hhmm) < 4 || C.stringSize(hhmm) > 5)
     {
         cout << err[0];
         return 2;
     }
 
-    if ( hhmm.length() == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')) )
+    if (C.stringSize(hhmm) == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')) )
     {
         cout << err[0];
         return 2;
@@ -776,7 +777,7 @@ int hhmmVaild(string hhmm)
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
 
-    if (!C.isOnlyNumber(hhmm) || hhmm.length() != 4)
+    if (!C.isOnlyNumber(hhmm) || C.stringSize(hhmm) != 4)
     {
         cout << err[0];
         return 2;
@@ -795,13 +796,14 @@ int hhmmVaild(string hhmm)
 
 int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
 {
-    if (findCheck(hhmm, "$") || hhmm.length() < 4 || hhmm.length() > 5)
+    check C;
+    if (findCheck(hhmm, "$") || C.stringSize(hhmm) < 4 || C.stringSize(hhmm) > 5)
     {
         cout << err[0];
         return 2;
     }
 
-    if (hhmm.length() == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')))
+    if (C.stringSize(hhmm) == 5 && !((hhmm[2] == '-' || hhmm[2] == '/' || hhmm[2] == ':')))
     {
         cout << err[0];
         return 2;
@@ -813,7 +815,7 @@ int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
 
-    if (!C.isOnlyNumber(hhmm) || hhmm.length() != 4)
+    if (!C.isOnlyNumber(hhmm) || C.stringSize(hhmm) != 4)
     {
         cout << err[0];
         return 2;
@@ -843,7 +845,7 @@ int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
 int contentVaild(string contents)
 {
     check c;
-    if (findCheck(contents, "$") || contents.length() > 100)
+    if (findCheck(contents, "$") || C.stringSize(contents) > 100)
     {
         cout << err[0];
         return 2;
