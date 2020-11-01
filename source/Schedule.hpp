@@ -707,10 +707,10 @@ int dateVaild(string yymmdd)
         cout << err[0];
         return 2;
     }
-
+    int yy = stoi(yymmdd.substr(0, 2));
     int mm = stoi(yymmdd.substr(2, 2));
     int dd = stoi(yymmdd.substr(4, 2));
-    if (mm < 1 || mm > 12 || dd < 1 || dd > 31)
+    if (mm < 1 || mm > 12 || dd < 1 || dd > C.getNumberOfDays(mm,yy))
     {
         cout << err[0];
         return 1;
