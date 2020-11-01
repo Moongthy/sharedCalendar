@@ -147,7 +147,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     int selection = checkValidSelection(admin, 6);
     if (selection == -2)
     {
-        return scheduleList;
+        return 0;
     }
 
     system("cls");
@@ -158,7 +158,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         if (admin)
         {
             if(deleteCalendar(user) == 1) {
-                return nullptr;
+                return -1;
             }
         }
         else
@@ -254,7 +254,7 @@ Title:
         if (Check.qCheck(title))
         {
             system("cls");
-            select_Schedules_option(user, scheduleList);
+            select_Schedules_option(user);
             return;
         }
     } while (titleVaild(title) != 0);
@@ -330,7 +330,7 @@ Content:
 
     system("cls");
     cout << addSchedulesString[7];
-    select_Schedules_option(user, scheduleList);
+    select_Schedules_option(user);
 }
 
 template <typename S, typename U, typename D>
@@ -353,7 +353,7 @@ void Calendar<S, U, D>::modify(U user)
         if (Check.qCheck(input))
         {
             system("cls");
-            select_Schedules_option(user, scheduleList);
+            select_Schedules_option(user);
             return;
         }
     } while (!(input=="1" || input =="2"));
@@ -421,7 +421,7 @@ void Calendar<S, U, D>::modifySchedule(U user)
 
         int input_id = stoi(input);
         modify_id = -1;
-        
+
         for (int i = 0; i < scheduleList.size(); i++)
         {
             if (scheduleList[i].getID() == input_id)
@@ -492,7 +492,7 @@ RetryYN:
     else if (input == "N" || input == "n")
     {
         system("cls");
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return;
     }
     else
@@ -712,7 +712,7 @@ int dateVaild(string yymmdd)
     int dd = stoi(yymmdd.substr(4, 2));
     if (mm < 1 || mm > 12 || dd < 1 || dd > C.getNumberOfDays(mm,yy))
     {
-        cout << err[0];
+        cout << yy << mm<< dd << err[0];
         return 1;
     }
 
@@ -879,7 +879,7 @@ deleteCalendarYN:
     }
     else if (input == "N" || input == "n")
     {
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return 0;
     }
     else
@@ -908,7 +908,7 @@ void Calendar<S, U, D>::deleteS(U user)
         if (Check.qCheck(input))
         {
             system("cls");
-            select_Schedules_option(user, scheduleList);
+            select_Schedules_option(user);
             return;
         }
     } while (!(input=="1" || input =="2"));
@@ -999,7 +999,7 @@ deleteRetryYN:
         scheduleList.erase(scheduleList.begin() + modify_id);
         saveSchedule(user);
         system("cls");
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return;
     }
     else if (input == "N" || input == "n")
@@ -1026,7 +1026,7 @@ SearchTryAgain:
     if (Check.qCheck(keyword))
     {
         system("cls");
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return;
     }
     if (c.stringSize(keyword) < 2)
@@ -1065,7 +1065,7 @@ SearchTryAgain:
         //보기 편하게 개행 세번
         cout << "\n\n\n";
     }
-    select_Schedules_option(user, scheduleList);
+    select_Schedules_option(user);
 }
 
 template <typename S, typename U, typename D>
@@ -1074,7 +1074,7 @@ void Calendar<S, U, D>::showNextMonthSchedules(U user)
     if (curr_year == 2069 && curr_month == 12)
     {
         cout << err[3];
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return;
     }
     else
@@ -1088,7 +1088,7 @@ void Calendar<S, U, D>::showNextMonthSchedules(U user)
         {
             curr_month++;
         }
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
     }
 }
 
@@ -1098,7 +1098,7 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
     if (curr_year == 1970 && curr_month == 1)
     {
         cout << err[3];
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
         return;
     }
     else
@@ -1112,7 +1112,7 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
         {
             curr_month--;
         }
-        select_Schedules_option(user, scheduleList);
+        select_Schedules_option(user);
     }
 }
 

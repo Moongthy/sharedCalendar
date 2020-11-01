@@ -215,7 +215,7 @@ public:
     /**
      *  일정 옵션 선택
      */
-    vector<Schedule> select_Schedules_option(U user,vector<Schedule> input);
+    int select_Schedules_option(U user);
 
     /**
      *  일정을 보여줌

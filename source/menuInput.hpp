@@ -93,7 +93,7 @@ void MenuInput::mainMenu(){
             // 0 리턴되면 이상 없이 진행
             // 1 리턴되면 
             // -1 리턴되면 삭제가 이미 된거! scIdx로 여기서 삭제
-            vector<Schedule> sReturn = sc.select_Schedules_option(user);
+            int sReturn = sc.select_Schedules_option(user);
             
             if(sReturn == -1) {
                 ReadFile rf;
