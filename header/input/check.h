@@ -47,33 +47,56 @@ public:
 	    }
 	    return (hcount / 2 + count);
     }
-    bool hangeulCheck(string &s);
+    bool hangeulCheck(char &s);
 
     // 인코딩 체크
-    bool encodingCheck(string &s)
-    {
+    // bool encodingCheck(string &s)
+    // {
+    //     // cout << s << endl;
+
+    //     string e = "";
+
+    //     for (int i = (int)'a'; i <= (int)'z'; ++i)
+    //         e += (char)i;
+    //     for (int i = (int)'A'; i <= (int)'Z'; ++i)
+    //         e += (char)i;
+    //     for (int i = (int)'0'; i <= (int)'9'; ++i)
+    //         e += (char)i;
+
+    //     for (int i = 0; i < s.size(); ++i)
+    //         // 이게 소문자 or 대문자 or 숫자가 아니라면
+    //         if (e.find(s[i]) == string::npos)
+    //         {
+    //             // 해당위치에서 자름.
+    //             string hanguelStart = s.substr(i, s.size());
+                
+    //             // 한글인지 검사한다.
+    //             return hangeulCheck(hanguelStart);
+
+    //         }
+
+    //     return true;
+    // }
+        // 인코딩 체크
+    bool encodingCheck(string& s){
         // cout << s << endl;
 
         string e = "";
 
-        for (int i = (int)'a'; i <= (int)'z'; ++i)
-            e += (char)i;
-        for (int i = (int)'A'; i <= (int)'Z'; ++i)
-            e += (char)i;
-        for (int i = (int)'0'; i <= (int)'9'; ++i)
-            e += (char)i;
+        for(int i = (int)'a'; i <= (int)'z'; ++i) e += (char)i;
+        for(int i = (int)'A'; i <= (int)'Z'; ++i) e += (char)i;
+        for(int i = (int)'0'; i <= (int)'9'; ++i) e += (char)i;
 
-        for (int i = 0; i < s.size(); ++i)
-            // 이게 소문자 or 대문자 or 숫자가 아니라면
-            if (e.find(s[i]) == string::npos)
-            {
-                // 해당위치에서 자름.
-                string hanguelStart = s.substr(i, s.size());
-                
-                // 한글인지 검사한다.
-                return hangeulCheck(hanguelStart);
-
-            }
+        // for(int i = 0; i < s.size(); ++i)
+        //     // 이게 소문자 or 대문자 or 숫자가 아니라면
+        //     if(e.find(s[i]) == string::npos){
+        //         // 해당위치에서 자름.
+        //         string hanguelStart = s.substr(i, s.size());
+        //         // 한글인지 검사한다.
+        //         return hangeulCheck(hanguelStart);
+        //     }
+        for(int i = 0; i < s.size(); ++i)
+            if(e.find(s[i]) == string::npos && !hangeulCheck(s[i])) return false;
 
         return true;
     }
