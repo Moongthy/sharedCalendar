@@ -8,17 +8,7 @@ Calendar / sharedCalendar
 📦shared_calendar  
  ┣ 📂data  
  ┃ ┣ 📂Calendar  
- ┃ ┃ ┣ 📜ansrms.txt  
- ┃ ┃ ┣ 📜문근.txt  
- ┃ ┃ ┣ 📜병찬.txt  
- ┃ ┃ ┣ 📜병찬이.txt  
- ┃ ┃ ┣ 📜아이디.txt  
- ┃ ┃ ┣ 📜정석.txt  
- ┃ ┃ ┗ 📜정석12.txt  
- ┃ ┣ 📂SharedCalendar  
- ┃ ┃ ┣ 📜1.txt  
- ┃ ┃ ┣ 📜10.txt   
- ┃ ┃ ┗ 📜2.txt  
+ ┃ ┣ 📂SharedCalendar    
  ┃ ┣ 📜SharedCalendarList.txt  
  ┃ ┗ 📜UserList.txt  
  ┣ 📂execution  

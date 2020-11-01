@@ -331,7 +331,6 @@ vector<string> ReadFile::readCalendar(string userID, int index)
     isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
     //cout << "open success" << endl;
-
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -398,7 +397,6 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;
-
     write.close(); 
 }
 
