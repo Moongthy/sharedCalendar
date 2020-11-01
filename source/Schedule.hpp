@@ -840,7 +840,8 @@ int contentVaild(string contents)
         cout << err[0];
         return 2;
     }
-    else if (contents.length() == 1 && contents[0] == 'q')
+    
+    else if (c.stringSize(contents) == 1 && contents[0] == 'q')
     {
         return 1;
     }
@@ -1040,6 +1041,3753 @@ SearchTryAgain:
             cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
             cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
             cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+        goto SearchTryAgain;
+    }
+    cout << searchSchedulesString[1];
+    bool state = false;
+    for (int i = 0; i < scheduleList.size(); i++)
+    {
+        string content = scheduleList[i].getTitle();
+        if (content.find(keyword) != string::npos)
+        {
+            state = true;
+            Date search = scheduleList[i].getDate();
+            cout << line << endl;
+            cout << ScheduleInfo[11] << scheduleList[i].getID() << endl;
+            cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
+            cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
+            cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+        goto SearchTryAgain;
+    }
+    cout << searchSchedulesString[1];
+    bool state = false;
+    for (int i = 0; i < scheduleList.size(); i++)
+    {
+        string content = scheduleList[i].getTitle();
+        if (content.find(keyword) != string::npos)
+        {
+            state = true;
+            Date search = scheduleList[i].getDate();
+            cout << line << endl;
+            cout << ScheduleInfo[11] << scheduleList[i].getID() << endl;
+            cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
+            cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
+            cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+        goto SearchTryAgain;
+    }
+    cout << searchSchedulesString[1];
+    bool state = false;
+    for (int i = 0; i < scheduleList.size(); i++)
+    {
+        string content = scheduleList[i].getTitle();
+        if (content.find(keyword) != string::npos)
+        {
+            state = true;
+            Date search = scheduleList[i].getDate();
+            cout << line << endl;
+            cout << ScheduleInfo[11] << scheduleList[i].getID() << endl;
+            cout << ScheduleInfo[0] << scheduleList[i].getTitle() << endl;
+            cout << ScheduleInfo[1] << search.yy << ScheduleInfo[2] << search.mm << ScheduleInfo[3] << search.dd << ScheduleInfo[4] << endl;
+            cout << ScheduleInfo[5] << scheduleList[i].getStartTime() / 100 << ScheduleInfo[6] << scheduleList[i].getStartTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
+            cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
+            cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
+            cout << line << endl;
+        }
+    }
+    if (!state)
+    {
+        cout << line << endl;
+        cout << searchSchedulesString[2];
+        cout << line << endl;
+        goto SearchTryAgain;
+    }
+    else {
+        //보기 편하게 개행 세번
+        cout << "\n\n\n";
+    }
+    select_Schedules_option(user);
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showNextMonthSchedules(U user)
+{
+    if (curr_year == 2069 && curr_month == 12)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 12)
+        {
+            curr_month = 1;
+            curr_year++;
+        }
+        else
+        {
+            curr_month++;
+        }
+        select_Schedules_option(user);
+    }
+}
+
+template <typename S, typename U, typename D>
+void Calendar<S, U, D>::showPrevMonthSchedules(U user)
+{
+    if (curr_year == 1970 && curr_month == 1)
+    {
+        cout << err[3];
+        select_Schedules_option(user);
+        return;
+    }
+    else
+    {
+        if (curr_month == 1)
+        {
+            curr_month = 12;
+            curr_year--;
+        }
+        else
+        {
+            curr_month--;
+        }
+        select_Schedules_option(user);
+    }
+}            cout << ScheduleInfo[8] << scheduleList[i].getEndTime() / 100 << ScheduleInfo[6] << scheduleList[i].getEndTime() % 100 << ScheduleInfo[7] << endl;
             cout << ScheduleInfo[10] << scheduleList[i].getLocation() << endl;
             cout << ScheduleInfo[9] << scheduleList[i].getContent() << endl;
             cout << line << endl;

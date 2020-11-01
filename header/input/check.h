@@ -29,7 +29,24 @@ public:
             return true;
         return false;
     }
-
+    //한글이랑 문자 포함해서 2바이트로 계산안하고 진짜 로우한 길이 재는 함수.
+    int stringSize(string s) {
+	    int hcount = 0;
+	    int count = 0;
+	    cout << s.size() << endl;
+	    cout << s.length() << endl;
+	    for (int i = 0; i < s.size(); i++) {
+		    if ((s[i] & 0x80) == 0x80) {
+			    hcount += 1;
+			    //cout << hcount << "@" << endl;
+		    }
+		    else {
+			    count += 1;
+			    //cout << count << "!" << endl;
+		    }
+	    }
+	    return (hcount / 2 + count);
+}
     bool hangeulCheck(string &s);
 
     // 인코딩 체크

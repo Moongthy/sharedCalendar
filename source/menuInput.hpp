@@ -31,7 +31,8 @@ void MenuInput::mainMenu(){
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
-        if(a == 1) { 
+        if(a == 1) {
+            
             personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
@@ -64,9 +65,6 @@ void MenuInput::mainMenu(){
             // (userID).txt => Calendar.h
             // personalCal.savePersonalScheduleList();
             // 스케줄 리스트 저장하는것.            
-
-
-
             exit(0);
         }
         
@@ -105,6 +103,8 @@ void MenuInput::mainMenu(){
             int sReturn = sc.select_Schedules_option(user);
             
             if(sReturn == -1) {
+                ReadFile rf;
+                rf.clearSCScheList(sc.getCalendarID());
                 scm.deleteSharedCalendar(user, scIdx);
             }
 
@@ -234,7 +234,6 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
         int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
         if(x < 0){
             cout << scInfo[1] << endl;
-            // cout << x << endl;
             cout << err[1];
             return;
         }
@@ -349,8 +348,9 @@ void MenuInput::showJoinedList(){
                 isMyCalendar = true;
                 break;
             }
-        if(isMyCalendar)
+        if(isMyCalendar) {
             cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
+        }
         ++i;
     }
 }
