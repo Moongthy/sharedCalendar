@@ -170,14 +170,12 @@ void ReadFile::clearSCList() {
 }
 
 void ReadFile::clearSCScheList(string calId) {
-    cout << calId + "call clearSCScheduleList" << endl;
     isFileExist("../data/SharedCalendar/"+calId+".txt");
     write.open("../data/SharedCalendar/"+calId+".txt", ios::out);
     write.close();
 }
 
 void ReadFile::clearPCScheList(string userId) {
-    cout << userId + "call clearPCScheduleList" << endl;
     isFileExist("../data/Calendar/"+userId+".txt");
     write.open("../data/Calendar/"+userId+".txt", ios::out);
     write.close();
@@ -374,7 +372,6 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
 {
     isFileExist("../data/Calendar/"+userID+".txt");
     write.open("../data/Calendar/"+userID+".txt", ios::app);
-    cout << "writeSChedule" << endl;
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;

@@ -1120,11 +1120,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
     int idx = 1;    
     check c;
     if(!isShared) {
-        //cout << "savePersonalSchelist write" << endl;
-
         rf.clearPCScheList(user.userId);
-
-        cout << "PS size : " << scheduleList.size() << endl;
         
         int i = 0;
         for(i=0; i<scheduleList.size(); i++){
@@ -1132,7 +1128,6 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 + to_string(scheduleList[i].getDate().mm)
                 + to_string(scheduleList[i].getDate().dd);
 
-            //cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
             rf.writeSchedule(
                 user.getUserId(),
                 to_string(idx),
