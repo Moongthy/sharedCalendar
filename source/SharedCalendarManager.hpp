@@ -126,7 +126,7 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
         // cout << "write " + sc.getCalendarID() + " SCMember" << endl;
 
         for(int i = 1; i < sc.getMemberList().size(); ++i){
-            cout << sc.getMemberList()[i].getUserId() << endl;
+            //cout << sc.getMemberList()[i].getUserId() << endl;
             rf.writeSCMember(sc.getSharedCalendarName(), sc.getMemberList()[i].getUserId());
         }
         // cout << sc.getCalendarID() << "save success" << endl;

@@ -285,7 +285,7 @@ int Users::mainmenuInput(string menuname,string purpose){
 }
 
 string Users::getInput(string menuname, string purpose, int start, int end){
-	check ck=check();
+	check ck;
 	string str;
 	if(purpose.compare(loginMenu[7])==0){
 		cout << menuname;
@@ -297,7 +297,7 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 		if (str.compare("q") == 0) {
 			break;
 		}
-
+		
 		if (ck.encodingCheck(str)) {
 			if (ck.stringSize(str) >= start && ck.stringSize(str) <= end) {
 				break;

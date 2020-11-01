@@ -38,10 +38,8 @@ string choiceSharedCalendarAction[10] = {
     "1. 새로운 공유캘린더 생성\n",
     "2. 새로운 공유캘린더 참가\n",
     "3. 내가 속한 캘린더 들어가기\n",
-    "> ",
-    "내가 속한 공유캘린더가 없습니다.\n"
+    "> "
 };
-
 
 string inputCreateSharedCalendar[10] = {
     "[새로운 공유 캘린더 생성]\n",
