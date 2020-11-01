@@ -1,4 +1,4 @@
-/*************************���� ��Ʈ********************************/
+/*************************일정 파트********************************/
 bool isNumber(const string &str);
 bool findCheck(string ss, string s);
 bool boundaryCheck(string ss, int boundary);
@@ -6,7 +6,7 @@ int titleVaild(string title);
 int dateVaild(string yymmdd);
 int yymm_dateVaild(string yymmdd);
 int hhmmVaild(string hhmm);
-int hhmm_ahead_Vaild(int startTime, string endTime,bool lol);
+int hhmm_ahead_Vaild(int startTime, string endTime, bool lol);
 int contentVaild(string contents);
 int locationVaild(string location);
 bool admin = false;
@@ -75,7 +75,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         cout << myCalendar[0];
         ReadFile rf = ReadFile();
         string userID = user.userId;
-        // userId.txt ���Ͽ��� �о��.
+        // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(userID, 0);
         vector<string> sName        = rf.readCalendar(userID, 1);
         vector<string> sDate        = rf.readCalendar(userID, 2);
@@ -84,12 +84,12 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         vector<string> sLoc         = rf.readCalendar(userID, 5);
         vector<string> sMemo        = rf.readCalendar(userID, 6);
         
-        // ����� ������ ���� ��ŭ. �����ٸ���Ʈ�� �ҷ��´�.
+        // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
         {
-            // �ϳ��� ������ ����
+            // 하나의 스케줄 생성
             Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
-            // ������ �־���
+            // 끝에다 넣어줌
             scheduleList.push_back(s);
         }
     }
@@ -98,7 +98,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
 
         ReadFile rf = ReadFile();
         
-        // calid.txt ���Ͽ��� �о��.
+        // calid.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readSCCalendar(calendarID, 0);
         vector<string> sName        = rf.readSCCalendar(calendarID, 1);
         vector<string> sDate        = rf.readSCCalendar(calendarID, 2);
@@ -107,13 +107,13 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         vector<string> sLoc         = rf.readSCCalendar(calendarID, 5);
         vector<string> sMemo        = rf.readSCCalendar(calendarID, 6);
 
-        // ����� ������ ���� ��ŭ. �����ٸ���Ʈ�� �ҷ��´�.
+        // 저장된 스케줄 갯수 만큼. 스케줄리스트에 불러온다.
         for(int i = 0; i < sId.size(); ++i)
         {
-            // �ϳ��� ������ ����
+            // 하나의 스케줄 생성
             Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
             
-            // ������ �־���
+            // 끝에다 넣어줌
             scheduleList.push_back(s);
         }
 
@@ -154,7 +154,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     switch (selection)
     {
     case 0:
-        /*Ķ���� ���� ���� Ķ���� �����ڸ�*/
+        /*캘린더 삭제 공유 캘린더 관리자만*/
         if (admin)
         {
             if(deleteCalendar(user) == 1) {
@@ -167,32 +167,32 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         }
         break;
     case 1:
-        /* �������� */
+        /* 일정생성 */
         addSchedule(user);
         break;
     case 2:
-        /* �������� */
+        /* 일정수정 */
         modify(user);
         break;
     case 3:
-        /* �������� */
+        /* 일정삭제 */
         deleteS(user);
         break;
     case 4:
-        /* �����˻� */
+        /* 일정검색 */
         searchSchedule(user);
         break;
     case 5:
-        /* ���� �� ���� */
+        /* 이전 달 일정 */
         showPrevMonthSchedules(user);
         break;
     case 6:
-        /* ���� �� ���� */
+        /* 다음 달 일정 */
         showNextMonthSchedules(user);
         break;
     default:
+        /* 오류 */
         cout << err[0];
-        /* ���� */
         break;
     }
     admin = false;
@@ -451,27 +451,27 @@ ModifyRetry:
     switch (selection)
     {
     case 1:
-        /* ������� */
+        /* 제목수정 */
         modifyTitle(modify_id);
         break;
     case 2:
-        /* ��¥���� */
+        /* 날짜수정 */
         modifyDate(modify_id);
         break;
     case 3:
-        /* ���۽ð� ���� */
+        /* 시작시간 수정 */
         modifySTime(modify_id);
         break;
     case 4:
-        /* ����ð� ���� */
+        /* 종료시간 수정 */
         modifyETime(modify_id);
         break;
     case 5:
-        /* ���� ���� */
+        /* 내용 수정 */
         modifyContent(modify_id);
         break;
     case 6:
-        /* ��� ���� */
+        /* 장소 수정 */
         modifyLocation(modify_id);
         break;
     default: 
@@ -600,10 +600,10 @@ int Calendar<S, U, D>::modifyLocation(int mod_id)
 }
 
 /*
-���� üũ �Լ�(???Vaild)�� ���� �� ����
-0 : ���� ����
-1 : q �Է�
-2~ : ���� ���
+오류 체크 함수(???Vaild)의 리턴 값 설명
+0 : 정상 종료
+1 : q 입력
+2~ : 오류 출력
 */
 bool isNumber(const string &str)
 {
@@ -662,18 +662,18 @@ int titleVaild(string title)
 
     if (c.stringSize(title) > 20 || c.stringSize(title) < 1)
     {
-        //���� ���̰� �ٸ� �� ����
+        //문자 길이가 다를 때 오류
         cout << err[0];
         return 2;
     }
     else if (c.stringSize(title) == 1 && title[0] == 'q')
     {
-        //q�� �Է����� �� �ൿ ����
+        //q를 입력했을 때 행동 수행
         return 1;
     }
     else if (c.stringSize(title) == 1 && title[0] == ' ')
     {
-        //������ �Է����� �� ����
+        //공백을 입력했을 때 오류
         cout << err[0];
         return 3;
     }
@@ -842,12 +842,13 @@ int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
 
 int contentVaild(string contents)
 {
+    check c;
     if (findCheck(contents, "$") || contents.length() > 100)
     {
         cout << err[0];
         return 2;
     }
-    else if (contents.length() == 1 && contents[0] == 'q')
+    else if (c.stringSize(contents) == 1 && contents[0] == 'q')
     {
         return 1;
     }
@@ -859,14 +860,13 @@ template <typename S, typename U, typename D>
 int Calendar<S, U, D>::deleteCalendar(U user)
 {
     /*
-    �̰� �� �ʿ���� menuinput�� 295���ο� delSc�� �����ٰ� �����.
-
-    �ٵ� �̰� ���� ���µ�, ��Ķ �ε����� ���� �Ű������� �ʿ��ؼ� �װ� �� �������°�
-    �߰��ؼ� �ڵ��ؾ��ҵ������� ���� ���� ��Ÿ�̹��̴�
+    이거 다 필요없고 menuinput에 295라인에 delSc를 가져다가 쓰면됨.
+    근데 이거 쓰면 쓰는데, 공캘 인덱스가 따로 매개변수로 필요해서 그거 또 가져오는거
+    추가해서 코딩해야할듯싶은데 지금 말하 ㄹ타이밍이다
     */
    
-   // �׷� ���Լ� ���� �ٽ� ��������ߵ��ݾ�
-   // �޴���������
+   // 그럼 저함수 쓰고 다시 리턴해줘야디잖아
+   // 메뉴선택으로
     string input;
 deleteCalendarYN:
     cout << deleteString[3];
@@ -1062,7 +1062,7 @@ SearchTryAgain:
         goto SearchTryAgain;
     }
     else {
-        //���� ���ϰ� ���� ����
+        //보기 편하게 개행 세번
         cout << "\n\n\n";
     }
     select_Schedules_option(user, scheduleList);

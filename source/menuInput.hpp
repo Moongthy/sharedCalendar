@@ -27,8 +27,9 @@ void MenuInput::mainMenu(){
         a = whatCalendarDoYouWant();
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
-        if(a == 1) { 
-            p_schedule = personalCal.select_Schedules_option(user, p_schedule);
+        if(a == 1) {
+            
+            personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
         if(a == 2) b = sharedCalendarActions();
@@ -232,7 +233,6 @@ void MenuInput::joinSC(vector<string>& scInfo, int stage){
         int x = scm.joinSharedCalendar(user, scInfo[0], scInfo[1]); 
         if(x < 0){
             cout << scInfo[1] << endl;
-            // cout << x << endl;
             cout << err[1];
             return;
         }

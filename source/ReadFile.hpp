@@ -163,7 +163,6 @@ vector<string> ReadFile::getSCList() {
     return SCAll;
 }
 
-
 void ReadFile::clearSCList() {
     cout << "in clear SCList" << endl;
     write.open("../data/SharedCalendarList.txt", ios::out);
