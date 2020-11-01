@@ -35,17 +35,27 @@ private:
     string location;
 
 public :
-    Schedule(string title, Date date, int startTime, int endTime, string content, string location, int id = -1)
+    Schedule(string title, Date date, int startTime, int endTime, string content, int contentLength, string location, int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime) {
 
-        if(content.empty()) {
-            this -> content.clear();
+        cout << title << "num check" << endl;
+        int han_length = 0;
+        int n_han_length = 0;
+        int real_length = 0;
+        for(int i = 0; i<content.length(); i++) {
+            if(int(content[i]) != 0) {
+                real_length++;
+            }
         }
-
-        if(location.empty()) {
-            this -> location.clear();
+        printf("%dreal %d\n", real_length);
+        if(real_length == 0) {
+            content.clear();
+            this -> content = content;
         }
-
+        else {
+            this -> content = content.substr(0, real_length);
+        }
+        this -> location = location;
     }
 
     //임시 생성자

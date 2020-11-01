@@ -52,7 +52,6 @@ string inputCreateSharedCalendar[10] = {
     "성공적으로 저장되었습니다.\n"
 };
 
-
 string inputJoinSharedCalendar[10] = {
     "[새로운 공유캘린더 참가]\n",
     "참가할 공유캘린더 제목 > ",
@@ -60,7 +59,6 @@ string inputJoinSharedCalendar[10] = {
     "성공적으로 저장되었습니다.\n",
     "[참가된 캘린더 목록 출력]\n"
 };
-
 
 string signInShardCalendar[10] = {
     "[내가 속한 공유 캘린더 들어가기]\n",
