@@ -1174,7 +1174,6 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 scheduleList[i].getLocation(),
                 scheduleList[i].getContent()
             );
-            // cout << "writeSchedule end" << endl;
             ++idx;
         }
     }
