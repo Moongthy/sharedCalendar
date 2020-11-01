@@ -36,7 +36,7 @@ private:
     string location;
 
 public :
-    Schedule(string title, Date date, int startTime, int endTime, string content, int contentLength, string location, int id = -1)
+    Schedule(string title, Date date, int startTime, int endTime, string content, string location, int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime) {
             
         int real_length = 0;

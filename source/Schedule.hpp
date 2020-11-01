@@ -73,7 +73,9 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
     check c;
     if (!isShared) {
         cout << myCalendar[0];
+
         ReadFile rf = ReadFile();
+        
         string userID = user.userId;
         // userId.txt 파일에서 읽어옮.
         vector<string> sId          = rf.readCalendar(userID, 0);
@@ -88,7 +90,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         for(int i = 0; i < sId.size(); ++i)
         {
             // 하나의 스케줄 생성
-            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
+            Schedule s = Schedule(sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
             // 끝에다 넣어줌
             scheduleList.push_back(s);
         }

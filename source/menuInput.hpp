@@ -25,9 +25,11 @@ void MenuInput::mainMenu(){
     while(true){
         int a , b , c = -1;
         a = whatCalendarDoYouWant();
+        if(a==-1) system("cls");
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) {
+            system("cls");
             personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
@@ -169,20 +171,13 @@ void MenuInput::createNewSc(vector<string>& scInfo, int stage){
 
     if(stage == 5){
 
-        // cout << "see curr year" << endl;
         time_t curTime = time(NULL);
         struct tm *pLocal = localtime(&curTime);
         int yy = pLocal->tm_year + 1900;
         int mm = pLocal->tm_mon+1;
         int dd = pLocal->tm_mday;
-        // cout << yy << mm << dd << "this is yymmdd" << endl;
-        // int yy = scm.getSharedCalendarList()[0].curr_year;
-        // int mm = scm.getSharedCalendarList()[0].curr_month;
-        // int dd = scm.getSharedCalendarList()[0].curr_day;
-        // cout << "see success" << endl;
         yy = yy%100;
         Date startDate = Date(yy, mm, dd);
-        // cout << startDate.yy << startDate.mm << startDate.dd << "this is yymmdd2" << endl;
         
         scm.addSharedCalendar(user, scInfo[0], scInfo[1], stoi(scInfo[2]), startDate, Date(scInfo[3])) ;
         cout << inputCreateSharedCalendar[stage];
@@ -350,7 +345,7 @@ bool MenuInput::delSc(int scIdx){
 }
 
 void MenuInput::showJoinedList(){
-    int i = 0;  
+    int i = 0;
     int calnum = 0;
     for(SharedCalendar<Schedule, User, Date> sc : scm.getSharedCalendarList()){
         bool isMyCalendar = false;
@@ -360,10 +355,10 @@ void MenuInput::showJoinedList(){
                 break;
             }
         if(isMyCalendar) {
-            cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
             calnum++;
+            cout << i+1 << " " << sc.getSharedCalendarName() << "\n";
         }
         ++i;
     }
-    // if(calnum == 0) cout << choiceSharedCalendarAction[5];
+    if(calnum == 0) cout << NOcalendar;
 }

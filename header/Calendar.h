@@ -130,7 +130,8 @@ public:
 
         // 여기다가 넣어줏에요
         rf.clearSCScheList(calendarID);
-        cout << calendarID << endl;
+
+        // cout << calendarID << endl;
 
         //cout << "saveSCSchelist write" << endl;
         

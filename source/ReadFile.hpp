@@ -151,7 +151,7 @@ vector<string> ReadFile::getSCList() {
                 if(str[i]=='\0') break;
                 SCdata += str[i];
             }
-            cout << SCdata << endl;
+            //cout << SCdata << endl;
             SCAll.push_back(SCdata);
         }
         
@@ -291,7 +291,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     //cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
-    cout << "open success" << endl;
+    //cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -325,10 +325,10 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
 //개인캘린더에서 일정 읽는거
 vector<string> ReadFile::readCalendar(string userID, int index)
 {
-    cout << "open the ../data/Calendar/"+userID+".txt" << endl << endl;
+    //cout << "open the ../data/Calendar/"+userID+".txt" << endl << endl;
     isFileExist("../data/Calendar/"+userID+".txt");
     read.open("../data/Calendar/"+userID+".txt");
-    cout << "open success" << endl;
+    //cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -351,7 +351,7 @@ vector<string> ReadFile::readCalendar(string userID, int index)
             }
             //cout << "temp# : " << temp << endl;
             if(temp.empty()) {
-                cout << "this temp is empty, cleared now" << endl;
+                //cout << "this temp is empty, cleared now" << endl;
                 temp.clear();
             }
             return_list.push_back(temp);
@@ -388,9 +388,9 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
     // write2.close(); 
     //
     //cout << " in write check content ! : " << memo << endl;
-    cin.ignore();
+    // cin.ignore();
     isFileExist("../data/Calendar/"+userID+".txt");
-    cin.ignore();
+    // cin.ignore();
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
@@ -410,7 +410,6 @@ void ReadFile::editSchedule(string userID, string scheID, int index, string text
     {
         while(!read.eof())
         {
-
             char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
@@ -440,7 +439,6 @@ void ReadFile::editSchedule(string userID, string scheID, int index, string text
         }
     }
     read.close();
-
     write.open("../data/Calendar/"+userID+".txt");
     write << saveAll;
     write.close();
@@ -458,7 +456,6 @@ void ReadFile::deleteSchedule(string userID, string scheID) {
     {
         while(!read.eof())
         {
-
             char str[sizeof(read)]={'\0'};
             read.getline(str, sizeof(read));
             if(read.eof()) break;
@@ -471,7 +468,6 @@ void ReadFile::deleteSchedule(string userID, string scheID) {
                 if(str[i]=='$') separatorIndex++;
                 else if(separatorIndex==0) id += str[i]; 
                 else if(str[i]=='\0') break;
-
                 temp += str[i];     
             }
             if(id!=scheID) saveAll += (temp+"\n");
