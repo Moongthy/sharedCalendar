@@ -88,7 +88,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         for(int i = 0; i < sId.size(); ++i)
         {
             // 하나의 스케줄 생성
-            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i],c.stringSize(sMemo[i]), sLoc[i], stoi(sId[i]));
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
             // 끝에다 넣어줌
             scheduleList.push_back(s);
         }
@@ -111,7 +111,7 @@ int Calendar<S, U, D>::select_Schedules_option(U user)
         for(int i = 0; i < sId.size(); ++i)
         {
             // 하나의 스케줄 생성
-            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i],c.stringSize(sMemo[i]), sLoc[i], stoi(sId[i]));
+            Schedule s = Schedule( sName[i], Date(sDate[i]), stoi(sStartTime[i]), stoi(sEndTime[i]), sMemo[i], sLoc[i], stoi(sId[i]));
             
             // 끝에다 넣어줌
             scheduleList.push_back(s);
@@ -323,7 +323,6 @@ Content:
             goto Location;
         }
     } while (contentVaild(content) != 0);
-    cout << "in addschedule : " << content <<"    size : " << c.stringSize(content);
     Schedule new_s = Schedule(title, newD, stoi(startTime), stoi(endTime), content, location, maximum_id);
     scheduleList.push_back(new_s);
 
@@ -1137,20 +1136,6 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 + to_string(scheduleList[i].getDate().mm)
                 + to_string(scheduleList[i].getDate().dd);
 
-            // cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
-            // cin.ignore();
-            // cout << "parameter Check" << endl;
-
-            cout << user.getUserId() << endl;
-            cout << to_string(idx) << endl;
-            cout << scheduleList[i].getTitle() << endl;
-            cout << d << endl;
-            cout << to_string(scheduleList[i].getStartTime()) << endl;
-            cout << to_string(scheduleList[i].getEndTime()) << endl;
-            cout << scheduleList[i].getLocation() << endl; 
-            cout << scheduleList[i].getContent() << endl;
-            
-            // cout << "call writeSchedule in saveSchedule" << endl;
             rf.writeSchedule(
                 user.getUserId(),
                 to_string(idx),
@@ -1161,7 +1146,6 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 scheduleList[i].getLocation(),
                 scheduleList[i].getContent()
             );
-            // cout << "writeSchedule end" << endl;
             ++idx;
         }
     }
