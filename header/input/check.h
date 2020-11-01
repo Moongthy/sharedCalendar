@@ -26,13 +26,28 @@ public:
             return true;
         return false;
     }
-
-    // bool hangeulCheck(string& s);
-    bool hangeulCheck(char& s);
+    //한글이랑 문자 포함해서 2바이트로 계산안하고 진짜 로우한 길이 재는 함수.
+    int stringSize(string s) {
+	    int hcount = 0;
+	    int count = 0;
+	    //cout << s.size() << endl;
+	    //cout << s.length() << endl;
+	    for (int i = 0; i < s.size(); i++) {
+		    if ((s[i] & 0x80) == 0x80) {
+			    hcount += 1;
+			    //cout << hcount << "@" << endl;
+		    }
+		    else {
+			    count += 1;
+			    //cout << count << "!" << endl;
+		    }
+	    }
+	    return (hcount / 2 + count);
+    }
+    bool hangeulCheck(char &s);
 
     // 인코딩 체크
     bool encodingCheck(string& s){
-        // cout << s << endl;
 
         string e = "";
 
@@ -53,7 +68,28 @@ public:
 
         return true;
     }
-
+    int  getNumberOfDays(int month, int year) {
+	    //leap year condition, if month is 2
+	    if( month == 2)
+	    {
+            if(70 <= year <= 99) {
+                year += 1900;
+            } else {
+                year += 2000;
+            }
+            if((year%400==0) || (year%4==0 && year%100!=0))	
+		    	return 29;
+		        else	
+		    	return 28;
+		    
+	    }
+	    //months which has 31 days
+	    else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 ||month == 10 || month==12)	
+	    	return 31;
+	    else 		
+	    	return 30;
+    } 
+    
     // 이 문자열이 숫자로만 이루어진 문자열이라면 true
     bool isOnlyNumber(const string& s){
         string num = "0123456789";
@@ -105,7 +141,6 @@ public:
         if(n == _DATE){
             return true;
         }
-
         return true; 
     }
 };
