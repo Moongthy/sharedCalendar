@@ -698,8 +698,6 @@ int dateVaild(string yymmdd)
         return 2;
     }
 
-    check C = check();
-
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '-'), yymmdd.end());
     yymmdd.erase(std::remove(yymmdd.begin(), yymmdd.end(), '/'), yymmdd.end());
 
@@ -759,6 +757,7 @@ int yymm_dateVaild(string yymmdd)
 }
 int hhmmVaild(string hhmm)
 {
+    check C;
     if (findCheck(hhmm, "$") || C.stringSize(hhmm) < 4 || C.stringSize(hhmm) > 5)
     {
         cout << err[0];
@@ -770,8 +769,6 @@ int hhmmVaild(string hhmm)
         cout << err[0];
         return 2;
     }
-
-    check C = check();
 
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
@@ -809,8 +806,6 @@ int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
         return 2;
     }
 
-    check C = check();
-
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '-'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), '/'), hhmm.end());
     hhmm.erase(std::remove(hhmm.begin(), hhmm.end(), ':'), hhmm.end());
@@ -845,7 +840,7 @@ int hhmm_ahead_Vaild(int startTime, string hhmm, bool lol)
 int contentVaild(string contents)
 {
     check c;
-    if (findCheck(contents, "$") || C.stringSize(contents) > 100)
+    if (findCheck(contents, "$") || c.stringSize(contents) > 100)
     {
         cout << err[0];
         return 2;
