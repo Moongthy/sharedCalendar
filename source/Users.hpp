@@ -95,8 +95,8 @@ void Users::signIn(){
 
    		User user = User(a, b);	
 
-		cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
-		cout << "call scm Contructor in Users.hpp" << endl;
+		// cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
+		// cout << "call scm Contructor in Users.hpp" << endl;
 		
 		SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
 		
@@ -168,8 +168,8 @@ void Users::signUp(){
 
    		User user = User(a, b);
 
-		cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
-		cout << "call scm Contructor in Users.hpp" << endl;
+		// cout<< "UserName: "<<getUserName()<<" / UserID: "<<getUserId()<<endl;
+		// cout << "call scm Contructor in Users.hpp" << endl;
     	
 		SharedCalendarManager<Schedule, User, Date> scm = SharedCalendarManager<Schedule, User, Date>();
 

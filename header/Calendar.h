@@ -45,7 +45,6 @@ public:
      *  개인 캘린더 생성자
      *  일정목록의 크기는 0으로 초기화됨
      * 
-     * 여기서 load() 호출
      * 
      *  @param user 이 캘린더를 생성한 사람. 관리자
      */
@@ -54,8 +53,6 @@ public:
     /**
      *  공유 캘린더 생성자에서 호출될 생성자
      *  일정목록의 크기는 0으로 초기화됨
-     * 
-     *  load() 호출
      * 
      *  @param administrator 이 캘린더를 생성한 사람. 관리자
      *  @param sharedCalendarId 공유캘린더 Id. 현재있는 공유캘린더 수 + 1000 으로 매겨짐
@@ -66,7 +63,7 @@ public:
     // 개인 캘린더 소멸자
     virtual ~Calendar()
     {
-        // savePersonalScheduleList();
+
     }
 
     /**
@@ -100,18 +97,18 @@ public:
     {
         ReadFile rf = ReadFile();
 
-        cout << "savePCSchelist write" << endl;
+        //cout << "savePCSchelist write" << endl;
 
         rf.clearPCScheList(administrator.getUserId());
         // txt파일 맨앞에 붙는 숫자
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
-        cout << "sch size " << scheduleList.size() << endl;
+        //cout << "sch size " << scheduleList.size() << endl;
         for(Schedule s : scheduleList)
         {
             // Date 를 string 으로 변환 --> 이러면 이상해짐
             string d = to_string(s.getDate().yy % 100) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
-            cout << "in savePersonalScheduleList() PLOLOLO" << endl;
+            //cout << "in savePersonalScheduleList() PLOLOLO" << endl;
             rf.writeSchedule(
                 administrator.getUserId(),
                 to_string(idx),
@@ -135,14 +132,14 @@ public:
         rf.clearSCScheList(calendarID);
         cout << calendarID << endl;
 
-        cout << "saveSCSchelist write" << endl;
+        //cout << "saveSCSchelist write" << endl;
         
         int idx = 1;
         // 스케줄 갯수만큼, userId.txt 파일에 써벌임
         for(Schedule s : scheduleList)
         {
             // Date 를 string 으로 변환
-            cout << "in saveSharedScheduleList() PLOLOLO" << endl;
+            //cout << "in saveSharedScheduleList() PLOLOLO" << endl;
             string d = to_string(s.getDate().yy % 100) + to_string(s.getDate().mm) + to_string(s.getDate().dd); 
             
             rf.writeSCSchedule(

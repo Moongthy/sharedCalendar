@@ -9,12 +9,13 @@
 #include <iostream>
 #include "Date.h"
 #include "string.h"
+#include "../input/check.h"
 
 using namespace std;
 
 class Schedule{
 private:
-    
+    check c;
     // 일정 아이디.
     int id;
     
@@ -37,17 +38,13 @@ private:
 public :
     Schedule(string title, Date date, int startTime, int endTime, string content, int contentLength, string location, int id = -1)
         : id(id), title(title), date(date), startTime(startTime), endTime(endTime) {
-
-        cout << title << "num check" << endl;
-        int han_length = 0;
-        int n_han_length = 0;
+            
         int real_length = 0;
         for(int i = 0; i<content.length(); i++) {
             if(int(content[i]) != 0) {
                 real_length++;
             }
         }
-        printf("%dreal %d\n", real_length);
         if(real_length == 0) {
             content.clear();
             this -> content = content;

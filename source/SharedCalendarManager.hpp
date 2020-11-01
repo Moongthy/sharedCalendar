@@ -2,13 +2,13 @@
 template<typename S, typename U, typename D>
 SharedCalendarManager<S, U, D>::SharedCalendarManager(){
     // loadSharedCalendarList();
-    cout << "scm Constructor" << endl;
+    // cout << "scm Constructor" << endl;
 };
 
 template<typename S, typename U, typename D>
 SharedCalendarManager<S, U, D>::~SharedCalendarManager(){
     
-    cout << "scm Destructor" << endl;
+    // cout << "scm Destructor" << endl;
     // for(SharedCalendar<S, U, D> sc : sharedCalendarList)
     // {
     //     delete &sc;
@@ -30,7 +30,7 @@ int SharedCalendarManager<S, U, D>::getSharedCalendarListSize(){
 template<typename S, typename U, typename D>
 void SharedCalendarManager<S, U, D>::addSharedCalendar(U user, string sharedCalendarName, string pw,
  int acceptable, D startDate, D endDate){
-     cout << "addSharedCalendar" << endl;
+    //  cout << "addSharedCalendar" << endl;
     sharedCalendarList.push_back(SharedCalendar<S, U, D>(user, std::to_string(sharedCalendarList.size()+1) , sharedCalendarName, pw, acceptable, startDate, endDate));
 }
 
@@ -90,7 +90,7 @@ int SharedCalendarManager<S, U, D>::joinSharedCalendar(U user, string inputCalen
 template<typename S, typename U, typename D>
 void SharedCalendarManager<S, U, D>::showSharedCalendarList(){
     if(!sharedCalendarList.size()){
-        cout << "there are no sharedCalendar" << endl;
+        // cout << "there are no sharedCalendar" << endl;
         return;
     }
     for(int i = 0; i < sharedCalendarList.size(); ++i)
@@ -112,7 +112,7 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
     ReadFile rf = ReadFile();
     
     rf.clearSCList();
-    cout << "end ClearSCList" << endl;
+    // cout << "end ClearSCList" << endl;
     for(SharedCalendar<S, U, D> sc : sharedCalendarList){
 
         // string startDate = "201025", endDate = "201231";
@@ -120,16 +120,16 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
         string startDate = to_string(sc.getStartDate().yy % 100) + to_string(sc.getStartDate().mm) + to_string(sc.getStartDate().dd);
         string endDate = to_string(sc.getEndDate().yy % 100) + to_string(sc.getEndDate().mm) + to_string(sc.getEndDate().dd);
 
-        cout << "write " + sc.getCalendarID() + " SCList " << endl;
+        // cout << "write " + sc.getCalendarID() + " SCList " << endl;
         rf.writeSCList(sc.getSharedCalendarName(), sc.getPassWord(), startDate, endDate, sc.getCalendarAdministrator().getUserId());
 
-        cout << "write " + sc.getCalendarID() + " SCMember" << endl;
+        // cout << "write " + sc.getCalendarID() + " SCMember" << endl;
 
         for(int i = 1; i < sc.getMemberList().size(); ++i){
             cout << sc.getMemberList()[i].getUserId() << endl;
             rf.writeSCMember(sc.getSharedCalendarName(), sc.getMemberList()[i].getUserId());
         }
-        cout << sc.getCalendarID() << "save success" << endl;
+        // cout << sc.getCalendarID() << "save success" << endl;
     }
     return 0;
 }
@@ -139,13 +139,13 @@ int SharedCalendarManager<S, U, D>:: saveSharedCalendarList(){
 
 template<typename S, typename U, typename D>
 int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
-    cout << "in loadScharedCalendar List" << endl;
+    // cout << "in loadScharedCalendar List" << endl;
     ReadFile rf = ReadFile();
 
-    cout << "getSCList in loadSharedCalendarList" << endl;
+    // cout << "getSCList in loadSharedCalendarList" << endl;
     vector<string> FileSCList = rf.getSCList();
 
-    cout << "getSCList in getUserIdName" << endl;
+    // cout << "getSCList in getUserIdName" << endl;
     // User ID랑 이름이랑 같이 불러오는 것 필요.
     vector<User> userList = rf.getUserIdName();
 
@@ -154,7 +154,7 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
 
     // SCdata는 라인별 내용이다,,, 
     int i=0;
-    cout << "iterative start in load" << endl;
+    // cout << "iterative start in load" << endl;
     for(i=0; i<FileSCList.size(); i++){
     
         vector<string> calData;
@@ -170,11 +170,11 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
             if(token == NULL) break;
             calData.push_back(string(token));
         }
-        cout << "cal Id : " << calData[0] << endl;
-        cout << "cal Name : " << calData[1] << endl;
-        cout << "cal Pw : " << calData[2] << endl;
-        cout << "cal sDate : " << calData[3] << endl;
-        cout << "cal eDate : " << calData[4] << endl;
+        // cout << "cal Id : " << calData[0] << endl;
+        // cout << "cal Name : " << calData[1] << endl;
+        // cout << "cal Pw : " << calData[2] << endl;
+        // cout << "cal sDate : " << calData[3] << endl;
+        // cout << "cal eDate : " << calData[4] << endl;
 
         // calData[0] = calId
 
@@ -196,7 +196,7 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
         int adminIdx = -1;
         
         // 저장된 관리자Id의 관리자Name을 찾는다.
-        cout << "find adminId" << endl;
+        // cout << "find adminId" << endl;
         for(int i = 0; i < userList.size(); ++i){
             if(userList[i].getUserId() == calData[5]){
                 adminIdx = i;
@@ -208,12 +208,12 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
         //     continue;
         // }
         
-        cout << "sharedClaendar create" << endl;
-        cout << "admin Id : " << userList[adminIdx].getUserId() << endl;
+        // cout << "sharedClaendar create" << endl;
+        // cout << "admin Id : " << userList[adminIdx].getUserId() << endl;
 
         SharedCalendar<S, U, D> sc = SharedCalendar<S, U, D>(userList[adminIdx], calData[0], calData[1], calData[2], 5, startDate, endDate);
 
-        cout << "add members" << endl;
+        // cout << "add members" << endl;
         // 저장된 멤버들 추가
         for(int i = 6; i <= calData.size(); ++i){
             for(User u : userList){
@@ -223,7 +223,7 @@ int SharedCalendarManager<S, U, D>:: loadSharedCalendarList(){
                 }
             }
         }        
-        cout << "add SC" << endl;
+        // cout << "add SC" << endl;
         sharedCalendarList.push_back(sc);
 
         // showSharedCalendarList();

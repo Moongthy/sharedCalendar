@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 #include <io.h>
+#include <sstream>
+#include <locale>
+#include <codecvt>
 #include "../header/type/User.h"
 
 using namespace std;
@@ -13,6 +16,8 @@ class ReadFile {
     private:
         ifstream read;
         ofstream write;
+        wofstream write2;
+        wifstream read2;
         int separatorIndex;
         char separator = '$';
 
