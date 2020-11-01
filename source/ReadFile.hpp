@@ -289,7 +289,7 @@ void ReadFile::writeSCMember(string title, string member) {
 
 vector<string> ReadFile::readSCCalendar(string calID, int index)
 {
-    cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
+    //cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
     cout << "open success" << endl;
@@ -320,7 +320,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     else cout << "readSCCalendar [" << calID << ".txt] read error!" << endl;
     
     read.close();
-    cout << "in readSCCalednar success" << endl;
+    //cout << "in readSCCalednar success" << endl;
     return return_list;    
 }
 //개인캘린더에서 일정 읽는거
@@ -361,7 +361,7 @@ vector<string> ReadFile::readCalendar(string userID, int index)
     else cout << "readCalendar [" << userID << ".txt] read error!" << endl;
     
     read.close();
-    cout << "in readSCCalednar success" << endl;
+    //cout << "in readSCCalednar success" << endl;
 
     return return_list;    
 }
@@ -371,7 +371,7 @@ void ReadFile::writeSCSchedule(string calID, string id, string name, string date
 {
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     write.open("../data/SharedCalendar/"+calID+".txt", ios::app);
-    cout << "writeSharedSchedule" << endl;
+    //cout << "writeSharedSchedule" << endl;
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;
@@ -388,30 +388,30 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
     //                     + endtime + separator + loc + separator + memo << endl;
     // write2.close(); 
     //
-    cout << " in write check content ! : " << memo << endl;
+    //cout << " in write check content ! : " << memo << endl;
     cin.ignore();
     isFileExist("../data/Calendar/"+userID+".txt");
     cin.ignore();
     write.open("../data/Calendar/"+userID+".txt", ios::app);
     cin.ignore();
-    cout << "writePersonalChedule" << endl;
-    cout << loc << endl;
-    cout << memo << endl;
+    //cout << "writePersonalChedule" << endl;
+    //cout << loc << endl;
+    //cout << memo << endl;
     /***********************************************************************/
-    write << id;
+    write << id; 
     write << separator 
             + name 
-            + separator
-            + date
-            + separator
+            + separator 
+            + date 
+            + separator 
             + starttime 
             + separator 
             + endtime 
             + separator 
             + loc 
             + separator 
-            + memo << endl;
-    /***********************************************************************/
+            + memo << endl; 
+    /***********************************************************************/ 
     cin.ignore();
     write.close(); 
 }

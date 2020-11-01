@@ -28,7 +28,6 @@ void MenuInput::mainMenu(){
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) {
-            
             personalCal.select_Schedules_option(user);
         }
         // a에서 공유 캘린더 메뉴로 들어감.
@@ -38,7 +37,7 @@ void MenuInput::mainMenu(){
             // delete &scm;
 
             /************************************************************/
-            //                     종료 되는 시점 임                     /
+            //                     종료 되는 시점 임                       /
             /************************************************************/
             //personalCal;
             

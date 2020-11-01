@@ -19,7 +19,7 @@ int main() {
     User user = User(name, id);
 
     Users users = Users(name, id);
-    cout << "===========================START==============================" << endl;
+    //cout << "===========================START==============================" << endl;
     users.firstMenu();
 
     // Users users = Users("ansrms", "1234");

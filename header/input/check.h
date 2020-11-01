@@ -211,7 +211,7 @@ public:
         // 유효기간
         if (n == _DATE)
         {
-            cout << "this is dateValid" << endl;
+            //cout << "this is dateValid" << endl;
             if (dateVaild(s) != 0)
                 return false;
         }

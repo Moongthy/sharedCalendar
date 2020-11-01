@@ -1117,7 +1117,7 @@ void Calendar<S, U, D>::showPrevMonthSchedules(U user)
 template <typename S, typename U, typename D>
 void Calendar<S, U, D>::saveSchedule(U user)
 {
-    cout << "==================saveSchedule Start=====================" << endl;
+    // cout << "==================saveSchedule Start=====================" << endl;
     ReadFile rf = ReadFile();
 
     int idx = 1;    
@@ -1137,9 +1137,9 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 + to_string(scheduleList[i].getDate().mm)
                 + to_string(scheduleList[i].getDate().dd);
 
-            cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
-            cin.ignore();
-            cout << "parameter Check" << endl;
+            // cout << "content length " << c.stringSize(scheduleList[i].getContent()) << endl;
+            // cin.ignore();
+            // cout << "parameter Check" << endl;
 
             cout << user.getUserId() << endl;
             cout << to_string(idx) << endl;
@@ -1150,7 +1150,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
             cout << scheduleList[i].getLocation() << endl; 
             cout << scheduleList[i].getContent() << endl;
             
-            cout << "call writeSchedule in saveSchedule" << endl;
+            // cout << "call writeSchedule in saveSchedule" << endl;
             rf.writeSchedule(
                 user.getUserId(),
                 to_string(idx),
@@ -1161,7 +1161,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
                 scheduleList[i].getLocation(),
                 scheduleList[i].getContent()
             );
-            cout << "writeSchedule end" << endl;
+            // cout << "writeSchedule end" << endl;
             ++idx;
         }
     }

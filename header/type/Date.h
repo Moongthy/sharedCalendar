@@ -25,10 +25,10 @@ public:
 
 	Date(int yy, int mm, int dd) : mm(mm), dd(dd) {
 
-		cout << "yy_constructor " << yy << endl;
+		//cout << "yy_constructor " << yy << endl;
 		if (0 <= yy && yy < 70) yy += 2000;
 		else if (70 <= yy && yy < 100) yy += 1900;
-		cout << "yy_constructor2 " << yy << endl;
+		//cout << "yy_constructor2 " << yy << endl;
 
 		this -> yy = yy;
 	}
