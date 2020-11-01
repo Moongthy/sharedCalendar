@@ -1124,7 +1124,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
 
         rf.clearPCScheList(user.userId);
 
-        cout << "PS size : " << scheduleList.size() << endl;
+        //cout << "PS size : " << scheduleList.size() << endl;
         
         int i = 0;
         for(i=0; i<scheduleList.size(); i++){
@@ -1151,7 +1151,7 @@ void Calendar<S, U, D>::saveSchedule(U user)
         rf.clearSCScheList(calendarID);
         
         int i = 0;
-        cout << scheduleList.size() << endl;
+        //cout << scheduleList.size() << endl;
         for(i=0; i<scheduleList.size(); i++){
             string d = to_string(scheduleList[i].getDate().yy % 100) 
                 + to_string(scheduleList[i].getDate().mm)

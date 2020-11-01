@@ -33,8 +33,8 @@ public:
     int stringSize(string s) {
 	    int hcount = 0;
 	    int count = 0;
-	    cout << s.size() << endl;
-	    cout << s.length() << endl;
+	    //cout << s.size() << endl;
+	    //cout << s.length() << endl;
 	    for (int i = 0; i < s.size(); i++) {
 		    if ((s[i] & 0x80) == 0x80) {
 			    hcount += 1;

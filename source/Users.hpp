@@ -1,7 +1,7 @@
 Users::Users(string userName, string userId)
 	: User(userId, userName)
 {
-	cout<<"Users Constructor"<<endl;
+	// cout<<"Users Constructor"<<endl;
 }
 
 string Users::getUserPw()
@@ -16,33 +16,12 @@ void Users::setUserPw(string pw)
 
 void Users::firstMenu()
 {
-	cout<<"Check if  \"../data\", \"../dataUserList.txt\"  exist... if they don't, create."<<endl;
+	// cout<<"Check if  \"../data\", \"../dataUserList.txt\"  exist... if they don't, create."<<endl;
+
 	isDirExist("../data");
 	isFileExist("../data/UserList.txt");
 	int select;
-
-	// while (true) {
-	// system("cls");
-	// 	string s_select;
-
-	// 	cout << loginMenu[0];
-	// 	cout << loginMenu[1];
-
-	// 	getline(cin,s_select);
-		
-	// 	if (s_select.compare("1") == 0 || s_select.compare("2") == 0 || s_select.compare("3") == 0) {
-	// 		select = stoi(s_select);
-	// 		break;
-	// 	}
-	// 	else {
-	// 		system("cls");
-	// 		cout << loginMenu[0];
-	// 		cout << err[0];
-	// 		// cin.ignore();
-	// 	}
-	// }
-		
-		
+	
 	select=mainmenuInput(loginMenu[0],loginMenu[1]);
 
 	switch (select) {
@@ -63,9 +42,10 @@ void Users::firstMenu()
 }
 
 void Users::signIn(){
-	cout<<"//Users::signIn()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"//Users::signIn()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"call ReadFile::getUserIdName() in Users.hpp"<<endl;
+
 	ReadFile rf = ReadFile();
-	cout<<"call ReadFile::getUserIdName() in Users.hpp"<<endl;
 	vector<User> userList = rf.getUserIdName();
 	
 	int flag = 0;
@@ -87,15 +67,16 @@ void Users::signIn(){
 			break;
 		}
 
-		cout<<"call ReadFile::isFine() in Users.hpp  <-- To check a login-verification"<<endl;
+		// cout<<"call ReadFile::isFine() in Users.hpp  <-- To check a login-verification"<<endl;
+
 		if (isFine(id, pw)) {
-			cout<<"//Users::signIn()//  call Users::getUserNameList() in Users.hpp  <-- Load NAME of account from \"UserList.txt\""<<endl;
+			// cout<<"//Users::signIn()//  call Users::getUserNameList() in Users.hpp  <-- Load NAME of account from \"UserList.txt\""<<endl;
+
 			name = getUserNameList(id);
 			flag = 1;
 		}
 		else {
 			cout << err[1];
-			// cin.ignore();
 			flag=-1;
 			break;
 		}
@@ -165,7 +146,6 @@ void Users::signUp(){
 		}
 		else {
 			cout << err[2];
-			// cin.ignore();
 		}
 	}
 
@@ -173,9 +153,9 @@ void Users::signUp(){
 		firstMenu();
 	}
 	else if (flag == 1) {
-		cout<<"//In Users::signUp()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+		// cout<<"//In Users::signUp()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+		// cout<<"call ReadFile::writeUserList() in Users.hpp  <-- Save new ID, PW, NAME in \"UserList.txt\""<<endl;
 		ReadFile rf = ReadFile();
-		cout<<"call ReadFile::writeUserList() in Users.hpp  <-- Save new ID, PW, NAME in \"UserList.txt\""<<endl;
 		rf.writeUserList(id, pw, name);
 		
 		cout << loginMenu[4];
@@ -203,9 +183,9 @@ void Users::signUp(){
 
 bool Users::isOverlap(string id)
 {
-	cout<<"//Users::isOverlap()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"//Users::isOverlap()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"call ReadFile::getUserIDList() in Users.hpp"<<endl;
 	ReadFile rf = ReadFile();
-	cout<<"call ReadFile::getUserIDList() in Users.hpp"<<endl;
 	vector<string> idList = rf.getUserIDList();
 	if(find(idList.begin(),idList.end(),id) != idList.end()){
 		//id already exist
@@ -218,9 +198,9 @@ bool Users::isOverlap(string id)
 
 bool Users::isFine(string id, string pw)
 {
-	cout<<"//Users::isFine()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"//Users::isFine()//  call \"ReadFile\" Constructor in Users.hpp"<<endl;
+	// cout<<"call ReadFile::getUserpassword() in Users.hpp  <-- To check if ID and PW match"<<endl;
 	ReadFile rf = ReadFile();
-	cout<<"call ReadFile::getUserpassword() in Users.hpp  <-- To check if ID and PW match"<<endl;
 	if(pw == rf.getUserpassword(id)){
 		//id pw match
 		return true;
@@ -320,17 +300,14 @@ string Users::getInput(string menuname, string purpose, int start, int end){
 
 		if (ck.encodingCheck(str)) {
 			if (ck.stringSize(str) >= start && ck.stringSize(str) <= end) {
-				cout<<"length: "<<ck.stringSize(str)<<endl;
 				break;
 			}
 			else {
 				cout << err[0];
-				// cin.ignore();
 			}
 		}
 		else {
 			cout << err[0];
-			// cin.ignore();
 		}
 	}
 	return str;
@@ -351,13 +328,11 @@ void Users::isFileExist(const char* filepath)
 	if (_access(filepath, 0) != 0) {
 		FILE* f;
 		if (fopen(filepath, "w") != 0) {
-			cout << "[" << filepath << ("] read/create error!\n"); 
-			cin.ignore();
+			cout << "[" << filepath << ("] read/create error!\n");
 		}
 		else {
 			if (fclose(f) != 0) {
-				cout << "[" << filepath << ("] close error!\n"); 
-				// cin.ignore();
+				cout << "[" << filepath << ("] close error!\n");
 			}
 		}
 	}

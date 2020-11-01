@@ -164,20 +164,20 @@ vector<string> ReadFile::getSCList() {
 }
 
 void ReadFile::clearSCList() {
-    cout << "in clear SCList" << endl;
+    // cout << "in clear SCList" << endl;
     write.open("../data/SharedCalendarList.txt", ios::out);
     write.close();
 }
 
 void ReadFile::clearSCScheList(string calId) {
-    cout << calId + "call clearSCScheduleList" << endl;
+    // cout << calId + "call clearSCScheduleList" << endl;
     isFileExist("../data/SharedCalendar/"+calId+".txt");
     write.open("../data/SharedCalendar/"+calId+".txt", ios::out);
     write.close();
 }
 
 void ReadFile::clearPCScheList(string userId) {
-    cout << userId + "call clearPCScheduleList" << endl;
+    // cout << userId + "call clearPCScheduleList" << endl;
     isFileExist("../data/Calendar/"+userId+".txt");
     write.open("../data/Calendar/"+userId+".txt", ios::out);
     write.close();
@@ -186,7 +186,7 @@ void ReadFile::clearPCScheList(string userId) {
 
 void ReadFile::writeSCList(string title, string password, string startday, string endday, string admin) {
     vector<string> id_list = readSCList(0);
-    cout << "readSCList(0) success" << endl;
+    // cout << "readSCList(0) success" << endl;
 
     /*********************여기서 멈춤*************************/
     // cout << "idList size : " << id_list.size() << endl;
@@ -292,7 +292,7 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
-    cout << "open success" << endl;
+    // cout << "open success" << endl;
     int i = 0;
     string temp;
     vector<string> return_list;
@@ -313,14 +313,14 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
                 else if(separatorIndex==index) temp += str[i];
                 else if(str[i]=='\0') break;
             }
-            cout << "temp : " << temp << endl;
+            // cout << "temp : " << temp << endl;
             return_list.push_back(temp);
         }
     }
     else cout << "readSCCalendar [" << calID << ".txt] read error!" << endl;
     
     read.close();
-    cout << "in readSCCalednar success" << endl;
+    // cout << "in readSCCalednar success" << endl;
     return return_list;    
 }
 //개인캘린더에서 일정 읽는거
@@ -374,7 +374,7 @@ void ReadFile::writeSchedule(string userID, string id, string name, string date,
 {
     isFileExist("../data/Calendar/"+userID+".txt");
     write.open("../data/Calendar/"+userID+".txt", ios::app);
-    cout << "writeSChedule" << endl;
+    // cout << "writeSChedule" << endl;
     write << id;
     write << separator + name + separator + date + separator + starttime + separator 
                         + endtime + separator + loc + separator + memo << endl;

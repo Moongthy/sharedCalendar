@@ -275,7 +275,7 @@ int MenuInput::intoSC(){
     string input;
     getline(cin, input);
 
-    // if(input == "\n") {
+    // if(input.compare("\0")==0) {
     //     cout << err[0];
     //     return intoSC();
     // }
