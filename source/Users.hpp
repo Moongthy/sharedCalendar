@@ -16,7 +16,7 @@ void Users::setUserPw(string pw)
 
 void Users::firstMenu()
 {
-	// cout<<"Check if  \"../data\", \"../dataUserList.txt\"  exist... if they don't, create."<<endl;
+	//cout<<"Check if  \"../data\", \"../dataUserList.txt\"  exist... if they don't, create."<<endl;
 
 	isDirExist("../data");
 	isFileExist("../data/UserList.txt");
