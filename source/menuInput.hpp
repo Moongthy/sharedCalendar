@@ -28,8 +28,10 @@ void MenuInput::mainMenu(){
         // 개인 캘린더 메뉴
         Calendar<Schedule, User, Date> personalCal = Calendar<Schedule, User, Date>(user);
         if(a == 1) {
-            system("cls");
             personalCal.select_Schedules_option(user);
+            
+            a = -1, b = -1, c = -1;
+            
             system("cls");
         }
         // a에서 공유 캘린더 메뉴로 들어감.

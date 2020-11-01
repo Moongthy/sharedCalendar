@@ -151,7 +151,7 @@ vector<string> ReadFile::getSCList() {
                 if(str[i]=='\0') break;
                 SCdata += str[i];
             }
-            //cout << SCdata << endl;
+            // cout << SCdata << endl;
             SCAll.push_back(SCdata);
         }
         
@@ -291,7 +291,9 @@ vector<string> ReadFile::readSCCalendar(string calID, int index)
     //cout << "open the ../data/SharedCalendar/"+calID+".txt" << endl << endl;
     isFileExist("../data/SharedCalendar/"+calID+".txt");
     read.open("../data/SharedCalendar/"+calID+".txt");
-    //cout << "open success" << endl;
+
+    // cout << "open success" << endl;
+
     int i = 0;
     string temp;
     vector<string> return_list;
